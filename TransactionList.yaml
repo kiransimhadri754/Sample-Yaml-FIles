@@ -199,7 +199,7 @@ components:
         type: string
   responses:
     retrieveTransactionListResponse:
-        description: fetchAccountUser
+        description: fetchTransactionList
         content:
           application/json:
             schema:
