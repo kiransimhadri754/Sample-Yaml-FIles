@@ -34,132 +34,132 @@ paths:
           $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
-    TransactionAmount:
+    transactionAmount:
       type: object
       properties:
-        AmountValue:
+        amountValue:
           type: string
           description: "\n"
           format: string
-    AmountCurrency:
+    amountCurrency:
       type: object
       properties:
-        CurrencyCode:
+        currencyCode:
           type: string
           description: "\n"
           format: string
-    TransactionDate:
+    transactionDate:
       type: object
       properties:
-        DateContent:
+        dateContent:
           type: string
           description: "\n"
           format: string
-    InsertionDate:
+    insertionDate:
       type: object
       properties:
-        DateContent:
+        dateContent:
           type: string
           description: "\n"
           format: string
-    Transactions:
+    transactions:
       type: array
       items:
         type: object
         properties:
-              TransactionAmount:
+              transactionAmount:
                 type: object
                 properties:
-                  AmountValue:
+                  amountValue:
                     type: string
                     description: "\n"
                     format: string
-              AmountCurrency:
+              amountCurrency:
                 type: object
                 properties:
-                  CurrencyCode:
+                  currencyCode:
                     type: string
                     description: "\n"
                     format: string
-              TransactionDate:
+              transactionDate:
                 type: object
                 properties:
-                  DateContent:
+                  dateContent:
                     type: string
                     description: "\n"
                     format: string
-              InsertionDate:
+              insertionDate:
                 type: object
                 properties:
-                  DateContent:
+                  dateContent:
                     type: string
                     description: "\n"
                     format: string
-    RetrieveTransactionListResponse:
+    retrieveTransactionListResponse:
       type: object
       properties:
-        TotalDeposit:
+        totalDeposit:
             type: string
             description: "\n"
             format: string
-        TotalWithdrawal:
+        totalWithdrawal:
             type: string
             description: "\n"
             format: string
-        CurrentAccountId:
+        currentAccountId:
             type: string
             description: "\n"
             format: string
-        StartDate:
+        startDate:
             type: string
             description: "\n"
             format: string
-        EndDate:
+        endDate:
             type: string
             description: "\n"
             format: string
-        Transactions:
+        transactions:
           type: array
           items:
             type: object
             properties:
-              TransactionAmount:
+              transactionAmount:
                 type: object
                 properties:
-                  AmountValue:
+                  amountValue:
                     type: string
                     description: "\n"
                     format: string
-              AmountCurrency:
+              amountCurrency:
                 type: object
                 properties:
-                  CurrencyCode:
+                  currencyCode:
                     type: string
                     description: "\n"
                     format: string
-              TransactionDate:
+              transactionDate:
                 type: object
                 properties:
-                  DateContent:
+                  dateContent:
                     type: string
                     description: "\n"
                     format: string
-              InsertionDate:
+              insertionDate:
                 type: object
                 properties:
-                  DateContent:
+                  dateContent:
                     type: string
                     description: "\n"
                     format: string
-              TransactionDescription:
+              transactionDescription:
                     type: string
                     description: "\n"
                     format: string
-              TransactionType:
+              transactionType:
                     type: string
                     description: "\n"
                     format: string
-              TransactionReference:
+              transactionReference:
                     type: string
                     description: "\n"
                     format: string
@@ -198,7 +198,7 @@ components:
       schema:
         type: string
   responses:
-    RetrieveTransactionListResponse:
+    retrieveTransactionListResponse:
         description: fetchAccountUser
         content:
           application/json:
