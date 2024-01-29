@@ -12,7 +12,7 @@ paths:
         - Card Financial Settlement
       summary:  InCR Initiate card financial settlement processing
       description: InCR Initiate card financial settlement processing
-      operationId: InitiateCardFinancialSettlement
+      operationId: Initiate
       requestBody:
           $ref: '#/components/requestBodies/InitiateCardFinancialSettlementRequest'
       responses:
