@@ -442,14 +442,14 @@ components:
           format: string
   requestBodies:
     InitiateCardFinancialSettlementRequest:
-        description: InitiateCardFinancialSettlement
+        description: Initiate
         content:
           application/json:
             schema:
                 $ref: '#/components/schemas/InitiateCardFinancialSettlementRequest' 
   responses:
     InitiateCardFinancialSettlementResponse:
-        description: InitiateCardFinancialSettlement
+        description: Initiate
         content:
           application/json:
             schema:
