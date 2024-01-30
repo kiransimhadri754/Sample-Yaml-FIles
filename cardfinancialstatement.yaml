@@ -76,8 +76,7 @@ paths:
           FinInstnId:
             type: string
             description: "\n"
-            format: string
-                            
+            format: string               
     IntrBkSttlmAmt:
         type: object
         properties:
