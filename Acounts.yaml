@@ -105,9 +105,7 @@ components:
           type: string
           description: "\n"
           format: string
-    LinkedAccount:
-          type: array
-          items:
+    LinkedAccounts:
             type: object
             properties: 
               AccountStatus:
@@ -170,8 +168,6 @@ components:
           description: "\n"
           format: string
         LinkedAccount:
-          type: array
-          items:
             type: object
             properties: 
               AccountStatus:
