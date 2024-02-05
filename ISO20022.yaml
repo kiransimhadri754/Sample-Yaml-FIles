@@ -1,10 +1,10 @@
 openapi: 3.0.1
 info:
   title: Card Financial Settlement
-  description: BIAN Service Domain Packaged Business Capability (PCB) | DDD Bounded Context Fund Transfer.
+  description: ISO20022 Service Domain Packaged Business Capability (PCB) | DDD Bounded Context Fund Transfer.
   version: 12.0.1
 servers:
-- url: 'https://virtserver.swaggerhub.com/BIAN-3/BIAN/CardFinancialSettlement/11.0.0'
+- url: 'https://virtserver.swaggerhub.com/ISO20022-3/ISO20022/CardFinancialSettlement/11.0.0'
 paths:
   /CardFinancialSettlement/Initiate:
     post:
