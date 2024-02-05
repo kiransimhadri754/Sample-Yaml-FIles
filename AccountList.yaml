@@ -105,7 +105,7 @@ components:
           type: string
           description: "\n"
           format: string
-    LinkedAccount:
+    LinkedAccounts:
           type: array
           items:
             type: object
@@ -169,7 +169,7 @@ components:
           type: string
           description: "\n"
           format: string
-        LinkedAccount:
+        LinkedAccounts:
           type: array
           items:
             type: object
