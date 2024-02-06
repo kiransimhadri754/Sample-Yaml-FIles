@@ -262,14 +262,14 @@ components:
                   type: string
                   description: "\n"
                   format: string
-                ChrgBr:
-                  type: string
-                  description: "\n"
-                  format: string
-                Dbtr:
-                  type: string
-                  description: "\n"
-                  format: string
+            ChrgBr:
+              type: string
+              description: "\n"
+              format: string
+            Dbtr:
+              type: string
+              description: "\n"
+              format: string
     SplmtryData:
         type: object
         properties:
