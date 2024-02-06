@@ -176,6 +176,14 @@ components:
                 type: string
                 description: "\n"
                 format: string
+          NbOfTxs:
+              type: string
+              description: "\n"
+              format: string
+          MsgId:
+              type: string
+              description: "\n"
+              format: string
     SttlmInf:
         type: object
         properties:
