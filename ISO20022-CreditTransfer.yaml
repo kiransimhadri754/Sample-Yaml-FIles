@@ -96,7 +96,7 @@ components:
             SttlmInf:
               type: object
               properties:
-                SttlmInf:
+                SttlmMtd:
                   type: string
                   description: "\n"
                   format: string
@@ -176,7 +176,7 @@ components:
           SttlmInf:
             type: object
             properties:
-              SttlmInf:
+              SttlmMtd:
                 type: string
                 description: "\n"
                 format: string
@@ -301,7 +301,7 @@ components:
                     SttlmInf:
                       type: object
                       properties:
-                        SttlmInf:
+                        SttlmMtd:
                           type: string
                           description: "\n"
                           format: string
@@ -390,7 +390,7 @@ components:
                     SttlmInf:
                       type: object
                       properties:
-                        SttlmInf:
+                        SttlmMtd:
                           type: string
                           description: "\n"
                           format: string
@@ -483,7 +483,7 @@ components:
                     SttlmInf:
                       type: object
                       properties:
-                        SttlmInf:
+                        SttlmMtd:
                           type: string
                           description: "\n"
                           format: string
@@ -576,7 +576,7 @@ components:
                     SttlmInf:
                       type: object
                       properties:
-                        SttlmInf:
+                        SttlmMtd:
                           type: string
                           description: "\n"
                           format: string
@@ -669,7 +669,7 @@ components:
                     SttlmInf:
                       type: object
                       properties:
-                        SttlmInf:
+                        SttlmMtd:
                           type: string
                           description: "\n"
                           format: string
@@ -762,7 +762,7 @@ components:
                     SttlmInf:
                       type: object
                       properties:
-                        SttlmInf:
+                        SttlmMtd:
                           type: string
                           description: "\n"
                           format: string
