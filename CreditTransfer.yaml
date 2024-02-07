@@ -288,6 +288,10 @@ components:
     Document:
           type: object
           properties:
+            CdtTrfTxnId:
+              type: string
+              description: "\n"
+              format: string
             FIToFICstmrCdtTrf:
               type: object
               properties:
@@ -377,6 +381,10 @@ components:
         Document:
           type: object
           properties:
+            CdtTrfTxnId:
+              type: string
+              description: "\n"
+              format: string
             FIToFICstmrCdtTrf:
               type: object
               properties:
