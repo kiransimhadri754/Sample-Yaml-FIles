@@ -146,6 +146,8 @@ components:
               type: array
               items:
                 type: string
+                enum: 
+                  - "123455"
             BankBranchLocationReference:
               type: string
               description: "\n"
@@ -215,6 +217,8 @@ components:
               type: array
               items:
                 type: string
+                enum: 
+                  - "123455"
             BankBranchLocationReference:
               type: string
               description: "\n"
