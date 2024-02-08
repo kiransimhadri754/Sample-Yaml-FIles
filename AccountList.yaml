@@ -250,7 +250,7 @@ components:
         type: string
   responses:
     RetrieveAccountListResponse:
-        description: fetchAccountUser
+        description: fetchAccountListofCustomer
         content:
           application/json:
             schema:
