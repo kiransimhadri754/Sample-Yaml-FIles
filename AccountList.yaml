@@ -1,6 +1,6 @@
 openapi: 3.0.1
 info:
-  title: Account List
+  title: AccountList
   description: BIAN Service Domain Packaged Business Capability (PCB) | DDD Bounded Context Account Listing.
   version: 11.0.0
 servers:
