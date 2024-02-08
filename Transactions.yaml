@@ -19,7 +19,7 @@ paths:
         - $ref: '#/components/parameters/endDate'
       responses:
         '200':
-          $ref: '#/components/responses/RetrieveTransactionListResponse'
+          $ref: '#/components/responses/retrieveTransactionListResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -34,135 +34,72 @@ paths:
           $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
-    TransactionAmount:
+    transactionAmount:
       type: object
       properties:
-        AmountValue:
+        amountValue:
           type: string
           description: "\n"
           format: string
-    AmountCurrency:
+    amountCurrency:
       type: object
       properties:
-        CurrencyCode:
+        currencyCode:
           type: string
           description: "\n"
           format: string
-    TransactionDate:
+    transactionDate:
       type: object
       properties:
-        DateContent:
+        dateContent:
           type: string
           description: "\n"
           format: string
-    InsertionDate:
+    insertionDate:
       type: object
       properties:
-        DateContent:
+        dateContent:
           type: string
           description: "\n"
           format: string
-    Transactions:
+    transactions:
       type: array
       items:
         type: object
         properties:
-              TransactionAmount:
-                type: object
-                properties:
-                  AmountValue:
-                    type: string
-                    description: "\n"
-                    format: string
-              AmountCurrency:
-                type: object
-                properties:
-                  CurrencyCode:
-                    type: string
-                    description: "\n"
-                    format: string
-              TransactionDate:
-                type: object
-                properties:
-                  DateContent:
-                    type: string
-                    description: "\n"
-                    format: string
-              InsertionDate:
-                type: object
-                properties:
-                  DateContent:
-                    type: string
-                    description: "\n"
-                    format: string
-    RetrieveTransactionListResponse:
+              transactionAmount:
+                  $ref: '#/components/schemas/transactionAmount'
+              amountCurrency:
+                  $ref: '#/components/schemas/amountCurrency'
+              transactionDate:
+                  $ref: '#/components/schemas/transactionDate'
+              insertionDate:
+                  $ref: '#/components/schemas/insertionDate'
+    retrieveTransactionListResponse:
       type: object
       properties:
-        TotalDeposit:
+        totalDeposit:
             type: string
             description: "\n"
             format: string
-        TotalWithdrawal:
+        totalWithdrawal:
             type: string
             description: "\n"
             format: string
-        CurrentAccountId:
+        currentAccountId:
             type: string
             description: "\n"
             format: string
-        StartDate:
+        startDate:
             type: string
             description: "\n"
             format: string
-        EndDate:
+        endDate:
             type: string
             description: "\n"
             format: string
-        Transactions:
-          type: array
-          items:
-            type: object
-            properties:
-              TransactionAmount:
-                type: object
-                properties:
-                  AmountValue:
-                    type: string
-                    description: "\n"
-                    format: string
-              AmountCurrency:
-                type: object
-                properties:
-                  CurrencyCode:
-                    type: string
-                    description: "\n"
-                    format: string
-              TransactionDate:
-                type: object
-                properties:
-                  DateContent:
-                    type: string
-                    description: "\n"
-                    format: string
-              InsertionDate:
-                type: object
-                properties:
-                  DateContent:
-                    type: string
-                    description: "\n"
-                    format: string
-              TransactionDescription:
-                    type: string
-                    description: "\n"
-                    format: string
-              TransactionType:
-                    type: string
-                    description: "\n"
-                    format: string
-              TransactionReference:
-                    type: string
-                    description: "\n"
-                    format: string
+        transactions:
+           $ref: '#/components/schemas/transactions'
     HTTPError:
       type: object
       properties:
@@ -198,12 +135,12 @@ components:
       schema:
         type: string
   responses:
-    RetrieveTransactionListResponse:
-        description: fetchAccountUser
+    retrieveTransactionListResponse:
+        description: fetchTransactionList
         content:
           application/json:
             schema:
-                $ref: '#/components/schemas/RetrieveTransactionListResponse'
+                $ref: '#/components/schemas/retrieveTransactionListResponse'
     BadRequest:
       description: BadRequest
       content:
