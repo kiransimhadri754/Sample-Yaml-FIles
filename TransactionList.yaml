@@ -19,7 +19,7 @@ paths:
         - $ref: '#/components/parameters/endDate'
       responses:
         '200':
-          $ref: '#/components/responses/RetrieveTransactionListResponse'
+          $ref: '#/components/responses/retrieveTransactionListResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -68,33 +68,13 @@ components:
         type: object
         properties:
               transactionAmount:
-                type: object
-                properties:
-                  amountValue:
-                    type: string
-                    description: "\n"
-                    format: string
+                  $ref: '#/components/schemas/transactionAmount'
               amountCurrency:
-                type: object
-                properties:
-                  currencyCode:
-                    type: string
-                    description: "\n"
-                    format: string
+                  $ref: '#/components/schemas/amountCurrency'
               transactionDate:
-                type: object
-                properties:
-                  dateContent:
-                    type: string
-                    description: "\n"
-                    format: string
+                  $ref: '#/components/schemas/transactionDate'
               insertionDate:
-                type: object
-                properties:
-                  dateContent:
-                    type: string
-                    description: "\n"
-                    format: string
+                  $ref: '#/components/schemas/insertionDate'
     retrieveTransactionListResponse:
       type: object
       properties:
@@ -119,50 +99,7 @@ components:
             description: "\n"
             format: string
         transactions:
-          type: array
-          items:
-            type: object
-            properties:
-              transactionAmount:
-                type: object
-                properties:
-                  amountValue:
-                    type: string
-                    description: "\n"
-                    format: string
-              amountCurrency:
-                type: object
-                properties:
-                  currencyCode:
-                    type: string
-                    description: "\n"
-                    format: string
-              transactionDate:
-                type: object
-                properties:
-                  dateContent:
-                    type: string
-                    description: "\n"
-                    format: string
-              insertionDate:
-                type: object
-                properties:
-                  dateContent:
-                    type: string
-                    description: "\n"
-                    format: string
-              transactionDescription:
-                    type: string
-                    description: "\n"
-                    format: string
-              transactionType:
-                    type: string
-                    description: "\n"
-                    format: string
-              transactionReference:
-                    type: string
-                    description: "\n"
-                    format: string
+           $ref: '#/components/schemas/transactions'
     HTTPError:
       type: object
       properties:
@@ -203,7 +140,7 @@ components:
         content:
           application/json:
             schema:
-                $ref: '#/components/schemas/RetrieveTransactionListResponse'
+                $ref: '#/components/schemas/retrieveTransactionListResponse'
     BadRequest:
       description: BadRequest
       content:
