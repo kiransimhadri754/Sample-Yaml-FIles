@@ -30,6 +30,30 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
+   /Party/{Status}/Retrieve:
+    get:
+      tags:
+          - Party
+      summary: ReCR Retrieve list of customers
+      description: ReCR Retrieve list of customers
+      operationId: Retrieve
+      parameters:
+        - $ref: '#/components/parameters/Status'
+      responses:
+        '200':
+          $ref: '#/components/responses/RetrievePartiesResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
     PartyRoleType:
@@ -250,6 +274,15 @@ components:
               $ref: '#/components/schemas/PartyReference'
             PartyInvolvement:
               $ref: '#/components/schemas/PartyInvolvement'
+    Parties:
+      type: array
+      items:
+        type: object
+        properties:
+            PartyReference:
+              $ref: '#/components/schemas/PartyReference'
+            PartyInvolvement:
+              $ref: '#/components/schemas/PartyInvolvement'
     InitiatePartyRequest:
       type: object
       properties:
@@ -260,6 +293,11 @@ components:
       properties:
         Party: 
           $ref: '#/components/schemas/Party'
+    RetrievePartiesResponse:
+      type: object
+      properties:
+        Parties: 
+          $ref: '#/components/schemas/Parties'
     HTTPError:
       type: object
       properties:
@@ -275,6 +313,13 @@ components:
           type: string
           description: "\n"
           format: string
+  parameters:
+    Status:
+      name: Status
+      in: path
+      required: true
+      schema:
+        type: string
   requestBodies:
     InitiatePartyRequest:
       description: CurrentAccountFacilityInitiate
@@ -289,6 +334,12 @@ components:
           application/json:
             schema:
                 $ref: '#/components/schemas/InitiatePartyResponse'
+    RetrievePartiesResponse:
+        description: fetchAccountUser
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/RetrievePartiesResponse'
     BadRequest:
       description: BadRequest
       content:
