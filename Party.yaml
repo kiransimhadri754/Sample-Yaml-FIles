@@ -173,11 +173,68 @@ components:
                         $ref: '#/components/schemas/IdentifierStartDate'
                       IdentifierEndDate:
                         $ref: '#/components/schemas/IdentifierEndDate'
+    ElectronicAddressType:
+                  type: object
+                  properties:
+                    ElectronicAddressTypeValue:
+                      type: string
+                      description: "\n"
+                      format: string
+                      enum:
+                        - EmailAddress
+                    AddressDescription:
+                      type: string
+                      description: "\n"
+                      format: string
+    PhoneAddressType:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      PhoneTypeValue:
+                        type: string
+                        description: "\n"
+                        format: string
+                        enum:
+                          - MobileNumber
+                          - HomePhoneNumber
+                      PhoneNumber:
+                        type: string
+                        description: "\n"
+                        format: string
     PartyReference:
               type: object
               properties:
                 PartyName:
                   $ref: '#/components/schemas/PartyName'
+                Title:
+                  type: string
+                  description: "\n"
+                  format: string
+                BirthDate:
+                  type: string
+                  description: "\n"
+                  format: string
+                Gender:
+                  type: string
+                  description: "\n"
+                  format: string
+                Nationality:
+                  type: string
+                  description: "\n"
+                  format: string
+                Residence:
+                  type: string
+                  description: "\n"
+                  format: string
+                TaxCountry:
+                  type: string
+                  description: "\n"
+                  format: string
+                ElectronicAddressType:
+                  $ref: '#/components/schemas/ElectronicAddressType'
+                PhoneAddressType:
+                  $ref: '#/components/schemas/PhoneAddressType'
                 PartyType:
                   type: string
                   description: "\n"
