@@ -6,10 +6,10 @@ info:
 servers:
 - url: 'https://core-api.partner-integrations-sandbox.thirsty-fish-dephub.tmachine.io/v1/posting-instruction-batches:asyncCreate'
 paths:
-  /v1/posting-instruction-batches:asyncCreate:
+  /v1/posting-instruction-batches:'asyncCreate:
     post:
       tags:
-        - Payment Execution-SAPI
+        - Payment Execution SAPI
       summary:  InCR Initiate Payment Execution-SAPI
       description: InCR Initiate Payment Execution-SAPI
       operationId: Initiate
@@ -65,14 +65,16 @@ components:
             creditor_target_account:
                 $ref: '#/components/schemas/creditor_target_account'
     posting_instructions:
-      type: object
-      properties:
-        client_transaction_id:
-          type: string
-          description: "\n"
-          format: string
-        transfer:
-          $ref: '#/components/schemas/transfer'
+      type: array
+      items:
+        type: object
+        properties:
+          client_transaction_id:
+            type: string
+            description: "\n"
+            format: string
+          transfer:
+            $ref: '#/components/schemas/transfer'
     posting_instruction_batch:
       type: object
       properties:
@@ -80,15 +82,11 @@ components:
           type: string
           description: "\n"
           format: string
-          enum:
-            - internal_transfers
         client_batch_id:
           type: string
           description: "\n"
           format: string
         posting_instructions:
-          type: array
-          items:
             $ref: '#/components/schemas/posting_instructions'
         batch_details:
             $ref: '#/components/schemas/batch_details'
