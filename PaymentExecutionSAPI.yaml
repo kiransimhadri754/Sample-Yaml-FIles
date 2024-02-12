@@ -32,13 +32,6 @@ paths:
           $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
-    batch_details:
-      type: object
-      properties:
-        key: 
-          type: string
-          description: "\n"
-          format: string
     debtor_target_account:
       type: object
       properties:
@@ -93,7 +86,11 @@ components:
         posting_instructions:
             $ref: '#/components/schemas/posting_instructions'
         batch_details:
-            $ref: '#/components/schemas/batch_details'
+            type: string
+            description: "\n"
+            format: string
+            enum:
+              - null
         value_timestamp:
           type: string
           description: "\n"
