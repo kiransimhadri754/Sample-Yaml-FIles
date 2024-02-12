@@ -6,7 +6,7 @@ info:
 servers:
 - url: 'https://core-api.partner-integrations-sandbox.thirsty-fish-dephub.tmachine.io/v1/posting-instruction-batches:asyncCreate'
 paths:
-  /v1/posting-instruction-batches:asyncCreate:
+  /v1/posting-instruction-batchesasyncCreate:
     post:
       tags:
         - Payment Execution-SAPI
