@@ -4,7 +4,7 @@ info:
   description: BIAN Service Domain Packaged Business Capability (PCB) | DDD Bounded Context Payment Execution.
   version: 12.0.1
 servers:
-- url: 'https://virtserver.swaggerhub.com/BIAN-3/BIAN/CardFinancialSettlement/11.0.0'
+- url: 'https://app.swaggerhub.com/apis/BIAN-3/PaymentExecution/11.0.0'
 paths:
   /transfer/Initiate:
     post:
