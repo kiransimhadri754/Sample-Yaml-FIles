@@ -84,9 +84,7 @@ components:
                       type: string
                       description: "\n"
                       format: string
-    PhoneAddressType:
-                  type: array
-                  items:
+    MobilePhoneAddressType:
                     type: object
                     properties:
                       PhoneTypeValue:
@@ -95,7 +93,19 @@ components:
                         format: string
                         enum:
                           - MobileNumber
-                          - HomePhoneNumber
+                      PhoneNumber:
+                        type: string
+                        description: "\n"
+                        format: string
+    HomePhoneAddressType:
+                    type: object
+                    properties:
+                      PhoneTypeValue:
+                        type: string
+                        description: "\n"
+                        format: string
+                        enum:
+                          - HomeNumber
                       PhoneNumber:
                         type: string
                         description: "\n"
@@ -131,25 +141,27 @@ components:
                   format: string
                 ElectronicAddressType:
                   $ref: '#/components/schemas/ElectronicAddressType'
-                PhoneAddressType:
-                  $ref: '#/components/schemas/PhoneAddressType'
+                MobilePhoneAddressType:
+                  $ref: '#/components/schemas/MobilePhoneAddressType'
+                HomePhoneAddressType:
+                  $ref: '#/components/schemas/HomePhoneAddressType'
                 PartyLegalStructureType: 
                   type: string
                   description: "\n"
                   format: string  
                   enum: 
                     - Person
+                PartyInvolvementType:
+                  type: string
+                  description: "\n"
+                  format: string
+                  enum:
+                    - AgreementInvolvement
     Party:
           type: object
           properties:
             PartyReference:
               $ref: '#/components/schemas/PartyReference'
-            PartyInvolvementType:
-              type: string
-              description: "\n"
-              format: string
-              enum:
-                - AgreementInvolvement
     Parties:
       type: array
       items:
@@ -157,12 +169,6 @@ components:
         properties:
             PartyReference:
               $ref: '#/components/schemas/PartyReference'
-            PartyInvolvementType:
-              type: string
-              description: "\n"
-              format: string
-              enum:
-                - AgreementInvolvement
     InitiatePartyRequest:
       type: object
       properties:
