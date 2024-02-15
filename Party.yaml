@@ -56,70 +56,6 @@ paths:
           $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
-    PartyRoleType:
-                  type: object
-                  properties:
-                    Text:
-                      type: string
-                      description: "\n"
-                      format: string
-    PartyRoleName:
-                  type: object
-                  properties:
-                    Name:
-                      type: string
-                      description: "\n"
-                      format: string
-    PartyRoleValidityPeriod:
-                  type: object
-                  properties:
-                    FromDateTime:
-                      $ref: '#/components/schemas/FromDateTime'
-                    ToDateTime:
-                      $ref: '#/components/schemas/ToDateTime'
-    FromDateTime:
-                      type: object
-                      properties:
-                        DateTimeContent:
-                          type: string
-                          description: "\n"
-                          format: string
-                        TimeZoneCode:
-                          type: string
-                          description: "\n"
-                          format: string
-                        DaylightSavingIndicator:
-                          type: string
-                          description: "\n"
-                          format: string
-    ToDateTime:
-                      type: object
-                      properties:
-                        DateTimeContent:
-                          type: string
-                          description: "\n"
-                          format: string
-                        TimeZoneCode:
-                          type: string
-                          description: "\n"
-                          format: string
-                        DaylightSavingIndicator:
-                          type: string
-                          description: "\n"
-                          format: string                      
-    PartyInvolvement:
-              type: object
-              properties:
-                PartyRoleType:
-                  $ref: '#/components/schemas/PartyRoleType'
-                PartyRoleName:
-                  $ref: '#/components/schemas/PartyRoleName'
-                PartyRoleValidityPeriod:
-                  $ref: '#/components/schemas/PartyRoleValidityPeriod'
-                PartyInvolvementType:
-                  type: string
-                  description: "\n"
-                  format: string
     PartyName:
                   type: object
                   properties:
@@ -135,68 +71,6 @@ components:
                       type: string
                       description: "\n"
                       format: string
-    PartyDateTime:
-                  type: object
-                  properties:
-                    DateTimeContent:
-                      type: string
-                      description: "\n"
-                      format: string
-                    TimeZoneCode:
-                      type: string
-                      description: "\n"
-                      format: string
-                    DaylightSavingIndicator:
-                      type: string
-                      description: "\n"
-                      format: string
-    IdentifierStartDate:
-                        type: object
-                        properties:
-                          DateTimeContent:
-                            type: string
-                            description: "\n"
-                            format: string
-                          TimeZoneCode:
-                            type: string
-                            description: "\n"
-                            format: string
-                          DaylightSavingIndicator:
-                            type: string
-                            description: "\n"
-                            format: string
-    IdentifierEndDate:
-                        type: object
-                        properties:
-                          DateTimeContent:
-                            type: string
-                            description: "\n"
-                            format: string
-                          TimeZoneCode:
-                            type: string
-                            description: "\n"
-                            format: string
-                          DaylightSavingIndicator:
-                            type: string
-                            description: "\n"
-                            format: string
-    PartyIdentification:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      PartyIdentificationType:
-                        type: string
-                        description: "\n"
-                        format: string
-                      PartyIdentification:
-                        type: string
-                        description: "\n"
-                        format: string
-                      IdentifierStartDate:
-                        $ref: '#/components/schemas/IdentifierStartDate'
-                      IdentifierEndDate:
-                        $ref: '#/components/schemas/IdentifierEndDate'
     ElectronicAddressType:
                   type: object
                   properties:
@@ -259,21 +133,23 @@ components:
                   $ref: '#/components/schemas/ElectronicAddressType'
                 PhoneAddressType:
                   $ref: '#/components/schemas/PhoneAddressType'
-                PartyType:
+                PartyLegalStructureType: 
                   type: string
                   description: "\n"
-                  format: string
-                PartyDateTime:
-                  $ref: '#/components/schemas/PartyDateTime'
-                PartyIdentification:
-                  $ref: '#/components/schemas/PartyIdentification'
+                  format: string  
+                  enum: 
+                    - Person
     Party:
           type: object
           properties:
             PartyReference:
               $ref: '#/components/schemas/PartyReference'
-            PartyInvolvement:
-              $ref: '#/components/schemas/PartyInvolvement'
+            PartyInvolvementType:
+              type: string
+              description: "\n"
+              format: string
+              enum:
+                - AgreementInvolvement
     Parties:
       type: array
       items:
@@ -281,8 +157,12 @@ components:
         properties:
             PartyReference:
               $ref: '#/components/schemas/PartyReference'
-            PartyInvolvement:
-              $ref: '#/components/schemas/PartyInvolvement'
+            PartyInvolvementType:
+              type: string
+              description: "\n"
+              format: string
+              enum:
+                - AgreementInvolvement
     InitiatePartyRequest:
       type: object
       properties:
