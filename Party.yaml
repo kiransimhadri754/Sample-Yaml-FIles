@@ -157,18 +157,78 @@ components:
                   format: string
                   enum:
                     - AgreementInvolvement
+    PartyReferrence:
+              type: object
+              properties:
+                PartyReference:
+                  type: string
+                  description: "\n"
+                  format: string
+                Status:
+                  type: string
+                  description: "\n"
+                  format: string
+                PartyName:
+                  $ref: '#/components/schemas/PartyName'
+                Title:
+                  type: string
+                  description: "\n"
+                  format: string
+                BirthDate:
+                  type: string
+                  description: "\n"
+                  format: string
+                Gender:
+                  type: string
+                  description: "\n"
+                  format: string
+                Nationality:
+                  type: string
+                  description: "\n"
+                  format: string
+                Residence:
+                  type: string
+                  description: "\n"
+                  format: string
+                TaxCountry:
+                  type: string
+                  description: "\n"
+                  format: string
+                ElectronicAddressType:
+                  $ref: '#/components/schemas/ElectronicAddressType'
+                MobilePhoneAddressType:
+                  $ref: '#/components/schemas/MobilePhoneAddressType'
+                HomePhoneAddressType:
+                  $ref: '#/components/schemas/HomePhoneAddressType'
+                PartyLegalStructureType: 
+                  type: string
+                  description: "\n"
+                  format: string  
+                  enum: 
+                    - Person
+                PartyInvolvementType:
+                  type: string
+                  description: "\n"
+                  format: string
+                  enum:
+                    - AgreementInvolvement
     Party:
           type: object
           properties:
             PartyReference:
               $ref: '#/components/schemas/PartyReference'
+    PartyResponse:
+          type: object
+          properties:
+            PartyReference:
+              $ref: '#/components/schemas/PartyReferrence'
     Parties:
       type: array
       items:
         type: object
         properties:
             PartyReference:
-              $ref: '#/components/schemas/PartyReference'
+              $ref: '#/components/schemas/PartyReferrence'
     InitiatePartyRequest:
       type: object
       properties:
@@ -178,7 +238,7 @@ components:
       type: object
       properties:
         Party: 
-          $ref: '#/components/schemas/Party'
+          $ref: '#/components/schemas/PartyResponse'
     RetrievePartiesResponse:
       type: object
       properties:
