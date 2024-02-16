@@ -40,12 +40,7 @@ components:
           description: "\n"
           format: string
         AccountTypeName:
-          type: object
-          properties:
-            Name:
-              type: string
-              description: "\n"
-              format: string
+          $ref: '#/components/schemas/AccountTypeName'
     AccountTypeName:
       type: object
       properties:
@@ -76,30 +71,9 @@ components:
               description: "\n"
               format: string
             AccountType:
-              type: object
-              properties:
-                AccountType:
-                  type: string
-                  description: "\n"
-                  format: string
-                AccountTypeName:
-                  type: object
-                  properties:
-                    Name:
-                      type: string
-                      description: "\n"
-                      format: string
+              $ref: '#/components/schemas/AccountType'
             AccountCurrency:
-              type: object
-              properties:
-                AccountCurrencyType:
-                  type: string
-                  description: "\n"
-                  format: string
-                CurrencyCode:
-                  type: string
-                  description: "\n"
-                  format: string
+              $ref: '#/components/schemas/AccountCurrency'
             Associations:
               type: string
               description: "\n"
@@ -132,136 +106,12 @@ components:
       type: object
       properties:
         CurrentAccountFaciity:
-          type: object
-          properties:
-            CustomerReference:
-              type: string
-              description: "\n"
-              format: string
-            BankBranchLocationReference:
-              type: string
-              description: "\n"
-              format: string
-            AccountType:
-              type: object
-              properties:
-                AccountType:
-                  type: string
-                  description: "\n"
-                  format: string
-                AccountTypeName:
-                  type: object
-                  properties:
-                    Name:
-                      type: string
-                      description: "\n"
-                      format: string
-            AccountCurrency:
-              type: object
-              properties:
-                AccountCurrencyType:
-                  type: string
-                  description: "\n"
-                  format: string
-                CurrencyCode:
-                  type: string
-                  description: "\n"
-                  format: string
-            Associations:
-              type: string
-              description: "\n"
-              format: string
-            AssociationType:
-              type: string
-              description: "\n"
-              format: string
-            AssociationReference:
-              type: string
-              description: "\n"
-              format: string
-            AccountDetails:
-              type: string
-              description: "\n"
-              format: string
-            PositionLimits:
-              type: string
-              description: "\n"
-              format: string
-            PositionLimitSettings:
-              type: string
-              description: "\n"
-              format: string
-            DateType:
-              type: string
-              description: "\n"
-              format: string
+          $ref: '#/components/schemas/CurrentAccountFaciity'
     InitiateCurrentAccountFacilityResponse:
       type: object
       properties:
         CurrentAccountFaciity:
-          type: object
-          properties:
-            CustomerReference:
-              type: string
-              description: "\n"
-              format: string
-            BankBranchLocationReference:
-              type: string
-              description: "\n"
-              format: string
-            AccountType:
-              type: object
-              properties:
-                AccountType:
-                  type: string
-                  description: "\n"
-                  format: string
-                AccountTypeName:
-                  type: object
-                  properties:
-                    Name:
-                      type: string
-                      description: "\n"
-                      format: string
-            AccountCurrency:
-              type: object
-              properties:
-                AccountCurrencyType:
-                  type: string
-                  description: "\n"
-                  format: string
-                CurrencyCode:
-                  type: string
-                  description: "\n"
-                  format: string
-            Associations:
-              type: string
-              description: "\n"
-              format: string
-            AssociationType:
-              type: string
-              description: "\n"
-              format: string
-            AssociationReference:
-              type: string
-              description: "\n"
-              format: string
-            AccountDetails:
-              type: string
-              description: "\n"
-              format: string
-            PositionLimits:
-              type: string
-              description: "\n"
-              format: string
-            PositionLimitSettings:
-              type: string
-              description: "\n"
-              format: string
-            DateType:
-              type: string
-              description: "\n"
-              format: string
+          $ref: '#/components/schemas/CurrentAccountFaciity'
     HTTPError:
       type: object
       properties:
