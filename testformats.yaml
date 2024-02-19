@@ -90,7 +90,7 @@ components:
                   description: "\n"
                   format: string
                 BirthDate:
-                  type: string
+                  type: date
                   description: "\n"
                   format: string
                 Gender:
