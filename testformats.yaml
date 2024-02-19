@@ -68,7 +68,7 @@ components:
                       PhoneNumber:
                         type: integer
                         description: "\n"
-                        format: float
+                        format: int32
     HomePhoneAddressType:
                     type: object
                     properties:
