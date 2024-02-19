@@ -1,0 +1,294 @@
+openapi: 3.0.1
+info:
+  title: Party
+  description: BIAN Service Domain Packaged Business Capability (PCB) | DDD Bounded Context Party
+  version: 11.0.0
+servers:
+- url: 'https://app.swaggerhub.com/apis/BIAN-3/CurrentAccount/11.0.0#/servers'
+paths:
+   /Party/Initiate:
+    post:
+      tags:
+          - Party
+      summary: InCR Initiate A new party
+      description: InCR Initiate A party
+      operationId: Initiate
+      requestBody:
+        $ref: '#/components/requestBodies/InitiatePartyRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiatePartyResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  schemas:
+    PartyName:
+                  type: object
+                  properties:
+                    FirstName:
+                      type: string
+                      description: "\n"
+                      format: date
+                    MiddleName:
+                      type: string
+                      description: "\n"
+                      format: date-time
+                    LastName:
+                      type: string
+                      description: "\n"
+                      format: uuid
+    ElectronicAddressType:
+                  type: object
+                  properties:
+                    ElectronicAddressTypeValue:
+                      type: string
+                      description: "\n"
+                      format: email
+                    AddressDescription:
+                      type: string
+                      description: "\n"
+                      format: uri
+    MobilePhoneAddressType:
+                    type: object
+                    properties:
+                      PhoneTypeValue:
+                        type: string
+                        description: "\n"
+                        format: binary
+                      PhoneNumber:
+                        type: number
+                        description: "\n"
+                        format: float
+    HomePhoneAddressType:
+                    type: object
+                    properties:
+                      PhoneTypeValue:
+                        type: integer
+                        description: "\n"
+                        format: double
+                      PhoneNumber:
+                        type: string
+                        description: "\n"
+                        format: string
+    PartyReference:
+              type: object
+              properties:
+                PartyName:
+                  $ref: '#/components/schemas/PartyName'
+                Title:
+                  type: string
+                  description: "\n"
+                  format: string
+                BirthDate:
+                  type: string
+                  description: "\n"
+                  format: string
+                Gender:
+                  type: string
+                  description: "\n"
+                  format: string
+                Nationality:
+                  type: string
+                  description: "\n"
+                  format: string
+                Residence:
+                  type: string
+                  description: "\n"
+                  format: string
+                TaxCountry:
+                  type: string
+                  description: "\n"
+                  format: string
+                ElectronicAddressType:
+                  $ref: '#/components/schemas/ElectronicAddressType'
+                MobilePhoneAddressType:
+                  $ref: '#/components/schemas/MobilePhoneAddressType'
+                HomePhoneAddressType:
+                  $ref: '#/components/schemas/HomePhoneAddressType'
+                PartyLegalStructureType: 
+                  type: string
+                  description: "\n"
+                  format: string  
+                  enum: 
+                    - Person
+                PartyInvolvementType:
+                  type: string
+                  description: "\n"
+                  format: string
+                  enum:
+                    - AgreementInvolvement
+    PartyReferrence:
+              type: object
+              properties:
+                PartyReference:
+                  type: string
+                  description: "\n"
+                  format: string
+                Status:
+                  type: string
+                  description: "\n"
+                  format: string
+                PartyName:
+                  $ref: '#/components/schemas/PartyName'
+                Title:
+                  type: string
+                  description: "\n"
+                  format: string
+                BirthDate:
+                  type: string
+                  description: "\n"
+                  format: string
+                Gender:
+                  type: string
+                  description: "\n"
+                  format: string
+                Nationality:
+                  type: string
+                  description: "\n"
+                  format: string
+                Residence:
+                  type: string
+                  description: "\n"
+                  format: string
+                TaxCountry:
+                  type: string
+                  description: "\n"
+                  format: string
+                ElectronicAddressType:
+                  $ref: '#/components/schemas/ElectronicAddressType'
+                MobilePhoneAddressType:
+                  $ref: '#/components/schemas/MobilePhoneAddressType'
+                HomePhoneAddressType:
+                  $ref: '#/components/schemas/HomePhoneAddressType'
+                PartyLegalStructureType: 
+                  type: string
+                  description: "\n"
+                  format: string  
+                  enum: 
+                    - Person
+                PartyInvolvementType:
+                  type: string
+                  description: "\n"
+                  format: string
+                  enum:
+                    - AgreementInvolvement
+    Party:
+          type: object
+          properties:
+            PartyReference:
+              $ref: '#/components/schemas/PartyReference'
+    PartyResponse:
+          type: object
+          properties:
+            PartyReference:
+              $ref: '#/components/schemas/PartyReferrence'
+    Parties:
+      type: array
+      items:
+        type: object
+        properties:
+            PartyReference:
+              $ref: '#/components/schemas/PartyReferrence'
+    InitiatePartyRequest:
+      type: object
+      properties:
+        Party: 
+          $ref: '#/components/schemas/Party'
+    InitiatePartyResponse:
+      type: object
+      properties:
+        Party: 
+          $ref: '#/components/schemas/PartyResponse'
+    RetrievePartiesResponse:
+      type: object
+      properties:
+        Parties: 
+          $ref: '#/components/schemas/Parties'
+    HTTPError:
+      type: object
+      properties:
+        status_code:
+          type: string
+          description: "\n"
+          format: string
+        status:
+          type: string
+          description: "\n"
+          format: string
+        message:
+          type: string
+          description: "\n"
+          format: string
+  parameters:
+    Status:
+      name: Status
+      in: path
+      required: true
+      schema:
+        type: string
+  requestBodies:
+    InitiatePartyRequest:
+      description: CurrentAccountFacilityInitiate
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InitiatePartyRequest'
+  responses:
+    InitiatePartyResponse:
+        description: fetchAccountUser
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiatePartyResponse'
+    RetrievePartiesResponse:
+        description: fetchAccountUser
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/RetrievePartiesResponse'
+    BadRequest:
+      description: BadRequest
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    NotFound:
+      description: NotFound
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    TooManyRequests:
+      description: TooManyRequests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    InternalServerError:
+      description: InternalServerError
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
