@@ -120,35 +120,35 @@ components:
           description: "\n"
           format: string
         Departments:
-          type: array
-          items:
-            $ref: '#/components/schemas/Department'
+            $ref: '#/components/schemas/Departments'
         Roles:
-          type: array
-          items:
-            $ref: '#/components/schemas/Role'
-    Department:
-      type: object
-      properties:
-        Name:
-          type: string
-          description: "\n"
-          format: string
-        Location:
-          type: string
-          description: "\n"
-          format: string
-    Role:
-      type: object
-      properties:
-        Title:
-          type: string
-          description: "\n"
-          format: string
-        Responsibilities:
-          type: string
-          description: "\n"
-          format: string
+            $ref: '#/components/schemas/Roles'
+    Departments:
+      type: array
+      items:
+        type: object
+        properties:
+          Name:
+            type: string
+            description: "\n"
+            format: string
+          Location:
+            type: string
+            description: "\n"
+            format: string
+    Roles:
+      type: array
+      items:
+        type: object
+        properties:
+          Title:
+            type: string
+            description: "\n"
+            format: string
+          Responsibilities:
+            type: string
+            description: "\n"
+            format: string
     InitiateEmployeeRequest:
       $ref: '#/components/schemas/Employee'
     InitiateEmployeeResponse:
