@@ -11,7 +11,7 @@ paths:
       tags:
           - CONSUMER
       summary: Business Health Characteristics Data
-      description: Equifax Business Health Characteristics uses current account transaction data to offer you a more complete picture of a company's financial health,helping you make more accurate lending decisions. Because it uses transaction data, it doesn’t rely on your business customers having a history of credit,in order to determine their ability to pay back a loan, invoice finance or asset finance agreement.<p>This means that you can more accurately assess the creditworthiness and affordability of UK businesses who are applying to the CBILS scheme with characteristics that show turnover and payments such as Tax and Salary. Characteristics are available over 1,3,6, 12 and 24 months and cover pre-COVID (pre March 1 2020), post-COVID (post March 1 2020) and rolling periods (crossing the ‘COVID’ date) in addition to chars that cover loans and other borrowing taken during the COVID period.</p>"
+      description: Equifax Business Health Characteristics uses current 
       operationId: Retrieve
       parameters:
       - $ref: "#/components/parameters/CustomerIdParam"
