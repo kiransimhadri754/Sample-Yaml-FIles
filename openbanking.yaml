@@ -44,20 +44,22 @@ paths:
 components:
   schemas:
     Flags:
-      type: object
-      properties:
-        flag:
-          type: string
-          description: "\n"
-          format: string
-        description:
-          type: string
-          description: "\n"
-          format: string
-        level:
-          type: string
-          description: "\n"
-          format: string
+      type: array
+      items:
+        type: object
+        properties:
+          flag:
+            type: string
+            description: "\n"
+            format: string
+          description:
+            type: string
+            description: "\n"
+            format: string
+          level:
+            type: string
+            description: "\n"
+            format: string
     FhiScoreResponse:
       type: object
       properties:
