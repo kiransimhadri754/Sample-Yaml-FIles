@@ -12,7 +12,7 @@ paths:
           - "CONSUMER"
       summary: "Business Health Characteristics Data"
       description: "Equifax Business Health Characteristics uses current account transaction data to offer you a more complete picture of a company's financial health,helping you make more accurate lending decisions. Because it uses transaction data, it doesn’t rely on your business customers having a history of credit,in order to determine their ability to pay back a loan, invoice finance or asset finance agreement.<p>This means that you can more accurately assess the creditworthiness and affordability of UK businesses who are applying to the CBILS scheme with characteristics that show turnover and payments such as Tax and Salary. Characteristics are available over 1,3,6, 12 and 24 months and cover pre-COVID (pre March 1 2020), post-COVID (post March 1 2020) and rolling periods (crossing the ‘COVID’ date) in addition to chars that cover loans and other borrowing taken during the COVID period.</p>"
-      operationId: RetrieveBusinessHealthCharacteristicsData
+      operationId: Retrieve
       parameters:
       - $ref: "#/components/parameters/CustomerIdParam"
       responses:
@@ -33,27 +33,30 @@ paths:
 components:
   schemas:
     Flags:
-      type: object
-      properties:
-        flag:
-          type: string
-          description: The flag associated with the score
-        description:
-          type: string
-          description: Description of the flag
-        level:
-          type: string
-          description: Level of the flag
+      type: array
+      items:
+        type: object
+        properties:
+          flag:
+            type: string
+            description: "\n"
+            format: string
+          description:
+            type: string
+            description: "\n"
+            format: string
+          level:
+            type: string
+            description: "\n"
+            format: string
     FhiScoreResponse:
       type: object
       properties:
         fhiScore:
-          type: integer
-          description: The FHI (Flagged Health Indicator) score
+          type: string
+          description: "\n"
+          format: string
         flags:
-          type: array
-          description: List of flags associated with the score
-          items:
             $ref: '#/components/schemas/Flags'
     InitiateFhiScoreResponseResponse:
           $ref: '#/components/schemas/FhiScoreResponse'
@@ -72,7 +75,6 @@ components:
     CustomerIdParam:
       name: customerId
       in: query
-      description: "Internal Id of the customer. This can be retrieved from the general/lookup/customerId endpoint when providing an external client reference."
       required: true
       schema:
         type: string
