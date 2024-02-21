@@ -11,7 +11,7 @@ paths:
       tags:
           - CONSUMER
       summary: Business Health Characteristics Data
-      description: "Equifax Business Health Characteristics uses current account transaction\
+      description: "Equifax Business Health Characteristics uses current account transaction
         \ data to offer you a more complete picture of a company's financial health,\
         \ helping you make more accurate lending decisions. Because it uses transaction\
         \ data, it doesn’t rely on your business customers having a history of credit,\
@@ -60,7 +60,7 @@ components:
             type: string
             description: "\n"
             format: string
-    FhiScoreResponse:
+    RetrieveFhiScoreResponse:
       type: object
       properties:
         fhiScore:
@@ -69,8 +69,6 @@ components:
           format: string
         flags:
           $ref: '#/components/schemas/flags'
-    RetrieveFhiScoreResponse:
-          $ref: '#/components/schemas/FhiScoreResponse'
     HTTPError:
       type: object
       properties:
