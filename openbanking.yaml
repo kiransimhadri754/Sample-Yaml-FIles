@@ -6,7 +6,7 @@ info:
 servers:
 - url: "https://api.sandbox.equifax.co.uk/open-banking-insights/v1"
 paths:
-   /commercial/businessHealthCharacteristics:
+  /commercial/businessHealthCharacteristics:
     get:
       tags:
           - CONSUMER
