@@ -26,6 +26,8 @@ paths:
       operationId: Retrieve
       parameters:
           - $ref: "#/components/parameters/CustomerIdParam"
+          - $ref: "#/components/parameters/NumberOfMonths1361224Param"
+          - $ref: "#/components/parameters/EfxClientCorrelationIdParam"
       responses:
         '200':
           $ref: '#/components/responses/RetrieveFhiScoreResponse'
@@ -85,6 +87,17 @@ components:
       name: customerId
       in: query
       required: true
+      schema:
+        type: string
+    NumberOfMonths1361224Param:
+      name: numberOfMonths
+      in: query
+      required: true
+      schema:
+        type: string
+    EfxClientCorrelationIdParam:
+      name: efx-client-correlation-id
+      in: header
       schema:
         type: string
   responses:
