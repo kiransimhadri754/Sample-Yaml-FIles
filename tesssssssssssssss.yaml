@@ -5,16 +5,14 @@ info:
   version: 1.2.32
 servers:
 - url: "https://api.sandbox.equifax.co.uk/open-banking-insights/v1"
-x-comments: 
-  -CONSUMER:"These APIs are available to clients that register for the consumer product.""
 paths:
    /commercial/businessHealthCharacteristics:
     get:
       tags:
-          - SavingsAccountFacility
-      summary: InCR Initiate A new savings account
-      description: InCR Initiate A new savings account
-      operationId: Initiate
+          - "CONSUMER"
+      summary: "Business Health Characteristics Data"
+      description: "Equifax Business Health Characteristics uses current account transaction data to offer you a more complete picture of a company's financial health,helping you make more accurate lending decisions. Because it uses transaction data, it doesn’t rely on your business customers having a history of credit,in order to determine their ability to pay back a loan, invoice finance or asset finance agreement.<p>This means that you can more accurately assess the creditworthiness and affordability of UK businesses who are applying to the CBILS scheme with characteristics that show turnover and payments such as Tax and Salary. Characteristics are available over 1,3,6, 12 and 24 months and cover pre-COVID (pre March 1 2020), post-COVID (post March 1 2020) and rolling periods (crossing the ‘COVID’ date) in addition to chars that cover loans and other borrowing taken during the COVID period.</p>"
+      operationId: RetrieveBusinessHealthCharacteristicsData
       parameters:
       - $ref: "#/components/parameters/CustomerIdParam"
       responses:
@@ -78,22 +76,13 @@ components:
       required: true
       schema:
         type: string
-  headers:
-    EfxClientCorrelationIdParam:
-      description: "This is a client reference ID, which is returned in the response.This can be used by clients for their own reference and logging purposes."
-      schema:
-        type: "string"
   responses:
     RetrieveFhiScoreResponseResponse:
       description: fetchFhiScoreResponse
-      headers:
-        EfxClientCorrelationIdParam:
-          $ref: '#/components/headers/EfxClientCorrelationIdParam'
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/InitiateFhiScoreResponseResponse'
-
     BadRequest:
       description: BadRequest
       content:
