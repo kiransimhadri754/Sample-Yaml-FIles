@@ -97,19 +97,15 @@ components:
           type: string
           description: "\n"
           format: string
+        AssociationObligationEntitlement:
+          type: string
+          description: "\n"
+          format: string
         AssociationReference:
           type: string
           description: "\n"
           format: string
         AccountDetails:
-          type: string
-          description: "\n"
-          format: string
-        PositionLimits:
-          type: string
-          description: "\n"
-          format: string
-        PositionLimitSettings:
           type: string
           description: "\n"
           format: string
