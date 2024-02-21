@@ -43,7 +43,7 @@ paths:
           $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
-    Flags:
+    flags:
       type: array
       items:
         type: object
@@ -68,7 +68,7 @@ components:
           description: "\n"
           format: string
         flags:
-          $ref: '#/components/schemas/Flags'
+          $ref: '#/components/schemas/flags'
     RetrieveFhiScoreResponse:
           $ref: '#/components/schemas/FhiScoreResponse'
     HTTPError:
