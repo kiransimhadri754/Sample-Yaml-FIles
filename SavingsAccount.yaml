@@ -59,7 +59,7 @@ components:
           type: string
           description: "\n"
           format: string
-    savingsAccountArrangement:
+    SavingsAccountArrangement:
           type: array
           items:
             type: object
@@ -87,8 +87,8 @@ components:
           $ref: '#/components/schemas/AccountType'
         AccountCurrency:
           $ref: '#/components/schemas/AccountCurrency'
-        savingsAccountArrangement:
-          $ref: '#/components/schemas/savingsAccountArrangement'
+        SavingsAccountArrangement:
+          $ref: '#/components/schemas/SavingsAccountArrangement'
         Associations:
           type: string
           description: "\n"
@@ -126,15 +126,15 @@ components:
     HTTPError:
       type: object
       properties:
-        status_code:
+        Status_code:
           type: string
           description: "\n"
           format: string
-        status:
+        Status:
           type: string
           description: "\n"
           format: string
-        message:
+        Message:
           type: string
           description: "\n"
           format: string
@@ -147,7 +147,7 @@ components:
             $ref: '#/components/schemas/InitiateSavingsAccountFacilityRequest'
   responses:
     InitiateSavingsAccountFacilityResponse:
-        description: fetchAccountUser
+        description: fetchSavingsAccount
         content:
           application/json:
             schema:
