@@ -189,9 +189,9 @@ components:
       type: object
       properties:
         numberOfMonths:
-          type: string
+          type: integer
           description: "\n"
-          format: string
+          format: integer
         fhiScore:
           type: string
           description: "\n"
