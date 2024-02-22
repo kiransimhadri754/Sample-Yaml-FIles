@@ -25,7 +25,7 @@ paths:
         \ indicators that help explain why the individual has been assigned the index\
         \ value. Financial Health Index (V1) is based on amount of account information\
         \ requested, e.g. 3, 6 and 12 months of data." 
-      operationId: RetrieveFHI
+      operationId: RetrieveFinancialHealthIndex(V1)
       parameters:
           - $ref: "#/components/parameters/CustomerIdParam"
           - $ref: "#/components/parameters/NumberOfMonths1361224Param"
@@ -53,7 +53,7 @@ paths:
       description: "Financial Health Index V2 is an improved version of the Financial\
         \ Health Index V1 where all data can be returned in the output, e.g. 3, 6\
         \ and 12 months of data." 
-      operationId: RetrieveFHIM
+      operationId: RetrieveFinancialHealthIndex(V2)
       parameters:
           - $ref: "#/components/parameters/CustomerIdParam"
           - $ref: "#/components/parameters/NumberOfMonth1361224Param"
@@ -61,6 +61,67 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/RetrieveFinancialHealthIndexMonthsResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /consumer/customerExpenditure:
+    get:
+      tags:
+          - CONSUMER
+      summary: "Customer Expenditure"
+      description: "Expenditure APIs provides characteristics and summaries of a customer’\
+        s expenditures, including non-discretionary, discretionary and living expenses,\
+        \ based off personal current account information obtained from Open Banking\
+        \ APIs."
+      operationId: RetrieveCustomerExpenditure
+      parameters:
+      - $ref: "#/components/parameters/CustomerIdParam"
+      - $ref: "#/components/parameters/NumberOfMonths3612Param"
+      - $ref: "#/components/parameters/StartYearParam"
+      - $ref: "#/components/parameters/StartMonthParam"
+      - $ref: "#/components/parameters/EndYearParam"
+      - $ref: "#/components/parameters/EndMonthParam"
+      - $ref: "#/components/parameters/EfxClientCorrelationIdParam"
+      responses:
+        '200':
+          $ref: '#/components/responses/RetrieveCustomerExpenditureResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /consumer/customerCalculations:
+    get:
+      tags:
+          - CONSUMER
+      summary: "Customer Calculations"
+      description: "The Customer Calculations API provides a view of a customer's\
+        \ income, expenditure and disposable income position, based on either default\
+        \ affordability weightings or client specified weightings which can be set\
+        \ in the client dashboard."
+      operationId: RetrieveCustomerCalculations
+      parameters:
+      - $ref: "#/components/parameters/CustomerIdParam"
+      - $ref: "#/components/parameters/EfxClientCorrelationIdParam"
+      responses:
+        '200':
+          $ref: '#/components/responses/RetrieveCustomerCalculationsResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -176,13 +237,214 @@ components:
             type: string
             description: "\n"
             format: string
+    expenditureChars: 
+      type: array
+      items:
+        type: object
+        properties:
+          charCode:
+            type: string
+            description: "\n"
+            format: string
+          lable:
+            type: string
+            description: "\n"
+            format: string
+          value:
+            type: string
+            description: "\n"
+            format: string
+    IncomeCategory:
+      type: object
+      properties:
+        description:
+          type: string
+          description: "\n"
+          format: string
+        amount:
+          type: number
+          description: "\n"
+          format: number
+        calculatedAmount:
+          type: number
+          description: "\n"
+          format: number
+        weighting:
+          type: number
+          description: "\n"
+          format: number
+    ExpenditureCategory:
+      type: object
+      properties:
+        description:
+          type: string
+          description: "\n"
+          format: string
+        amount:
+          type: number
+          description: "\n"
+          format: number
+        calculatedAmount:
+          type: number
+          description: "\n"
+          format: number
+        weighting:
+          type: number
+          description: "\n"
+          format: number
+    MonthData:
+      type: object
+      properties:
+        calculatedIncomeTotal:
+          type: number
+          description: "\n"
+          format: number
+        rawIncomeTotal:
+          type: number
+          description: "\n"
+          format: number
+        calculatedExpenditureTotal:
+          type: number
+          description: "\n"
+          format: number
+        rawExpenditureTotal:
+          type: number
+          description: "\n"
+          format: number
+        discretionaryTotal:
+          type: number
+          description: "\n"
+          format: number
+        incomeCategories:
+          type: array
+          items:
+            $ref: '#/components/schemas/IncomeCategory'
+        expenditureCategories:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExpenditureCategory'
+        diPercentage:
+          type: number
+          description: "\n"
+          format: number
+        incomePercentage:
+          type: number
+          description: "\n"
+          format: number
+        expenditurePercentage:
+          type: number
+          description: "\n"
+          format: number
+    Month:
+      type: object
+      properties:
+        yearNumber:
+          type: number
+          description: "\n"
+          format: number
+        monthNumber:
+          type: number
+          description: "\n"
+          format: number
+    MonthlyData:
+      type: object
+      properties:
+        month:
+          $ref: '#/components/schemas/Month'
+        data:
+          $ref: '#/components/schemas/MonthData'
+    Average:
+      type: object
+      properties:
+        calculatedIncomeTotal:
+          type: number
+          description: "\n"
+          format: number
+        rawIncomeTotal:
+          type: number
+          description: "\n"
+          format: number
+        calculatedExpenditureTotal:
+          type: number
+          description: "\n"
+          format: number
+        rawExpenditureTotal:
+          type: number
+          description: "\n"
+          format: number
+        discretionaryTotal:
+          type: number
+          description: "\n"
+          format: number
+        incomeCategories:
+          type: array
+          items:
+            $ref: '#/components/schemas/IncomeCategory'
+        expenditureCategories:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExpenditureCategory'
+        diPercentage:
+          type: number
+          description: "\n"
+          format: number
+        incomePercentage:
+          type: number
+          description: "\n"
+          format: number
+        expenditurePercentage:
+          type: number
+          description: "\n"
+          format: number
+    CalibrationInfo:
+      type: object
+      properties:
+        searchGuid:
+          type: string
+          description: "\n"
+          format: uuid
+        customerId:
+          type: string
+          description: "\n"
+          format: uuid
+        accountId:
+          type: string
+          description: "\n"
+          format: uuid
+        startYear:
+          type: number
+          description: "\n"
+          format: number
+        startMonth:
+          type: number
+          description: "\n"
+          format: number
+        endYear:
+          type: number
+          description: "\n"
+          format: number
+        endMonth:
+          type: number
+          description: "\n"
+          format: number
+    RetrieveCustomerCalculationsResponse:
+      type: object
+      properties:
+        average:
+          $ref: '#/components/schemas/Average'
+        months:
+          type: array
+          items:
+            $ref: '#/components/schemas/MonthlyData'
+        calibrationInfo:
+          $ref: '#/components/schemas/CalibrationInfo'
     RetrieveFinancialHealthIndexResponse:
       type: object
       properties:
         fhiScore:
-          type: string
+          type: integer
           description: "\n"
-          format: string
+          format: integer
         flags:
           $ref: '#/components/schemas/flags'
     RetrieveFinancialHealthIndexMonthsResponse:
@@ -193,9 +455,9 @@ components:
           description: "\n"
           format: integer
         fhiScore:
-          type: string
+          type: integer
           description: "\n"
-          format: string
+          format: integer
         flags:
           $ref: '#/components/schemas/flags'
     RetrieveAutomatedIncomeVerificationResponse:
@@ -207,11 +469,16 @@ components:
       type: object
       properties:
         numberOfMonths:
-          type: string
+          type: integer
           description: "\n"
-          format: string
+          format: integer
         aivScorecardResponse:
           $ref: '#/components/schemas/aivScorecardResponse'
+    RetrieveCustomerExpenditureResponse:
+      type: object
+      properties:
+        expenditureChars:
+          $ref: '#/components/schemas/expenditureChars'
     HTTPError:
       type: object
       properties:
@@ -239,14 +506,14 @@ components:
       in: query
       required: true
       schema:
-        type: string
+        type: integer
     NumberOfMonths3612Param:
       name: numberOfMonths
       description: 3, 6 or 12 months for transaction data to be provided in the response.
       in: query
       required: true
       schema:
-        type: string
+        type: integer
     NumberOfMonth3612Param:
       name: numberOfMonth
       description: "An array of integers, containing either 3, 6 or 12 months for\
@@ -254,7 +521,7 @@ components:
       in: query
       required: false
       schema:
-        type: string
+        type: integer
     NumberOfMonth1361224Param:
       name: numberOfMonth
       description: "An array of integers, containing either 3, 6 or 12 months for\
@@ -262,7 +529,7 @@ components:
       in: query
       required: false
       schema:
-        type: string
+        type: integer
     GrossAnnualSalaryParam:
       name: grossAnnualSalary
       description:  "The value provided in this parameter will be used to override\
@@ -270,14 +537,14 @@ components:
       in: query
       required: false
       schema:
-        type: string
+        type: integer
     StartYearParam:
       name: startYear
       description:  "The year provided must be between 1900 and 3000."
       in: query
       required: false
       schema:
-        type: string
+        type: integer
         default: 1900
     StartMonthParam:
       name: startMonth
@@ -285,7 +552,7 @@ components:
       in: query
       required: false
       schema:
-        type: string
+        type: integer
         default: 1
     EndYearParam:
       name: endYear
@@ -294,7 +561,7 @@ components:
       in: query
       required: false
       schema:
-        type: string
+        type: integer
         default: 3000
     EndMonthParam:
       name: endMonth
@@ -303,7 +570,7 @@ components:
       in: query
       required: false
       schema:
-        type: string
+        type: integer
         default: 1
     EfxClientCorrelationIdParam:
       name: efx-client-correlation-id
@@ -330,13 +597,25 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/RetrieveAutomatedIncomeVerificationResponse'    
+            $ref: '#/components/schemas/RetrieveAutomatedIncomeVerificationResponse' 
     RetrieveAutomatedIncomeVerificationMonthsResponse:
       description: fetchFhiScore
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/RetrieveAutomatedIncomeVerificationMonthsResponse' 
+            $ref: '#/components/schemas/RetrieveAutomatedIncomeVerificationMonthsResponse'
+    RetrieveCustomerCalculationsResponse:
+      description: fetchFhiScore
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RetrieveCustomerCalculationsResponse'
+    RetrieveCustomerExpenditureResponse:
+      description: fetchFhiScore
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RetrieveCustomerExpenditureResponse'      
     BadRequest:
       description: BadRequest
       content:
