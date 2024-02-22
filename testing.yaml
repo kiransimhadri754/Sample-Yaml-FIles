@@ -73,6 +73,40 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
+  /consumer/automatedIncomeVerification:
+    get:
+      tags:
+          - CONSUMER
+      summary: "Automated Income Verification (V1)"
+      description: "<p>Automated Income Verification enables real-time, digital income\
+        \ verification from personal current account transaction data made available\
+        \ from Open Banking APIs.</p> <p>The solution provides a ranking (A to F)\
+        \ of the amount of evidence there is to support a customer declared income.\
+        \ It also breaks down income into individual components such as salary, benefits\
+        \ and pension for more granular insight and more accurate verification. It\
+        \ can be used by any organisation, provided the customer gives their consent\
+        \ and banks digitally.</p>" 
+      operationId: RetrieveAIV
+      parameters:
+          - $ref: "#/components/parameters/CustomerIdParam"
+          - $ref: "#/components/parameters/NumberOfMonths3612Param"
+          - $ref: "#/components/parameters/GrossAnnualSalaryParam"
+          - $ref: "#/components/parameters/EfxClientCorrelationIdParam"
+      responses:
+        '200':
+          $ref: '#/components/responses/RetrieveAutomatedIncomeVerificationResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
     flags:
@@ -89,6 +123,23 @@ components:
             description: "\n"
             format: string
           level:
+            type: string
+            description: "\n"
+            format: string
+    aivScorecardResponse: 
+      type: array
+      items:
+        type: object
+        properties:
+          code:
+            type: string
+            description: "\n"
+            format: string
+          lable:
+            type: string
+            description: "\n"
+            format: string
+          value:
             type: string
             description: "\n"
             format: string
@@ -114,6 +165,11 @@ components:
           format: string
         flags:
           $ref: '#/components/schemas/flags'
+    RetrieveAutomatedIncomeVerificationResponse:
+      type: object
+      properties:
+        aivScorecardResponse:
+          $ref: '#/components/schemas/aivScorecardResponse'
     HTTPError:
       type: object
       properties:
@@ -142,11 +198,27 @@ components:
       required: true
       schema:
         type: string
+    NumberOfMonths3612Param:
+      name: numberOfMonths
+      description: 3, 6 or 12 months for transaction data to be provided in the response.
+      in: query
+      required: true
+      schema:
+        type: string
     NumberOfMonth1361224Param:
       name: numberOfMonth
       description: "An array of integers, containing either 3, 6 or 12 months for\
         \ transaction data to be provided in the response."
       in: query
+      required: false
+      schema:
+        type: string
+    GrossAnnualSalaryParam:
+      name: grossAnnualSalary
+      description:  "The value provided in this parameter will be used to override\
+        \ the value provided during the customer application process."
+      in: query
+      required: false
       schema:
         type: string
     EfxClientCorrelationIdParam:
@@ -169,6 +241,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/RetrieveFinancialHealthIndexMonthsResponse'
+    RetrieveAutomatedIncomeVerificationResponse:
+      description: fetchFhiScore
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RetrieveAutomatedIncomeVerificationResponse'            
     BadRequest:
       description: BadRequest
       content:
