@@ -194,7 +194,7 @@ components:
           type: string
           description: "\n"
           format: string
-    LinkedAccount:
+    LinkedAccounts:
       type: object
       properties:
         AccountReference:
@@ -281,7 +281,7 @@ components:
         LinkedAccounts:
           type: array
           items:
-            $ref: '#/components/schemas/LinkedAccount'
+            $ref: '#/components/schemas/LinkedAccounts'
     RetrieveCustomerCategorisedTransactionsResponse:
       type: array
       items:
