@@ -217,6 +217,14 @@ components:
           format: string
         StatusReason:
           $ref: '#/components/schemas/StatusReason'
+        AccountIdentification:
+          $ref: '#/components/schemas/AccountIdentification'
+        AccountBalance:
+          $ref: '#/components/schemas/AccountBalance'
+        AccountBalanceDate:
+          $ref: '#/components/schemas/AccountBalanceDate'
+        AccountDescription:
+          $ref: '#/components/schemas/AccountDescription'
     IdentifierValue:
       type: object
       properties:
@@ -274,14 +282,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/LinkedAccount'
-        AccountIdentification:
-          $ref: '#/components/schemas/AccountIdentification'
-        AccountBalance:
-          $ref: '#/components/schemas/AccountBalance'
-        AccountBalanceDate:
-          $ref: '#/components/schemas/AccountBalanceDate'
-        AccountDescription:
-          $ref: '#/components/schemas/AccountDescription'
     RetrieveCustomerCategorisedTransactionsResponse:
       type: array
       items:
