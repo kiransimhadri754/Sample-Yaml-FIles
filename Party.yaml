@@ -30,7 +30,7 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
-   /Party/{Status}/Retrieve:
+   /Party/Retrieve:
     get:
       tags:
           - Party
@@ -39,6 +39,11 @@ paths:
       operationId: Retrieve
       parameters:
         - $ref: '#/components/parameters/Status'
+        - $ref: '#/components/parameters/PhoneIdentifiers'
+        - $ref: '#/components/parameters/EmailIdentifiers'
+        - $ref: '#/components/parameters/UsernameIdentifiers'
+        - $ref: '#/components/parameters/PageSize'
+        - $ref: '#/components/parameters/PageToken'
       responses:
         '200':
           $ref: '#/components/responses/RetrievePartiesResponse'
@@ -262,8 +267,38 @@ components:
   parameters:
     Status:
       name: Status
-      in: path
+      in: query
       required: true
+      schema:
+        type: string
+    PhoneIdentifiers:
+      name: phone_identifier
+      in: query
+      required: false
+      schema:
+        type: string
+    EmailIdentifiers:
+      name: email_identifiers
+      in: query
+      required: false
+      schema:
+        type: string
+    UsernameIdentifiers:
+      name: username_identifiers
+      in: query
+      required: false
+      schema:
+        type: string
+    PageSize:
+      name: page_size
+      in: query
+      required: false
+      schema:
+        type: string
+    PageToken:
+      name: page_token
+      in: query
+      required: false
       schema:
         type: string
   requestBodies:
