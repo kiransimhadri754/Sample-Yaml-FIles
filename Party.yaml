@@ -303,20 +303,20 @@ components:
         type: string
   requestBodies:
     InitiatePartyRequest:
-      description: CurrentAccountFacilityInitiate
+      description: PartyInitiate
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/InitiatePartyRequest'
   responses:
     InitiatePartyResponse:
-        description: fetchAccountUser
+        description: fetchParty
         content:
           application/json:
             schema:
                 $ref: '#/components/schemas/InitiatePartyResponse'
     RetrievePartiesResponse:
-        description: fetchAccountUser
+        description: fetchParties
         content:
           application/json:
             schema:
