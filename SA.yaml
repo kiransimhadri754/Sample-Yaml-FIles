@@ -2,14 +2,11 @@ openapi: 3.0.1
 info:
   title: Savings Account
   description: 'This service domain orchestrates a consumer savings account. The typical range of services and fees covers payments from and scheduled and ad-hoc deposits to the account, standing orders, sweeps, and liens.'
-  contact:
-    name: BIAN
-    url: https://bian.org
   version: 11.0.0
 servers:
   - url: https://virtserver.swaggerhub.com/BIAN-3/BIAN/SavingsAccount/11.0.0
 paths:
-  /SavingsAccount/Initiate:
+  '/SavingsAccount/Initiate':
     post:
       tags:
         - CR - SavingsAccountFacility
@@ -502,7 +499,6 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
-
   '/SavingsAccount/{savingsaccountid}/Payments/{paymentsid}/Initiate':
     post:
       tags:
@@ -722,14 +718,16 @@ components:
       properties:
         status_code:
           type: string
+          description: "\n"
           format: string
         status:
           type: string
+          description: "\n"
           format: string
         message:
           type: string
+          description: "\n"
           format: string
-      description: Status Attributes
     AccountBalanceStatement:
       type: object
       description: ''
@@ -738,9 +736,8 @@ components:
       properties:
         Currencycode:
           type: string
-          description: "A code identifying a currency according to ISO-4217.\nA currency is a system of money in general use in a particular country.\n\nCode allocated to a currency, by a maintenance agency, under an international identification scheme as described in the latest edition of the international standard ISO 4217 \"Codes for the representation of currencies and funds\". Valid currency codes are registered with the ISO 4217 Maintenance Agency, and consist of three contiguous letters. (ISO20022)\n\n"
-          format: datatype
-      description: ''
+          description: "\n"
+          format: string
     amount:
       type: object
       properties:
@@ -754,7 +751,6 @@ components:
           type: string
           description: "Decimal point position starts calulating from the right\n"
           format: string
-      description: The amount transferred to or from the account
     date:
       type: object
       properties:
@@ -762,7 +758,6 @@ components:
           type: string
           description: ''
           format: string
-      description: The date and time the sweep is initiated
     AccountSweep:
       type: object
       properties:
@@ -806,7 +801,6 @@ components:
           $ref: '#/components/schemas/amount'
         AccountSweepExecutionDate:
           $ref: '#/components/schemas/date'
-      description: ''
     AccountLien:
       type: object
       properties:
@@ -844,7 +838,6 @@ components:
           type: string
           description: The status on the lien
           format: string
-      description: ''
     IssuedDevice:
       type: object
       properties:
@@ -880,7 +873,6 @@ components:
           type: string
           description: 'The tracked status of the device/inventory item (e.g. active, suspended, cancelled)'
           format: string
-      description: ''
     ServiceFees:
       type: object
       properties:
@@ -942,7 +934,6 @@ components:
           type: string
           description: The accrued amount of fees and penalties
           format: string
-      description: ''
     rate:
       type: object
       properties:
@@ -962,7 +953,6 @@ components:
           type: string
           description: ''
           format: string
-      description: The processing schedule for applying interest rates to the account
     Interest:
       type: object
       properties:
@@ -1006,35 +996,61 @@ components:
           type: string
           description: The accrued amount of applied interest
           format: string
-      description: ''
     DepositsandWithdrawals:
       type: object
       properties:
-        TransactionReference:
-              type: string
-              description: "\n"
-              format: string
-        TransactionType:
-              type: string
-              description: "\n"
-              format: string
+        DepositType:
+          type: string
+          description: 'The type of deposit transaction that can be applied to the account (e.g. customer deposit, internal credit)'
+          format: string
+        WithdrawalType:
+          type: string
+          description: 'The type of withdrawal transaction that can be applied to the account (e.g. customer withdrawal, internal service charge, disbursement)'
+          format: string
         AccountLimitBreachResponse:
-              type: string
-              description: "\n"
-              format: string
-        TransactionDescription:
-              type: string
-              description: "\n"
-              format: string
-        TransactionAmount:
-              type: string
-              description: "\n"
-              format: string
-        TransactionDate:
-              type: string
-              description: "\n"
-              format: string
-      description: ''
+          type: string
+          description: The handling options if a withdrawal results in a breach of an account limit
+          format: string
+        DepositTransaction:
+          type: string
+          description: The collection of applicable rates
+          format: string
+        DepositTransactionSourceReference:
+          type: string
+          description: Identifies the source of the deposit
+          format: object
+        DepositTransactionDepositType:
+          type: string
+          description: The type of deposit made with the transaction
+          format: string
+        DepositTransactionDescription:
+          type: string
+          description: Any necessary details describing the purpose or reference properties of the deposit
+          format: string
+        DepositTransactionAmount:
+          $ref: '#/components/schemas/amount'
+        DepositTransactionDate:
+          $ref: '#/components/schemas/date'
+        WithdrawalTransaction:
+          type: string
+          description: The record of applied interest
+          format: string
+        WithdrawalTransactionSourceReference:
+          type: string
+          description: Identifies the target for the withdrawal
+          format: object
+        WithdrawalTransactionWithdrawalType:
+          type: string
+          description: The type of withdrawal made with the transaction
+          format: string
+        WithdrawalTransactionDescription:
+          type: string
+          description: Any necessary details describing the purpose or reference properties of the withdrawal
+          format: string
+        WithdrawalTransactionAmount:
+          $ref: '#/components/schemas/amount'
+        WithdrawalTransactionDate:
+          $ref: '#/components/schemas/date'
     Payments:
       type: object
       properties:
@@ -1126,7 +1142,6 @@ components:
           type: string
           description: 'The processing status of the transaction (e.g. captured, approved, initiated, confirmed, settled)'
           format: string
-      description: ''
     SavingsAccountFacility:
       type: object
       properties:
@@ -1244,7 +1259,6 @@ components:
           type: string
           description: The statement content
           format: string
-      description: 'Fulfill any scheduled and ad-hoc obligations under a service arrangement, most typically for a financial product or facility within Savings Account. '
     InitiateSavingsAccountFacilityRequest:
       type: object
       properties:
@@ -1333,7 +1347,6 @@ components:
               type: string
               description: "\n"
               format: string
-      description: 'Input: InCR Initiate A new savings account'
     InitiateSavingsAccountFacilityResponse:
       type: object
       properties:
@@ -1382,7 +1395,6 @@ components:
               type: string
               description: "\n"
               format: string
-      description: 'Output: InCR Initiate A new savings account'
     UpdateSavingsAccountFacilityRequest:
       type: object
       properties:
@@ -1499,7 +1511,6 @@ components:
               type: string
               description: "\n"
               format: string
-      description: 'Input: UpCR Update details of a savings account'
     UpdateSavingsAccountFacilityResponse:
       type: object
       properties:
@@ -1616,7 +1627,6 @@ components:
               type: string
               description: "\n"
               format: string
-      description: 'Output: UpCR Update details of a savings account'
     RetrieveSavingsAccountFacilityResponse:
       type: object
       properties:
@@ -1733,7 +1743,6 @@ components:
               type: string
               description: "\n"
               format: string
-      description: 'Output: ReCR Retrieve information about a savings account - either standard canned reports or selected instance attribute values'
     RetrieveInterestResponse:
       type: object
       properties:
@@ -1778,7 +1787,6 @@ components:
               type: string
               description: "\n"
               format: string
-      description: 'Output: ReBQ Retrieve details of an interest transaction applied internally to the account'
     InitiateServiceFeesRequest:
       type: object
       properties:
@@ -1866,7 +1874,6 @@ components:
               type: string
               description: "\n"
               format: string
-      description: 'Input: InBQ Initiate service fees against an account'
     InitiateServiceFeesResponse:
       type: object
       properties:
@@ -1884,7 +1891,6 @@ components:
               type: string
               description: "\n"
               format: string
-      description: 'Output: InBQ Initiate service fees against an account'
     ExecuteServiceFeesRequest:
       type: object
       properties:
@@ -1931,7 +1937,6 @@ components:
               type: string
               description: "\n"
               format: string
-      description: 'Input: ExBQ Execute Apply Service Fee'
     ExecuteServiceFeesResponse:
       type: object
       properties:
@@ -1984,7 +1989,6 @@ components:
               type: string
               description: "\n"
               format: string
-      description: 'Output: ExBQ Execute Apply Service Fee'
     RetrieveServiceFeesResponse:
       type: object
       properties:
@@ -2049,7 +2053,6 @@ components:
               type: string
               description: "\n"
               format: string
-      description: 'Output: ReBQ Retrieve information about a service fee applied to the account'
     InitiateAccountLienRequest:
       type: object
       properties:
@@ -2145,7 +2148,6 @@ components:
               type: string
               description: "\n"
               format: string
-      description: 'Input: InBQ Set up an account lien'
     InitiateAccountLienResponse:
       type: object
       properties:
@@ -2224,7 +2226,6 @@ components:
               type: string
               description: "\n"
               format: string
-      description: 'Input: UpBQ Update details of an existing account lien'
     UpdateAccountLienResponse:
       type: object
       properties:
@@ -2261,7 +2262,6 @@ components:
               type: string
               description: "\n"
               format: string
-      description: 'Output: UpBQ Update details of an existing account lien'
     RetrieveAccountLienResponse:
       type: object
       properties:
@@ -2302,7 +2302,6 @@ components:
               type: string
               description: "\n"
               format: string
-      description: 'Output: ReBQ Retrieve details about an account lien'
     InitiateAccountSweepRequest:
       type: object
       properties:
@@ -2386,7 +2385,6 @@ components:
               type: string
               description: "\n"
               format: string
-      description: 'Input: InBQ Set up an account sweep'
     InitiateAccountSweepResponse:
       type: object
       properties:
@@ -2408,7 +2406,6 @@ components:
               type: string
               description: "\n"
               format: string
-      description: 'Output: InBQ Set up an account sweep'
     ExecuteAccountSweepRequest:
       type: object
       properties:
@@ -2427,7 +2424,6 @@ components:
               $ref: '#/components/schemas/amount'
             AccountSweepExecutionDate:
               $ref: '#/components/schemas/date'
-      description: 'Input: ExBQ Trigger an account sweep transaction'
     RetrieveAccountSweepResponse:
       type: object
       properties:
@@ -2474,7 +2470,6 @@ components:
               $ref: '#/components/schemas/amount'
             AccountSweepExecutionDate:
               $ref: '#/components/schemas/date'
-      description: 'Output: ReBQ Retrieve details about a sweep facility or specific sweep transaction'
     InitiateDepositsandWithdrawalsRequest:
       type: object
       properties:
@@ -2502,9 +2497,7 @@ components:
               description: "\n"
               format: string
             AccountCurrency:
-              type: string
-              description: "\n"
-              format: string
+              $ref: '#/components/schemas/currencycode'
             EntitlementOptionSetting:
               type: string
               description: "\n"
@@ -2517,22 +2510,18 @@ components:
               type: string
               description: "\n"
               format: string
-            TransactionDateType:
+            DateType:
               type: string
               description: "\n"
               format: string
         DepositsandWithdrawals:
           type: object
           properties:
-            TransactionType:
+            DepositType:
               type: string
               description: "\n"
               format: string
-            TransactionAmount:
-              type: string
-              description: "\n"
-              format: string
-            TransactionDescription:
+            WithdrawalType:
               type: string
               description: "\n"
               format: string
@@ -2540,17 +2529,12 @@ components:
               type: string
               description: "\n"
               format: string
-      description: 'Input: InBQ Initialize deposit or withdrawal transaction'
     InitiateDepositsandWithdrawalsResponse:
       type: object
       properties:
         SavingsAccountFacility:
           type: object
           properties:
-            TransactionReference:
-              type: string
-              description: "\n"
-              format: string
             PositionLimitValue:
               type: string
               description: "\n"
@@ -2559,18 +2543,73 @@ components:
               type: string
               description: "\n"
               format: string
-      description: 'Output: InBQ Initialize deposit or withdrawal transaction'
     ExecuteDepositsandWithdrawalsRequest:
       type: object
       properties:
         DepositsandWithdrawals:
           type: object
           properties:
-            TransactionReference:
+            DepositTransaction:
               type: string
               description: "\n"
               format: string
-            TransactionType:
+            DepositTransactionSourceReference:
+              type: string
+              description: "\n"
+              format: object
+            DepositTransactionDepositType:
+              type: string
+              description: "\n"
+              format: string
+            DepositTransactionDescription:
+              type: string
+              description: "\n"
+              format: string
+            DepositTransactionAmount:
+              $ref: '#/components/schemas/amount'
+            DepositTransactionDate:
+              $ref: '#/components/schemas/date'
+            WithdrawalTransaction:
+              type: string
+              description: "\n"
+              format: string
+            WithdrawalTransactionSourceReference:
+              type: string
+              description: "\n"
+              format: object
+            WithdrawalTransactionWithdrawalType:
+              type: string
+              description: "\n"
+              format: string
+            WithdrawalTransactionDescription:
+              type: string
+              description: "\n"
+              format: string
+            WithdrawalTransactionAmount:
+              $ref: '#/components/schemas/amount'
+            WithdrawalTransactionDate:
+              $ref: '#/components/schemas/date'
+    ExecuteDepositsandWithdrawalsResponse:
+      type: object
+      properties:
+        DepositsandWithdrawals:
+          type: object
+          properties:
+            DepositTransactionDate:
+              $ref: '#/components/schemas/date'
+            WithdrawalTransactionDate:
+              $ref: '#/components/schemas/date'
+    RetrieveDepositsandWithdrawalsResponse:
+      type: object
+      properties:
+        DepositsandWithdrawals:
+          type: object
+          properties:
+            DepositType:
+              type: string
+              description: "\n"
+              format: string
+            WithdrawalType:
               type: string
               description: "\n"
               format: string
@@ -2578,25 +2617,23 @@ components:
               type: string
               description: "\n"
               format: string
-            TransactionDescription:
+            DepositTransaction:
               type: string
               description: "\n"
               format: string
-            TransactionAmount:
+            DepositTransactionSourceReference:
+              type: string
+              description: "\n"
+              format: object
+            DepositTransactionDepositType:
               type: string
               description: "\n"
               format: string
-            TransactionDate:
+            DepositTransactionDescription:
               type: string
               description: "\n"
               format: string
-    ExecuteDepositsandWithdrawalsResponse:
-      type: object
-      properties:
-        DepositsandWithdrawals:
-          type: object
-          properties:
-            TransactionReference:
+            DepositTransactionAmount:
               type: string
               description: "\n"
               format: string
@@ -2604,34 +2641,27 @@ components:
               type: string
               description: "\n"
               format: string
-      description: 'Output: ExBQ Execute a deposit or withdrawal transaction'
-    RetrieveDepositsandWithdrawalsResponse:
-      type: object
-      properties:
-        DepositsandWithdrawals:
-          type: object
-          properties:
-            TransactionReference:
+            WithdrawalTransaction:
               type: string
               description: "\n"
               format: string
-            TransactionType:
+            WithdrawalTransactionSourceReference:
+              type: string
+              description: "\n"
+              format: object
+            WithdrawalTransactionWithdrawalType:
               type: string
               description: "\n"
               format: string
-            AccountLimitBreachResponse:
+            WithdrawalTransactionDescription:
               type: string
               description: "\n"
               format: string
-            TransactionDescription:
+            WithdrawalTransactionAmount:
               type: string
               description: "\n"
               format: string
-            TransactionAmount:
-              type: string
-              description: "\n"
-              format: string
-            TransactionDate:
+            WithdrawalTransactionDate:
               type: string
               description: "\n"
               format: string
@@ -2738,7 +2768,6 @@ components:
               type: string
               description: "\n"
               format: string
-      description: 'Input: InBQ Initialize a payment transaction (can be single or repeating)'
     InitiatePaymentsResponse:
       type: object
       properties:
@@ -2780,7 +2809,6 @@ components:
               type: string
               description: "\n"
               format: string
-      description: 'Output: InBQ Initialize a payment transaction (can be single or repeating)'
     UpdatePaymentsRequest:
       type: object
       properties:
@@ -2867,7 +2895,6 @@ components:
               type: string
               description: "\n"
               format: object
-      description: 'Input: UpBQ Update a payment transaction configuration or specific transaction'
     UpdatePaymentsResponse:
       type: object
       properties:
@@ -2958,7 +2985,6 @@ components:
               type: string
               description: "\n"
               format: string
-      description: 'Output: UpBQ Update a payment transaction configuration or specific transaction'
     ExecutePaymentsRequest:
       type: object
       properties:
@@ -3013,7 +3039,6 @@ components:
               type: string
               description: "\n"
               format: string
-      description: 'Input: ExBQ Trigger a payment for a repeating payment set up'
     ExecutePaymentsResponse:
       type: object
       properties:
@@ -3026,7 +3051,6 @@ components:
               type: string
               description: "\n"
               format: string
-      description: 'Output: ExBQ Trigger a payment for a repeating payment set up'
     RetrievePaymentsResponse:
       type: object
       properties:
@@ -3121,7 +3145,6 @@ components:
               type: string
               description: "\n"
               format: string
-      description: 'Output: ReBQ Retrieve details about a payment transaction or arrangement'
     InitiateIssuedDeviceRequest:
       type: object
       properties:
@@ -3201,7 +3224,6 @@ components:
               type: string
               description: "\n"
               format: string
-      description: 'Input: InBQ Initiate the provision of issued inventory for the account (include initial issuance)'
     InitiateIssuedDeviceResponse:
       type: object
       properties:
@@ -3259,7 +3281,6 @@ components:
               type: string
               description: "\n"
               format: string
-      description: 'Output: InBQ Initiate the provision of issued inventory for the account (include initial issuance)'
     RequestIssuedDeviceRequest:
       type: object
       properties:
@@ -3286,7 +3307,6 @@ components:
               type: string
               description: "\n"
               format: string
-      description: 'Input: RqBQ Request changes or replacement devices or inventory'
     RequestIssuedDeviceResponse:
       type: object
       properties:
@@ -3317,7 +3337,6 @@ components:
               type: string
               description: "\n"
               format: string
-      description: 'Output: RqBQ Request changes or replacement devices or inventory'
     RetrieveIssuedDeviceResponse:
       type: object
       properties:
@@ -3356,7 +3375,6 @@ components:
               type: string
               description: "\n"
               format: string
-      description: 'Output: ReBQ Retrieve details about issued devices or inventory'
   responses:
     BadRequest:
       description: BadRequest
@@ -3609,110 +3627,110 @@ components:
         type: string
   requestBodies:
     InitiateSavingsAccountFacilityRequest:
+      description: "\n"
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/InitiateSavingsAccountFacilityRequest'
-      required: true
     UpdateSavingsAccountFacilityRequest:
+      description: "\n"
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/UpdateSavingsAccountFacilityRequest'
-      required: true
     InitiateServiceFeesRequest:
+      description: "\n"
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/InitiateServiceFeesRequest'
-      required: true
     ExecuteServiceFeesRequest:
+      description: "\n"
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ExecuteServiceFeesRequest'
-      required: true
     InitiateAccountLienRequest:
+      description: "\n"
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/InitiateAccountLienRequest'
-      required: true
     UpdateAccountLienRequest:
+      description: "\n"
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/UpdateAccountLienRequest'
-      required: true
     InitiateAccountSweepRequest:
+      description: "\n"
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/InitiateAccountSweepRequest'
-      required: true
     AccountSweep:
+      description: "\n"
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/AccountSweep'
-      required: true
     ExecuteAccountSweepRequest:
+      description: "\n"
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ExecuteAccountSweepRequest'
-      required: true
     InitiateDepositsandWithdrawalsRequest:
+      description: "\n"
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/InitiateDepositsandWithdrawalsRequest'
-      required: true
     DepositsandWithdrawals:
+      description: "\n"
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/DepositsandWithdrawals'
-      required: true
     ExecuteDepositsandWithdrawalsRequest:
+      description: "\n"
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ExecuteDepositsandWithdrawalsRequest'
-      required: true
     InitiatePaymentsRequest:
+      description: "\n"
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/InitiatePaymentsRequest'
-      required: true
     UpdatePaymentsRequest:
+      description: "\n"
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/UpdatePaymentsRequest'
-      required: true
     ExecutePaymentsRequest:
+      description: "\n"
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ExecutePaymentsRequest'
-      required: true
     InitiateIssuedDeviceRequest:
+      description: "\n"
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/InitiateIssuedDeviceRequest'
-      required: true
     IssuedDevice:
+      description: "\n"
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/IssuedDevice'
-      required: true
     RequestIssuedDeviceRequest:
+      description: "\n"
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/RequestIssuedDeviceRequest'
-      required: true
