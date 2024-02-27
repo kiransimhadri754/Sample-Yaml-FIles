@@ -146,7 +146,7 @@ components:
               type: string
               description: "\n"
               format: string
-    DepositsandWithdrawalsResponse:
+    Transactions:
       type: object
       properties:
         TransactionReference:
@@ -225,8 +225,8 @@ components:
     RetrieveTransactionsResponse:
       type: object
       properties:
-        DepositsandWithdrawals:
-          $ref: '#/components/schemas/DepositsandWithdrawalsResponse'
+        Transactions:
+          $ref: '#/components/schemas/Transactions'
   requestBodies:
     InitiateWithdrawalRequest:
       description: InitiateWithdrawal
