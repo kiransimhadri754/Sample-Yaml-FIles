@@ -1259,490 +1259,161 @@ components:
           type: string
           description: The statement content
           format: string
+    SavingsAccountFacilityRequest:
+          type: object
+          properties:
+            CustomerReference:
+              type: string
+              description: "\n"
+              format: object
+            BankBranchLocationReference:
+              type: string
+              description: "\n"
+              format: object
+            AccountType:
+              type: string
+              description: "\n"
+              format: string
+            AccountCurrency:
+              $ref: '#/components/schemas/currencycode'
+            TaxReference:
+              type: string
+              description: "\n"
+              format: object
+            EntitlementOptionSetting:
+              type: string
+              description: "\n"
+              format: string
+            RestrictionOptionSetting:
+              type: string
+              description: "\n"
+              format: string
+            Associations:
+              type: string
+              description: "\n"
+              format: string
+            AssociationType:
+              type: string
+              description: "\n"
+              format: string
+            AssociationObligationEntitlement:
+              type: string
+              description: "\n"
+              format: string
+            AssociationReference:
+              type: string
+              description: "\n"
+              format: object
+            LinkedAccounts:
+              type: string
+              description: "\n"
+              format: string
+            LinkType:
+              type: string
+              description: "\n"
+              format: string
+            AccountDetails:
+              type: string
+              description: "\n"
+              format: string
+            PositionLimitSettings:
+              type: string
+              description: "\n"
+              format: string
+            DateType:
+              type: string
+              description: "\n"
+              format: string
+            StatementsSchedule:
+              type: string
+              description: "\n"
+              format: string
+            StatementType:
+              type: string
+              description: "\n"
+              format: string
+            StatementTransactionType:
+              type: string
+              description: "\n"
+              format: string
+            StatementPeriod:
+              type: string
+              description: "\n"
+              format: string
+            StatementReport:
+              type: string
+              description: "\n"
+              format: string
+    SavingsAccountFacilityResponse:
+          type: object
+          properties:
+            ProductInstanceReference:
+              type: string
+              description: "\n"
+              format: object
+            SavingsAccountNumber:
+              type: string
+              description: "\n"
+              format: string
+            AccountCurrency:
+              $ref: '#/components/schemas/currencycode'
+            EntitlementOptionDefinition:
+              type: string
+              description: "\n"
+              format: string
+            EntitlementOptionSetting:
+              type: string
+              description: "\n"
+              format: string
+            RestrictionOptionDefinition:
+              type: string
+              description: "\n"
+              format: string
+            RestrictionOptionSetting:
+              type: string
+              description: "\n"
+              format: string
+            PositionLimitType:
+              type: string
+              description: "\n"
+              format: string
+            PositionLimitSettings:
+              type: string
+              description: "\n"
+              format: string
+            PositionLimitValue:
+              type: string
+              description: "\n"
+              format: string
+            DateType:
+              type: string
+              description: "\n"
+              format: string
     InitiateSavingsAccountFacilityRequest:
       type: object
       properties:
         SavingsAccountFacility:
-          type: object
-          properties:
-            CustomerReference:
-              type: string
-              description: "\n"
-              format: object
-            BankBranchLocationReference:
-              type: string
-              description: "\n"
-              format: object
-            AccountType:
-              type: string
-              description: "\n"
-              format: string
-            AccountCurrency:
-              $ref: '#/components/schemas/currencycode'
-            TaxReference:
-              type: string
-              description: "\n"
-              format: object
-            EntitlementOptionSetting:
-              type: string
-              description: "\n"
-              format: string
-            RestrictionOptionSetting:
-              type: string
-              description: "\n"
-              format: string
-            Associations:
-              type: string
-              description: "\n"
-              format: string
-            AssociationType:
-              type: string
-              description: "\n"
-              format: string
-            AssociationObligationEntitlement:
-              type: string
-              description: "\n"
-              format: string
-            AssociationReference:
-              type: string
-              description: "\n"
-              format: object
-            LinkedAccounts:
-              type: string
-              description: "\n"
-              format: string
-            LinkType:
-              type: string
-              description: "\n"
-              format: string
-            AccountDetails:
-              type: string
-              description: "\n"
-              format: string
-            PositionLimitSettings:
-              type: string
-              description: "\n"
-              format: string
-            DateType:
-              type: string
-              description: "\n"
-              format: string
-            StatementsSchedule:
-              type: string
-              description: "\n"
-              format: string
-            StatementType:
-              type: string
-              description: "\n"
-              format: string
-            StatementTransactionType:
-              type: string
-              description: "\n"
-              format: string
-            StatementPeriod:
-              type: string
-              description: "\n"
-              format: string
-            StatementReport:
-              type: string
-              description: "\n"
-              format: string
+          $ref: '#/components/schemas/SavingsAccountFacilityRequest'
     InitiateSavingsAccountFacilityResponse:
       type: object
       properties:
         SavingsAccountFacility:
-          type: object
-          properties:
-            ProductInstanceReference:
-              type: string
-              description: "\n"
-              format: object
-            SavingsAccountNumber:
-              type: string
-              description: "\n"
-              format: string
-            AccountCurrency:
-              $ref: '#/components/schemas/currencycode'
-            EntitlementOptionDefinition:
-              type: string
-              description: "\n"
-              format: string
-            EntitlementOptionSetting:
-              type: string
-              description: "\n"
-              format: string
-            RestrictionOptionDefinition:
-              type: string
-              description: "\n"
-              format: string
-            RestrictionOptionSetting:
-              type: string
-              description: "\n"
-              format: string
-            PositionLimitType:
-              type: string
-              description: "\n"
-              format: string
-            PositionLimitSettings:
-              type: string
-              description: "\n"
-              format: string
-            PositionLimitValue:
-              type: string
-              description: "\n"
-              format: string
-            DateType:
-              type: string
-              description: "\n"
-              format: string
+          $ref: '#/components/schemas/SavingsAccountFacilityResponse'
     UpdateSavingsAccountFacilityRequest:
       type: object
       properties:
         SavingsAccountFacility:
-          type: object
-          properties:
-            ProductInstanceReference:
-              type: string
-              description: "\n"
-              format: object
-            SavingsAccountNumber:
-              type: string
-              description: "\n"
-              format: string
-            CustomerReference:
-              type: string
-              description: "\n"
-              format: object
-            BankBranchLocationReference:
-              type: string
-              description: "\n"
-              format: object
-            AccountType:
-              type: string
-              description: "\n"
-              format: string
-            AccountCurrency:
-              $ref: '#/components/schemas/currencycode'
-            TaxReference:
-              type: string
-              description: "\n"
-              format: object
-            EntitlementOptionDefinition:
-              type: string
-              description: "\n"
-              format: string
-            EntitlementOptionSetting:
-              type: string
-              description: "\n"
-              format: string
-            RestrictionOptionDefinition:
-              type: string
-              description: "\n"
-              format: string
-            RestrictionOptionSetting:
-              type: string
-              description: "\n"
-              format: string
-            Associations:
-              type: string
-              description: "\n"
-              format: string
-            AssociationType:
-              type: string
-              description: "\n"
-              format: string
-            AssociationObligationEntitlement:
-              type: string
-              description: "\n"
-              format: string
-            AssociationReference:
-              type: string
-              description: "\n"
-              format: object
-            LinkedAccounts:
-              type: string
-              description: "\n"
-              format: string
-            LinkType:
-              type: string
-              description: "\n"
-              format: string
-            AccountDetails:
-              type: string
-              description: "\n"
-              format: string
-            PositionLimits:
-              type: string
-              description: "\n"
-              format: string
-            PositionLimitType:
-              type: string
-              description: "\n"
-              format: string
-            PositionLimitSettings:
-              type: string
-              description: "\n"
-              format: string
-            PositionLimitValue:
-              type: string
-              description: "\n"
-              format: string
-            DateType:
-              type: string
-              description: "\n"
-              format: string
-            StatementsSchedule:
-              type: string
-              description: "\n"
-              format: string
-            StatementType:
-              type: string
-              description: "\n"
-              format: string
-            StatementTransactionType:
-              type: string
-              description: "\n"
-              format: string
-            StatementPeriod:
-              type: string
-              description: "\n"
-              format: string
-            StatementReport:
-              type: string
-              description: "\n"
-              format: string
+          $ref: '#/components/schemas/SavingsAccountFacility'
     UpdateSavingsAccountFacilityResponse:
       type: object
       properties:
         SavingsAccountFacility:
-          type: object
-          properties:
-            ProductInstanceReference:
-              type: string
-              description: "\n"
-              format: object
-            SavingsAccountNumber:
-              type: string
-              description: "\n"
-              format: string
-            CustomerReference:
-              type: string
-              description: "\n"
-              format: object
-            BankBranchLocationReference:
-              type: string
-              description: "\n"
-              format: object
-            AccountType:
-              type: string
-              description: "\n"
-              format: string
-            AccountCurrency:
-              $ref: '#/components/schemas/currencycode'
-            TaxReference:
-              type: string
-              description: "\n"
-              format: object
-            EntitlementOptionDefinition:
-              type: string
-              description: "\n"
-              format: string
-            EntitlementOptionSetting:
-              type: string
-              description: "\n"
-              format: string
-            RestrictionOptionDefinition:
-              type: string
-              description: "\n"
-              format: string
-            RestrictionOptionSetting:
-              type: string
-              description: "\n"
-              format: string
-            Associations:
-              type: string
-              description: "\n"
-              format: string
-            AssociationType:
-              type: string
-              description: "\n"
-              format: string
-            AssociationObligationEntitlement:
-              type: string
-              description: "\n"
-              format: string
-            AssociationReference:
-              type: string
-              description: "\n"
-              format: object
-            LinkedAccounts:
-              type: string
-              description: "\n"
-              format: string
-            LinkType:
-              type: string
-              description: "\n"
-              format: string
-            AccountDetails:
-              type: string
-              description: "\n"
-              format: string
-            PositionLimits:
-              type: string
-              description: "\n"
-              format: string
-            PositionLimitType:
-              type: string
-              description: "\n"
-              format: string
-            PositionLimitSettings:
-              type: string
-              description: "\n"
-              format: string
-            PositionLimitValue:
-              type: string
-              description: "\n"
-              format: string
-            DateType:
-              type: string
-              description: "\n"
-              format: string
-            StatementsSchedule:
-              type: string
-              description: "\n"
-              format: string
-            StatementType:
-              type: string
-              description: "\n"
-              format: string
-            StatementTransactionType:
-              type: string
-              description: "\n"
-              format: string
-            StatementPeriod:
-              type: string
-              description: "\n"
-              format: string
-            StatementReport:
-              type: string
-              description: "\n"
-              format: string
+          $ref: '#/components/schemas/SavingsAccountFacility'
     RetrieveSavingsAccountFacilityResponse:
       type: object
       properties:
         SavingsAccountFacility:
-          type: object
-          properties:
-            ProductInstanceReference:
-              type: string
-              description: "\n"
-              format: object
-            SavingsAccountNumber:
-              type: string
-              description: "\n"
-              format: string
-            CustomerReference:
-              type: string
-              description: "\n"
-              format: object
-            BankBranchLocationReference:
-              type: string
-              description: "\n"
-              format: object
-            AccountType:
-              type: string
-              description: "\n"
-              format: string
-            AccountCurrency:
-              $ref: '#/components/schemas/currencycode'
-            TaxReference:
-              type: string
-              description: "\n"
-              format: object
-            EntitlementOptionDefinition:
-              type: string
-              description: "\n"
-              format: string
-            EntitlementOptionSetting:
-              type: string
-              description: "\n"
-              format: string
-            RestrictionOptionDefinition:
-              type: string
-              description: "\n"
-              format: string
-            RestrictionOptionSetting:
-              type: string
-              description: "\n"
-              format: string
-            Associations:
-              type: string
-              description: "\n"
-              format: string
-            AssociationType:
-              type: string
-              description: "\n"
-              format: string
-            AssociationObligationEntitlement:
-              type: string
-              description: "\n"
-              format: string
-            AssociationReference:
-              type: string
-              description: "\n"
-              format: object
-            LinkedAccounts:
-              type: string
-              description: "\n"
-              format: string
-            LinkType:
-              type: string
-              description: "\n"
-              format: string
-            AccountDetails:
-              type: string
-              description: "\n"
-              format: string
-            PositionLimits:
-              type: string
-              description: "\n"
-              format: string
-            PositionLimitType:
-              type: string
-              description: "\n"
-              format: string
-            PositionLimitSettings:
-              type: string
-              description: "\n"
-              format: string
-            PositionLimitValue:
-              type: string
-              description: "\n"
-              format: string
-            DateType:
-              type: string
-              description: "\n"
-              format: string
-            StatementsSchedule:
-              type: string
-              description: "\n"
-              format: string
-            StatementType:
-              type: string
-              description: "\n"
-              format: string
-            StatementTransactionType:
-              type: string
-              description: "\n"
-              format: string
-            StatementPeriod:
-              type: string
-              description: "\n"
-              format: string
-            StatementReport:
-              type: string
-              description: "\n"
-              format: string
+          $ref: '#/components/schemas/SavingsAccountFacility'
     RetrieveInterestResponse:
       type: object
       properties:
