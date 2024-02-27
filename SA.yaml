@@ -134,8 +134,6 @@ components:
               type: string
               description: "\n"
               format: string
-              enum:
-                - Withdrawal
             TransactionAmount:
               type: string
               description: "\n"
