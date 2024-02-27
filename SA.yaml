@@ -175,6 +175,21 @@ components:
               type: string
               description: "\n"
               format: string
+    SavingsAccountFacilityResponse:
+          type: object
+          properties:
+            TransactionReference:
+              type: string
+              description: "\n"
+              format: string
+            PositionLimitValue:
+              type: string
+              description: "\n"
+              format: string
+            DateType:
+              type: string
+              description: "\n"
+              format: string
     HTTPError:
       type: object
       properties:
@@ -190,6 +205,11 @@ components:
           type: string
           description: "\n"
           format: string
+    InitiateDepositsandWithdrawalsResponse:
+      type: object
+      properties:
+        SavingsAccountFacilityResponse:
+          $ref: '#/components/schemas/SavingsAccountFacilityResponse'
     InitiateWithdrawalRequest:
       type: object
       properties:
@@ -232,11 +252,17 @@ components:
       required: true
   responses:
     RetrieveTransactionsResponse:
-      description: BadRequest
+      description: allTransactions
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/RetrieveTransactionsResponse'
+    InitiateDepositsandWithdrawalsResponse:
+      description: allTransactions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InitiateDepositsandWithdrawalsResponse'
     BadRequest:
       description: BadRequest
       content:
