@@ -487,89 +487,6 @@ components:
           type: string
           description: "\n"
           format: string
-    Transactions:
-      type: object
-      properties:
-        accountId:
-          type: string
-          description: "\n"
-          format: string
-        primaryCategoryDescription:
-          type: string
-          description: "\n"
-          format: string
-        subCategoryDescription:
-          type: string
-          description: "\n"
-          format: string
-        vendorDescription:
-          type: string
-          description: "\n"
-          format: string
-        description:
-          type: string
-          description: "\n"
-          format: string
-        postDate:
-          type: string
-          description: "\n"
-          format: string
-        direction:
-          type: string
-          description: "\n"
-          format: string
-        amount:
-          type: string
-          description: "\n"
-          format: string
-        primaryCategoryId:
-          type: string
-          description: "\n"
-          format: string
-        subCategoryId:
-          type: string
-          description: "\n"
-          format: string
-        transactionId:
-          type: string
-          description: "\n"
-          format: string
-        recurrenceEventId:
-          type: string
-          description: "\n"
-          format: string
-        recurrenceType:
-          type: string
-          description: "\n"
-          format: string
-        vendorId:
-          type: string
-          description: "\n"
-          format: string
-        hash:
-          type: string
-          description: "\n"
-          format: string
-        runningBalance:
-          type: string
-          description: "\n"
-          format: string
-        transactionIdx:
-          type: string
-          description: "\n"
-          format: string
-        currencyCode:
-          type: string
-          description: "\n"
-          format: string
-        proprietaryBankTransactionCode:
-          type: string
-          description: "\n"
-          format: string
-        proprietaryBankTransactionCodeIssuer:
-          type: string
-          description: "\n"
-          format: string
     subCategoryBreakdownL30L90:
       type: object
       properties:
@@ -627,7 +544,7 @@ components:
           type: string
           description: "\n"
           format: string
-        accountId:
+        accountReference:
           type: string
           description: "\n"
           format: string
@@ -801,7 +718,7 @@ components:
         customerDetails:
           $ref: "#/components/schemas/CustomerDetails"
         categorisedTransactions:
-          $ref: "#/components/schemas/Transactions"
+          $ref: '#/components/schemas/DepositsandWithdrawals'
         subCategoryBreakdownL30L90:
           $ref: "#/components/schemas/subCategoryBreakdownL30L90"
         customerAccounts:
