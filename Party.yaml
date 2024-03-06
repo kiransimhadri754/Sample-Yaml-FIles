@@ -36,7 +36,7 @@ paths:
           - Party
       summary: ReCR Retrieve list of customers
       description: ReCR Retrieve list of customers
-      operationId: Retrieve
+      operationId: RetrieveAll
       parameters:
         - $ref: '#/components/parameters/Status'
         - $ref: '#/components/parameters/PhoneIdentifiers'
@@ -47,6 +47,56 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/RetrievePartiesResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+   /Parties/{PartyReference}/Retrieve:
+    get:
+      tags:
+          - Party
+      summary: ReCR Retrieve details of party
+      description: ReCR Retrieve details of party
+      operationId: RetrieveParty
+      parameters:
+        - $ref: '#/components/parameters/PartyReference'
+      responses:
+        '200':
+          $ref: '#/components/responses/RetrievePartyResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+   /Parties/{PartyReference}/Update:
+    put:
+      tags:
+          - Party
+      summary: UpCR Update details of a Party
+      description: UpCR Update details of a Party
+      operationId:  UpdateParty
+      parameters:
+        - $ref: '#/components/parameters/PartyReference'
+      requestBody:
+        $ref: '#/components/requestBodies/UpdatePartyRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/UpdatePartyResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -244,11 +294,26 @@ components:
       properties:
         Party: 
           $ref: '#/components/schemas/PartyResponse'
+    UpdatePartyRequest:
+      type: object
+      properties:
+        Party: 
+          $ref: '#/components/schemas/Party'
+    UpdatePartyResponse:
+      type: object
+      properties:
+        Party: 
+          $ref: '#/components/schemas/PartyResponse'
     RetrievePartiesResponse:
       type: object
       properties:
         Parties: 
           $ref: '#/components/schemas/Parties'
+    RetrievePartyResponse:
+      type: object
+      properties:
+        Party:
+          $ref: '#/components/schemas/PartyReferrence'
     HTTPError:
       type: object
       properties:
@@ -301,6 +366,12 @@ components:
       required: false
       schema:
         type: string
+    PartyReference:
+      name: PartyReference
+      in: path
+      required: true
+      schema:
+        type: string
   requestBodies:
     InitiatePartyRequest:
       description: PartyInitiate
@@ -308,6 +379,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/InitiatePartyRequest'
+    UpdatePartyRequest:
+      description: PartyUpdate
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UpdatePartyRequest'
   responses:
     InitiatePartyResponse:
         description: fetchParty
@@ -315,12 +392,24 @@ components:
           application/json:
             schema:
                 $ref: '#/components/schemas/InitiatePartyResponse'
+    UpdatePartyResponse:
+        description: fetchParty
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/UpdatePartyResponse'
     RetrievePartiesResponse:
         description: fetchParties
         content:
           application/json:
             schema:
                 $ref: '#/components/schemas/RetrievePartiesResponse'
+    RetrievePartyResponse:
+        description: fetchParty
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/RetrievePartyResponse'
     BadRequest:
       description: BadRequest
       content:
