@@ -109,6 +109,56 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
+   /Party-Addresses/Initiate:
+    post:
+      tags:
+          - Party Address
+      summary: InCR Initiate A new party
+      description: InCR Initiate A party
+      operationId: InitiatePartyAddress
+      requestBody:
+        $ref: '#/components/requestBodies/InitiatePartyAddressRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiatePartyAddressResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+   /Party-Addresses/{PartyAddressReference}/Update:
+    put:
+      tags:
+          - Party Address
+      summary: UpCR Update details of a Party Address
+      description: UpCR Update details of a Party Address
+      operationId: UpdatePartyAddress
+      parameters:
+        - $ref: '#/components/parameters/PartyAddressReference'
+      requestBody:
+        $ref: '#/components/requestBodies/UpdatePartyAddressRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/UpdatePartyAddressResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
     PartyName:
@@ -267,6 +317,57 @@ components:
                   format: string
                   enum:
                     - AgreementInvolvement
+    PartyAddress:
+      type: object
+      properties:
+        BuildingName:
+                  type: string
+                  description: "\n"
+                  format: string
+        StreetBuildingIdentification:
+                  type: string
+                  description: "\n"
+                  format: string
+        StreetName:
+                  type: string
+                  description: "\n"
+                  format: string
+        Municipality:
+                  type: string
+                  description: "\n"
+                  format: string
+        TownName:
+                  type: string
+                  description: "\n"
+                  format: string
+        PostCodeIdentification:
+                  type: string
+                  description: "\n"
+                  format: string
+        District:
+                  type: string
+                  description: "\n"
+                  format: string
+        Country:
+                  type: string
+                  description: "\n"
+                  format: string
+        AddressType:
+                  type: string
+                  description: "\n"
+                  format: string
+        FromDateTime:
+                  type: string
+                  description: "\n"
+                  format: string
+        ToDateTime:
+                  type: string
+                  description: "\n"
+                  format: string
+        PartyReference:
+                  type: string
+                  description: "\n"
+                  format: string
     Party:
           type: object
           properties:
@@ -294,6 +395,34 @@ components:
       properties:
         Party: 
           $ref: '#/components/schemas/PartyResponse'
+    InitiatePartyAddressRequest:
+      type: object
+      properties:
+        PartyAddress: 
+          $ref: '#/components/schemas/PartyAddress'
+    InitiatePartyAddressResponse:
+      type: object
+      properties:
+        PartyAddressReference:
+          type: string
+          description: "\n"
+          format: string
+        PartyAddress: 
+          $ref: '#/components/schemas/PartyAddress'
+    UpdatePartyAddressRequest:
+      type: object
+      properties:
+        PartyAddress: 
+          $ref: '#/components/schemas/PartyAddress'
+    UpdatePartyAddressResponse:
+      type: object
+      properties:
+        PartyAddressReference:
+          type: string
+          description: "\n"
+          format: string
+        PartyAddress: 
+          $ref: '#/components/schemas/PartyAddress'
     UpdatePartyRequest:
       type: object
       properties:
@@ -372,6 +501,12 @@ components:
       required: true
       schema:
         type: string
+    PartyAddressReference:
+      name: PartyAddressReference
+      in: path
+      required: true
+      schema:
+        type: string
   requestBodies:
     InitiatePartyRequest:
       description: PartyInitiate
@@ -385,6 +520,18 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/UpdatePartyRequest'
+    UpdatePartyAddressRequest:
+      description: PartyUpdate
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UpdatePartyAddressRequest'
+    InitiatePartyAddressRequest:
+        description: fetchParty
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiatePartyAddressRequest'
   responses:
     InitiatePartyResponse:
         description: fetchParty
@@ -392,12 +539,24 @@ components:
           application/json:
             schema:
                 $ref: '#/components/schemas/InitiatePartyResponse'
+    InitiatePartyAddressResponse:
+        description: fetchParty
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiatePartyAddressResponse'
     UpdatePartyResponse:
         description: fetchParty
         content:
           application/json:
             schema:
                 $ref: '#/components/schemas/UpdatePartyResponse'
+    UpdatePartyAddressResponse:
+        description: fetchParty
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/UpdatePartyAddressResponse'
     RetrievePartiesResponse:
         description: fetchParties
         content:
