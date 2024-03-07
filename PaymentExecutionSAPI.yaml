@@ -4,7 +4,7 @@ info:
   description: BIAN Service Domain Packaged Business Capability (PCB) | DDD Bounded Context Payment Execution-SAPI.
   version: 12.0.1
 servers:
-- url: 'https://core-api.partner-integrations-sandbox.thirsty-fish-dephub.tmachine.io/v1/posting-instruction-batches:asyncCreate'
+- url: 'https://core-api.partner-integrations-sandbox.thirsty-fish-dephub.tmachine.io'
 paths:
   /v1/posting-instruction-batches:asyncCreate:
     post:
@@ -89,6 +89,8 @@ components:
             type: string
             description: "\n"
             format: string
+            enum:
+              - null
         value_timestamp:
           type: string
           description: "\n"
