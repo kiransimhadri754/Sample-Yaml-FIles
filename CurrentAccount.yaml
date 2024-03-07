@@ -6,7 +6,7 @@ info:
 servers:
 - url: 'https://app.swaggerhub.com/apis/BIAN-3/CurrentAccount/11.0.0#/servers'
 paths:
-   /CurrentAccount/Initiate:
+   /CurrentAccountFacility/Initiate:
     post:
       tags:
           - CurrentAccountFacility
