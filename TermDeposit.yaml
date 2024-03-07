@@ -6,7 +6,7 @@ info:
 servers:
 - url: 'https://app.swaggerhub.com/apis/BIAN-3/TermDeposit/11.0.0#/servers'
 paths:
-   /TermDeposit/Initiate:
+   /TermDepositFacility/Initiate:
     post:
       tags:
           - TermDepositFacility
