@@ -344,9 +344,64 @@ components:
                   format: string
                   enum:
                     - AgreementInvolvement
-    PartyAddress:
+    PartyAddressRequest:
       type: object
       properties:
+        BuildingName:
+                  type: string
+                  description: "\n"
+                  format: string
+        StreetBuildingIdentification:
+                  type: string
+                  description: "\n"
+                  format: string
+        StreetName:
+                  type: string
+                  description: "\n"
+                  format: string
+        Municipality:
+                  type: string
+                  description: "\n"
+                  format: string
+        TownName:
+                  type: string
+                  description: "\n"
+                  format: string
+        PostCodeIdentification:
+                  type: string
+                  description: "\n"
+                  format: string
+        District:
+                  type: string
+                  description: "\n"
+                  format: string
+        Country:
+                  type: string
+                  description: "\n"
+                  format: string
+        AddressType:
+                  type: string
+                  description: "\n"
+                  format: string
+        FromDateTime:
+                  type: string
+                  description: "\n"
+                  format: string
+        ToDateTime:
+                  type: string
+                  description: "\n"
+                  format: string
+        PartyReference:
+                  type: string
+                  description: "\n"
+                  format: string
+    PartyAddressResponse:
+      type: object
+      properties:
+        PartyAddressReference:
+                  type: string
+                  description: "\n"
+                  format: string
         BuildingName:
                   type: string
                   description: "\n"
@@ -426,41 +481,29 @@ components:
       type: object
       properties:
         PartyAddress: 
-          $ref: '#/components/schemas/PartyAddress'
+          $ref: '#/components/schemas/PartyAddressRequest'
     InitiatePartyAddressResponse:
       type: object
       properties:
-        PartyAddressReference:
-          type: string
-          description: "\n"
-          format: string
         PartyAddress: 
-          $ref: '#/components/schemas/PartyAddress'
+          $ref: '#/components/schemas/PartyAddressResponse'
     UpdatePartyAddressRequest:
       type: object
       properties:
         PartyAddress: 
-          $ref: '#/components/schemas/PartyAddress'
+          $ref: '#/components/schemas/PartyAddressResponse'
     UpdatePartyAddressResponse:
       type: object
       properties:
-        PartyAddressReference:
-          type: string
-          description: "\n"
-          format: string
         PartyAddress: 
-          $ref: '#/components/schemas/PartyAddress'
+          $ref: '#/components/schemas/PartyAddressResponse'
     RetrievePartyAddressResponse:
         type: object
         properties:
-            PartyAddressReference:
-              type: string
-              description: "\n"
-              format: string
             PartyAddress: 
               type: array
               items:
-                $ref: '#/components/schemas/PartyAddress'
+                $ref: '#/components/schemas/PartyAddressResponse'
     UpdatePartyRequest:
       type: object
       properties:
