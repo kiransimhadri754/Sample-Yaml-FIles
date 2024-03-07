@@ -159,6 +159,33 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
+   /Party-Addresses/{PartyReference}/Retrieve:
+    get:
+      tags:
+          - Party Address
+      summary: ReCR Retrieve details of a Party Addresses
+      description: ReCR Retrieve details of a Party Addresses
+      operationId: RetrievePartyAddress
+      parameters:
+        - $ref: '#/components/parameters/PartyReference'
+        - $ref: '#/components/parameters/IncludePrevious'
+        - $ref: '#/components/parameters/PageSize'
+        - $ref: '#/components/parameters/PageToken'
+      responses:
+        '200':
+          $ref: '#/components/responses/RetrievePartyAddressResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
     PartyName:
@@ -423,6 +450,17 @@ components:
           format: string
         PartyAddress: 
           $ref: '#/components/schemas/PartyAddress'
+    RetrievePartyAddressResponse:
+        type: object
+        properties:
+            PartyAddressReference:
+              type: string
+              description: "\n"
+              format: string
+            PartyAddress: 
+              type: array
+              items:
+                $ref: '#/components/schemas/PartyAddress'
     UpdatePartyRequest:
       type: object
       properties:
@@ -495,6 +533,12 @@ components:
       required: false
       schema:
         type: string
+    IncludePrevious:
+      name: include_previous
+      in: query
+      required: false
+      schema:
+        type: string
     PartyReference:
       name: PartyReference
       in: path
@@ -557,6 +601,12 @@ components:
           application/json:
             schema:
                 $ref: '#/components/schemas/UpdatePartyAddressResponse'
+    RetrievePartyAddressResponse:
+        description: fetchPartyAddress
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/RetrievePartyAddressResponse'
     RetrievePartiesResponse:
         description: fetchParties
         content:
