@@ -6,7 +6,7 @@ info:
 servers:
 - url: 'https://app.swaggerhub.com/apis/BIAN-3/PaymentExecution/11.0.0'
 paths:
-  /transfer/Initiate:
+  /PaymentExecution/Initiate:
     post:
       tags:
         - Payment Execution
@@ -99,68 +99,7 @@ components:
       type: object
       properties:
         PaymentExecutionProcedure:
-          type: object
-          properties:
-            PaymentTransactionInitiatorReference:
-              type: string
-              description: "\n"
-              format: string
-            PaymentOrderReference:
-              type: string
-              description: "\n"
-              format: string
-            PayerReference:
-              type: string
-              description: "\n"
-              format: string
-            PayerBankReference:
-              type: string
-              description: "\n"
-              format: string
-            PayerProductInstanceReference:
-              type: string
-              description: "\n"
-              format: string
-            PayeeReference:
-              type: string
-              description: "\n"
-              format: string
-            PayeeBankReference:
-              type: string
-              description: "\n"
-              format: string
-            PayeeProductInstanceReference:
-              type: string
-              description: "\n"
-              format: string
-            Amount:
-              type: string
-              description: "\n"
-              format: string
-            Currency:
-              type: string
-              description: "\n"
-              format: string
-            DateType:
-              type: string
-              description: "\n"
-              format: string
-            PaymentNote:
-              type: string
-              description: "\n"
-              format: string
-            WashAccountReference:
-              type: string
-              description: "\n"
-              format: string
-            IntermediaryAccountReference:
-              type: string
-              description: "\n"
-              format: string
-            PaymentMechanismType:
-              type: string
-              description: "\n"
-              format: string
+          $ref: '#/components/schemas/PaymentExecutionProcedure'
     InitiatePaymentExecutionResponse:
       type: object
       properties:
