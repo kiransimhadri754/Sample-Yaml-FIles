@@ -347,6 +347,15 @@ components:
     PartyAddress:
       type: object
       properties:
+        PartyAddressReference:
+                  type: string
+                  description: "\n"
+                  format: string
+        PartyAddressDetails:
+             $ref: '#/components/schemas/PartyAddressResponse'
+    PartyAddressResponse:
+      type: object
+      properties:
         BuildingName:
                   type: string
                   description: "\n"
@@ -425,38 +434,26 @@ components:
     InitiatePartyAddressRequest:
       type: object
       properties:
-        PartyAddress: 
-          $ref: '#/components/schemas/PartyAddress'
+        PartyAddressDetails: 
+          $ref: '#/components/schemas/PartyAddressResponse'
     InitiatePartyAddressResponse:
       type: object
       properties:
-        PartyAddressReference:
-          type: string
-          description: "\n"
-          format: string
         PartyAddress: 
           $ref: '#/components/schemas/PartyAddress'
     UpdatePartyAddressRequest:
       type: object
       properties:
-        PartyAddress: 
-          $ref: '#/components/schemas/PartyAddress'
+        PartyAddressDetails: 
+          $ref: '#/components/schemas/PartyAddressResponse'
     UpdatePartyAddressResponse:
       type: object
       properties:
-        PartyAddressReference:
-          type: string
-          description: "\n"
-          format: string
         PartyAddress: 
           $ref: '#/components/schemas/PartyAddress'
     RetrievePartyAddressResponse:
         type: object
         properties:
-            PartyAddressReference:
-              type: string
-              description: "\n"
-              format: string
             PartyAddress: 
               type: array
               items:
