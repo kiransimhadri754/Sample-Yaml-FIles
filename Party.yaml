@@ -59,18 +59,18 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
-   /Party/{PartyReference}/Retrieve:
-    get:
+   /Party/Update:
+    put:
       tags:
           - Party Facility
-      summary: ReCR Retrieve details of party
-      description: ReCR Retrieve details of party
-      operationId: RetrieveParty
-      parameters:
-        - $ref: '#/components/parameters/PartyReference'
+      summary: UpCR Update details of a Party's Status and Identifiers
+      description: UpCR Update details of a Party's Status and Identifiers
+      operationId:  UpdateParty
+      requestBody:
+        $ref: '#/components/requestBodies/UpdatePartyRequest'
       responses:
         '200':
-          $ref: '#/components/responses/RetrievePartyResponse'
+          $ref: '#/components/responses/UpdatePartyResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -83,20 +83,18 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
-   /Party/{PartyReference}/Update:
-    put:
+   /Party/{PartyReference}/Retrieve:
+    get:
       tags:
           - Party Facility
-      summary: UpCR Update details of a Party
-      description: UpCR Update details of a Party
-      operationId:  UpdateParty
+      summary: ReCR Retrieve details of party
+      description: ReCR Retrieve details of party
+      operationId: RetrieveParty
       parameters:
         - $ref: '#/components/parameters/PartyReference'
-      requestBody:
-        $ref: '#/components/requestBodies/UpdatePartyRequest'
       responses:
         '200':
-          $ref: '#/components/responses/UpdatePartyResponse'
+          $ref: '#/components/responses/RetrievePartyResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -462,7 +460,7 @@ components:
       type: object
       properties:
         Party: 
-          $ref: '#/components/schemas/Party'
+          $ref: '#/components/schemas/PartyResponse'
     UpdatePartyResponse:
       type: object
       properties:
