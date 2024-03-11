@@ -1,0 +1,84 @@
+openapi: 3.0.1
+info:
+  title: InventoryMicroservice
+  description: A microservice for Inventory Items
+  version: 1.0.0
+servers:
+- url: ' <Mention the base url here>'
+paths:
+   /CreateInventory:
+    post:
+      tags:
+          - Inventory Items
+      summary: Create a new Inventory Item
+      description: Create a new Inventory Item
+      operationId: Initiate
+      parameters:
+        - $ref: '#/components/parameters/inventoryVO'
+      requestBody:
+        $ref: '#/components/requestBodies/InitiateInventoryRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiateInventoryResponse'
+components:
+  schemas:
+    InitiateInventoryRequest:
+      type: object
+      properties:
+          Id:
+            type: string
+            description: Unique identifier for the inventory item
+            format: string
+          Name:
+            type: string
+            description: Name of the inventory item
+            format: string
+          Description:
+            type: string
+            description: Description of the inventory item
+            format: string
+          remarks:
+            type: string
+            description: Remarks about the inventory item
+            format: string
+    InitiateInventoryResponse:
+      type: object
+      properties:
+          Id:
+            type: string
+            description: Unique identifier for the inventory item
+            format: string
+          Name:
+            type: string
+            description: Name of the inventory item
+            format: string
+          Description:
+            type: string
+            description: Description of the inventory item
+            format: string
+          remarks:
+            type: string
+            description: Remarks about the inventory item
+            format: string
+  parameters:
+    inventoryVO:
+      name: inventoryVO
+      in: query
+      description: Inventory data for the new item
+      required: true
+      schema:
+        type: string
+  requestBodies:
+    InitiateInventoryRequest:
+      description: Initiate Inventory Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InitiateInventoryRequest'
+  responses:
+    InitiateInventoryResponse:
+      description: Initiate Inventory Response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InitiateInventoryResponse'
