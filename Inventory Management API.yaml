@@ -1,0 +1,205 @@
+openapi: 3.0.1
+info:
+  title: Inventory Management API
+  description: API for managing inventory in a retail system.
+  version: 11.0.0
+servers:
+- url: ' <Mention the base url here>'
+paths:
+   /items:
+    get:
+      tags:
+          - Items
+      summary: Get all inventory items
+      description: Returns a list of all inventory items
+      operationId: Retrieve
+      responses:
+        '200':
+          $ref: '#/components/responses/RetrieveItemsResponse'
+    post:
+      tags:
+          - Items
+      summary: Create a new inventory item
+      description: Creates a new inventory item
+      operationId: Initiate
+      requestBody:
+        $ref: '#/components/requestBodies/InitiateItemRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiateItemResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+   /items/{id}:
+    get:
+      tags:
+          - Items
+      summary: Get an inventory item by ID
+      description: Returns a specific inventory item by its ID
+      operationId: RetrieveItems
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          $ref: '#/components/responses/RetrieveItemResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      tags:
+          - Items
+      summary: Update an inventory item
+      description: Updates an existing inventory item
+      operationId: UpdateItem
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      requestBody:
+        $ref: '#/components/requestBodies/UpdateItemRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/UpdateItemResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+    delete:
+      tags:
+          - Items
+      summary: Update an inventory item
+      description: Updates an existing inventory item
+      operationId: DeleteItem
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '204':
+          $ref: '#/components/responses/DeleteItemResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+components:
+  schemas:
+    Item:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the inventory item
+          format: string
+        name:
+          type: string
+          description: The name of the inventory item
+          format: string
+        description:
+          type: string
+          description: A description of the inventory item
+          format: string
+        quantity:
+          type: string
+          description: The current quantity of the inventory item
+          format: string
+    RetrieveItemResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/Item'
+    HTTPError:
+      type: object
+      properties:
+        status_code:
+          type: string
+          description: "\n"
+          format: string
+        status:
+          type: string
+          description: "\n"
+          format: string
+        message:
+          type: string
+          description: "\n"
+          format: string
+  parameters:
+    Id:
+      name: id
+      in: path
+      description: The ID of the inventory item
+      required: true
+      schema:
+        type: string
+  requestBodies:
+    InitiateItemRequest:
+      description: PartyInitiate
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Item'
+    UpdateItemRequest:
+      description: PartyInitiate
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Item'
+  responses:
+    RetrieveItemsResponse:
+        description: fetchItems
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/RetrieveItemResponse'
+    InitiateItemResponse:
+      description: Created
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Item'
+    RetrieveItemResponse:
+        description: fetchItems
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/Item'
+    UpdateItemResponse:
+        description: fetchItems
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/Item'
+    DeleteItemResponse:
+        description: Deleted Successful
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HTTPError'
+    BadRequest:
+      description: BadRequest
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    NotFound:
+      description: NotFound
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    TooManyRequests:
+      description: TooManyRequests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    InternalServerError:
+      description: InternalServerError
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
