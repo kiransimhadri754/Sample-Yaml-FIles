@@ -2,7 +2,7 @@ openapi: 3.0.1
 info:
   title: Inventory Management API
   description: API for managing inventory in a retail system.
-  version: 11.0.0
+  version: 1.0.0
 servers:
 - url: ' <Mention the base url here>'
 paths:
