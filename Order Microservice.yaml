@@ -1,0 +1,54 @@
+openapi: 3.0.1
+info:
+  title: Order Microservice
+  description: A microservice for managing orders
+  version: 1.0.0
+servers:
+- url: ' <Mention the base url here>'
+paths:
+   /CreateOrder:
+    post:
+      tags:
+          - Orders
+      summary: Create a new order
+      description: Create a new order
+      operationId: Initiate
+      requestBody:
+        $ref: '#/components/requestBodies/InitiateOrderRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiateOrderResponse'
+components:
+  schemas:
+    InitiateOrderRequest:
+      type: object
+      properties:
+        OrderDetails:
+          type: string
+          description: "\n"
+          format: string
+    InitiateOrderResponse:
+      type: object
+      properties:
+        OrderId:
+          type: string
+          description: "\n"
+          format: string
+        Message:
+          type: string
+          description: "\n"
+          format: string
+  requestBodies:
+    InitiateOrderRequest:
+      description: PartyInitiate
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InitiateOrderRequest'
+  responses:
+    InitiateOrderResponse:
+      description: PartyInitiate
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InitiateOrderResponse'
