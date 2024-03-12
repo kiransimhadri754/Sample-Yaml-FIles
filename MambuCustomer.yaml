@@ -153,13 +153,13 @@ components:
           groupKeys:
             type: array
             items:
-              type: object
+              type: string
           Addresses:
             $ref: '#/components/schemas/addresses'
           idDocuments:
             type: array
             items:
-              type: object
+              type: string
     HTTPError:
       type: object
       properties:
