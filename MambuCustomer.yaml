@@ -1,0 +1,227 @@
+openapi: 3.0.1
+info:
+  title: Customer List
+  description: Mambu services for Customer.
+  version: v9.156.4
+servers:
+- url: 'https://partnerfincuro.sandbox.mambu.com/api'
+paths:
+  /clients:
+    get:
+      tags:
+        - Customer List
+      summary: InCR Retrieve list of customers
+      description: InCR Retrieve list of customers
+      operationId: Retrieve
+      parameters:
+        - $ref: '#/components/parameters/DetailsLevel'
+      responses:
+        '200':
+          $ref: '#/components/responses/RetrieveCustomerListResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  schemas:
+    addresses:
+      type: array
+      items:
+        type: object
+        properties:
+          encodedKey:
+            type: string
+            description: "\n"
+            format: string
+          parentKey:
+            type: string
+            description: "\n"
+            format: string
+          line1:
+            type: string
+            description: "\n"
+            format: string
+          line2:
+            type: string
+            description: "\n"
+            format: string
+          city:
+            type: string
+            description: "\n"
+            format: string
+          region:
+            type: string
+            description: "\n"
+            format: string
+          postcode:
+            type: string
+            description: "\n"
+            format: string
+          country:
+            type: string
+            description: "\n"
+            format: string
+          indexInList:
+            type: string
+            description: "\n"
+            format: string
+    RetrieveCustomerListResponse:
+      type: array
+      items:
+        type: object
+        properties:
+          EncodedKey:
+            type: string
+            description: "\n"
+            format: string
+          Id:
+            type: string
+            description: "\n"
+            format: string
+          State:
+            type: string
+            description: "\n"
+            format: string
+          CreationDate:
+            type: string
+            description: "\n"
+            format: string
+          LastModifiedDate:
+            type: string
+            description: "\n"
+            format: string
+          ActivationDate:
+            type: string
+            description: "\n"
+            format: string
+          ApprovedDate:
+            type: string
+            description: "\n"
+            format: string
+          FirstName:
+            type: string
+            description: "\n"
+            format: string
+          LastName:
+            type: string
+            description: "\n"
+            format: string
+          EmailAddress:
+            type: string
+            description: "\n"
+            format: string
+          PreferredLanguage:
+            type: string
+            description: "\n"
+            format: string
+          Notes:
+            type: string
+            description: "\n"
+            format: string
+          AssignedBranchKey:
+            type: string
+            description: "\n"
+            format: string
+          AssignedCenterKey:
+            type: string
+            description: "\n"
+            format: string
+          AssignedUserKey:
+            type: string
+            description: "\n"
+            format: string
+          ClientRoleKey:
+            type: string
+            description: "\n"
+            format: string
+          loanCycle:
+            type: string
+            description: "\n"
+            format: string
+          groupLoanCycle:
+            type: string
+            description: "\n"
+            format: string
+          groupKeys:
+            type: array
+            items:
+              type: object
+          Addresses:
+            $ref: '#/components/schemas/addresses'
+          idDocuments:
+            type: array
+            items:
+              type: object
+    HTTPError:
+      type: object
+      properties:
+        status_code:
+          type: string
+          description: "\n"
+          format: string
+        status:
+          type: string
+          description: "\n"
+          format: string
+        message:
+          type: string
+          description: "\n"
+          format: string
+  parameters:
+    DetailsLevel:
+      name: details_level
+      in: query
+      required: true
+      schema:
+        type: string
+  responses:
+    RetrieveCustomerListResponse:
+        description: fetchAccountUser
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/RetrieveCustomerListResponse'
+    BadRequest:
+      description: BadRequest
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    NotFound:
+      description: NotFound
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    TooManyRequests:
+      description: TooManyRequests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    InternalServerError:
+      description: InternalServerError
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
