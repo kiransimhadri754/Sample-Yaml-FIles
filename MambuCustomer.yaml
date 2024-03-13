@@ -6,12 +6,12 @@ info:
 servers:
 - url: 'https://api-qa.fincuro.com/teller'
 paths:
-  /clients:search:
+  '/clients:search':
     post:
       tags:
         - CustomerDetails
-      summary: InCR Retrieve details of customer
-      description: InCR Retrieve details of customers
+      summary: Retrieve details of customer
+      description: Retrieve details of customers
       operationId: InitiateCustomersearch
       parameters:
         - $ref: '#/components/parameters/DetailsLevel'
@@ -49,40 +49,40 @@ components:
               - ASC
               - DESC
     FilterCriteria:
-      type: object
-      properties:
-        field:
-            type: string
-            description: "\n"
-            format: string
-        value:
-            type: string
-            description: "\n"
-            format: string
-        operator:
-            type: string
-            description: "\n"
-            format: string
-            enum:
-              - EQUALS
-              - NOT_EQUALS
-              - GREATER_THAN
-              - LESS_THAN
-        values:
-            type: string
-            description: "\n"
-            format: string
-            enum:
-              - 'null'
+      type: array
+      items:
+        type: object
+        properties:
+          field:
+              type: string
+              description: "\n"
+              format: string
+          value:
+              type: string
+              description: "\n"
+              format: string
+          operator:
+              type: string
+              description: "\n"
+              format: string
+              enum:
+                - EQUALS
+                - NOT_EQUALS
+                - GREATER_THAN
+                - LESS_THAN
+          values:
+              type: string
+              description: "\n"
+              format: string
+              enum:
+                - 'null'
     InitiateCustomerSearchRequest:
       type: object
       properties:
         sortingCriteria:
           $ref: '#/components/schemas/SortingCriteria'
         filterCriteria:
-          type: array
-          items:
-            $ref: '#/components/schemas/FilterCriteria'
+          $ref: '#/components/schemas/FilterCriteria'
     InitiateCustomerSearchResponse:
       type: array
       items:
