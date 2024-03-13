@@ -1,23 +1,25 @@
 openapi: 3.0.1
 info:
-  title: Customer List
-  description: Mambu services for Customer.
+  title: Customer
+  description: FinX BIAN service for Customer details.
   version: v9.156.4
 servers:
-- url: 'https://partnerfincuro.sandbox.mambu.com/api'
+- url: 'https://api-qa.fincuro.com/teller'
 paths:
-  /clients:
-    get:
+  /clients:search:
+    post:
       tags:
-        - Customer List
-      summary: InCR Retrieve list of customers
-      description: InCR Retrieve list of customers
-      operationId: Retrieve
+        - CustomerDetails
+      summary: InCR Retrieve details of customer
+      description: InCR Retrieve details of customers
+      operationId: InitiateCustomersearch
       parameters:
         - $ref: '#/components/parameters/DetailsLevel'
+      requestBody:
+        $ref: '#/components/requestBodies/InitiateCustomerSearchRequest'
       responses:
         '200':
-          $ref: '#/components/responses/RetrieveCustomerListResponse'
+          $ref: '#/components/responses/InitiateCustomerSearchResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -32,97 +34,65 @@ paths:
           $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
-    addresses:
+    SortingCriteria:
+      type: object
+      properties:
+        field:
+            type: string
+            description: "\n"
+            format: string
+        order:
+            type: string
+            description: "\n"
+            format: string
+            enum:
+              - ASC
+              - DESC
+    FilterCriteria:
+      type: object
+      properties:
+        field:
+            type: string
+            description: "\n"
+            format: string
+        value:
+            type: string
+            description: "\n"
+            format: string
+        operator:
+            type: string
+            description: "\n"
+            format: string
+            enum:
+              - EQUALS
+              - NOT_EQUALS
+              - GREATER_THAN
+              - LESS_THAN
+        values:
+            type: string
+            description: "\n"
+            format: string
+            enum:
+              - 'null'
+    InitiateCustomerSearchRequest:
+      type: object
+      properties:
+        sortingCriteria:
+          $ref: '#/components/schemas/SortingCriteria'
+        filterCriteria:
+          type: array
+          items:
+            $ref: '#/components/schemas/FilterCriteria'
+    InitiateCustomerSearchResponse:
       type: array
       items:
         type: object
         properties:
-          encodedKey:
-            type: string
-            description: "\n"
-            format: string
-          parentKey:
-            type: string
-            description: "\n"
-            format: string
-          line1:
-            type: string
-            description: "\n"
-            format: string
-          line2:
-            type: string
-            description: "\n"
-            format: string
-          city:
-            type: string
-            description: "\n"
-            format: string
-          region:
-            type: string
-            description: "\n"
-            format: string
-          postcode:
-            type: string
-            description: "\n"
-            format: string
-          country:
-            type: string
-            description: "\n"
-            format: string
-          indexInList:
-            type: string
-            description: "\n"
-            format: string
-    RetrieveCustomerListResponse:
-      type: array
-      items:
-        type: object
-        properties:
-          EncodedKey:
-            type: string
-            description: "\n"
-            format: string
-          Id:
-            type: string
-            description: "\n"
-            format: string
-          State:
-            type: string
-            description: "\n"
-            format: string
-          CreationDate:
-            type: string
-            description: "\n"
-            format: string
-          LastModifiedDate:
-            type: string
-            description: "\n"
-            format: string
           ActivationDate:
             type: string
             description: "\n"
             format: string
           ApprovedDate:
-            type: string
-            description: "\n"
-            format: string
-          FirstName:
-            type: string
-            description: "\n"
-            format: string
-          LastName:
-            type: string
-            description: "\n"
-            format: string
-          EmailAddress:
-            type: string
-            description: "\n"
-            format: string
-          PreferredLanguage:
-            type: string
-            description: "\n"
-            format: string
-          Notes:
             type: string
             description: "\n"
             format: string
@@ -134,7 +104,7 @@ components:
             type: string
             description: "\n"
             format: string
-          AssignedUserKey:
+          BirthDate:
             type: string
             description: "\n"
             format: string
@@ -142,7 +112,27 @@ components:
             type: string
             description: "\n"
             format: string
-          loanCycle:
+          CreationDate:
+            type: string
+            description: "\n"
+            format: string
+          EmailAddress:
+            type: string
+            description: "\n"
+            format: string
+          EncodedKey:
+            type: string
+            description: "\n"
+            format: string
+          FirstName:
+            type: string
+            description: "\n"
+            format: string
+          LastName:
+            type: string
+            description: "\n"
+            format: string
+          Gender:
             type: string
             description: "\n"
             format: string
@@ -150,16 +140,34 @@ components:
             type: string
             description: "\n"
             format: string
-          groupKeys:
-            type: array
-            items:
-              type: string
-          Addresses:
-            $ref: '#/components/schemas/addresses'
-          idDocuments:
-            type: array
-            items:
-              type: string
+          Id:
+            type: string
+            description: "\n"
+            format: string
+          LastModifiedDate:
+            type: string
+            description: "\n"
+            format: string
+          loanCycle:
+            type: string
+            description: "\n"
+            format: string
+          MobilePhone:
+            type: string
+            description: "\n"
+            format: string
+          State:
+            type: string
+            description: "\n"
+            format: string
+          PreferredLanguage:
+            type: string
+            description: "\n"
+            format: string
+          ProfilePictureKey:
+            type: string
+            description: "\n"
+            format: string
     HTTPError:
       type: object
       properties:
@@ -182,13 +190,20 @@ components:
       required: true
       schema:
         type: string
-  responses:
-    RetrieveCustomerListResponse:
+  requestBodies:
+    InitiateCustomerSearchRequest:
         description: fetchAccountUser
         content:
           application/json:
             schema:
-                $ref: '#/components/schemas/RetrieveCustomerListResponse'
+                $ref: '#/components/schemas/InitiateCustomerSearchRequest'
+  responses:
+    InitiateCustomerSearchResponse:
+        description: fetchAccountUser
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiateCustomerSearchResponse'
     BadRequest:
       description: BadRequest
       content:
