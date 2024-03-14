@@ -83,7 +83,7 @@ components:
               description: "\n"
               format: string
         CdtTrfTxInf:
-            type: object
+            type: 
             properties:
               Cdtr:
                 type: string
