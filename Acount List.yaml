@@ -106,60 +106,20 @@ components:
           description: "\n"
           format: string
     LinkedAccounts:
+        type: array
+        items:
             type: object
             properties: 
               AccountStatus:
-                type: object
-                properties:
-                  StatusReason:
-                    type: object
-                    properties:
-                      Text:
-                        type: string
-                        description: "\n"
-                        format: string
+                $ref: '#/components/schemas/AccountStatus'
               AccountIdentification:
-                type: object
-                properties:
-                  AccountIdentificationType:
-                    type: string
-                    description: "\n"
-                    format: string
-                  IdentifierValue:
-                    type: object
-                    properties:
-                      Value:
-                        type: string
-                        description: "\n"
-                        format: string
+                $ref: '#/components/schemas/AccountIdentification'
               AccountBalance:
-                type: object
-                properties:
-                  AmountValue:
-                    type: string
-                    description: "\n"
-                    format: string
-                  AmountCurrency:
-                    type: object
-                    properties:
-                      CurrencyCode:
-                        type: string
-                        description: "\n"
-                        format: string
+                $ref: '#/components/schemas/AccountBalance'
               AccountBalanceDate:
-                type: object
-                properties:
-                  DateTimeContent:
-                    type: string
-                    description: "\n"
-                    format: date
+                $ref: '#/components/schemas/AccountBalanceDate'
               AccountDescription:
-                type: object
-                properties:
-                  Text:
-                    type: string
-                    description: "\n"
-                    format: string
+                $ref: '#/components/schemas/AccountDescription'
     RetrieveAccountListResponse:
       type: object
       properties:
@@ -168,60 +128,7 @@ components:
           description: "\n"
           format: string
         LinkedAccounts:
-            type: object
-            properties: 
-              AccountStatus:
-                type: object
-                properties:
-                  StatusReason:
-                    type: object
-                    properties:
-                      Text:
-                        type: string
-                        description: "\n"
-                        format: string
-              AccountIdentification:
-                type: object
-                properties:
-                  AccountIdentificationType:
-                    type: string
-                    description: "\n"
-                    format: string
-                  IdentifierValue:
-                    type: object
-                    properties:
-                      Value:
-                        type: string
-                        description: "\n"
-                        format: string
-              AccountBalance:
-                type: object
-                properties:
-                  AmountValue:
-                    type: string
-                    description: "\n"
-                    format: string
-                  AmountCurrency:
-                    type: object
-                    properties:
-                      CurrencyCode:
-                        type: string
-                        description: "\n"
-                        format: string
-              AccountBalanceDate:
-                type: object
-                properties:
-                  DateTimeContent:
-                    type: string
-                    description: "\n"
-                    format: date
-              AccountDescription:
-                type: object
-                properties:
-                  Text:
-                    type: string
-                    description: "\n"
-                    format: string
+            $ref: '#/components/schemas/LinkedAccounts'
     HTTPError:
       type: object
       properties:
