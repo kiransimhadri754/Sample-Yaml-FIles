@@ -38,9 +38,9 @@ components:
       type: object
       properties:
         amountValue:
-          type: string
+          type: number
           description: "\n"
-          format: string
+          format: float
     amountCurrency:
       type: object
       properties:
@@ -54,14 +54,14 @@ components:
         dateContent:
           type: string
           description: "\n"
-          format: string
+          format: date-time
     insertionDate:
       type: object
       properties:
         dateContent:
           type: string
           description: "\n"
-          format: string
+          format: date-time
     transactions:
       type: array
       items:
@@ -78,14 +78,18 @@ components:
     retrieveTransactionListResponse:
       type: object
       properties:
+        Email:
+            type: string
+            description: "\n"
+            format: email
         totalDeposit:
-            type: string
+            type: number
             description: "\n"
-            format: string
+            format: number
         totalWithdrawal:
-            type: string
+            type: number
             description: "\n"
-            format: string
+            format: number
         currentAccountId:
             type: string
             description: "\n"
@@ -93,11 +97,11 @@ components:
         startDate:
             type: string
             description: "\n"
-            format: string
+            format: date
         endDate:
             type: string
             description: "\n"
-            format: string
+            format: date
         transactions:
            $ref: '#/components/schemas/transactions'
     HTTPError:
