@@ -1,0 +1,277 @@
+openapi: 3.0.1
+info:
+  title: Party
+  description: This API provides endpoints for managing customer information, including creating, retrieving, updating customer records.
+  version: 11.0.1
+servers:
+- url: ' https://virtserver.swaggerhub.com/BIAN-3/CurrentAccount/12.0.1'
+paths:
+   /Party/Initiate:
+    post:
+      tags:
+          - Party Facility
+      summary: InCR Initiate A new party
+      description: InCR Initiate A party
+      operationId: Initiate
+      requestBody:
+        $ref: '#/components/requestBodies/InitiatePartyRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiatePartyResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  schemas:
+    PartyName:
+          type: object
+          properties:
+            FirstName:
+              type: string
+            MiddleName:
+              type: string
+            LastName:
+              type: string
+    ElectronicAddressType:
+          type: object
+          properties:
+            ElectronicAddressTypeValue:
+              type: string
+            AddressDescription:
+              type: string
+    MobilePhoneAddressType:
+          type: object
+          properties:
+            PhoneAddressTypeValue:
+              type: string
+            PhoneNumber:
+              type: string
+    HomePhoneAddressType:
+          type: object
+          properties:
+            PhoneAddressTypeValue:
+              type: string
+            HomePhoneNumber:
+              type: string
+    PartyIdentification:
+          type: array
+          items:
+            type: object
+            properties:
+              SerialNumber:
+                type: string
+              PartyIdentificationType:
+                type: string
+              PartyIdentification:
+                type: string
+              IdentificationDocumentUrl:
+                type: string
+              IdentifierIssuingAuthority:
+                type: string
+              IdentifierStartDate:
+                type: object
+                properties:
+                  DateTimeContent:
+                    type: string
+                    format: date-time
+              IdentifierEndDate:
+                type: object
+                properties:
+                  DateTimeContent:
+                    type: string
+                    format: date-time
+    PartyAddress:
+      type: array
+      items:
+        type: object
+        properties:
+          SerialNumber:
+            type: string
+          BuildingName:
+            type: string
+          StreetBuildingIdentification:
+            type: string
+          StreetName:
+            type: string
+          Municipality:
+            type: string
+          TownName:
+            type: string
+          PostCodeIdentification:
+            type: string
+          District:
+            type: string
+          Country:
+            type: string
+          AddressType:
+            type: string
+          FromDateTime:
+            type: string
+            format: date-time
+          ToDateTime:
+            type: string
+            format: date-time
+    InitiatePartyRequest:
+      type: object
+      properties:
+        Party:
+          type: object
+          properties:
+            PartyName:
+              $ref: '#/components/schemas/PartyName'
+            Title:
+              type: string
+            BirthDate:
+              type: string
+              format: date
+            Gender:
+              type: string
+            Nationality:
+              type: string
+            Residence:
+              type: string
+            TaxCountry:
+              type: string
+            Description:
+              type: string
+            ElectronicAddressType:
+              $ref: '#/components/schemas/ElectronicAddressType'
+            MobilePhoneAddressType:
+              $ref: '#/components/schemas/MobilePhoneAddressType'
+            HomePhoneAddressType:
+              $ref: '#/components/schemas/HomePhoneAddressType'
+            PartyLegalStructureType:
+              type: string
+            BranchIdentification:
+              type: string
+            PartyUserIdentifier:
+              type: string
+            PartyRoleIdentifier:
+              type: string
+            PartyIdentification:
+              $ref: '#/components/schemas/PartyIdentification'
+            PartyAddress:
+              $ref: '#/components/schemas/PartyAddress'
+            PartyInvolvementType:
+              type: string
+    InitiatePartyResponse:
+      type: object
+      properties:
+        Party:
+          type: object
+          properties:
+            PartyReference:
+              type: string
+            Status:
+              type: string
+            PartyName:
+              $ref: '#/components/schemas/PartyName'
+            Title:
+              type: string
+            BirthDate:
+              type: string
+              format: date
+            Gender:
+              type: string
+            Nationality:
+              type: string
+            Residence:
+              type: string
+            TaxCountry:
+              type: string
+            Description:
+              type: string
+            ElectronicAddressType:
+              $ref: '#/components/schemas/ElectronicAddressType'
+            MobilePhoneAddressType:
+              $ref: '#/components/schemas/MobilePhoneAddressType'
+            HomePhoneAddressType:
+              $ref: '#/components/schemas/HomePhoneAddressType'
+            PartyLegalStructureType:
+              type: string
+            BranchIdentification:
+              type: string
+            PartyUserIdentifier:
+              type: string
+            PartyRoleIdentifier:
+              type: string
+            PartyIdentification:
+              $ref: '#/components/schemas/PartyIdentification'
+            PartyAddress:
+              $ref: '#/components/schemas/PartyAddress'
+            PartyInvolvementType:
+              type: string
+    HTTPError:
+      type: object
+      properties:
+        status_code:
+          type: string
+          description: "\n"
+          format: string
+        status:
+          type: string
+          description: "\n"
+          format: string
+        message:
+          type: string
+          description: "\n"
+          format: string
+  requestBodies:
+    InitiatePartyRequest:
+        description: Initiate New Party
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiatePartyRequest'
+  responses:
+    InitiatePartyResponse:
+        description: PartyFacility 
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiatePartyResponse'
+    BadRequest:
+      description: BadRequest
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    NotFound:
+      description: NotFound
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    TooManyRequests:
+      description: TooManyRequests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    InternalServerError:
+      description: InternalServerError
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
