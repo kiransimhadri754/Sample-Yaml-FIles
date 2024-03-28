@@ -37,31 +37,49 @@ components:
           properties:
             FirstName:
               type: string
+              description: "\n"
+              format: string
             MiddleName:
               type: string
+              description: "\n"
+              format: string
             LastName:
               type: string
+              description: "\n"
+              format: string
     ElectronicAddressType:
           type: object
           properties:
             ElectronicAddressTypeValue:
               type: string
+              description: "\n"
+              format: string
             AddressDescription:
               type: string
+              description: "\n"
+              format: string
     MobilePhoneAddressType:
           type: object
           properties:
             PhoneAddressTypeValue:
               type: string
+              description: "\n"
+              format: string
             PhoneNumber:
               type: string
+              description: "\n"
+              format: string
     HomePhoneAddressType:
           type: object
           properties:
             PhoneAddressTypeValue:
               type: string
+              description: "\n"
+              format: string
             HomePhoneNumber:
               type: string
+              description: "\n"
+              format: string
     PartyIdentification:
           type: array
           items:
@@ -69,26 +87,38 @@ components:
             properties:
               SerialNumber:
                 type: string
+                description: "\n"
+                format: string
               PartyIdentificationType:
                 type: string
+                description: "\n"
+                format: string
               PartyIdentification:
                 type: string
+                description: "\n"
+                format: string
               IdentificationDocumentUrl:
                 type: string
+                description: "\n"
+                format: string
               IdentifierIssuingAuthority:
                 type: string
+                description: "\n"
+                format: string
               IdentifierStartDate:
                 type: object
                 properties:
                   DateTimeContent:
                     type: string
-                    format: date-time
+                    description: "\n"
+                    format: string
               IdentifierEndDate:
                 type: object
                 properties:
                   DateTimeContent:
                     type: string
-                    format: date-time
+                    description: "\n"
+                    format: string
     PartyAddress:
       type: array
       items:
@@ -96,30 +126,52 @@ components:
         properties:
           SerialNumber:
             type: string
+            description: "\n"
+            format: string
           BuildingName:
             type: string
+            description: "\n"
+            format: string
           StreetBuildingIdentification:
             type: string
+            description: "\n"
+            format: string
           StreetName:
             type: string
+            description: "\n"
+            format: string
           Municipality:
             type: string
+            description: "\n"
+            format: string
           TownName:
             type: string
+            description: "\n"
+            format: string
           PostCodeIdentification:
             type: string
+            description: "\n"
+            format: string
           District:
             type: string
+            description: "\n"
+            format: string
           Country:
             type: string
+            description: "\n"
+            format: string
           AddressType:
             type: string
+            description: "\n"
+            format: string
           FromDateTime:
             type: string
-            format: date-time
+            description: "\n"
+            format: string
           ToDateTime:
             type: string
-            format: date-time
+            description: "\n"
+            format: string
     InitiatePartyRequest:
       type: object
       properties:
@@ -130,19 +182,32 @@ components:
               $ref: '#/components/schemas/PartyName'
             Title:
               type: string
+              description: "\n"
+              format: string
             BirthDate:
               type: string
-              format: date
+              description: "\n"
+              format: string
             Gender:
               type: string
+              description: "\n"
+              format: string
             Nationality:
               type: string
+              description: "\n"
+              format: string
             Residence:
               type: string
+              description: "\n"
+              format: string
             TaxCountry:
               type: string
+              description: "\n"
+              format: string
             Description:
               type: string
+              description: "\n"
+              format: string
             ElectronicAddressType:
               $ref: '#/components/schemas/ElectronicAddressType'
             MobilePhoneAddressType:
@@ -151,18 +216,28 @@ components:
               $ref: '#/components/schemas/HomePhoneAddressType'
             PartyLegalStructureType:
               type: string
+              description: "\n"
+              format: string
             BranchIdentification:
               type: string
+              description: "\n"
+              format: string
             PartyUserIdentifier:
               type: string
+              description: "\n"
+              format: string
             PartyRoleIdentifier:
               type: string
+              description: "\n"
+              format: string
             PartyIdentification:
               $ref: '#/components/schemas/PartyIdentification'
             PartyAddress:
               $ref: '#/components/schemas/PartyAddress'
             PartyInvolvementType:
               type: string
+              description: "\n"
+              format: string
     InitiatePartyResponse:
       type: object
       properties:
@@ -171,25 +246,42 @@ components:
           properties:
             PartyReference:
               type: string
+              description: "\n"
+              format: string
             Status:
               type: string
+              description: "\n"
+              format: string
             PartyName:
               $ref: '#/components/schemas/PartyName'
             Title:
               type: string
+              description: "\n"
+              format: string
             BirthDate:
               type: string
-              format: date
+              description: "\n"
+              format: string
             Gender:
               type: string
+              description: "\n"
+              format: string
             Nationality:
               type: string
+              description: "\n"
+              format: string
             Residence:
               type: string
+              description: "\n"
+              format: string
             TaxCountry:
               type: string
+              description: "\n"
+              format: string
             Description:
               type: string
+              description: "\n"
+              format: string
             ElectronicAddressType:
               $ref: '#/components/schemas/ElectronicAddressType'
             MobilePhoneAddressType:
@@ -198,18 +290,28 @@ components:
               $ref: '#/components/schemas/HomePhoneAddressType'
             PartyLegalStructureType:
               type: string
+              description: "\n"
+              format: string
             BranchIdentification:
               type: string
+              description: "\n"
+              format: string
             PartyUserIdentifier:
               type: string
+              description: "\n"
+              format: string
             PartyRoleIdentifier:
               type: string
+              description: "\n"
+              format: string
             PartyIdentification:
               $ref: '#/components/schemas/PartyIdentification'
             PartyAddress:
               $ref: '#/components/schemas/PartyAddress'
             PartyInvolvementType:
               type: string
+              description: "\n"
+              format: string
     HTTPError:
       type: object
       properties:
