@@ -11,8 +11,7 @@ paths:
       tags:
           - GENERAL
       summary: "Customer Categorised Transactions"
-      description: "This API returns a full list of categorised transactions for a\
-        \ given account shared through open banking."
+      description: "This API returns a full list of categorised transactions for a given account shared through open banking."
       operationId: RetrieveCustomerCategorisedTransactions
       parameters:
         - $ref: "#/components/parameters/CustomerIdParam"
@@ -42,9 +41,7 @@ paths:
       - "GENERAL"
       summary: "Get All Data"
       operationId: RetrieveAllData
-      description: "This is the new version of the All Data endpoint. This APIs returns\
-        \ all categorised data and events from all accounts held against a customer\
-        \ record in a single call."
+      description: "This is the new version of the All Data endpoint. This APIs returns all categorised data and events from all accounts held against a customer record in a single call."
       parameters:
       - $ref: "#/components/parameters/CustomerIdParam"
       - $ref: "#/components/parameters/EfxClientCorrelationIdParam"
@@ -68,9 +65,8 @@ paths:
       tags:
           - GENERAL
       summary: Customer Account Categorised Transactions
-      description: "This API returns a full list of categorised transactions for a\
-        \ given account shared through open banking - at account level. The  AccountId\
-        \ can be retrieved either from the AllData endpoint or CustomerAccounts endpoint."
+      description: "This API returns a full list of categorised transactions for a given account shared through open banking at account level. The  AccountId
+        can be retrieved either from the AllData endpoint or CustomerAccounts endpoin."
       operationId: RetrieveCustomerAccountCategorisedTransactions
       parameters:
         - $ref: "#/components/parameters/CustomerIdParam"
@@ -100,7 +96,7 @@ paths:
       tags:
           - CONSUMER
       summary: Get Customer
-      description: The Get Customer API provides all account details based on a specific Customer Id
+      description: The Get Customer API provides all account details based on a specific Customer Id.
       operationId: RetrieveGetCustomer
       parameters:
         - $ref: "#/components/parameters/CustomerIdParam"
@@ -209,6 +205,38 @@ components:
           type: string
           description: "\n"
           format: string
+    AccountIdentification:
+      type: object
+      properties:
+        AccountIdentificationType:
+          type: string
+          description: "\n"
+          format: string
+        IdentifierValue:
+            $ref: '#/components/schemas/IdentifierValue'
+    AccountBalance:
+      type: object
+      properties:
+        AmountValue:
+          type: string
+          description: "\n"
+          format: string
+        AmountCurrency:
+          $ref: '#/components/schemas/AmountCurrency'
+    AccountBalanceDate:
+      type: object
+      properties:
+        DateTimeContent:
+          type: string
+          description: "\n"
+          format: string
+    AccountDescription:
+      type: object
+      properties:
+        Text:
+          type: string
+          description: "\n"
+          format: string
     StatusReason:
       type: object
       properties:
@@ -261,42 +289,10 @@ components:
           type: string
           description: "\n"
           format: string
-    AccountIdentification:
-      type: object
-      properties:
-        AccountIdentificationType:
-          type: string
-          description: "\n"
-          format: string
-        IdentifierValue:
-            $ref: '#/components/schemas/IdentifierValue'
     AmountCurrency:
       type: object
       properties:
         CurrencyCode:
-          type: string
-          description: "\n"
-          format: string
-    AccountBalance:
-      type: object
-      properties:
-        AmountValue:
-          type: string
-          description: "\n"
-          format: string
-        AmountCurrency:
-          $ref: '#/components/schemas/AmountCurrency'
-    AccountBalanceDate:
-      type: object
-      properties:
-        DateTimeContent:
-          type: string
-          description: "\n"
-          format: string
-    AccountDescription:
-      type: object
-      properties:
-        Text:
           type: string
           description: "\n"
           format: string
@@ -829,92 +825,81 @@ components:
   parameters:
     CustomerIdParam:
       name: customerId
-      description: "Internal Id of the customer. This can be retrieved from the /general/lookup/customerId\
-        \ endpoint when providing an external client reference."
       in: query
       required: true
+      style: form
       schema:
         type: string
     AccountIdParam:
       name: accountId
-      description: "The accountId provided must be a valid GUID type."
       in: query
       required: true
+      style: form
       schema:
         type: string
     NumberOfMonths1361224Param:
       name: numberOfMonths
-      description: "1, 3, 6, 12 or 24 months of transaction data to be utilised in\
-        \ the response calculation."
       in: query
       required: true
+      style: form
       schema:
         type: integer
     NumberOfMonths3612Param:
       name: numberOfMonths
-      description: 3, 6 or 12 months for transaction data to be provided in the response.
       in: query
       required: true
+      style: form
       schema:
         type: integer
     NumberOfMonth3612Param:
       name: numberOfMonth
-      description: "An array of integers, containing either 3, 6 or 12 months for\
-        \ transaction data to be provided in the response."
       in: query
       required: false
+      style: form
       schema:
         type: integer
     NumberOfMonth1361224Param:
       name: numberOfMonth
-      description: "An array of integers, containing either 3, 6 or 12 months for\
-        \ transaction data to be provided in the response."
       in: query
       required: false
+      style: form
       schema:
         type: integer
     GrossAnnualSalaryParam:
       name: grossAnnualSalary
-      description:  "The value provided in this parameter will be used to override\
-        \ the value provided during the customer application process."
       in: query
       required: false
+      style: form
       schema:
         type: integer
     StartYearParam:
       name: startYear
-      description:  "The year provided must be between 1900 and 3000."
       in: query
       required: false
+      style: form
       schema:
         type: integer
-        default: 1900
     StartMonthParam:
       name: startMonth
-      description:  "The month provided must be between 1 and 12."
       in: query
       required: false
+      style: form
       schema:
         type: integer
-        default: 1
     EndYearParam:
       name: endYear
-      description:  "The year provided must be between 1900 and 3000. End year must\
-        \ not be less than startYear."
       in: query
       required: false
+      style: form
       schema:
         type: integer
-        default: 3000
     EndMonthParam:
       name: endMonth
-      description:  "The month provided must be between 1 and 12. If startYear and\
-        \ endYear are the same then endMonth must not be less than startMonth."
       in: query
       required: false
+      style: form
       schema:
         type: integer
-        default: 1
     EfxClientCorrelationIdParam:
       name: efx-client-correlation-id
       description: "This is a client reference ID, which is returned in the response.\
