@@ -10,8 +10,8 @@ paths:
     get:
       tags:
           - GENERAL
-      summary: "Customer Categorised Transactions"
-      description: "This API returns a full list of categorised transactions for a given account shared through open banking."
+      summary: Customer Categorised Transactions
+      description: This API returns a full list of categorised transactions for a given account shared through open banking.
       operationId: RetrieveCustomerCategorisedTransactions
       parameters:
         - $ref: "#/components/parameters/CustomerIdParam"
@@ -23,91 +23,6 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/RetrieveCustomerCategorisedTransactionsResponse'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '429':
-          $ref: '#/components/responses/TooManyRequests'
-        '500':
-          $ref: '#/components/responses/InternalServerError'
-  /general/allData:
-    get:
-      tags:
-      - "GENERAL"
-      summary: "Get All Data"
-      operationId: RetrieveAllData
-      description: "This is the new version of the All Data endpoint. This APIs returns all categorised data and events from all accounts held against a customer record in a single call."
-      parameters:
-      - $ref: "#/components/parameters/CustomerIdParam"
-      - $ref: "#/components/parameters/EfxClientCorrelationIdParam"
-      responses:
-        "200":
-          $ref: "#/components/responses/RetrieveAllDataResponse"
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '429':
-          $ref: '#/components/responses/TooManyRequests'
-        '500':
-          $ref: '#/components/responses/InternalServerError'
-  /general/customer/account/transactions/categorised:
-    get:
-      tags:
-          - GENERAL
-      summary: Customer Account Categorised Transactions
-      description: "This API returns a full list of categorised transactions for a given account shared through open banking at account level. The  AccountId
-        can be retrieved either from the AllData endpoint or CustomerAccounts endpoin."
-      operationId: RetrieveCustomerAccountCategorisedTransactions
-      parameters:
-        - $ref: "#/components/parameters/CustomerIdParam"
-        - $ref: "#/components/parameters/AccountIdParam"
-        - $ref: "#/components/parameters/StartYearParam"
-        - $ref: "#/components/parameters/StartMonthParam"
-        - $ref: "#/components/parameters/EndYearParam"
-        - $ref: "#/components/parameters/EndMonthParam"
-        - $ref: "#/components/parameters/EfxClientCorrelationIdParam"
-      responses:
-        '200':
-          $ref: '#/components/responses/RetrieveCustomerCategorisedTransactionsResponse'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '429':
-          $ref: '#/components/responses/TooManyRequests'
-        '500':
-          $ref: '#/components/responses/InternalServerError'
-  /consumer/getCustomer:
-    get:
-      tags:
-          - CONSUMER
-      summary: Get Customer
-      description: The Get Customer API provides all account details based on a specific Customer Id.
-      operationId: RetrieveGetCustomer
-      parameters:
-        - $ref: "#/components/parameters/CustomerIdParam"
-        - $ref: "#/components/parameters/StartYearParam"
-        - $ref: "#/components/parameters/StartMonthParam"
-        - $ref: "#/components/parameters/EndYearParam"
-        - $ref: "#/components/parameters/EndMonthParam"
-        - $ref: "#/components/parameters/EfxClientCorrelationIdParam"
-      responses:
-        '200':
-          $ref: '#/components/responses/RetrieveGetCustomerResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
