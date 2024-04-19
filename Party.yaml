@@ -80,6 +80,20 @@ components:
               type: string
               description: "\n"
               format: string
+    IdentifierStartDate:
+                type: object
+                properties:
+                  DateTimeContent:
+                    type: string
+                    description: "\n"
+                    format: string
+    IdentifierEndDate:
+                type: object
+                properties:
+                  DateTimeContent:
+                    type: string
+                    description: "\n"
+                    format: string
     PartyIdentification:
           type: array
           items:
@@ -106,19 +120,9 @@ components:
                 description: "\n"
                 format: string
               IdentifierStartDate:
-                type: object
-                properties:
-                  DateTimeContent:
-                    type: string
-                    description: "\n"
-                    format: string
+                $ref: '#/components/schemas/IdentifierStartDate'
               IdentifierEndDate:
-                type: object
-                properties:
-                  DateTimeContent:
-                    type: string
-                    description: "\n"
-                    format: string
+                $ref: '#/components/schemas/IdentifierEndDate'
     PartyAddress:
       type: array
       items:
