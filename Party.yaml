@@ -176,10 +176,7 @@ components:
             type: string
             description: "\n"
             format: string
-    InitiatePartyRequest:
-      type: object
-      properties:
-        Party:
+    PartyRequest:
           type: object
           properties:
             PartyName:
@@ -242,10 +239,7 @@ components:
               type: string
               description: "\n"
               format: string
-    InitiatePartyResponse:
-      type: object
-      properties:
-        Party:
+    PartyResponse:
           type: object
           properties:
             PartyReference:
@@ -316,6 +310,16 @@ components:
               type: string
               description: "\n"
               format: string
+    InitiatePartyRequest:
+      type: object
+      properties:
+        Party:
+          $ref: '#/components/schemas/PartyRequest'
+    InitiatePartyResponse:
+      type: object
+      properties:
+        Party:
+          $ref: '#/components/schemas/PartyResponse'
     HTTPError:
       type: object
       properties:
