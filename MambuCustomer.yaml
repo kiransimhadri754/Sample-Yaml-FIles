@@ -33,16 +33,18 @@ paths:
 components:
   schemas:
     ExampleSelectFieldOption:
-      type: object
-      properties:
-        example_option_id:
-          type: string
-          description: "\n"
-          format: string
-        example_option_value:
-          type: string
-          description: "\n"
-          format: string
+      type: array
+      items:
+        type: object
+        properties:
+          example_option_id:
+            type: string
+            description: "\n"
+            format: string
+          example_option_value:
+            type: string
+            description: "\n"
+            format: string
     ExampleGroupedCFSet:
         type: array
         items:
@@ -61,8 +63,6 @@ components:
               description: "\n"
               format: string
             Example_Select_Field:
-              type: array
-              items:
                 $ref: '#/components/schemas/ExampleSelectFieldOption'
             _index:
               type: string
