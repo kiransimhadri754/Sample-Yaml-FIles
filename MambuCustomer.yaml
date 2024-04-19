@@ -43,27 +43,21 @@ components:
           type: string
           description: "\n"
           format: string
-    ExampleCheckboxField:
-      type: string
-      description: "\n"
-      format: string
-    ExampleNumberField:
-      type: string
-      description: "\n"
-      format: string
-    ExampleFreeTextField:
-      type: string
-      description: "\n"
-      format: string
     ExampleGroupedCFSet:
       type: object
       properties:
         Example_Checkbox_Field:
-          $ref: '#/components/schemas/ExampleCheckboxField'
+          type: string
+          description: "\n"
+          format: string
         Example_Free_Text_Field:
-          $ref: '#/components/schemas/ExampleFreeTextField'
+          type: string
+          description: "\n"
+          format: string
         Example_Number_Field:
-          $ref: '#/components/schemas/ExampleNumberField'
+          type: string
+          description: "\n"
+          format: string
         Example_Select_Field:
           type: array
           items:
@@ -111,7 +105,7 @@ components:
           type: string
           description: "\n"
           format: string
-    IdDocumentAttachment:
+    Attachments:
       type: object
       properties:
         fileName:
@@ -148,7 +142,7 @@ components:
         attachments:
           type: array
           items:
-            $ref: '#/components/schemas/IdDocumentAttachment'
+            $ref: '#/components/schemas/Attachments'
         documentId:
           type: string
           description: "\n"
@@ -184,246 +178,262 @@ components:
           type: string
           description: "\n"
           format: string
+    ClientRequest:
+      type: object
+      properties:
+        _Example_Custom_Fields:
+          type: object
+          properties:
+            Example_Checkbox_Field:
+              type: string
+              description: "\n"
+              format: string
+            Example_ClientLink_Field:
+              type: string
+              description: "\n"
+              format: string
+            Example_Date_Field:
+              type: string
+              description: "\n"
+              format: string
+            Example_Datetime_Field:
+              type: string
+              description: "\n"
+              format: string
+            Example_Free_Text_Field:
+              type: string
+              description: "\n"
+              format: string
+            Example_GroupLink_Field:
+              type: string
+              description: "\n"
+              format: string
+            Example_Number_Field:
+              type: string
+              description: "\n"
+              format: string
+            Example_Select_Field:
+                $ref: '#/components/schemas/ExampleSelectFieldOption'
+            Example_UserLink_Field:
+              type: string
+              description: "\n"
+              format: string
+        _Example_Grouped_CF_Set:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExampleGroupedCFSet'
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Address'
+        assignedBranchKey:
+          type: string
+          description: "\n"
+          format: string
+        assignedCentreKey:
+          type: string
+          description: "\n"
+          format: string
+        assignedUserKey:
+          type: string
+          description: "\n"
+          format: string
+        birthDate:
+          type: string
+          description: "\n"
+          format: string
+        clientRoleKey:
+          type: string
+          description: "\n"
+          format: string
+        emailAddress:
+          type: string
+          description: "\n"
+          format: string
+        firstName:
+          type: string
+          description: "\n"
+          format: string
+        gender:
+          type: string
+          description: "\n"
+          format: string
+        groupKeys:
+          type: array
+          items:
+            type: string
+        homePhone:
+          type: string
+          description: "\n"
+          format: string
+        id:
+          type: string
+          description: "\n"
+          format: string
+        idDocuments:
+          type: array
+          items:
+            $ref: '#/components/schemas/IdDocument'
+        lastName:
+          type: string
+          description: "\n"
+          format: string
+        middleName:
+          type: string
+          description: "\n"
+          format: string
+        mobilePhone:
+          type: string
+          description: "\n"
+          format: string
+        mobilePhone2:
+          type: string
+          description: "\n"
+          format: string
+        notes:
+          type: string
+          description: "\n"
+          format: string
+        portalSettings:
+          $ref: '#/components/schemas/PortalSettings'
+        preferredLanguage:
+          type: string
+          description: "\n"
+          format: string
+        state:
+          type: string
+          description: "\n"
+          format: string
+    ClientResponse:
+      type: object
+      properties:
+        _Example_Custom_Fields:
+          type: object
+          properties:
+            Example_Checkbox_Field:
+              type: string
+              description: "\n"
+              format: string
+            Example_ClientLink_Field:
+              type: string
+              description: "\n"
+              format: string
+            Example_Date_Field:
+              type: string
+              description: "\n"
+              format: string
+            Example_Datetime_Field:
+              type: string
+              description: "\n"
+              format: string
+            Example_Free_Text_Field:
+              type: string
+              description: "\n"
+              format: string
+            Example_GroupLink_Field:
+              type: string
+              description: "\n"
+              format: string
+            Example_Number_Field:
+              type: string
+              description: "\n"
+              format: string
+            Example_Select_Field:
+                $ref: '#/components/schemas/ExampleSelectFieldOption'
+            Example_UserLink_Field:
+              type: string
+              description: "\n"
+              format: string
+        _Example_Grouped_CF_Set:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExampleGroupedCFSet'
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Address'
+        assignedBranchKey:
+          type: string
+          description: "\n"
+          format: string
+        assignedCentreKey:
+          type: string
+          description: "\n"
+          format: string
+        assignedUserKey:
+          type: string
+          description: "\n"
+          format: string
+        birthDate:
+          type: string
+          description: "\n"
+          format: string
+        clientRoleKey:
+          type: string
+          description: "\n"
+          format: string
+        emailAddress:
+          type: string
+          description: "\n"
+          format: string
+        firstName:
+          type: string
+          description: "\n"
+          format: string
+        gender:
+          type: string
+          description: "\n"
+          format: string
+        groupKeys:
+          type: array
+          items:
+            type: string
+        homePhone:
+          type: string
+          description: "\n"
+          format: string
+        id:
+          type: string
+          description: "\n"
+          format: string
+        idDocuments:
+          type: array
+          items:
+            $ref: '#/components/schemas/IdDocument'
+        lastName:
+          type: string
+          description: "\n"
+          format: string
+        middleName:
+          type: string
+          description: "\n"
+          format: string
+        mobilePhone:
+          type: string
+          description: "\n"
+          format: string
+        mobilePhone2:
+          type: string
+          description: "\n"
+          format: string
+        notes:
+          type: string
+          description: "\n"
+          format: string
+        portalSettings:
+          $ref: '#/components/schemas/PortalSettings'
+        preferredLanguage:
+          type: string
+          description: "\n"
+          format: string
+        state:
+          type: string
+          description: "\n"
+          format: string
     InitiateClientRequest:
-      type: object
-      properties:
-        _Example_Custom_Fields:
-          type: object
-          properties:
-            Example_Checkbox_Field:
-              $ref: '#/components/schemas/ExampleCheckboxField'
-            Example_ClientLink_Field:
-              type: string
-              description: "\n"
-              format: string
-            Example_Date_Field:
-              type: string
-              description: "\n"
-              format: string
-            Example_Datetime_Field:
-              type: string
-              description: "\n"
-              format: string
-            Example_Free_Text_Field:
-              $ref: '#/components/schemas/ExampleFreeTextField'
-            Example_GroupLink_Field:
-              type: string
-              description: "\n"
-              format: string
-            Example_Number_Field:
-              $ref: '#/components/schemas/ExampleNumberField'
-            Example_Select_Field:
-                $ref: '#/components/schemas/ExampleSelectFieldOption'
-            Example_UserLink_Field:
-              type: string
-              description: "\n"
-              format: string
-        _Example_Grouped_CF_Set:
-          type: array
-          items:
-            $ref: '#/components/schemas/ExampleGroupedCFSet'
-        addresses:
-          type: array
-          items:
-            $ref: '#/components/schemas/Address'
-        assignedBranchKey:
-          type: string
-          description: "\n"
-          format: string
-        assignedCentreKey:
-          type: string
-          description: "\n"
-          format: string
-        assignedUserKey:
-          type: string
-          description: "\n"
-          format: string
-        birthDate:
-          type: string
-          description: "\n"
-          format: string
-        clientRoleKey:
-          type: string
-          description: "\n"
-          format: string
-        emailAddress:
-          type: string
-          description: "\n"
-          format: string
-        firstName:
-          type: string
-          description: "\n"
-          format: string
-        gender:
-          type: string
-          description: "\n"
-          format: string
-        groupKeys:
-          type: array
-          items:
-            type: string
-        homePhone:
-          type: string
-          description: "\n"
-          format: string
-        id:
-          type: string
-          description: "\n"
-          format: string
-        idDocuments:
-          type: array
-          items:
-            $ref: '#/components/schemas/IdDocument'
-        lastName:
-          type: string
-          description: "\n"
-          format: string
-        middleName:
-          type: string
-          description: "\n"
-          format: string
-        mobilePhone:
-          type: string
-          description: "\n"
-          format: string
-        mobilePhone2:
-          type: string
-          description: "\n"
-          format: string
-        notes:
-          type: string
-          description: "\n"
-          format: string
-        portalSettings:
-          $ref: '#/components/schemas/PortalSettings'
-        preferredLanguage:
-          type: string
-          description: "\n"
-          format: string
-        state:
-          type: string
-          description: "\n"
-          format: string
+          $ref: '#/components/schemas/ClientRequest'
     InitiateClientResponse:
-      type: object
-      properties:
-        _Example_Custom_Fields:
-          type: object
-          properties:
-            Example_Checkbox_Field:
-              $ref: '#/components/schemas/ExampleCheckboxField'
-            Example_ClientLink_Field:
-              type: string
-              description: "\n"
-              format: string
-            Example_Date_Field:
-              type: string
-              description: "\n"
-              format: string
-            Example_Datetime_Field:
-              type: string
-              description: "\n"
-              format: string
-            Example_Free_Text_Field:
-              $ref: '#/components/schemas/ExampleFreeTextField'
-            Example_GroupLink_Field:
-              type: string
-              description: "\n"
-              format: string
-            Example_Number_Field:
-              $ref: '#/components/schemas/ExampleNumberField'
-            Example_Select_Field:
-                $ref: '#/components/schemas/ExampleSelectFieldOption'
-            Example_UserLink_Field:
-              type: string
-              description: "\n"
-              format: string
-        _Example_Grouped_CF_Set:
-          type: array
-          items:
-            $ref: '#/components/schemas/ExampleGroupedCFSet'
-        addresses:
-          type: array
-          items:
-            $ref: '#/components/schemas/Address'
-        assignedBranchKey:
-          type: string
-          description: "\n"
-          format: string
-        assignedCentreKey:
-          type: string
-          description: "\n"
-          format: string
-        assignedUserKey:
-          type: string
-          description: "\n"
-          format: string
-        birthDate:
-          type: string
-          description: "\n"
-          format: string
-        clientRoleKey:
-          type: string
-          description: "\n"
-          format: string
-        emailAddress:
-          type: string
-          description: "\n"
-          format: string
-        firstName:
-          type: string
-          description: "\n"
-          format: string
-        gender:
-          type: string
-          description: "\n"
-          format: string
-        groupKeys:
-          type: array
-          items:
-            type: string
-        homePhone:
-          type: string
-          description: "\n"
-          format: string
-        id:
-          type: string
-          description: "\n"
-          format: string
-        idDocuments:
-          type: array
-          items:
-            $ref: '#/components/schemas/IdDocument'
-        lastName:
-          type: string
-          description: "\n"
-          format: string
-        middleName:
-          type: string
-          description: "\n"
-          format: string
-        mobilePhone:
-          type: string
-          description: "\n"
-          format: string
-        mobilePhone2:
-          type: string
-          description: "\n"
-          format: string
-        notes:
-          type: string
-          description: "\n"
-          format: string
-        portalSettings:
-          $ref: '#/components/schemas/PortalSettings'
-        preferredLanguage:
-          type: string
-          description: "\n"
-          format: string
-        state:
-          type: string
-          description: "\n"
-          format: string
+          $ref: '#/components/schemas/ClientResponse'
     HTTPError:
       type: object
       properties:
