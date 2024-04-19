@@ -44,28 +44,30 @@ components:
           description: "\n"
           format: string
     ExampleGroupedCFSet:
-      type: object
-      properties:
-        Example_Checkbox_Field:
-          type: string
-          description: "\n"
-          format: string
-        Example_Free_Text_Field:
-          type: string
-          description: "\n"
-          format: string
-        Example_Number_Field:
-          type: string
-          description: "\n"
-          format: string
-        Example_Select_Field:
-          type: array
-          items:
-            $ref: '#/components/schemas/ExampleSelectFieldOption'
-        _index:
-          type: string
-          description: "\n"
-          format: string
+        type: array
+        items:
+          type: object
+          properties:
+            Example_Checkbox_Field:
+              type: string
+              description: "\n"
+              format: string
+            Example_Free_Text_Field:
+              type: string
+              description: "\n"
+              format: string
+            Example_Number_Field:
+              type: string
+              description: "\n"
+              format: string
+            Example_Select_Field:
+              type: array
+              items:
+                $ref: '#/components/schemas/ExampleSelectFieldOption'
+            _index:
+              type: string
+              description: "\n"
+              format: string
     _Example_Custom_Fields:
           type: object
           properties:
@@ -104,44 +106,46 @@ components:
               description: "\n"
               format: string
     Address:
-      type: object
-      properties:
-        city:
-          type: string
-          description: "\n"
-          format: string
-        country:
-          type: string
-          description: "\n"
-          format: string
-        indexInList:
-          type: string
-          description: "\n"
-          format: string
-        latitude:
-          type: string
-          description: "\n"
-          format: string
-        line1:
-          type: string
-          description: "\n"
-          format: string
-        line2:
-          type: string
-          description: "\n"
-          format: string
-        longitude:
-          type: string
-          description: "\n"
-          format: string
-        postcode:
-          type: string
-          description: "\n"
-          format: string
-        region:
-          type: string
-          description: "\n"
-          format: string
+      type: array
+      items:  
+          type: object
+          properties:
+            city:
+              type: string
+              description: "\n"
+              format: string
+            country:
+              type: string
+              description: "\n"
+              format: string
+            indexInList:
+              type: string
+              description: "\n"
+              format: string
+            latitude:
+              type: string
+              description: "\n"
+              format: string
+            line1:
+              type: string
+              description: "\n"
+              format: string
+            line2:
+              type: string
+              description: "\n"
+              format: string
+            longitude:
+              type: string
+              description: "\n"
+              format: string
+            postcode:
+              type: string
+              description: "\n"
+              format: string
+            region:
+              type: string
+              description: "\n"
+              format: string
     Attachments:
       type: object
       properties:
@@ -174,36 +178,38 @@ components:
           description: "\n"
           format: string
     IdDocument:
-      type: object
-      properties:
-        attachments:
-          type: array
-          items:
-            $ref: '#/components/schemas/Attachments'
-        documentId:
-          type: string
-          description: "\n"
-          format: string
-        documentType:
-          type: string
-          description: "\n"
-          format: string
-        identificationDocumentTemplateKey:
-          type: string
-          description: "\n"
-          format: string
-        indexInList:
-          type: string
-          description: "\n"
-          format: string
-        issuingAuthority:
-          type: string
-          description: "\n"
-          format: string
-        validUntil:
-          type: string
-          description: "\n"
-          format: string
+      type: array
+      items:  
+          type: object
+          properties:
+            attachments:
+              type: array
+              items:
+                $ref: '#/components/schemas/Attachments'
+            documentId:
+              type: string
+              description: "\n"
+              format: string
+            documentType:
+              type: string
+              description: "\n"
+              format: string
+            identificationDocumentTemplateKey:
+              type: string
+              description: "\n"
+              format: string
+            indexInList:
+              type: string
+              description: "\n"
+              format: string
+            issuingAuthority:
+              type: string
+              description: "\n"
+              format: string
+            validUntil:
+              type: string
+              description: "\n"
+              format: string
     PortalSettings:
       type: object
       properties:
@@ -221,12 +227,8 @@ components:
         _Example_Custom_Fields:
           $ref: '#/components/schemas/_Example_Custom_Fields'
         _Example_Grouped_CF_Set:
-          type: array
-          items:
             $ref: '#/components/schemas/ExampleGroupedCFSet'
         addresses:
-          type: array
-          items:
             $ref: '#/components/schemas/Address'
         assignedBranchKey:
           type: string
@@ -273,8 +275,6 @@ components:
           description: "\n"
           format: string
         idDocuments:
-          type: array
-          items:
             $ref: '#/components/schemas/IdDocument'
         lastName:
           type: string
@@ -312,12 +312,8 @@ components:
         _Example_Custom_Fields:
           $ref: '#/components/schemas/_Example_Custom_Fields'
         _Example_Grouped_CF_Set:
-          type: array
-          items:
             $ref: '#/components/schemas/ExampleGroupedCFSet'
         addresses:
-          type: array
-          items:
             $ref: '#/components/schemas/Address'
         assignedBranchKey:
           type: string
@@ -364,8 +360,6 @@ components:
           description: "\n"
           format: string
         idDocuments:
-          type: array
-          items:
             $ref: '#/components/schemas/IdDocument'
         lastName:
           type: string
