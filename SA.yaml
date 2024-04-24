@@ -147,32 +147,34 @@ components:
               description: "\n"
               format: string
     Transactions:
-      type: object
-      properties:
-        TransactionReference:
-              type: string
-              description: "\n"
-              format: string
-        TransactionType:
-              type: string
-              description: "\n"
-              format: string
-        AccountLimitBreachResponse:
-              type: string
-              description: "\n"
-              format: string
-        TransactionDescription:
-              type: string
-              description: "\n"
-              format: string
-        TransactionAmount:
-              type: string
-              description: "\n"
-              format: string
-        TransactionDate:
-              type: string
-              description: "\n"
-              format: string
+      type: array
+      items:
+        type: object
+        properties:
+          TransactionReference:
+                type: string
+                description: "\n"
+                format: string
+          TransactionType:
+                type: string
+                description: "\n"
+                format: string
+          AccountLimitBreachResponse:
+                type: string
+                description: "\n"
+                format: string
+          TransactionDescription:
+                type: string
+                description: "\n"
+                format: string
+          TransactionAmount:
+                type: string
+                description: "\n"
+                format: string
+          TransactionDate:
+                type: string
+                description: "\n"
+                format: string
     SavingsAccountFacilityResponse:
           type: object
           properties:
