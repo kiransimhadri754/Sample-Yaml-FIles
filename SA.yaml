@@ -107,6 +107,11 @@ components:
               type: string
               description: "\n"
               format: string
+              enum: 
+                - Savings Account
+                - Checking Account
+                - Deposit Account
+                - Current Account
             AccountCurrency:
               type: string
               description: "\n"
