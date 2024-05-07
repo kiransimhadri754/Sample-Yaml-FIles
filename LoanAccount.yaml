@@ -1,0 +1,355 @@
+openapi: 3.0.1
+info:
+  title: Loan Account
+  description: 'This service domain orchestrates a consumer Loan account. The typical range of services and fees covers payments from and scheduled and ad-hoc loans to the account.'
+  version: 11.0.0
+servers:
+  - url: https://virtserver.swaggerhub.com/BIAN-3/BIAN/SavingsAccount/11.0.0
+paths:
+  '/LoanAccount/Initiate':
+    post:
+      tags:
+        - Loan
+      summary: InBQ Initialize Loan Account
+      description: InBQ Initialize deposit transaction
+      operationId: InitiateLoan
+      requestBody:
+        $ref: '#/components/requestBodies/InitiateLoanAccountRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiateLoanAccountResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  schemas:
+    LoanApplicableRate:
+      type: object
+      properties:
+        RateValue:
+          type: string
+          description: "\n"
+          format: string
+        InterestType:
+          type: string
+          description: "\n"
+          format: string
+        InterestAccrualMethod:
+          type: string
+          description: "\n"
+          format: string
+    AmountCurrency:
+      type: object
+      properties:
+        Currencycode:
+          type: string
+          description: "\n"
+          format: string
+    LoanAmount:
+      type: object
+      properties:
+        AmountValue:
+          type: string
+          description: "\n"
+          format: string
+        AmountCurrency:
+          $ref: '#/components/schemas/AmountCurrency'
+    LoanFacilityRequest:
+      type: object
+      properties:
+        ProductInstanceReference:
+          type: string
+          description: "\n"
+          format: string
+        CustomerReference:
+          type: string
+          description: "\n"
+          format: string
+        BankBranchLocationReference:
+          type: string
+          description: "\n"
+          format: string
+        LoanType:
+          type: string
+          description: "\n"
+          format: string
+        LoanAmount:
+          $ref: '#/components/schemas/LoanAmount'
+        LoanRateType:
+          type: string
+          description: "\n"
+          format: string
+        LoanApplicableRate:
+          $ref: '#/components/schemas/LoanApplicableRate'
+        TaxReference:
+          type: string
+          description: "\n"
+          format: string
+        EntitlementOptionDefinition:
+          type: string
+          description: "\n"
+          format: string
+        EntitlementOptionSetting:
+          type: string
+          description: "\n"
+          format: string
+        RestrictionOptionDefinition:
+          type: string
+          description: "\n"
+          format: string
+        RestrictionOptionSetting:
+          type: string
+          description: "\n"
+          format: string
+        Associations:
+          type: string
+          description: "\n"
+          format: string
+        AssociationType:
+          type: string
+          description: "\n"
+          format: string
+        AssociationReference:
+          type: string
+          description: "\n"
+          format: string
+        CustomerCommentary:
+          type: string
+          description: "\n"
+          format: string
+        PartyLegalStructureType:
+          type: string
+          description: "\n"
+          format: string
+        LoanRepaymentSchedule:
+          type: string
+          description: "\n"
+          format: string
+        StagedRepaymentStatement:
+          type: string
+          description: "\n"
+          format: string
+    LoanFacilityResponse:
+      type: object
+      properties:
+        LoanNumber:
+          type: string
+          description: "\n"
+          format: string
+        AccountState:
+          type: string
+          description: "\n"
+          format: string
+        ProductInstanceReference:
+          type: string
+          description: "\n"
+          format: string
+        CustomerReference:
+          type: string
+          description: "\n"
+          format: string
+        BankBranchLocationReference:
+          type: string
+          description: "\n"
+          format: string
+        LoanType:
+          type: string
+          description: "\n"
+          format: string
+        LoanAmount:
+          $ref: '#/components/schemas/LoanAmount'
+        LoanRateType:
+          type: string
+          description: "\n"
+          format: string
+        LoanApplicableRate:
+          $ref: '#/components/schemas/LoanApplicableRate'
+        TaxReference:
+          type: string
+          description: "\n"
+          format: string
+        EntitlementOptionDefinition:
+          type: string
+          description: "\n"
+          format: string
+        EntitlementOptionSetting:
+          type: string
+          description: "\n"
+          format: string
+        RestrictionOptionDefinition:
+          type: string
+          description: "\n"
+          format: string
+        RestrictionOptionSetting:
+          type: string
+          description: "\n"
+          format: string
+        Associations:
+          type: string
+          description: "\n"
+          format: string
+        AssociationType:
+          type: string
+          description: "\n"
+          format: string
+        AssociationReference:
+          type: string
+          description: "\n"
+          format: string
+        CustomerCommentary:
+          type: string
+          description: "\n"
+          format: string
+        PartyLegalStructureType:
+          type: string
+          description: "\n"
+          format: string
+        LoanRepaymentSchedule:
+          type: string
+          description: "\n"
+          format: string
+        StagedRepaymentStatement:
+          type: string
+          description: "\n"
+          format: string
+    HTTPError:
+      type: object
+      properties:
+        status_code:
+          type: string
+          description: "\n"
+          format: string
+        status:
+          type: string
+          description: "\n"
+          format: string
+        message:
+          type: string
+          description: "\n"
+          format: string
+    InitiateLoanAccountRequest:
+      type: object
+      properties:
+        LoanFacility:
+          $ref: '#/components/schemas/LoanFacilityRequest'
+    InitiateLoanAccountResponse:
+      type: object
+      properties:
+        LoanFacility:
+          $ref: '#/components/schemas/LoanFacilityResponse'
+  requestBodies:
+    InitiateLoanAccountRequest:
+      description: InitiateLoanAccount
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InitiateLoanAccountRequest'
+  responses:
+    InitiateLoanAccountResponse:
+      description: InitiateLoanAccountResponse
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InitiateLoanAccountResponse'
+    BadRequest:
+      description: BadRequest
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    NotFound:
+      description: NotFound
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    TooManyRequests:
+      description: TooManyRequests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    InternalServerError:
+      description: InternalServerError
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+  parameters:
+    savingsaccountid:
+      name: savingsaccountid
+      in: path
+      required: true
+      style: simple
+      schema:
+        type: string
+    interestid:
+      name: interestid
+      in: path
+      required: true
+      style: simple
+      schema:
+        type: string
+    servicefeesid:
+      name: servicefeesid
+      in: path
+      required: true
+      style: simple
+      schema:
+        type: string
+    accountlienid:
+      name: accountlienid
+      in: path
+      required: true
+      style: simple
+      schema:
+        type: string
+    accountsweepid:
+      name: accountsweepid
+      in: path
+      required: true
+      style: simple
+      schema:
+        type: string
+    depositsandwithdrawalsid:
+      name: depositsandwithdrawalsid
+      in: path
+      required: true
+      style: simple
+      schema:
+        type: string
+    paymentsid:
+      name: paymentsid
+      in: path
+      required: true
+      style: simple
+      schema:
+        type: string
+    issueddeviceid:
+      name: issueddeviceid
+      in: path
+      required: true
+      style: simple
+      schema:
+        type: string
