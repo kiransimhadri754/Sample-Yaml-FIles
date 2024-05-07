@@ -145,7 +145,7 @@ components:
           type: string
           description: "\n"
           format: string
-        AccountState:
+        LoanStatus:
           type: string
           description: "\n"
           format: string
