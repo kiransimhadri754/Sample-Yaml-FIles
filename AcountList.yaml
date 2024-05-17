@@ -6,7 +6,7 @@ info:
 servers:
 - url: ' https://virtserver.swaggerhub.com/BIAN-3/CurrentAccount/11.0.0'
 paths:
-   /CustomerProductsandServices/Accounts/{PartyReference}/retrieve:
+   /CustomerProductsandServices/{PartyReference}/retrieve:
     get:
       tags:
           - AccountList
