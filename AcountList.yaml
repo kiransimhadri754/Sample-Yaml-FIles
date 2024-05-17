@@ -60,33 +60,28 @@ components:
           type: string
           description: "\n"
           format: string
-    AccountBalance:
-      type: object
-      properties:
-        AmountValue:
-          type: string
-          description: "\n"
-          format: string
-        AmountCurrency:
-          $ref: '#/components/schemas/AmountCurrency'
-    AmountCurrency:
+    AccountCurrency:
       type: object
       properties:
         CurrencyCode:
           type: string
           description: "\n"
           format: string  
-    AccountBalanceDate:
-      type: object
-      properties:
-        DateTimeContent:
-          type: string
-          description: "\n"
-          format: date
     AccountDescription:
       type: object
       properties:
         Text:
+          type: string
+          description: "\n"
+          format: string
+    AccountDate:
+      type: object
+      properties:
+        AccountDateType:
+          type: string
+          description: "\n"
+          format: string
+        DateTimeContent:
           type: string
           description: "\n"
           format: string
@@ -99,12 +94,44 @@ components:
                 $ref: '#/components/schemas/AccountStatus'
               AccountIdentification:
                 $ref: '#/components/schemas/AccountIdentification'
-              AccountBalance:
-                $ref: '#/components/schemas/AccountBalance'
-              AccountBalanceDate:
-                $ref: '#/components/schemas/AccountBalanceDate'
+              AccountCurrency:
+                $ref: '#/components/schemas/AccountCurrency'
               AccountDescription:
                 $ref: '#/components/schemas/AccountDescription'
+              AccountDate:
+                $ref: '#/components/schemas/AccountDate'
+              TaxReference:
+                type: string
+                description: "\n"
+                format: string
+              EntitlementOptionDefinition:
+                type: string
+                description: "\n"
+                format: string
+              EntitlementOptionSetting:
+                type: string
+                description: "\n"
+                format: string
+              RestrictionOptionDefinition:
+                type: string
+                description: "\n"
+                format: string
+              RestrictionOptionSetting:
+                type: string
+                description: "\n"
+                format: string
+              Associations:
+                type: string
+                description: "\n"
+                format: string
+              AssociationType:
+                type: string
+                description: "\n"
+                format: string
+              AssociationReference:
+                type: string
+                description: "\n"
+                format: string
     RetrieveAccountListResponse:
       type: object
       properties:
