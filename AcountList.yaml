@@ -36,12 +36,7 @@ components:
       type: object
       properties:
         StatusReason:
-          type: object
-          properties:
-            Text:
-              type: string
-              description: "\n"
-              format: string
+          $ref: '#/components/schemas/StatusReason'
     StatusReason:
       type: object
       properties:
@@ -57,12 +52,7 @@ components:
           description: "\n"
           format: string
         IdentifierValue:
-          type: object
-          properties:
-            Value:
-              type: string
-              description: "\n"
-              format: string
+          $ref: '#/components/schemas/IdentifierValue'
     IdentifierValue:
       type: object
       properties:
@@ -78,12 +68,7 @@ components:
           description: "\n"
           format: string
         AmountCurrency:
-          type: object
-          properties:
-            CurrencyCode:
-              type: string
-              description: "\n"
-              format: string
+          $ref: '#/components/schemas/AmountCurrency'
     AmountCurrency:
       type: object
       properties:
