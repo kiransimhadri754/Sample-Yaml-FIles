@@ -6,13 +6,15 @@ info:
 servers:
   - url: https://virtserver.swaggerhub.com/BIAN-3/BIAN/SavingsAccount/11.0.0
 paths:
-  '/LoanAccounts/Retrieve':
+  '/{PartyReference}/LoanAccounts/Retrieve':
     get:
       tags:
         - Loan
       summary: Retrieve Loan Accounts
       description: Retrieve Loan Accounts
       operationId: RetrieveLoans
+      parameters:
+        - $ref: '#/components/parameters/PartyReference'
       responses:
         '200':
           $ref: '#/components/responses/InitiateLoanAccountResponse'
@@ -166,6 +168,13 @@ components:
         properties:
             LoanFacility:
               $ref: '#/components/schemas/LoanFacilityResponse'
+  parameters:
+    PartyReference:
+      name: PartyReference
+      in: path
+      required: true
+      schema:
+        type: string
   responses:
     InitiateLoanAccountResponse:
       description: InitiateLoanAccountResponse
