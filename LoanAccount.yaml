@@ -17,7 +17,7 @@ paths:
         - $ref: '#/components/parameters/PartyReference'
       responses:
         '200':
-          $ref: '#/components/responses/InitiateLoanAccountResponse'
+          $ref: '#/components/responses/RetrieveLoanAccountResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -161,7 +161,7 @@ components:
           type: string
           description: "\n"
           format: string
-    InitiateLoanAccountResponse:
+    RetrieveLoanAccountResponse:
       type: array
       items:
         type: object
@@ -176,12 +176,12 @@ components:
       schema:
         type: string
   responses:
-    InitiateLoanAccountResponse:
+    RetrieveLoanAccountResponse:
       description: InitiateLoanAccountResponse
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/InitiateLoanAccountResponse'
+            $ref: '#/components/schemas/RetrieveLoanAccountResponse'
     BadRequest:
       description: BadRequest
       content:
