@@ -12,7 +12,7 @@ paths:
           - Party Facility
       summary: InCR Initiate A new party
       description: InCR Initiate A party
-      operationId: Initiate
+      operationId: InitiateParty
       requestBody:
         $ref: '#/components/requestBodies/InitiatePartyRequest'
       responses:
@@ -36,7 +36,7 @@ paths:
           - Party Facility
       summary: InCR Retrieve A party
       description: InCR Retrieve A party
-      operationId: Retrieve
+      operationId: RetrieveParty
       parameters:
         - $ref: '#/components/parameters/PartyReference'
       responses:
@@ -60,7 +60,7 @@ paths:
           - Party Facility
       summary: InCR Check a party exists
       description: InCR Check a party exists
-      operationId: Check
+      operationId: CheckParty
       parameters:
         - $ref: '#/components/parameters/EmailAddress'
         - $ref: '#/components/parameters/MobileNumber'
