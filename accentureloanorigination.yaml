@@ -54,6 +54,31 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
+   /Party/search:
+    get:
+      tags:
+          - Party Facility
+      summary: InCR Retrieve A party
+      description: InCR Retrieve A party
+      operationId: Search
+      parameters:
+        - $ref: '#/components/parameters/EmailAddress'
+        - $ref: '#/components/parameters/MobileNumber'
+      responses:
+        '200':
+          $ref: '#/components/responses/RetrievePartyResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
     PartyName:
@@ -264,6 +289,18 @@ components:
     PartyReference:
       name: PartyReference
       in: path
+      required: true
+      schema:
+        type: string
+    EmailAddress:
+      name: EmailAddress
+      in: query
+      required: true
+      schema:
+        type: string
+    MobileNumber:
+      name: MobileNumber
+      in: query
       required: true
       schema:
         type: string
