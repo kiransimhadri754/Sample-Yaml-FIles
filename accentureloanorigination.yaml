@@ -54,19 +54,67 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
-   /Party/search:
+   /Party/Check:
     get:
       tags:
           - Party Facility
-      summary: InCR Retrieve A party
-      description: InCR Retrieve A party
-      operationId: Search
+      summary: InCR Check a party exists
+      description: InCR Check a party exists
+      operationId: Check
       parameters:
         - $ref: '#/components/parameters/EmailAddress'
         - $ref: '#/components/parameters/MobileNumber'
       responses:
         '200':
           $ref: '#/components/responses/RetrievePartyResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+   /LoanAccounts/Initiate:
+    post:
+      tags:
+          - Loan Facility
+      summary: InCR Initiate A new loan account
+      description: InCR Initiate A new loan account
+      operationId: InitiateLoan
+      requestBody:
+        $ref: '#/components/requestBodies/InitiateLoanAccountRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiateLoanAccountResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+   /LoanDisbursement/Initiate:
+    post:
+      tags:
+          - Loan Facility
+      summary: InCR Initiate A LoanDisbursement
+      description: InCR Initiate A LoanDisbursement
+      operationId: InitiateLoanDisbursement
+      requestBody:
+        $ref: '#/components/requestBodies/InitiateLoanDisbursementRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiateLoanDisbursementResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -126,6 +174,269 @@ components:
               description: "\n"
               format: string
             HomePhoneNumber:
+              type: string
+              description: "\n"
+              format: string
+    LoanApplicableRate:
+      type: object
+      properties:
+        RateValue:
+          type: string
+          description: "\n"
+          format: string
+        InterestType:
+          type: string
+          description: "\n"
+          format: string
+        InterestAccrualMethod:
+          type: string
+          description: "\n"
+          format: string
+    AmountCurrency:
+      type: object
+      properties:
+        Currencycode:
+          type: string
+          description: "\n"
+          format: string
+    LoanAmount:
+      type: object
+      properties:
+        AmountValue:
+          type: string
+          description: "\n"
+          format: string
+        AmountCurrency:
+          $ref: '#/components/schemas/AmountCurrency'
+    LoanOriginationDate:
+      type: object
+      properties:
+        DateContent:
+          type: string
+          description: "\n"
+          format: string
+    ValueDate:
+      type: object
+      properties:
+        DateContent:
+          type: string
+          description: "\n"
+          format: string
+    LoanFacilityResponse:
+      type: object
+      properties:
+        LoanNumber:
+          type: string
+          description: "\n"
+          format: string
+        LoanStatus:
+          type: string
+          description: "\n"
+          format: string
+        ProductInstanceReference:
+          type: string
+          description: "\n"
+          format: string
+        CustomerReference:
+          type: string
+          description: "\n"
+          format: string
+        BankBranchLocationReference:
+          type: string
+          description: "\n"
+          format: string
+        LoanType:
+          type: string
+          description: "\n"
+          format: string
+        LoanAmount:
+          $ref: '#/components/schemas/LoanAmount'
+        LoanOriginationDate:
+          $ref: '#/components/schemas/LoanOriginationDate'
+        LoanRateType:
+          type: string
+          description: "\n"
+          format: string
+        LoanApplicableRate:
+          $ref: '#/components/schemas/LoanApplicableRate'
+        TaxReference:
+          type: string
+          description: "\n"
+          format: string
+        EntitlementOptionDefinition:
+          type: string
+          description: "\n"
+          format: string
+        EntitlementOptionSetting:
+          type: string
+          description: "\n"
+          format: string
+        RestrictionOptionDefinition:
+          type: string
+          description: "\n"
+          format: string
+        RestrictionOptionSetting:
+          type: string
+          description: "\n"
+          format: string
+        Associations:
+          type: string
+          description: "\n"
+          format: string
+        AssociationType:
+          type: string
+          description: "\n"
+          format: string
+        AssociationReference:
+          type: string
+          description: "\n"
+          format: string
+        CustomerCommentary:
+          type: string
+          description: "\n"
+          format: string
+        PartyLegalStructureType:
+          type: string
+          description: "\n"
+          format: string
+        LoanRepaymentSchedule:
+          type: string
+          description: "\n"
+          format: string
+        StagedRepaymentStatement:
+          type: string
+          description: "\n"
+          format: string
+    LoanFacilityRequest:
+      type: object
+      properties:
+        ProductInstanceReference:
+          type: string
+          description: "\n"
+          format: string
+        CustomerReference:
+          type: string
+          description: "\n"
+          format: string
+        BankBranchLocationReference:
+          type: string
+          description: "\n"
+          format: string
+        LoanType:
+          type: string
+          description: "\n"
+          format: string
+        LoanAmount:
+          $ref: '#/components/schemas/LoanAmount'
+        LoanOriginationDate:
+          $ref: '#/components/schemas/LoanOriginationDate'
+        LoanRateType:
+          type: string
+          description: "\n"
+          format: string
+        LoanApplicableRate:
+          $ref: '#/components/schemas/LoanApplicableRate'
+        TaxReference:
+          type: string
+          description: "\n"
+          format: string
+        EntitlementOptionDefinition:
+          type: string
+          description: "\n"
+          format: string
+        EntitlementOptionSetting:
+          type: string
+          description: "\n"
+          format: string
+        RestrictionOptionDefinition:
+          type: string
+          description: "\n"
+          format: string
+        RestrictionOptionSetting:
+          type: string
+          description: "\n"
+          format: string
+        Associations:
+          type: string
+          description: "\n"
+          format: string
+        AssociationType:
+          type: string
+          description: "\n"
+          format: string
+        AssociationReference:
+          type: string
+          description: "\n"
+          format: string
+        CustomerCommentary:
+          type: string
+          description: "\n"
+          format: string
+        PartyLegalStructureType:
+          type: string
+          description: "\n"
+          format: string
+        LoanRepaymentSchedule:
+          type: string
+          description: "\n"
+          format: string
+        StagedRepaymentStatement:
+          type: string
+          description: "\n"
+          format: string
+    LoanDisbursementRequest:
+      type: object
+      properties:
+        ProductInstanceReference:
+          type: string
+          description: "\n"
+          format: object
+        AuthorizingEmployeeReference:
+          type: string
+          description: "\n"
+          format: object
+        CustomerReference:
+          type: string
+          description: "\n"
+          format: object
+        FundingAccountReference:
+          type: string
+          description: "\n"
+          format: object
+        PayeeReference:
+          type: string
+          description: "\n"
+          format: object
+        PayeeProductInstanceReference:
+          type: string
+          description: "\n"
+          format: object
+        PayeeBankReference:
+          type: string
+          description: "\n"
+          format: object
+        Amount:
+          type: string
+          description: "\n"
+          format: object
+        Currency:
+          type: string
+          description: "\n"
+          format: object
+        ValueDate:
+          $ref: '#/components/schemas/ValueDate'
+    LoanDisbursementResponse:
+      type: object
+      properties:
+            TransactionReference:
+              type: string
+              description: "\n"
+              format: string
+            PositionLimitValue:
+              type: string
+              description: "\n"
+              format: string
+            DateType:
               type: string
               description: "\n"
               format: string
@@ -270,6 +581,20 @@ components:
       properties:
         Party:
           $ref: '#/components/schemas/PartyResponse'
+    InitiateLoanAccountRequest:
+      type: object
+      properties:
+        LoanFacility:
+          $ref: '#/components/schemas/LoanFacilityRequest'
+    InitiateLoanAccountResponse:
+      type: object
+      properties:
+        LoanFacility:
+          $ref: '#/components/schemas/LoanFacilityResponse'
+    InitiateLoanDisbursementRequest:
+          $ref: '#/components/schemas/LoanDisbursementRequest'
+    InitiateLoanDisbursementResponse:
+          $ref: '#/components/schemas/LoanDisbursementResponse'
     HTTPError:
       type: object
       properties:
@@ -311,6 +636,18 @@ components:
           application/json:
             schema:
                 $ref: '#/components/schemas/InitiatePartyRequest'
+    InitiateLoanAccountRequest:
+        description: Initiate New Loan Account
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiateLoanAccountRequest'
+    InitiateLoanDisbursementRequest:
+        description: Initiate New Loan Account
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiateLoanDisbursementRequest'
   responses:
     InitiatePartyResponse:
         description: PartyFacility 
@@ -323,7 +660,19 @@ components:
         content:
           application/json:
             schema:
-                $ref: '#/components/schemas/RetrievePartyResponse'        
+                $ref: '#/components/schemas/RetrievePartyResponse'  
+    InitiateLoanAccountResponse:
+      description: InitiateLoanAccountResponse
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InitiateLoanAccountResponse'
+    InitiateLoanDisbursementResponse:
+      description: InitiateLoanAccountResponse
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InitiateLoanDisbursementResponse'
     BadRequest:
       description: BadRequest
       content:
