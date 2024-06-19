@@ -103,7 +103,7 @@ components:
               type: string
               description: "\n"
               format: string
-            AddressDescription:
+            EmailAddress:
               type: string
               description: "\n"
               format: string
