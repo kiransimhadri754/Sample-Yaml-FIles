@@ -54,7 +54,7 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
-   /Party/Check:
+   /Party/Search:
     get:
       tags:
           - Party Facility
