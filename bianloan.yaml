@@ -6,7 +6,7 @@ info:
 servers:
 - url: ' https://virtserver.swaggerhub.com/BIAN-3/CurrentAccount/12.0.1'
 paths:
-   '/Party/Initiate':
+  '/Party/Initiate':
     post:
       tags:
           - Party Facility
@@ -30,7 +30,7 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
-   '/Party/{PartyReference}/Retrieve':
+  '/Party/{PartyReference}/Retrieve':
     get:
       tags:
           - Party Facility
@@ -54,7 +54,7 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
-   '/Party/Search':
+  '/Party/Search':
     get:
       tags:
           - Party Facility
@@ -79,7 +79,7 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
-   '/LoanAccounts/Initiate':
+  '/LoanAccounts/Initiate':
     post:
       tags:
           - Loan Facility
@@ -103,7 +103,7 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
-   '/LoanDisbursement/Initiate':
+  '/LoanDisbursement/Initiate':
     post:
       tags:
           - Loan Facility
