@@ -80,7 +80,7 @@ components:
               type: string
               description: "\n"
               format: string
-    InitiatePartyRequest:
+    PartyRequest:
           type: object
           properties:
             PartyName:
@@ -139,7 +139,7 @@ components:
               type: string
               description: "\n"
               format: string
-    InitiatePartyResponse:
+    PartyResponse:
           type: object
           properties:
             PartyReference:
@@ -206,6 +206,16 @@ components:
               type: string
               description: "\n"
               format: string
+    InitiatePartyRequest:
+      type: object
+      properties:
+        Party:
+          $ref: '#/components/schemas/PartyRequest'
+    InitiatePartyResponse:
+      type: object
+      properties:
+        Party:
+          $ref: '#/components/schemas/PartyResponse'
     HTTPError:
       type: object
       properties:
