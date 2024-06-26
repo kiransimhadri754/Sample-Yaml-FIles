@@ -103,30 +103,6 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
-  '/LoanDisbursement/Initiate':
-    post:
-      tags:
-          - Loan Facility
-      summary: InCR Initiate A LoanDisbursement
-      description: InCR Initiate A LoanDisbursement
-      operationId: InitiateLoanDisbursement
-      requestBody:
-        $ref: '#/components/requestBodies/InitiateLoanDisbursementRequest'
-      responses:
-        '200':
-          $ref: '#/components/responses/InitiateLoanDisbursementResponse'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '429':
-          $ref: '#/components/responses/TooManyRequests'
-        '500':
-          $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
     PartyName:
@@ -228,6 +204,14 @@ components:
         LoanFacility:
           type: object
           properties:
+            LoanNumber:
+              type: string
+              description: "\n"
+              format: string
+            LoanStatus:
+              type: string
+              description: "\n"
+              format: string          
             ProductInstanceReference:
               type: string
               description: "\n"
@@ -244,11 +228,15 @@ components:
               type: string
               description: "\n"
               format: string
+            PayeeProductInstanceReference:
+              type: string
+              description: "\n"
+              format: string
             LoanAmount:
               $ref: '#/components/schemas/LoanAmount'
             LoanOriginationDate:
               $ref: '#/components/schemas/LoanOriginationDate'
-            LoanRateType:
+            LoanTerm:
               type: string
               description: "\n"
               format: string
@@ -324,11 +312,15 @@ components:
               type: string
               description: "\n"
               format: string
+            PayeeProductInstanceReference:
+              type: string
+              description: "\n"
+              format: string
             LoanAmount:
               $ref: '#/components/schemas/LoanAmount'
             LoanOriginationDate:
               $ref: '#/components/schemas/LoanOriginationDate'
-            LoanRateType:
+            LoanTerm:
               type: string
               description: "\n"
               format: string
@@ -379,62 +371,6 @@ components:
               description: "\n"
               format: string
             StagedRepaymentStatement:
-              type: string
-              description: "\n"
-              format: string
-    InitiateLoanDisbursementRequest:
-      type: object
-      properties:
-        ProductInstanceReference:
-          type: string
-          description: "\n"
-          format: object
-        AuthorizingEmployeeReference:
-          type: string
-          description: "\n"
-          format: object
-        CustomerReference:
-          type: string
-          description: "\n"
-          format: object
-        FundingAccountReference:
-          type: string
-          description: "\n"
-          format: object
-        PayeeReference:
-          type: string
-          description: "\n"
-          format: object
-        PayeeProductInstanceReference:
-          type: string
-          description: "\n"
-          format: object
-        PayeeBankReference:
-          type: string
-          description: "\n"
-          format: object
-        Amount:
-          type: string
-          description: "\n"
-          format: object
-        Currency:
-          type: string
-          description: "\n"
-          format: object
-        ValueDate:
-          $ref: '#/components/schemas/ValueDate'
-    InitiateLoanDisbursementResponse:
-      type: object
-      properties:
-            TransactionReference:
-              type: string
-              description: "\n"
-              format: string
-            PositionLimitValue:
-              type: string
-              description: "\n"
-              format: string
-            DateType:
               type: string
               description: "\n"
               format: string
@@ -687,12 +623,6 @@ components:
           application/json:
             schema:
                 $ref: '#/components/schemas/InitiateLoanAccountRequest'
-    InitiateLoanDisbursementRequest:
-        description: Initiate New Loan Account
-        content:
-          application/json:
-            schema:
-                $ref: '#/components/schemas/InitiateLoanDisbursementRequest'
   responses:
     InitiatePartyResponse:
         description: PartyFacility 
@@ -712,12 +642,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/InitiateLoanAccountResponse'
-    InitiateLoanDisbursementResponse:
-      description: InitiateLoanAccountResponse
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/InitiateLoanDisbursementResponse'
     BadRequest:
       description: BadRequest
       content:
