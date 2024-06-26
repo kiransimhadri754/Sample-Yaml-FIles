@@ -640,11 +640,6 @@ components:
               type: string
               description: "\n"
               format: string
-    InitiateLoanAccountResponse:
-      type: object
-      properties:
-        LoanFacility:
-          $ref: '#/components/schemas/LoanFacilityResponse'
     HTTPError:
       type: object
       properties:
