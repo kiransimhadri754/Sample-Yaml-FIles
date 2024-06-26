@@ -238,102 +238,7 @@ components:
           type: string
           description: "\n"
           format: string
-    InitiateLoanAccountResponse:
-      type: object
-      properties:
-        LoanFacility:
-          type: object
-          properties:
-            LoanNumber:
-              type: string
-              description: "\n"
-              format: string
-            LoanStatus:
-              type: string
-              description: "\n"
-              format: string          
-            ProductInstanceReference:
-              type: string
-              description: "\n"
-              format: string
-            CustomerReference:
-              type: string
-              description: "\n"
-              format: string
-            BankBranchLocationReference:
-              type: string
-              description: "\n"
-              format: string
-            LoanType:
-              type: string
-              description: "\n"
-              format: string
-            PayeeProductInstanceReference:
-              type: string
-              description: "\n"
-              format: string
-            LoanAmount:
-              $ref: '#/components/schemas/LoanAmount'
-            LoanOriginationDate:
-              $ref: '#/components/schemas/LoanOriginationDate'
-            LoanTerm:
-              type: string
-              description: "\n"
-              format: string
-            LoanApplicableRate:
-              $ref: '#/components/schemas/LoanApplicableRate'
-            TaxReference:
-              type: string
-              description: "\n"
-              format: string
-            EntitlementOptionDefinition:
-              type: string
-              description: "\n"
-              format: string
-            EntitlementOptionSetting:
-              type: string
-              description: "\n"
-              format: string
-            RestrictionOptionDefinition:
-              type: string
-              description: "\n"
-              format: string
-            RestrictionOptionSetting:
-              type: string
-              description: "\n"
-              format: string
-            Associations:
-              type: string
-              description: "\n"
-              format: string
-            AssociationType:
-              type: string
-              description: "\n"
-              format: string
-            AssociationReference:
-              type: string
-              description: "\n"
-              format: string
-            CustomerCommentary:
-              type: string
-              description: "\n"
-              format: string
-            PartyLegalStructureType:
-              type: string
-              description: "\n"
-              format: string
-            LoanRepaymentSchedule:
-              type: string
-              description: "\n"
-              format: string
-            StagedRepaymentStatement:
-              type: string
-              description: "\n"
-              format: string
-    InitiateLoanAccountRequest:
-      type: object
-      properties:
-        LoanFacility:
+    LoanFacility:
           type: object
           properties:
             ProductInstanceReference:
@@ -414,10 +319,7 @@ components:
               type: string
               description: "\n"
               format: string
-    InitiatePartyRequest:
-      type: object
-      properties:
-        Party:
+    Party:
           type: object
           properties:
             PartyName:
@@ -476,146 +378,55 @@ components:
               type: string
               description: "\n"
               format: string      
+    InitiatePartyRequest:
+        type: object
+        properties:
+          Party:
+            $ref: '#/components/schemas/Party'
     InitiatePartyResponse:
-      type: object
-      properties:
-        Party:
-          type: object
-          properties:
-            PartyReference:
-              type: string
-              description: "\n"
-              format: string
-            Status:
-              type: string
-              description: "\n"
-              format: string
-            PartyName:
-              $ref: '#/components/schemas/PartyName'
-            Title:
-              type: string
-              description: "\n"
-              format: string
-            BirthDate:
-              type: string
-              description: "\n"
-              format: string
-            Gender:
-              type: string
-              description: "\n"
-              format: string
-            Nationality:
-              type: string
-              description: "\n"
-              format: string
-            Residence:
-              type: string
-              description: "\n"
-              format: string
-            TaxCountry:
-              type: string
-              description: "\n"
-              format: string
-            Description:
-              type: string
-              description: "\n"
-              format: string
-            ElectronicAddressType:
-              $ref: '#/components/schemas/ElectronicAddressType'
-            MobilePhoneAddressType:
-              $ref: '#/components/schemas/MobilePhoneAddressType'
-            HomePhoneAddressType:
-              $ref: '#/components/schemas/HomePhoneAddressType'
-            PartyLegalStructureType:
-              type: string
-              description: "\n"
-              format: string
-            BranchIdentification:
-              type: string
-              description: "\n"
-              format: string
-            PartyUserIdentifier:
-              type: string
-              description: "\n"
-              format: string
-            PartyRoleIdentifier:
-              type: string
-              description: "\n"
-              format: string
-            PartyInvolvementType:
-              type: string
-              description: "\n"
-              format: string
+        type: object
+        properties:
+          PartyReference:
+            type: string
+            description: "\n"
+            format: string
+          Status:
+            type: string
+            description: "\n"
+            format: string
+          Party:
+            $ref: '#/components/schemas/Party'
     RetrievePartyResponse:
-      type: object
-      properties:
-        Party:
-          type: object
-          properties:
-            PartyReference:
-              type: string
-              description: "\n"
-              format: string
-            Status:
-              type: string
-              description: "\n"
-              format: string
-            PartyName:
-              $ref: '#/components/schemas/PartyName'
-            Title:
-              type: string
-              description: "\n"
-              format: string
-            BirthDate:
-              type: string
-              description: "\n"
-              format: string
-            Gender:
-              type: string
-              description: "\n"
-              format: string
-            Nationality:
-              type: string
-              description: "\n"
-              format: string
-            Residence:
-              type: string
-              description: "\n"
-              format: string
-            TaxCountry:
-              type: string
-              description: "\n"
-              format: string
-            Description:
-              type: string
-              description: "\n"
-              format: string
-            ElectronicAddressType:
-              $ref: '#/components/schemas/ElectronicAddressType'
-            MobilePhoneAddressType:
-              $ref: '#/components/schemas/MobilePhoneAddressType'
-            HomePhoneAddressType:
-              $ref: '#/components/schemas/HomePhoneAddressType'
-            PartyLegalStructureType:
-              type: string
-              description: "\n"
-              format: string
-            BranchIdentification:
-              type: string
-              description: "\n"
-              format: string
-            PartyUserIdentifier:
-              type: string
-              description: "\n"
-              format: string
-            PartyRoleIdentifier:
-              type: string
-              description: "\n"
-              format: string
-            PartyInvolvementType:
-              type: string
-              description: "\n"
-              format: string
+        type: object
+        properties:
+          PartyReference:
+            type: string
+            description: "\n"
+            format: string
+          Status:
+            type: string
+            description: "\n"
+            format: string
+          Party:
+            $ref: '#/components/schemas/Party'
+    InitiateLoanAccountRequest:
+        type: object
+        properties:
+          LoanFacility:
+            $ref: '#/components/schemas/LoanFacility'
+    InitiateLoanAccountResponse:
+        type: object
+        properties:
+          LoanNumber:
+            type: string
+            description: "\n"
+            format: string
+          LoanStatus:
+            type: string
+            description: "\n"
+            format: string
+          LoanFacility:
+            $ref: '#/components/schemas/LoanFacility'
     RetrieveRepaymentResponse:
       type: object
       properties:
