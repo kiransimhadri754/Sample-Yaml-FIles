@@ -103,6 +103,30 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
+  '/LoanAccounts/Repayment/{LoanNumber}/Retrieve':
+    get:
+      tags:
+          - Loan Facility
+      summary: InCR Initiate A new loan account
+      description: InCR Initiate A new loan account
+      operationId: RetrieveRepayment
+      parameters:
+        - $ref: '#/components/parameters/LoanNumber'
+      responses:
+        '200':
+          $ref: '#/components/responses/RetrieveRepaymentResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
     PartyName:
@@ -153,6 +177,29 @@ components:
               type: string
               description: "\n"
               format: string
+    RepaymentTransactionAmount:
+      type: object
+      properties:
+        AmountValue:
+          type: string
+          description: "\n"
+          format: string
+        AmountCurrency:
+          $ref: '#/components/schemas/AmountCurrency'
+    RepaymentTransactionValueDate:
+      type: object
+      properties:
+        DateContent:
+          type: string
+          description: "\n"
+          format: string
+    Repayment:
+      type: object
+      properties:
+        RepaymentTransactionAmount:
+          $ref: '#/components/schemas/RepaymentTransactionAmount'
+        RepaymentTransactionValueDate:
+          $ref: '#/components/schemas/RepaymentTransactionValueDate'
     LoanApplicableRate:
       type: object
       properties:
@@ -185,13 +232,6 @@ components:
         AmountCurrency:
           $ref: '#/components/schemas/AmountCurrency'
     LoanOriginationDate:
-      type: object
-      properties:
-        DateContent:
-          type: string
-          description: "\n"
-          format: string
-    ValueDate:
       type: object
       properties:
         DateContent:
@@ -576,6 +616,27 @@ components:
               type: string
               description: "\n"
               format: string
+    RetrieveRepaymentResponse:
+      type: object
+      properties:
+            ProductInstanceReference:
+              type: string
+              description: "\n"
+              format: string
+            LoanNumber:
+              type: string
+              description: "\n"
+              format: string
+            CustomerReference:
+              type: string
+              description: "\n"
+              format: string
+            LoanOutstandingBalance:
+              type: string
+              description: "\n"
+              format: string
+            Repayment:
+              $ref: '#/components/schemas/Repayment'
     HTTPError:
       type: object
       properties:
@@ -594,6 +655,12 @@ components:
   parameters:
     PartyReference:
       name: PartyReference
+      in: path
+      required: true
+      schema:
+        type: string
+    LoanNumber:
+      name: LoanNumber
       in: path
       required: true
       schema:
@@ -642,6 +709,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/InitiateLoanAccountResponse'
+    RetrieveRepaymentResponse:
+      description: RetrieveRepaymentResponse
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RetrieveRepaymentResponse'
     BadRequest:
       description: BadRequest
       content:
