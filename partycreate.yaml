@@ -417,12 +417,6 @@ components:
           application/json:
             schema:
                 $ref: '#/components/schemas/InitiatePartyRequest'
-    InitiateLoanAccountRequest:
-        description: Initiate New Loan Account
-        content:
-          application/json:
-            schema:
-                $ref: '#/components/schemas/InitiateLoanAccountRequest'
   responses:
     InitiatePartyResponse:
         description: PartyFacility 
@@ -436,12 +430,6 @@ components:
           application/json:
             schema:
                 $ref: '#/components/schemas/RetrievePartyResponse'  
-    InitiateLoanAccountResponse:
-      description: InitiateLoanAccountResponse
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/InitiateLoanAccountResponse'
     BadRequest:
       description: BadRequest
       content:
