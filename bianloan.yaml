@@ -10,8 +10,8 @@ paths:
     post:
       tags:
           - Party Facility
-      summary: InCR Initiate A new party
-      description: InCR Initiate A party
+      summary: Initiate A new party
+      description: Initiate A party
       operationId: InitiateParty
       requestBody:
         $ref: '#/components/requestBodies/InitiatePartyRequest'
@@ -34,8 +34,8 @@ paths:
     get:
       tags:
           - Party Facility
-      summary: InCR Retrieve A party
-      description: InCR Retrieve A party
+      summary: Retrieve A party
+      description: Retrieve A party
       operationId: RetrieveParty
       parameters:
         - $ref: '#/components/parameters/PartyReference'
@@ -58,8 +58,8 @@ paths:
     get:
       tags:
           - Party Facility
-      summary: InCR Check a party exists
-      description: InCR Check a party exists
+      summary: Check a party exists
+      description: Check a party exists
       operationId: CheckParty
       parameters:
         - $ref: '#/components/parameters/EmailAddress'
@@ -83,8 +83,8 @@ paths:
     post:
       tags:
           - Loan Facility
-      summary: InCR Initiate A new loan account
-      description: InCR Initiate A new loan account
+      summary: Initiate A new loan account
+      description: Initiate A new loan account
       operationId: InitiateLoan
       requestBody:
         $ref: '#/components/requestBodies/InitiateLoanAccountRequest'
@@ -107,8 +107,8 @@ paths:
     get:
       tags:
           - Loan Facility
-      summary: InCR Initiate A new loan account
-      description: InCR Initiate A new loan account
+      summary: Retrieve repayment details
+      description: Retrieve repayment details
       operationId: RetrieveRepayment
       parameters:
         - $ref: '#/components/parameters/LoanNumber'
