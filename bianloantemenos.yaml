@@ -1,0 +1,654 @@
+openapi: 3.0.1
+info:
+  title: Bian Loan - Temenos
+  description: This API provides endpoints for managing customer information, including creating, retrieving, updating customer records.
+  version: 11.0.1
+servers:
+- url: ' https://virtserver.swaggerhub.com/BIAN-3/CurrentAccount/12.0.1'
+paths:
+  '/Party/Initiate':
+    post:
+      tags:
+          - Party Facility
+      summary: Initiate A new party
+      description: Initiate A party
+      operationId: InitiateParty
+      requestBody:
+        $ref: '#/components/requestBodies/InitiatePartyRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiatePartyResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  '/LoanAccounts/Initiate':
+    post:
+      tags:
+          - Loan Facility
+      summary: Initiate A new loan account
+      description: Initiate A new loan account
+      operationId: InitiateLoan
+      requestBody:
+        $ref: '#/components/requestBodies/InitiateLoanAccountRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiateLoanAccountResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  '/LoanAccounts/Disbursement/{LoanNumber}/Initiate':
+    post:
+      tags:
+          - Loan Facility
+      summary: Initiate Disbursement
+      description: Initiate Disbursement
+      operationId: InitiateDisbursement
+      parameters:
+        - $ref: '#/components/parameters/LoanNumber'
+      requestBody:
+        $ref: '#/components/requestBodies/InitiateDisbursementRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiateDisbursementResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  schemas:
+    PartyName:
+          type: object
+          properties:
+            FirstName:
+              type: string
+              description: "\n"
+              format: string
+            MiddleName:
+              type: string
+              description: "\n"
+              format: string
+            LastName:
+              type: string
+              description: "\n"
+              format: string
+    ElectronicAddressType:
+          type: object
+          properties:
+            ElectronicAddressTypeValue:
+              type: string
+              description: "\n"
+              format: string
+            EmailAddress:
+              type: string
+              description: "\n"
+              format: string
+    MobilePhoneAddressType:
+          type: object
+          properties:
+            PhoneAddressTypeValue:
+              type: string
+              description: "\n"
+              format: string
+            PhoneNumber:
+              type: string
+              description: "\n"
+              format: string
+    HomePhoneAddressType:
+          type: object
+          properties:
+            PhoneAddressTypeValue:
+              type: string
+              description: "\n"
+              format: string
+            HomePhoneNumber:
+              type: string
+              description: "\n"
+              format: string
+    CreditValueDate:
+      type: object
+      properties:
+        DateContent:
+          type: string
+          description: "\n"
+          format: string
+    DebitValueDate:
+      type: object
+      properties:
+        DateContent:
+          type: string
+          description: "\n"
+          format: string
+    LoanApplicableRate:
+      type: object
+      properties:
+        RateValue:
+          type: string
+          description: "\n"
+          format: string
+        InterestType:
+          type: string
+          description: "\n"
+          format: string
+        InterestAccrualMethod:
+          type: string
+          description: "\n"
+          format: string
+    AmountCurrency:
+      type: object
+      properties:
+        Currencycode:
+          type: string
+          description: "\n"
+          format: string
+    LoanAmount:
+      type: object
+      properties:
+        AmountValue:
+          type: string
+          description: "\n"
+          format: string
+        AmountCurrency:
+          $ref: '#/components/schemas/AmountCurrency'
+    LoanOriginationDate:
+      type: object
+      properties:
+        DateContent:
+          type: string
+          description: "\n"
+          format: string
+    PartyAddress:
+      type: array
+      items:
+        type: object
+        properties:
+            SerialNumber:
+              type: string
+              description: "\n"
+              format: string
+            BuildingName:
+              type: string
+              description: "\n"
+              format: string
+            StreetBuildingIdentification:
+              type: string
+              description: "\n"
+              format: string
+            StreetName:
+              type: string
+              description: "\n"
+              format: string
+            Municipality:
+              type: string
+              description: "\n"
+              format: string
+            TownName:
+              type: string
+              description: "\n"
+              format: string
+            PostCodeIdentification:
+              type: string
+              description: "\n"
+              format: string
+            District:
+              type: string
+              description: "\n"
+              format: string
+            Country:
+              type: string
+              description: "\n"
+              format: string
+            AddressType:
+              type: string
+              description: "\n"
+              format: string
+            FromDate:
+              type: string
+              description: "\n"
+              format: string
+            ToDate:
+              type: string
+              description: "\n"
+              format: string
+    PartyEmployementDetails:
+      type: array
+      items:
+        type: object
+        properties:
+            CustomerStatus:
+              type: string
+              description: "\n"
+              format: string
+            IndustryId:
+              type: string
+              description: "\n"
+              format: string
+            AccountOfficerId:
+              type: string
+              description: "\n"
+              format: string
+            CustomerCompany:
+              type: string
+              description: "\n"
+              format: string
+            AmlResult:
+              type: string
+              description: "\n"
+              format: string
+            SalaryAmount:
+              type: string
+              description: "\n"
+              format: string
+            SalaryCurrency:
+              type: string
+              description: "\n"
+              format: string
+    Disbursement:
+      type: object
+      properties:
+            ProductInstanceReference:
+              type: string
+              description: "\n"
+              format: string
+            AuthorizingEmployeeReference:
+              type: string
+              description: "\n"
+              format: string
+            FundingAccountReference:
+              type: string
+              description: "\n"
+              format: string
+            PayeeReference:
+              type: string
+              description: "\n"
+              format: string
+            PayeeProductInstanceReference:
+              type: string
+              description: "\n"
+              format: string
+            PayeeBank:
+              type: string
+              description: "\n"
+              format: string
+            PayeeBankReference:
+              type: string
+              description: "\n"
+              format: string
+            Amount:
+              type: string
+              description: "\n"
+              format: string
+            Currency:
+              type: string
+              description: "\n"
+              format: string
+            PaymentMechanismType:
+              type: string
+              description: "\n"
+              format: string
+            CreditValueDate:
+              $ref: '#/components/schemas/CreditValueDate'
+            DebitValueDate:
+              $ref: '#/components/schemas/DebitValueDate'
+    LoanFacility:
+          type: object
+          properties:
+            ProductInstanceReference:
+              type: string
+              description: "\n"
+              format: string
+            CustomerReference:
+              type: string
+              description: "\n"
+              format: string
+            BankBranchLocationReference:
+              type: string
+              description: "\n"
+              format: string
+            LoanType:
+              type: string
+              description: "\n"
+              format: string
+            PayeeProductInstanceReference:
+              type: string
+              description: "\n"
+              format: string
+            LoanAmount:
+              $ref: '#/components/schemas/LoanAmount'
+            LoanOriginationDate:
+              $ref: '#/components/schemas/LoanOriginationDate'
+            LoanTerm:
+              type: string
+              description: "\n"
+              format: string
+            LoanApplicableRate:
+              $ref: '#/components/schemas/LoanApplicableRate'
+            TaxReference:
+              type: string
+              description: "\n"
+              format: string
+            EntitlementOptionDefinition:
+              type: string
+              description: "\n"
+              format: string
+            EntitlementOptionSetting:
+              type: string
+              description: "\n"
+              format: string
+            RestrictionOptionDefinition:
+              type: string
+              description: "\n"
+              format: string
+            RestrictionOptionSetting:
+              type: string
+              description: "\n"
+              format: string
+            Associations:
+              type: string
+              description: "\n"
+              format: string
+            AssociationType:
+              type: string
+              description: "\n"
+              format: string
+            AssociationReference:
+              type: string
+              description: "\n"
+              format: string
+            CustomerCommentary:
+              type: string
+              description: "\n"
+              format: string
+            PartyLegalStructureType:
+              type: string
+              description: "\n"
+              format: string
+            LoanRepaymentSchedule:
+              type: string
+              description: "\n"
+              format: string
+            StagedRepaymentStatement:
+              type: string
+              description: "\n"
+              format: string
+            Reference:
+              type: string
+              description: "\n"
+              format: string
+            TradeDate:
+              type: string
+              description: "\n"
+              format: string
+            ResponseCode:
+              type: string
+              description: "\n"
+              format: string
+            ActivityId:
+              type: string
+              description: "\n"
+              format: string
+            Revolving:
+              type: string
+              description: "\n"
+              format: string
+    Party:
+          type: object
+          properties:
+            PartyName:
+              $ref: '#/components/schemas/PartyName'
+            Title:
+              type: string
+              description: "\n"
+              format: string
+            BirthDate:
+              type: string
+              description: "\n"
+              format: string
+            Gender:
+              type: string
+              description: "\n"
+              format: string
+            Nationality:
+              type: string
+              description: "\n"
+              format: string
+            Residence:
+              type: string
+              description: "\n"
+              format: string
+            TaxCountry:
+              type: string
+              description: "\n"
+              format: string
+            Description:
+              type: string
+              description: "\n"
+              format: string
+            ElectronicAddressType:
+              $ref: '#/components/schemas/ElectronicAddressType'
+            MobilePhoneAddressType:
+              $ref: '#/components/schemas/MobilePhoneAddressType'
+            HomePhoneAddressType:
+              $ref: '#/components/schemas/HomePhoneAddressType'
+            PartyAddress:
+              $ref: '#/components/schemas/PartyAddress'
+            PartyEmployementDetails:
+              $ref: '#/components/schemas/PartyEmployementDetails'
+            PartyLegalStructureType:
+              type: string
+              description: "\n"
+              format: string
+            BranchIdentification:
+              type: string
+              description: "\n"
+              format: string
+            PartyUserIdentifier:
+              type: string
+              description: "\n"
+              format: string
+            PartyRoleIdentifier:
+              type: string
+              description: "\n"
+              format: string
+            PartyInvolvementType:
+              type: string
+              description: "\n"
+              format: string      
+    InitiatePartyRequest:
+        type: object
+        properties:
+          Party:
+            $ref: '#/components/schemas/Party'
+    InitiatePartyResponse:
+        type: object
+        properties:
+          PartyReference:
+            type: string
+            description: "\n"
+            format: string
+          Status:
+            type: string
+            description: "\n"
+            format: string
+          Party:
+            $ref: '#/components/schemas/Party'
+    RetrievePartyResponse:
+        type: object
+        properties:
+          PartyReference:
+            type: string
+            description: "\n"
+            format: string
+          Status:
+            type: string
+            description: "\n"
+            format: string
+          Party:
+            $ref: '#/components/schemas/Party'
+    InitiateLoanAccountRequest:
+        type: object
+        properties:
+          LoanFacility:
+            $ref: '#/components/schemas/LoanFacility'
+    InitiateLoanAccountResponse:
+        type: object
+        properties:
+          LoanNumber:
+            type: string
+            description: "\n"
+            format: string
+          LoanStatus:
+            type: string
+            description: "\n"
+            format: string
+          LoanFacility:
+            $ref: '#/components/schemas/LoanFacility'
+    InitiateDisbursementRequest:
+            $ref: '#/components/schemas/Disbursement'
+    InitiateDisbursementResponse:
+            $ref: '#/components/schemas/Disbursement'
+    HTTPError:
+      type: object
+      properties:
+        status_code:
+          type: string
+          description: "\n"
+          format: string
+        status:
+          type: string
+          description: "\n"
+          format: string
+        message:
+          type: string
+          description: "\n"
+          format: string
+  parameters:
+    PartyReference:
+      name: PartyReference
+      in: path
+      required: true
+      schema:
+        type: string
+    LoanNumber:
+      name: LoanNumber
+      in: path
+      required: true
+      schema:
+        type: string
+    EmailAddress:
+      name: EmailAddress
+      in: query
+      required: true
+      schema:
+        type: string
+    MobileNumber:
+      name: MobileNumber
+      in: query
+      required: true
+      schema:
+        type: string
+  requestBodies:
+    InitiatePartyRequest:
+        description: Initiate New Party
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiatePartyRequest'
+    InitiateLoanAccountRequest:
+        description: Initiate New Loan Account
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiateLoanAccountRequest'
+    InitiateDisbursementRequest:
+        description: Initiate Disbursement
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiateDisbursementRequest'
+  responses:
+    InitiatePartyResponse:
+        description: PartyFacility 
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiatePartyResponse'
+    RetrievePartyResponse:
+        description: PartyFacility 
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/RetrievePartyResponse'  
+    InitiateLoanAccountResponse:
+      description: InitiateLoanAccountResponse
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InitiateLoanAccountResponse'
+    InitiateDisbursementResponse:
+      description: RetrieveRepaymentResponse
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InitiateDisbursementResponse'
+    BadRequest:
+      description: BadRequest
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    NotFound:
+      description: NotFound
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    TooManyRequests:
+      description: TooManyRequests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    InternalServerError:
+      description: InternalServerError
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
