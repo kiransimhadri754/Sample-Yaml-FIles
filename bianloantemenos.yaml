@@ -497,19 +497,6 @@ components:
             format: string
           Party:
             $ref: '#/components/schemas/Party'
-    RetrievePartyResponse:
-        type: object
-        properties:
-          PartyReference:
-            type: string
-            description: "\n"
-            format: string
-          Status:
-            type: string
-            description: "\n"
-            format: string
-          Party:
-            $ref: '#/components/schemas/Party'
     InitiateLoanAccountRequest:
         type: object
         properties:
@@ -528,10 +515,6 @@ components:
             format: string
           LoanFacility:
             $ref: '#/components/schemas/LoanFacility'
-    InitiateDisbursementRequest:
-            $ref: '#/components/schemas/Disbursement'
-    InitiateDisbursementResponse:
-            $ref: '#/components/schemas/Disbursement'
     HTTPError:
       type: object
       properties:
@@ -590,7 +573,7 @@ components:
         content:
           application/json:
             schema:
-                $ref: '#/components/schemas/InitiateDisbursementRequest'
+                $ref: '#/components/schemas/Disbursement'
   responses:
     InitiatePartyResponse:
         description: PartyFacility 
@@ -598,12 +581,6 @@ components:
           application/json:
             schema:
                 $ref: '#/components/schemas/InitiatePartyResponse'
-    RetrievePartyResponse:
-        description: PartyFacility 
-        content:
-          application/json:
-            schema:
-                $ref: '#/components/schemas/RetrievePartyResponse'  
     InitiateLoanAccountResponse:
       description: InitiateLoanAccountResponse
       content:
@@ -615,7 +592,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/InitiateDisbursementResponse'
+            $ref: '#/components/schemas/Disbursement'
     BadRequest:
       description: BadRequest
       content:
