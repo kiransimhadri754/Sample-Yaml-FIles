@@ -268,7 +268,54 @@ components:
               type: string
               description: "\n"
               format: string
-    Disbursement:
+    InitiateDisbursementRequest:
+      type: object
+      properties:
+            ProductInstanceReference:
+              type: string
+              description: "\n"
+              format: string
+            AuthorizingEmployeeReference:
+              type: string
+              description: "\n"
+              format: string
+            FundingAccountReference:
+              type: string
+              description: "\n"
+              format: string
+            PayeeReference:
+              type: string
+              description: "\n"
+              format: string
+            PayeeProductInstanceReference:
+              type: string
+              description: "\n"
+              format: string
+            PayeeBank:
+              type: string
+              description: "\n"
+              format: string
+            PayeeBankReference:
+              type: string
+              description: "\n"
+              format: string
+            Amount:
+              type: string
+              description: "\n"
+              format: string
+            Currency:
+              type: string
+              description: "\n"
+              format: string
+            PaymentMechanismType:
+              type: string
+              description: "\n"
+              format: string
+            CreditValueDate:
+              $ref: '#/components/schemas/CreditValueDate'
+            DebitValueDate:
+              $ref: '#/components/schemas/DebitValueDate'
+    InitiateDisbursementResponse:
       type: object
       properties:
             ProductInstanceReference:
@@ -573,7 +620,7 @@ components:
         content:
           application/json:
             schema:
-                $ref: '#/components/schemas/Disbursement'
+                $ref: '#/components/schemas/InitiateDisbursementRequest'
   responses:
     InitiatePartyResponse:
         description: PartyFacility 
@@ -592,7 +639,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Disbursement'
+            $ref: '#/components/schemas/InitiateDisbursementResponse'
     BadRequest:
       description: BadRequest
       content:
