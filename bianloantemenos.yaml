@@ -268,53 +268,6 @@ components:
               type: string
               description: "\n"
               format: string
-    Disbursement:
-      type: object
-      properties:
-            ProductInstanceReference:
-              type: string
-              description: "\n"
-              format: string
-            AuthorizingEmployeeReference:
-              type: string
-              description: "\n"
-              format: string
-            FundingAccountReference:
-              type: string
-              description: "\n"
-              format: string
-            PayeeReference:
-              type: string
-              description: "\n"
-              format: string
-            PayeeProductInstanceReference:
-              type: string
-              description: "\n"
-              format: string
-            PayeeBank:
-              type: string
-              description: "\n"
-              format: string
-            PayeeBankReference:
-              type: string
-              description: "\n"
-              format: string
-            Amount:
-              type: string
-              description: "\n"
-              format: string
-            Currency:
-              type: string
-              description: "\n"
-              format: string
-            PaymentMechanismType:
-              type: string
-              description: "\n"
-              format: string
-            CreditValueDate:
-              $ref: '#/components/schemas/CreditValueDate'
-            DebitValueDate:
-              $ref: '#/components/schemas/DebitValueDate'
     LoanFacility:
           type: object
           properties:
@@ -529,9 +482,99 @@ components:
           LoanFacility:
             $ref: '#/components/schemas/LoanFacility'
     InitiateDisbursementRequest:
-            $ref: '#/components/schemas/Disbursement'
+        type: object
+        properties:
+            ProductInstanceReference:
+              type: string
+              description: "\n"
+              format: string
+            AuthorizingEmployeeReference:
+              type: string
+              description: "\n"
+              format: string
+            FundingAccountReference:
+              type: string
+              description: "\n"
+              format: string
+            PayeeReference:
+              type: string
+              description: "\n"
+              format: string
+            PayeeProductInstanceReference:
+              type: string
+              description: "\n"
+              format: string
+            PayeeBank:
+              type: string
+              description: "\n"
+              format: string
+            PayeeBankReference:
+              type: string
+              description: "\n"
+              format: string
+            Amount:
+              type: string
+              description: "\n"
+              format: string
+            Currency:
+              type: string
+              description: "\n"
+              format: string
+            PaymentMechanismType:
+              type: string
+              description: "\n"
+              format: string
+            CreditValueDate:
+              $ref: '#/components/schemas/CreditValueDate'
+            DebitValueDate:
+              $ref: '#/components/schemas/DebitValueDate'
     InitiateDisbursementResponse:
-            $ref: '#/components/schemas/Disbursement'
+          type: object
+          properties:
+            ProductInstanceReference:
+              type: string
+              description: "\n"
+              format: string
+            AuthorizingEmployeeReference:
+              type: string
+              description: "\n"
+              format: string
+            FundingAccountReference:
+              type: string
+              description: "\n"
+              format: string
+            PayeeReference:
+              type: string
+              description: "\n"
+              format: string
+            PayeeProductInstanceReference:
+              type: string
+              description: "\n"
+              format: string
+            PayeeBank:
+              type: string
+              description: "\n"
+              format: string
+            PayeeBankReference:
+              type: string
+              description: "\n"
+              format: string
+            Amount:
+              type: string
+              description: "\n"
+              format: string
+            Currency:
+              type: string
+              description: "\n"
+              format: string
+            PaymentMechanismType:
+              type: string
+              description: "\n"
+              format: string
+            CreditValueDate:
+              $ref: '#/components/schemas/CreditValueDate'
+            DebitValueDate:
+              $ref: '#/components/schemas/DebitValueDate'
     HTTPError:
       type: object
       properties:
