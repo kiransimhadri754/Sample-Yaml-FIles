@@ -268,54 +268,7 @@ components:
               type: string
               description: "\n"
               format: string
-    InitiateDisbursementRequest:
-      type: object
-      properties:
-            ProductInstanceReference:
-              type: string
-              description: "\n"
-              format: string
-            AuthorizingEmployeeReference:
-              type: string
-              description: "\n"
-              format: string
-            FundingAccountReference:
-              type: string
-              description: "\n"
-              format: string
-            PayeeReference:
-              type: string
-              description: "\n"
-              format: string
-            PayeeProductInstanceReference:
-              type: string
-              description: "\n"
-              format: string
-            PayeeBank:
-              type: string
-              description: "\n"
-              format: string
-            PayeeBankReference:
-              type: string
-              description: "\n"
-              format: string
-            Amount:
-              type: string
-              description: "\n"
-              format: string
-            Currency:
-              type: string
-              description: "\n"
-              format: string
-            PaymentMechanismType:
-              type: string
-              description: "\n"
-              format: string
-            CreditValueDate:
-              $ref: '#/components/schemas/CreditValueDate'
-            DebitValueDate:
-              $ref: '#/components/schemas/DebitValueDate'
-    InitiateDisbursementResponse:
+    Disbursement:
       type: object
       properties:
             ProductInstanceReference:
@@ -544,6 +497,19 @@ components:
             format: string
           Party:
             $ref: '#/components/schemas/Party'
+    RetrievePartyResponse:
+        type: object
+        properties:
+          PartyReference:
+            type: string
+            description: "\n"
+            format: string
+          Status:
+            type: string
+            description: "\n"
+            format: string
+          Party:
+            $ref: '#/components/schemas/Party'
     InitiateLoanAccountRequest:
         type: object
         properties:
@@ -562,6 +528,10 @@ components:
             format: string
           LoanFacility:
             $ref: '#/components/schemas/LoanFacility'
+    InitiateDisbursementRequest:
+            $ref: '#/components/schemas/Disbursement'
+    InitiateDisbursementResponse:
+            $ref: '#/components/schemas/Disbursement'
     HTTPError:
       type: object
       properties:
@@ -628,6 +598,12 @@ components:
           application/json:
             schema:
                 $ref: '#/components/schemas/InitiatePartyResponse'
+    RetrievePartyResponse:
+        description: PartyFacility 
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/RetrievePartyResponse'  
     InitiateLoanAccountResponse:
       description: InitiateLoanAccountResponse
       content:
