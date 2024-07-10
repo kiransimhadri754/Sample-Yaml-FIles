@@ -1,0 +1,205 @@
+openapi: 3.0.1
+info:
+  title: Loan Account
+  description: 'This service domain orchestrates a consumer Loan account. The typical range of services and fees covers payments from and scheduled and ad-hoc loans to the account.'
+  version: 11.0.0
+servers:
+  - url: https://virtserver.swaggerhub.com/BIAN-3/BIAN/SavingsAccount/11.0.0
+paths:
+  '/{PartyReference}/DepositAccounts/Retrieve':
+    get:
+      tags:
+        - Account Summary
+      summary: Retrieve Deposit Accounts
+      description: Retrieve Deposit Accounts
+      operationId: RetrieveAccounts
+      parameters:
+        - $ref: '#/components/parameters/PartyReference'
+      responses:
+        '200':
+          $ref: '#/components/responses/RetrieveLoanAccountResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  schemas:
+    AccountStatus:
+      type: object
+      properties:
+        Status:
+          type: string
+          description: "\n"
+          format: string
+    AccountCurrency:
+      type: object
+      properties:
+        Currencycode:
+          type: string
+          description: "\n"
+          format: string
+    AccountBalance:
+      type: object
+      properties:
+        Amount:
+          type: string
+          description: "\n"
+          format: string
+    AccountOriginationDate:
+      type: object
+      properties:
+        DateContent:
+          type: string
+          description: "\n"
+          format: string
+    AccountFacilityResponse:
+      type: array
+      items:
+          type: object
+          properties:
+            ProductInstanceReference:
+              type: string
+              description: "\n"
+              format: string
+            AccountNumber:
+              type: string
+              description: "\n"
+              format: string
+            CustomerReference:
+              type: string
+              description: "\n"
+              format: string
+            BankBranchLocationReference:
+              type: string
+              description: "\n"
+              format: string
+            AccountType:
+              type: string
+              description: "\n"
+              format: string
+            AccountStatus:
+              $ref: '#/components/schemas/AccountStatus'
+            AccountCurrency:
+              $ref: '#/components/schemas/AccountCurrency'
+            AccountBalance:
+              $ref: '#/components/schemas/AccountBalance'
+            AccountOriginationDate:
+              $ref: '#/components/schemas/AccountOriginationDate'
+            TaxReference:
+              type: string
+              description: "\n"
+              format: string
+            EntitlementOptionDefinition:
+              type: string
+              description: "\n"
+              format: string
+            EntitlementOptionSetting:
+              type: string
+              description: "\n"
+              format: string
+            RestrictionOptionDefinition:
+              type: string
+              description: "\n"
+              format: string
+            RestrictionOptionSetting:
+              type: string
+              description: "\n"
+              format: string
+            Associations:
+              type: string
+              description: "\n"
+              format: string
+            AssociationType:
+              type: string
+              description: "\n"
+              format: string
+            AssociationReference:
+              type: string
+              description: "\n"
+              format: string
+            CustomerCommentary:
+              type: string
+              description: "\n"
+              format: string
+            PartyLegalStructureType:
+              type: string
+              description: "\n"
+              format: string
+    HTTPError:
+      type: object
+      properties:
+        status_code:
+          type: string
+          description: "\n"
+          format: string
+        status:
+          type: string
+          description: "\n"
+          format: string
+        message:
+          type: string
+          description: "\n"
+          format: string
+    RetrieveLoanAccountResponse:
+        type: object
+        properties:
+            AccountFacility:
+              $ref: '#/components/schemas/AccountFacilityResponse'
+  parameters:
+    PartyReference:
+      name: PartyReference
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    RetrieveLoanAccountResponse:
+      description: InitiateLoanAccountResponse
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RetrieveLoanAccountResponse'
+    BadRequest:
+      description: BadRequest
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    NotFound:
+      description: NotFound
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    TooManyRequests:
+      description: TooManyRequests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    InternalServerError:
+      description: InternalServerError
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
