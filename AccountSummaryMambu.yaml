@@ -35,28 +35,28 @@ components:
     AccountStatus:
       type: object
       properties:
-        Status:
+        status:
           type: string
           description: "\n"
           format: string
     AccountCurrency:
       type: object
       properties:
-        Currencycode:
+        currencyCode:
           type: string
           description: "\n"
           format: string
     AccountBalance:
       type: object
       properties:
-        Amount:
+        amount:
           type: string
           description: "\n"
           format: string
     AccountOriginationDate:
       type: object
       properties:
-        DateContent:
+        dateContent:
           type: string
           description: "\n"
           format: string
@@ -65,71 +65,71 @@ components:
       items:
           type: object
           properties:
-            ProductInstanceReference:
+            productInstanceReference:
               type: string
               description: "\n"
               format: string
-            AccountNumber:
+            accountNumber:
               type: string
               description: "\n"
               format: string
-            CustomerReference:
+            customerReference:
               type: string
               description: "\n"
               format: string
-            BankBranchLocationReference:
+            bankBranchLocationReference:
               type: string
               description: "\n"
               format: string
-            AccountType:
+            accountType:
               type: string
               description: "\n"
               format: string
-            AccountStatus:
+            accountStatus:
               $ref: '#/components/schemas/AccountStatus'
-            AccountCurrency:
+            accountCurrency:
               $ref: '#/components/schemas/AccountCurrency'
-            AccountBalance:
+            accountBalance:
               $ref: '#/components/schemas/AccountBalance'
-            AccountOriginationDate:
+            accountOriginationDate:
               $ref: '#/components/schemas/AccountOriginationDate'
-            TaxReference:
+            taxReference:
               type: string
               description: "\n"
               format: string
-            EntitlementOptionDefinition:
+            entitlementOptionDefinition:
               type: string
               description: "\n"
               format: string
-            EntitlementOptionSetting:
+            entitlementOptionSetting:
               type: string
               description: "\n"
               format: string
-            RestrictionOptionDefinition:
+            restrictionOptionDefinition:
               type: string
               description: "\n"
               format: string
-            RestrictionOptionSetting:
+            restrictionOptionSetting:
               type: string
               description: "\n"
               format: string
-            Associations:
+            associations:
               type: string
               description: "\n"
               format: string
-            AssociationType:
+            associationType:
               type: string
               description: "\n"
               format: string
-            AssociationReference:
+            associationReference:
               type: string
               description: "\n"
               format: string
-            CustomerCommentary:
+            customerCommentary:
               type: string
               description: "\n"
               format: string
-            PartyLegalStructureType:
+            partyLegalStructureType:
               type: string
               description: "\n"
               format: string
@@ -151,7 +151,7 @@ components:
     RetrieveLoanAccountResponse:
         type: object
         properties:
-            AccountFacility:
+            accountFacility:
               $ref: '#/components/schemas/AccountFacilityResponse'
   parameters:
     accountHolderId:
