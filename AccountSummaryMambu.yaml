@@ -32,34 +32,6 @@ paths:
           $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
-    AccountStatus:
-      type: object
-      properties:
-        status:
-          type: string
-          description: "\n"
-          format: string
-    AccountCurrency:
-      type: object
-      properties:
-        currencyCode:
-          type: string
-          description: "\n"
-          format: string
-    AccountBalance:
-      type: object
-      properties:
-        amount:
-          type: string
-          description: "\n"
-          format: string
-    AccountOriginationDate:
-      type: object
-      properties:
-        dateContent:
-          type: string
-          description: "\n"
-          format: string
     AccountFacilityResponse:
       type: array
       items:
@@ -86,13 +58,25 @@ components:
               description: "\n"
               format: string
             accountStatus:
-              $ref: '#/components/schemas/AccountStatus'
+              type: string
+              description: "\n"
+              format: string
             accountCurrency:
-              $ref: '#/components/schemas/AccountCurrency'
+              type: string
+              description: "\n"
+              format: string
             accountBalance:
-              $ref: '#/components/schemas/AccountBalance'
+              type: string
+              description: "\n"
+              format: string
             accountOriginationDate:
-              $ref: '#/components/schemas/AccountOriginationDate'
+              type: string
+              description: "\n"
+              format: string
+            lastModifiedDate:
+              type: string
+              description: "\n"
+              format: string
             taxReference:
               type: string
               description: "\n"
