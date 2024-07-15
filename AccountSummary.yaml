@@ -1,0 +1,146 @@
+openapi: 3.0.1
+info:
+  title: Account Summary
+  description: 'This service domain orchestrates a summary of an accounts for the customer.'
+  version: 11.0.0
+servers:
+  - url: https://api-qa.fincuro.com
+paths:
+  '/accounts/{accountHolderId}':
+    get:
+      tags:
+        - Account Summary
+      summary: Retrieve Accounts Summary
+      description: Retrieve Accounts Summary
+      operationId: RetrieveAccountsSummary
+      parameters:
+        - $ref: '#/components/parameters/accountHolderId'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/limit'
+      responses:
+        '200':
+          $ref: '#/components/responses/RetrieveLoanAccountResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  schemas:
+    RetrieveLoanAccountResponse:
+      type: array
+      items:
+          type: object
+          properties:
+            accountType:
+              type: string
+              description: "\n"
+              format: string
+            accountId:
+              type: string
+              description: "\n"
+              format: string
+            nickName:
+              type: string
+              description: "\n"
+              format: string
+            status:
+              type: string
+              description: "\n"
+              format: string
+            balanceAsof:
+              type: string
+              description: "\n"
+              format: string
+            currentBalance:
+              type: string
+              description: "\n"
+              format: string
+            productId:
+              type: string
+              description: "\n"
+              format: string
+    HTTPError:
+      type: object
+      properties:
+        status_code:
+          type: string
+          description: "\n"
+          format: string
+        status:
+          type: string
+          description: "\n"
+          format: string
+        message:
+          type: string
+          description: "\n"
+          format: string
+  parameters:
+    accountHolderId:
+      name: accountHolderId
+      in: path
+      required: true
+      schema:
+        type: string
+    offset:
+      name: offset
+      in: query
+      required: true
+      schema:
+        type: string
+    limit:
+      name: limit
+      in: query
+      required: true
+      schema:
+        type: string
+  responses:
+    RetrieveLoanAccountResponse:
+      description: InitiateLoanAccountResponse
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RetrieveLoanAccountResponse'
+    BadRequest:
+      description: BadRequest
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    NotFound:
+      description: NotFound
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    TooManyRequests:
+      description: TooManyRequests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    InternalServerError:
+      description: InternalServerError
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
