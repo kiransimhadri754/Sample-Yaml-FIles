@@ -1,0 +1,208 @@
+openapi: 3.0.1
+info:
+  title: Transactions 
+  description: 'This service domain orchestrates a summary of an transactions of an accounts.'
+  version: 11.0.0
+servers:
+  - url: https://api-qa.fincuro.com
+paths:
+  '/transactions':
+    post:
+      tags:
+        - Transactions
+      summary: Retrieve Transactions of an account.
+      description: Retrieve Transactions of an account.
+      operationId: RetrieveTransactions
+      requestBody:
+          $ref: '#/components/requestBodies/InitiatetransactionsRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiatetransactionsResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  schemas:
+    Transactions:
+      type: array
+      items:
+          type: object
+          properties:
+            accountId:
+              type: string
+              description: "\n"
+              format: string
+            fundingAmount:
+              type: string
+              description: "\n"
+              format: string
+            holdAmount:
+              type: string
+              description: "\n"
+              format: string
+            dateTimePosted:
+              type: string
+              description: "\n"
+              format: string
+            relationshipId:
+              type: string
+              description: "\n"
+              format: string
+            createdDateTime:
+              type: string
+              description: "\n"
+              format: string
+            description:
+              type: string
+              description: "\n"
+              format: string
+            id:
+              type: string
+              description: "\n"
+              format: string
+            modified:
+              type: string
+              description: "\n"
+              format: string
+            payee:
+              type: string
+              description: "\n"
+              format: string
+            subject:
+              type: string
+              description: "\n"
+              format: string
+            transactionType:
+              type: string
+              description: "\n"
+              format: string
+            transactionId:
+              type: string
+              description: "\n"
+              format: string
+            dateTimeEffective:
+              type: string
+              description: "\n"
+              format: string
+    InitiatetransactionsRequest:
+      type: object
+      properties:
+            category:
+              type: string
+              description: "\n"
+              format: string
+            endDate:
+              type: string
+              description: "\n"
+              format: string
+            startDate:
+              type: string
+              description: "\n"
+              format: string
+            id:
+              type: string
+              description: "\n"
+              format: string
+            limit:
+              type: string
+              description: "\n"
+              format: string
+            offset:
+              type: string
+              description: "\n"
+              format: string
+            sortOrder:
+              type: string
+              description: "\n"
+              format: string
+            type:
+              type: string
+              description: "\n"
+              format: string
+    InitiatetransactionsResponse:
+      type: object
+      properties:
+        totalDeposit:
+          type: string
+          description: "\n"
+          format: string
+        totalWithdrawal:
+          type: string
+          description: "\n"
+          format: string
+        transactions:
+          $ref: '#/components/schemas/Transactions'
+    HTTPError:
+      type: object
+      properties:
+        status_code:
+          type: string
+          description: "\n"
+          format: string
+        status:
+          type: string
+          description: "\n"
+          format: string
+        message:
+          type: string
+          description: "\n"
+          format: string
+  requestBodies:
+    InitiatetransactionsRequest:
+      description: Retrieve Transactions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InitiatetransactionsRequest'
+  responses:
+    InitiatetransactionsResponse:
+        description: Retrieve Transactions
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiatetransactionsResponse'
+    BadRequest:
+      description: BadRequest
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    NotFound:
+      description: NotFound
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    TooManyRequests:
+      description: TooManyRequests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    InternalServerError:
+      description: InternalServerError
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
