@@ -116,18 +116,14 @@ components:
     InitiatetransferResponse:
       type: object
       properties:
-        transferOccurrenceMessage:
-          type: object
-          properties:
-            messageContext:
+            status:
               type: string
               description: string
               format: string
-            transferOccurenceList:
-              type: object
-              properties:
-                transferOccurence:
-                  $ref: '#/components/schemas/TransferOccurrence'
+            message:
+              type: string
+              description: string
+              format: string
     HTTPError:
       type: object
       properties:
