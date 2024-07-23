@@ -6,7 +6,7 @@ info:
 servers:
   - url: https://api-qa.fincuro.com
 paths:
-  '/accounts/{accountHolderId}':
+  '/AccountSummary/{accountHolderId}/Accounts/Retrieve':
     get:
       tags:
         - Account Summary
