@@ -12,12 +12,36 @@ paths:
           - Party Facility
       summary: InCR Initiate A new party
       description: InCR Initiate A party
-      operationId: Initiate
+      operationId: InitiateParty
       requestBody:
         $ref: '#/components/requestBodies/InitiatePartyRequest'
       responses:
         '200':
           $ref: '#/components/responses/InitiatePartyResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+   /PartyAddress/Initiate:
+    post:
+      tags:
+          - Party Address
+      summary: InCR Initiate A party address
+      description: InCR Initiate A party address
+      operationId: InitiateAddress
+      requestBody:
+        $ref: '#/components/requestBodies/InitiatePartyAddressRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiatePartyAddressResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -42,6 +66,31 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/RetrievePartyResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+   /Party/Search:
+    get:
+      tags:
+          - Party Facility
+      summary: Check a party exists
+      description: Check a party exists
+      operationId: CheckParty
+      parameters:
+        - $ref: '#/components/parameters/EmailAddress'
+        - $ref: '#/components/parameters/MobileNumber'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiatePartyResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -148,10 +197,12 @@ components:
               IdentifierEndDate:
                 $ref: '#/components/schemas/IdentifierEndDate'
     PartyAddress:
-      type: array
-      items:
         type: object
         properties:
+          PartyReference:
+            type: string
+            description: "\n"
+            format: string
           SerialNumber:
             type: string
             description: "\n"
@@ -258,7 +309,9 @@ components:
             PartyIdentification:
               $ref: '#/components/schemas/PartyIdentification'
             PartyAddress:
-              $ref: '#/components/schemas/PartyAddress'
+              type: array
+              items:
+                $ref: '#/components/schemas/PartyAddress'
             PartyInvolvementType:
               type: string
               description: "\n"
@@ -329,11 +382,23 @@ components:
             PartyIdentification:
               $ref: '#/components/schemas/PartyIdentification'
             PartyAddress:
-              $ref: '#/components/schemas/PartyAddress'
+              type: array
+              items:
+                $ref: '#/components/schemas/PartyAddress'
             PartyInvolvementType:
               type: string
               description: "\n"
               format: string
+    InitiatePartyAddressRequest:
+      type: object
+      properties:
+        PartyAddress:
+          $ref: '#/components/schemas/PartyAddress'
+    InitiatePartyAddressResponse:
+      type: object
+      properties:
+        PartyAddress:
+          $ref: '#/components/schemas/PartyAddress'
     InitiatePartyRequest:
       type: object
       properties:
@@ -371,6 +436,18 @@ components:
       required: true
       schema:
         type: string
+    EmailAddress:
+      name: EmailAddress
+      in: query
+      required: false
+      schema:
+        type: string
+    MobileNumber:
+      name: MobileNumber
+      in: query
+      required: false
+      schema:
+        type: string
   requestBodies:
     InitiatePartyRequest:
         description: Initiate New Party
@@ -378,6 +455,12 @@ components:
           application/json:
             schema:
                 $ref: '#/components/schemas/InitiatePartyRequest'
+    InitiatePartyAddressRequest:
+        description: Initiate New Party
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiatePartyAddressRequest'
   responses:
     InitiatePartyResponse:
         description: PartyFacility 
@@ -390,7 +473,13 @@ components:
         content:
           application/json:
             schema:
-                $ref: '#/components/schemas/RetrievePartyResponse'        
+                $ref: '#/components/schemas/RetrievePartyResponse'  
+    InitiatePartyAddressResponse:
+        description: Initiate New Party
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiatePartyAddressResponse'
     BadRequest:
       description: BadRequest
       content:
