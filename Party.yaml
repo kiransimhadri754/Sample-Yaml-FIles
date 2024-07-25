@@ -60,7 +60,7 @@ paths:
           - Party Facility
       summary: InCR Retrieve A party
       description: InCR Retrieve A party
-      operationId: Retrieve
+      operationId: RetrieveParty
       parameters:
         - $ref: '#/components/parameters/PartyReference'
       responses:
@@ -90,7 +90,7 @@ paths:
         - $ref: '#/components/parameters/MobileNumber'
       responses:
         '200':
-          $ref: '#/components/responses/InitiatePartyResponse'
+          $ref: '#/components/responses/RetrievePartyResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -308,15 +308,80 @@ components:
               format: string
             PartyIdentification:
               $ref: '#/components/schemas/PartyIdentification'
-            PartyAddress:
-              type: array
-              items:
-                $ref: '#/components/schemas/PartyAddress'
             PartyInvolvementType:
               type: string
               description: "\n"
               format: string
     PartyResponse:
+          type: object
+          properties:
+            PartyReference:
+              type: string
+              description: "\n"
+              format: string
+            Status:
+              type: string
+              description: "\n"
+              format: string
+            PartyName:
+              $ref: '#/components/schemas/PartyName'
+            Title:
+              type: string
+              description: "\n"
+              format: string
+            BirthDate:
+              type: string
+              description: "\n"
+              format: string
+            Gender:
+              type: string
+              description: "\n"
+              format: string
+            Nationality:
+              type: string
+              description: "\n"
+              format: string
+            Residence:
+              type: string
+              description: "\n"
+              format: string
+            TaxCountry:
+              type: string
+              description: "\n"
+              format: string
+            Description:
+              type: string
+              description: "\n"
+              format: string
+            ElectronicAddressType:
+              $ref: '#/components/schemas/ElectronicAddressType'
+            MobilePhoneAddressType:
+              $ref: '#/components/schemas/MobilePhoneAddressType'
+            HomePhoneAddressType:
+              $ref: '#/components/schemas/HomePhoneAddressType'
+            PartyLegalStructureType:
+              type: string
+              description: "\n"
+              format: string
+            BranchIdentification:
+              type: string
+              description: "\n"
+              format: string
+            PartyUserIdentifier:
+              type: string
+              description: "\n"
+              format: string
+            PartyRoleIdentifier:
+              type: string
+              description: "\n"
+              format: string
+            PartyIdentification:
+              $ref: '#/components/schemas/PartyIdentification'
+            PartyInvolvementType:
+              type: string
+              description: "\n"
+              format: string
+    GetPartyResponse:
           type: object
           properties:
             PartyReference:
@@ -413,7 +478,7 @@ components:
       type: object
       properties:
         Party:
-          $ref: '#/components/schemas/PartyResponse'
+          $ref: '#/components/schemas/GetPartyResponse'
     HTTPError:
       type: object
       properties:
