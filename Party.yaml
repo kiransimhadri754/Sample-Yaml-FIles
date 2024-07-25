@@ -86,8 +86,8 @@ paths:
       description: Check a party exists
       operationId: CheckParty
       parameters:
-        - $ref: '#/components/parameters/EmailAddress'
-        - $ref: '#/components/parameters/MobileNumber'
+        - $ref: '#/components/parameters/email_identifiers'
+        - $ref: '#/components/parameters/phone_identifiers'
       responses:
         '200':
           $ref: '#/components/responses/RetrievePartyResponse'
@@ -501,14 +501,14 @@ components:
       required: true
       schema:
         type: string
-    EmailAddress:
-      name: EmailAddress
+    email_identifiers:
+      name: email_identifiers
       in: query
       required: false
       schema:
         type: string
-    MobileNumber:
-      name: MobileNumber
+    phone_identifiers:
+      name: phone_identifiers
       in: query
       required: false
       schema:
