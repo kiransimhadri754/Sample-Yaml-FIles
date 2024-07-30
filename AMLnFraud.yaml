@@ -67,7 +67,7 @@ components:
           type: string
           description: "\n"
           format: string
-    customer-creation:
+    customerCreation:
       type: object
       properties:
         status:
@@ -91,7 +91,7 @@ components:
           type: string
           description: "\n"
           format: string
-    initial-risk-scoring:
+    initialRiskScoring:
         type: object
         properties:
             status:
@@ -105,13 +105,13 @@ components:
             step_output:
               $ref: '#/components/schemas/initial_risk_scoring_step_output'
     customer_screening_step_output:
-                            type: object
-                            properties:
-                              screening_result:
-                                type: string
-                                description: "\n"
-                                format: string
-    customer-screening:
+        type: object
+        properties:
+          screening_result:
+            type: string
+            description: "\n"
+            format: string
+    customerScreening:
               type: object
               properties:
                 status:
@@ -156,7 +156,7 @@ components:
             type: string
             description: "\n"
             format: string
-    case-creation:
+    caseCreation:
         type: object
         properties:
           status:
@@ -173,15 +173,15 @@ components:
         type: object
         properties:
           customer-creation:
-             $ref: '#/components/schemas/customer-creation'
+             $ref: '#/components/schemas/customerCreation'
           initial-risk-scoring:
-             $ref: '#/components/schemas/initial-risk-scoring'
+             $ref: '#/components/schemas/initialRiskScoring'
           customer-screening:
-             $ref: '#/components/schemas/customer-screening'
+             $ref: '#/components/schemas/customerScreening'
           alerting:
              $ref: '#/components/schemas/alerting'
           case-creation:
-             $ref: '#/components/schemas/case-creation'
+             $ref: '#/components/schemas/caseCreation'
     InitiateIndividualRequest:
           type: object
           properties:
