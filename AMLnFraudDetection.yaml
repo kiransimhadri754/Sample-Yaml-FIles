@@ -59,7 +59,7 @@ components:
     InitiateIndividualRequest:
           type: object
           properties:
-            individualType:
+            individualId:
               type: string
               description: "\n"
               format: string
@@ -83,7 +83,7 @@ components:
               type: string
               description: "\n"
               format: string
-            emailAddress1:
+            emailAddress:
               type: string
               description: "\n"
               format: string
@@ -92,18 +92,6 @@ components:
               description: "\n"
               format: string
             mobilephone:
-              type: string
-              description: "\n"
-              format: string
-            workphone:
-              type: string
-              description: "\n"
-              format: string
-            linkedinProfile:
-              type: string
-              description: "\n"
-              format: string
-            tin:
               type: string
               description: "\n"
               format: string
@@ -201,7 +189,7 @@ components:
               type: string
               description: "\n"
               format: string
-            accountNumber:
+            corporateId:
               type: string
               description: "\n"
               format: string
