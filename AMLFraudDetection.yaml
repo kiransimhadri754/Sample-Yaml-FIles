@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
-  title: Onboarding
-  description: This API provides endpoints for onboarding a customer.
+  title: AMLFraudDetection
+  description: This API provides endpoints for AMLFraudDetection.
   version: 11.0.1
 servers:
 - url: 'https://finx-celta-api-dev.fincuro.com'
