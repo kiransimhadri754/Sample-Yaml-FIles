@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
-  title: AMLFraudDetection
-  description: This API provides endpoints for AMLFraudDetection.
+  title: AMLnFraudDetection
+  description: This API provides endpoints for AMLnFraudDetection.
   version: 11.0.1
 servers:
 - url: 'https://finx-celta-api-dev.fincuro.com'
@@ -18,6 +18,30 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/InitiateIndividualResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+   /v1/corporate-entity:
+    post:
+      tags:
+          - Corporate
+      summary: InCR Initiate A new corporate
+      description: InCR Initiate A new coporate
+      operationId: InitiateCorporate
+      requestBody:
+        $ref: '#/components/requestBodies/InitiateCorporateRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiateCorporateResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -166,6 +190,168 @@ components:
               type: string
               description: "\n"
               format: string
+    InitiateCorporateRequest:
+          type: object
+          properties:
+            name:
+              type: string
+              description: "\n"
+              format: string
+            entityStatus:
+              type: string
+              description: "\n"
+              format: string
+            accountNumber:
+              type: string
+              description: "\n"
+              format: string
+            address1Country:
+              type: string
+              description: "\n"
+              format: string
+            riskRating:
+              type: string
+              description: "\n"
+              format: string
+            taxPayerId:
+              type: string
+              description: "\n"
+              format: string
+            typeOfBusiness:
+              type: string
+              description: "\n"
+              format: string
+            otherBusiness:
+              type: string
+              description: "\n"
+              format: string
+            businessDescription:
+              type: string
+              description: "\n"
+              format: string
+            isListedOnStockExchange:
+              type: string
+              description: "\n"
+              format: string
+            stockExchange:
+              type: string
+              description: "\n"
+              format: string
+            isRegulated:
+              type: string
+              description: "\n"
+              format: string
+            regulator:
+              type: string
+              description: "\n"
+              format: string
+            regulatorUrl:
+              type: string
+              description: "\n"
+              format: string
+            licenseNumber:
+              type: string
+              description: "\n"
+              format: string
+            isAudited:
+              type: string
+              description: "\n"
+              format: string
+            auditorName:
+              type: string
+              description: "\n"
+              format: string
+            fyeDate:
+              type: string
+              description: "\n"
+              format: string
+            sendAuditLetterConf:
+              type: string
+              description: "\n"
+              format: string
+            pepStatus:
+              type: string
+              description: "\n"
+              format: string
+            copyAddress:
+              type: string
+              description: "\n"
+              format: string
+            address1TypeCode:
+              type: string
+              description: "\n"
+              format: string
+            address1Line1:
+              type: string
+              description: "\n"
+              format: string
+            address1City:
+              type: string
+              description: "\n"
+              format: string
+            address1PostalCode:
+              type: string
+              description: "\n"
+              format: string
+            countryOfIncorporationData:
+              type: string
+              description: "\n"
+              format: string
+            address1Line2:
+              type: string
+              description: "\n"
+              format: string
+            address1StateOrProvince:
+              type: string
+              description: "\n"
+              format: string
+            address1Status:
+              type: string
+              description: "\n"
+              format: string
+            address2TypeCode:
+              type: string
+              description: "\n"
+              format: string
+            address2Line1:
+              type: string
+              description: "\n"
+              format: string
+            address2City:
+              type: string
+              description: "\n"
+              format: string
+            address2PostalCode:
+              type: string
+              description: "\n"
+              format: string
+            address2Line2:
+              type: string
+              description: "\n"
+              format: string
+            address2StateOrProvince:
+              type: string
+              description: "\n"
+              format: string
+            address2Status:
+              type: string
+              description: "\n"
+              format: string
+            address2CountryValue:
+              type: string
+              description: "\n"
+              format: string
+    InitiateCorporateResponse:
+          type: object
+          properties:
+            accountId:
+              type: string
+              description: "\n"
+              format: string
+            ustCorporateId:
+              type: string
+              description: "\n"
+              format: string
     HTTPError:
       type: object
       properties:
@@ -181,39 +367,32 @@ components:
           type: string
           description: "\n"
           format: string
-  parameters:
-    PartyReference:
-      name: PartyReference
-      in: path
-      required: true
-      schema:
-        type: string
-    email_identifiers:
-      name: email_identifiers
-      in: query
-      required: false
-      schema:
-        type: string
-    phone_identifiers:
-      name: phone_identifiers
-      in: query
-      required: false
-      schema:
-        type: string
   requestBodies:
     InitiateIndividualRequest:
-        description: Initiate New Party
+        description: Initiate New individual
         content:
           application/json:
             schema:
                 $ref: '#/components/schemas/InitiateIndividualRequest'
+    InitiateCorporateRequest:
+        description: Initiate New Corporate
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiateCorporateRequest'
   responses:
     InitiateIndividualResponse:
-        description: PartyFacility 
+        description: Initiate New individual 
         content:
           application/json:
             schema:
                 $ref: '#/components/schemas/InitiateIndividualResponse'
+    InitiateCorporateResponse:
+        description: Initiate New corporate 
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiateCorporateResponse'
     BadRequest:
       description: BadRequest
       content:
