@@ -56,17 +56,17 @@ paths:
           $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
-    customer-creation_step_output:
-                            type: object
-                            properties:
-                              customer_identifier:
-                                type: string
-                                description: "\n"
-                                format: string
-                              external_identifier:
-                                type: string
-                                description: "\n"
-                                format: string
+    customer_creation_step_output:
+      type: object
+      properties:
+        customer_identifier:
+          type: string
+          description: "\n"
+          format: string
+        external_identifier:
+          type: string
+          description: "\n"
+          format: string
     customer-creation:
       type: object
       properties:
@@ -79,18 +79,18 @@ components:
           description: "\n"
           format: string
         step_output:
-          $ref: '#/components/schemas/customer-creation_step_output'
-    initial-risk-scoring_step_output:
-                            type: object
-                            properties:
-                              overall_value:
-                                type: string
-                                description: "\n"
-                                format: string
-                              overall_level:
-                                type: string
-                                description: "\n"
-                                format: string
+          $ref: '#/components/schemas/customer_creation_step_output'
+    initial_risk_scoring_step_output:
+      type: object
+      properties:
+        overall_value:
+          type: string
+          description: "\n"
+          format: string
+        overall_level:
+          type: string
+          description: "\n"
+          format: string
     initial-risk-scoring:
         type: object
         properties:
@@ -103,8 +103,8 @@ components:
               description: "\n"
               format: string
             step_output:
-              $ref: '#/components/schemas/initial-risk-scoring_step_output'
-    customer-screening_step_output:
+              $ref: '#/components/schemas/initial_risk_scoring_step_output'
+    customer_screening_step_output:
                             type: object
                             properties:
                               screening_result:
@@ -123,65 +123,65 @@ components:
                     description: "\n"
                     format: string
                 step_output:
-                    $ref: '#/components/schemas/customer-screening_step_output'
+                    $ref: '#/components/schemas/customer_screening_step_output'
     alerting_step_output:
-                            type: object
-                            properties:
-                              alerts:
-                                type: array
-                                items:
-                                  type: object
-                                  properties:
-                                    identifier:
-                                      type: string
-                                      description: "\n"
-                                      format: string
+        type: object
+        properties:
+          alerts:
+            type: array
+            items:
+              type: object
+              properties:
+                identifier:
+                  type: string
+                  description: "\n"
+                  format: string
     alerting:
-                        type: object
-                        properties:
-                          status:
-                                type: string
-                                description: "\n"
-                                format: string
-                          identifier:
-                                type: string
-                                description: "\n"
-                                format: string
-                          step_output:
-                            $ref: '#/components/schemas/alerting_step_output'
-    case-creation_step_output:
-                            type: object
-                            properties:
-                              case_identifier:
-                                type: string
-                                description: "\n"
-                                format: string
+        type: object
+        properties:
+          status:
+            type: string
+            description: "\n"
+            format: string
+          identifier:
+            type: string
+            description: "\n"
+            format: string
+          step_output:
+            $ref: '#/components/schemas/alerting_step_output'
+    case_creation_step_output:
+        type: object
+        properties:
+          case_identifier:
+            type: string
+            description: "\n"
+            format: string
     case-creation:
-                        type: object
-                        properties:
-                          status:
-                                type: string
-                                description: "\n"
-                                format: string
-                          identifier:
-                                type: string
-                                description: "\n"
-                                format: string
-                          step_output:
-                            $ref: '#/components/schemas/case-creation_step_output'
+        type: object
+        properties:
+          status:
+            type: string
+            description: "\n"
+            format: string
+          identifier:
+            type: string
+            description: "\n"
+            format: string
+          step_output:
+            $ref: '#/components/schemas/case_creation_step_output'
     step_details:
-                    type: object
-                    properties:
-                      customer-creation:
-                         $ref: '#/components/schemas/customer-creation'
-                      initial-risk-scoring:
-                         $ref: '#/components/schemas/initial-risk-scoring'
-                      customer-screening:
-                         $ref: '#/components/schemas/customer-screening'
-                      alerting:
-                          $ref: '#/components/schemas/alerting'
-                      case-creation:
-                          $ref: '#/components/schemas/case-creation'
+        type: object
+        properties:
+          customer-creation:
+             $ref: '#/components/schemas/customer-creation'
+          initial-risk-scoring:
+             $ref: '#/components/schemas/initial-risk-scoring'
+          customer-screening:
+             $ref: '#/components/schemas/customer-screening'
+          alerting:
+             $ref: '#/components/schemas/alerting'
+          case-creation:
+             $ref: '#/components/schemas/case-creation'
     InitiateIndividualRequest:
           type: object
           properties:
