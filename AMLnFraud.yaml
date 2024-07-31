@@ -193,10 +193,7 @@ components:
                     format: string
                 step_output:
                     $ref: '#/components/schemas/customer_screening_step_output'
-    alerts:    
-        type: object
-        properties:
-          alerts:
+    alerts:
             type: array
             items:
               type: object
@@ -206,7 +203,10 @@ components:
                   description: "\n"
                   format: string
     alerting_step_output:
-      $ref: '#/components/schemas/alerts'
+        type: object
+        properties:
+          alerts:
+            $ref: '#/components/schemas/alerts'
     alerting:
         type: object
         properties:
