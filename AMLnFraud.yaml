@@ -54,6 +54,75 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
+   /v2/webhooks:
+    post:
+      tags:
+          - Webhooks
+      summary: InCR Initiate A new webhook
+      description: InCR Initiate A new webhook
+      operationId: InitiateWebhook
+      requestBody:
+        $ref: '#/components/requestBodies/InitiateWebhookRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiateWebhookResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    get:
+      tags:
+          - Webhooks
+      summary: Retrieve list of webhooks
+      description: Retrieve list of webhooks
+      operationId: RetrieveWebhook
+      responses:
+        '200':
+          $ref: '#/components/responses/RetrieveWebhookResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+   /v2/webhooks/test:
+    post:
+      tags:
+          - Webhooks
+      summary: InCR Test a webhook
+      description: InCR Test a webhook
+      operationId: InitiateTest
+      requestBody:
+        $ref: '#/components/requestBodies/InitiateTestWebhookRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiateTestWebhookReponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
     customer_creation_step_output:
@@ -478,6 +547,124 @@ components:
                     format: string
                   step_details:
                     $ref: '#/components/schemas/step_details'
+    InitiateWebhookRequest:
+                type: object
+                properties:
+                  is_active:
+                    type: string
+                    description: "\n"
+                    format: string
+                  name:
+                    type: string
+                    description: "\n"
+                    format: string
+                  type:
+                    type: string
+                    description: "\n"
+                    format: string
+                  url:
+                    type: string
+                    description: "\n"
+                    format: string
+    InitiateWebhookResponse:
+                type: object
+                properties:
+                  configuration_identifier:
+                    type: string
+                    description: "\n"
+                    format: string
+                  name:
+                    type: string
+                    description: "\n"
+                    format: string
+                  url:
+                    type: string
+                    description: "\n"
+                    format: string
+                  is_active:
+                    type: string
+                    description: "\n"
+                    format: string
+                  created_at:
+                    type: string
+                    description: "\n"
+                    format: string
+                  updated_at:
+                    type: string
+                    description: "\n"
+                    format: string
+    Webhooks:
+      type: array
+      items:
+                type: object
+                properties:
+                  configuration_identifier:
+                    type: string
+                    description: "\n"
+                    format: string
+                  name:
+                    type: string
+                    description: "\n"
+                    format: string
+                  url:
+                    type: string
+                    description: "\n"
+                    format: string
+                  is_active:
+                    type: string
+                    description: "\n"
+                    format: string
+                  created_at:
+                    type: string
+                    description: "\n"
+                    format: string
+                  updated_at:
+                    type: string
+                    description: "\n"
+                    format: string
+                  type:
+                    type: string
+                    description: "\n"
+                    format: string
+    RetrieveWebhookResponse:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    description: "\n"
+                    format: string
+                  first:
+                    type: string
+                    description: "\n"
+                    format: string
+                  prev:
+                    type: string
+                    description: "\n"
+                    format: string
+                  next:
+                    type: string
+                    description: "\n"
+                    format: string
+                  total_count:
+                    type: string
+                    description: "\n"
+                    format: string
+                  webhooks:
+                    $ref: '#/components/schemas/Webhooks'
+    InitiateTestWebhookRequest:
+                type: object
+                properties:
+                  url:
+                    type: string
+                    description: "\n"
+                    format: string
+    InitiateTestWebhookReponse:
+                type: object
+                properties:
+                  test_webhook_identifier:
+                    type: string
+                    description: "\n"
+                    format: string
     HTTPError:
       type: object
       properties:
@@ -506,6 +693,18 @@ components:
           application/json:
             schema:
                 $ref: '#/components/schemas/InitiateCorporateRequest'
+    InitiateWebhookRequest:
+        description: Initiate New Corporate
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiateWebhookRequest'
+    InitiateTestWebhookRequest:
+        description: Initiate New Corporate
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiateTestWebhookRequest'
   responses:
     InitiateIndividualResponse:
         description: Initiate New individual 
@@ -519,6 +718,24 @@ components:
           application/json:
             schema:
                 $ref: '#/components/schemas/InitiateCorporateResponse'
+    InitiateWebhookResponse:
+        description: Initiate New corporate 
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiateWebhookResponse'
+    RetrieveWebhookResponse:
+        description: Initiate New corporate 
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/RetrieveWebhookResponse'
+    InitiateTestWebhookReponse:
+        description: Initiate New corporate 
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiateTestWebhookReponse'
     BadRequest:
       description: BadRequest
       content:
