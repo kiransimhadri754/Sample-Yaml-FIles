@@ -194,6 +194,8 @@ components:
                 step_output:
                     $ref: '#/components/schemas/customer_screening_step_output'
     alerts:
+            type: array
+            items:
               type: object
               properties:
                 identifier:
@@ -204,8 +206,6 @@ components:
         type: object
         properties:
           alerts:
-            type: array
-            items:
               $ref: '#/components/schemas/alerts'
     alerting:
         type: object
