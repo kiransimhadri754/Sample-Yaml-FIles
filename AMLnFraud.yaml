@@ -193,33 +193,6 @@ components:
                     format: string
                 step_output:
                     $ref: '#/components/schemas/customer_screening_step_output'
-    alerts:
-              type: object
-              properties:
-                identifier:
-                  type: string
-                  description: "\n"
-                  format: string
-    alerting_step_output:
-        type: object
-        properties:
-          alerts:
-            type: array
-            items:
-              $ref: '#/components/schemas/alerts'
-    alerting:
-        type: object
-        properties:
-          status:
-            type: string
-            description: "\n"
-            format: string
-          identifier:
-            type: string
-            description: "\n"
-            format: string
-          step_output:
-            $ref: '#/components/schemas/alerting_step_output'
     case_creation_step_output:
         type: object
         properties:
@@ -249,8 +222,6 @@ components:
              $ref: '#/components/schemas/initialRiskScoring'
           customer-screening:
              $ref: '#/components/schemas/customerScreening'
-          alerting:
-             $ref: '#/components/schemas/alerting'
           case-creation:
              $ref: '#/components/schemas/caseCreation'
     InitiateIndividualRequest:
