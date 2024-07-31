@@ -194,14 +194,14 @@ components:
                 step_output:
                     $ref: '#/components/schemas/customer_screening_step_output'
     alerts:
-            type: array
-            items:
-              type: object
-              properties:
-                identifier:
-                  type: string
-                  description: "\n"
-                  format: string
+        type: array
+        items:
+          type: object
+          properties:
+            identifier:
+              type: string
+              description: "\n"
+              format: string
     alerting_step_output:
         type: object
         properties:
@@ -269,6 +269,10 @@ components:
               description: "\n"
               format: string
             lastName:
+              type: string
+              description: "\n"
+              format: string
+            gender:
               type: string
               description: "\n"
               format: string
