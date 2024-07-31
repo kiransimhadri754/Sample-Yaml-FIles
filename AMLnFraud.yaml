@@ -193,6 +193,15 @@ components:
                     format: string
                 step_output:
                     $ref: '#/components/schemas/customer_screening_step_output'
+    alerts:
+            type: array
+            items:
+              type: object
+              properties:
+                identifier:
+                  type: string
+                  description: "\n"
+                  format: string
     alerting_step_output:
         type: object
         properties:
