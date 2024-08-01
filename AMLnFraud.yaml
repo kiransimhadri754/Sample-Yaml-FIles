@@ -31,7 +31,7 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
    /v1/corporate-entity:
-    patch:
+    post:
       tags:
           - Corporate
       summary: InCR Initiate A new corporate
@@ -87,6 +87,32 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/RetrieveWebhookResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+   /v2/webhooks/{configuration_identifier}:
+    patch:
+      tags:
+          - Webhooks
+      summary: Update the webhook
+      description: Update the webhook
+      operationId: UpdateWebhook
+      parameters:
+        - $ref: '#/components/parameters/configuration_identifier'
+      requestBody:
+        $ref: '#/components/requestBodies/UpdateWebhookRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/UpdateWebhookReponse'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -638,6 +664,40 @@ components:
                     type: string
                     description: "\n"
                     format: string
+    UpdateWebhookRequest:
+                type: object
+                properties:
+                  is_active:
+                    type: string
+                    description: "\n"
+                    format: string
+    UpdateWebhookReponse:
+                type: object
+                properties:
+                  configuration_identifier:
+                    type: string
+                    description: "\n"
+                    format: string
+                  name:
+                    type: string
+                    description: "\n"
+                    format: string
+                  url:
+                    type: string
+                    description: "\n"
+                    format: string
+                  is_active:
+                    type: string
+                    description: "\n"
+                    format: string
+                  created_at:
+                    type: string
+                    description: "\n"
+                    format: string
+                  updated_at:
+                    type: string
+                    description: "\n"
+                    format: string
     HTTPError:
       type: object
       properties:
@@ -653,6 +713,14 @@ components:
           type: string
           description: "\n"
           format: string
+  parameters:
+    configuration_identifier:
+      name: configuration_identifier
+      in: path
+      required: true
+      style: simple
+      schema:
+        type: string
   requestBodies:
     InitiateIndividualRequest:
         description: Initiate New individual
@@ -678,6 +746,12 @@ components:
           application/json:
             schema:
                 $ref: '#/components/schemas/InitiateTestWebhookRequest'
+    UpdateWebhookRequest:
+        description: Initiate New Corporate
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/UpdateWebhookRequest'
   responses:
     InitiateIndividualResponse:
         description: Initiate New individual 
@@ -709,6 +783,12 @@ components:
           application/json:
             schema:
                 $ref: '#/components/schemas/InitiateTestWebhookReponse'
+    UpdateWebhookReponse:
+        description: Initiate New corporate 
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/UpdateWebhookReponse'
     BadRequest:
       description: BadRequest
       content:
