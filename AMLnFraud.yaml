@@ -31,7 +31,7 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
    /v1/corporate-entity:
-    post:
+    patch:
       tags:
           - Corporate
       summary: InCR Initiate A new corporate
