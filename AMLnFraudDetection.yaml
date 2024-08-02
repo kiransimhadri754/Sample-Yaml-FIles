@@ -4,7 +4,7 @@ info:
   description: This API provides endpoints for AMLnFraudDetection.
   version: 11.0.1
 servers:
-- url: 'https://finx-celta-api-dev.fincuro.com'
+- url: 'https://finx-celta-api-dev.fincuro.in'
 paths:
    /v1/individuals:
     post:
