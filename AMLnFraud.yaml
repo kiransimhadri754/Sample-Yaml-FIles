@@ -131,7 +131,7 @@ paths:
           - Webhooks
       summary: Update the webhook
       description: Update the webhook
-      operationId: UpdateWebhook
+      operationId: ModifyWebhook
       parameters:
         - $ref: '#/components/parameters/configuration_identifier'
       requestBody:
