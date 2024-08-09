@@ -54,7 +54,7 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
-   /v2/webhooks:
+   /v1/webhooks:
     post:
       tags:
           - Webhooks
@@ -99,7 +99,7 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
-   /v2/webhooks/test:
+   /v1/webhooks/test:
     post:
       tags:
           - Webhooks
