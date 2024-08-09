@@ -6,12 +6,12 @@ info:
 servers:
 - url: 'https://finx-celta-api-dev.fincuro.in'
 paths:
-   /v1/individuals:
+   /v1/scan/individual:
     post:
       tags:
           - Individual
-      summary: InCR Initiate A new individual
-      description: InCR Initiate A new individual
+      summary: InCR Initiate scan a new individual
+      description: InCR Initiate scan a new individual
       operationId: InitiateIndividual
       requestBody:
         $ref: '#/components/requestBodies/InitiateIndividualRequest'
@@ -30,12 +30,12 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
-   /v1/corporate-entity:
+   /v1/scan/corporate:
     post:
       tags:
           - Corporate
-      summary: InCR Initiate A new corporate
-      description: InCR Initiate A new coporate
+      summary: InCR Initiate scan a new corporate
+      description: InCR Initiate scan a new coporate
       operationId: InitiateCorporate
       requestBody:
         $ref: '#/components/requestBodies/InitiateCorporateRequest'
@@ -54,10 +54,10 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
-   /v1/webhooks:
+   /v1/webhook:
     post:
       tags:
-          - Webhooks
+          - Webhook
       summary: InCR Initiate A new webhook
       description: InCR Initiate A new webhook
       operationId: InitiateWebhook
@@ -80,7 +80,7 @@ paths:
           $ref: '#/components/responses/InternalServerError'
     get:
       tags:
-          - Webhooks
+          - Webhook
       summary: Retrieve list of webhooks
       description: Retrieve list of webhooks
       operationId: RetrieveWebhook
@@ -99,10 +99,10 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
-   /v1/webhooks/test:
+   /v1/webhook/test:
     post:
       tags:
-          - Webhooks
+          - Webhook
       summary: InCR Test a webhook
       description: InCR Test a webhook
       operationId: InitiateTest
@@ -599,7 +599,7 @@ components:
                     type: string
                     description: "\n"
                     format: string
-    Webhooks:
+    webhook:
       type: array
       items:
                 type: object
@@ -655,8 +655,8 @@ components:
                     type: string
                     description: "\n"
                     format: string
-                  webhooks:
-                    $ref: '#/components/schemas/Webhooks'
+                  webhook:
+                    $ref: '#/components/schemas/webhook'
     InitiateTestWebhookRequest:
                 type: object
                 properties:
@@ -688,56 +688,56 @@ components:
           format: string
   requestBodies:
     InitiateIndividualRequest:
-        description: Initiate New individual
+        description: Initiate scan a new individual
         content:
           application/json:
             schema:
                 $ref: '#/components/schemas/InitiateIndividualRequest'
     InitiateCorporateRequest:
-        description: Initiate New Corporate
+        description: Initiate scan a new Corporate
         content:
           application/json:
             schema:
                 $ref: '#/components/schemas/InitiateCorporateRequest'
     InitiateWebhookRequest:
-        description: Initiate New Corporate
+        description: Initiate a new webhook
         content:
           application/json:
             schema:
                 $ref: '#/components/schemas/InitiateWebhookRequest'
     InitiateTestWebhookRequest:
-        description: Initiate New Corporate
+        description: Initiate test a webhook
         content:
           application/json:
             schema:
                 $ref: '#/components/schemas/InitiateTestWebhookRequest'
   responses:
     InitiateIndividualResponse:
-        description: Initiate New individual 
+        description: Initiate scan a new individual
         content:
           application/json:
             schema:
                 $ref: '#/components/schemas/InitiateIndividualResponse'
     InitiateCorporateResponse:
-        description: Initiate New corporate 
+        description: Initiate scan a new Corporate
         content:
           application/json:
             schema:
                 $ref: '#/components/schemas/InitiateCorporateResponse'
     InitiateWebhookResponse:
-        description: Initiate New corporate 
+        description: Initiate a new webhook
         content:
           application/json:
             schema:
                 $ref: '#/components/schemas/InitiateWebhookResponse'
     RetrieveWebhookResponse:
-        description: Initiate New corporate 
+        description: Retrieve list of webhooks
         content:
           application/json:
             schema:
                 $ref: '#/components/schemas/RetrieveWebhookResponse'
     InitiateTestWebhookReponse:
-        description: Initiate New corporate 
+        description: Initiate test a webhook
         content:
           application/json:
             schema:
