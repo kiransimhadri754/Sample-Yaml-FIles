@@ -1,0 +1,285 @@
+openapi: 3.0.1
+info:
+  title: FinXCeltaPartyService
+  description: This API provides endpoints for managing customer information, including creating, retrieving, updating customer records.
+  version: 11.0.1
+servers:
+- url: ' https://virtserver.swaggerhub.com/BIAN-3/CurrentAccount/12.0.1'
+paths:
+   /Party/Initiate:
+    post:
+      tags:
+          - Party Facility
+      summary: InCR Initiate A new party
+      description: InCR Initiate A party
+      operationId: InitiateParty
+      requestBody:
+        $ref: '#/components/requestBodies/InitiatePartyRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiatePartyResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+   /Party/Search:
+    get:
+      tags:
+          - Party Facility
+      summary: Check a party exists
+      description: Check a party exists
+      operationId: CheckParty
+      parameters:
+        - $ref: '#/components/parameters/statuses'
+        - $ref: '#/components/parameters/emailAddressDescription'
+        - $ref: '#/components/parameters/mobilePhoneNumber'
+      responses:
+        '200':
+          $ref: '#/components/responses/RetrievePartyResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  schemas:
+    PartyName:
+          type: object
+          properties:
+            firstName:
+              type: string
+              description: "\n"
+              format: string
+            middleName:
+              type: string
+              description: "\n"
+              format: string
+            lastName:
+              type: string
+              description: "\n"
+              format: string
+    ElectronicAddressType:
+          type: object
+          properties:
+            electronicAddressTypeValue:
+              type: string
+              description: "\n"
+              format: string
+            addressDescription:
+              type: string
+              description: "\n"
+              format: string
+    MobilePhoneType:
+          type: object
+          properties:
+            mobilePhoneNumber:
+              type: string
+              description: "\n"
+              format: string
+    HomePhoneType:
+          type: object
+          properties:
+            homePhoneNumber:
+              type: string
+              description: "\n"
+              format: string
+    BusinessPhoneType:
+          type: object
+          properties:
+            businessPhoneNumber:
+              type: string
+              description: "\n"
+              format: string
+    party:
+          type: object
+          properties:
+            partyName:
+              $ref: '#/components/schemas/PartyName'
+            title:
+              type: string
+              description: "\n"
+              format: string
+            birthDate:
+              type: string
+              description: "\n"
+              format: string
+            gender:
+              type: string
+              description: "\n"
+              format: string
+            nationality:
+              type: string
+              description: "\n"
+              format: string
+            residence:
+              type: string
+              description: "\n"
+              format: string
+            taxCountry:
+              type: string
+              description: "\n"
+              format: string
+            electronicAddressType:
+              $ref: '#/components/schemas/ElectronicAddressType'
+            mobilePhoneType:
+              $ref: '#/components/schemas/MobilePhoneType'
+            homePhoneType:
+              $ref: '#/components/schemas/HomePhoneType'
+            businessPhoneType:
+              $ref: '#/components/schemas/BusinessPhoneType'
+            preferredContactMethod:
+              type: string
+              description: "\n"
+              format: string
+            accessibilityMethod:
+              type: string
+              description: "\n"
+              format: string
+            partyExternalReference:
+              type: string
+              description: "\n"
+              format: string
+    InitiatePartyRequest:
+      type: object
+      properties:
+        party:
+          $ref: '#/components/schemas/party'
+    InitiatePartyResponse:
+      type: object
+      properties:
+        partyReference:
+              type: string
+              description: "\n"
+              format: string
+        status:
+              type: string
+              description: "\n"
+              format: string
+        party:
+          $ref: '#/components/schemas/party'
+    RetrievePartyResponse:
+      type: object
+      properties:
+        partyReference:
+              type: string
+              description: "\n"
+              format: string
+        status:
+              type: string
+              description: "\n"
+              format: string
+        party:
+          $ref: '#/components/schemas/party'
+        nextPageToken:
+              type: string
+              description: "\n"
+              format: string
+        previousPageToken:
+              type: string
+              description: "\n"
+              format: string
+    HTTPError:
+      type: object
+      properties:
+        status_code:
+          type: string
+          description: "\n"
+          format: string
+        status:
+          type: string
+          description: "\n"
+          format: string
+        message:
+          type: string
+          description: "\n"
+          format: string
+  parameters:
+    emailAddressDescription:
+      name: emailAddressDescription
+      in: query
+      required: false
+      schema:
+        type: string
+    mobilePhoneNumber:
+      name: mobilePhoneNumber
+      in: query
+      required: false
+      schema:
+        type: string
+    statuses:
+      name: statuses
+      in: query
+      required: false
+      schema:
+        type: string
+  requestBodies:
+    InitiatePartyRequest:
+        description: Initiate New Party
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiatePartyRequest'
+  responses:
+    InitiatePartyResponse:
+        description: PartyFacility 
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiatePartyResponse'
+    RetrievePartyResponse:
+        description: PartyFacility 
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/RetrievePartyResponse'  
+    BadRequest:
+      description: BadRequest
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    NotFound:
+      description: NotFound
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    TooManyRequests:
+      description: TooManyRequests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    InternalServerError:
+      description: InternalServerError
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
