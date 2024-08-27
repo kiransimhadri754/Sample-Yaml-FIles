@@ -4,7 +4,7 @@ info:
   description: This API provides endpoints for managing customer information, including creating, retrieving, updating customer records.
   version: 11.0.1
 servers:
-- url: ' https://virtserver.swaggerhub.com/BIAN-3/CurrentAccount/11.0.1'
+- url: 'https://core-api.shine.staging.saas.tmachine.io'
 paths:
    /Party/Initiate:
     post:
@@ -154,6 +154,20 @@ components:
               type: string
               description: "\n"
               format: string
+    Parties:  
+      type: array
+      items:
+        properties:
+          partyReference:
+                type: string
+                description: "\n"
+                format: string
+          status:
+                type: string
+                description: "\n"
+                format: string
+          party:
+            $ref: '#/components/schemas/party'
     InitiatePartyRequest:
       type: object
       properties:
@@ -175,16 +189,8 @@ components:
     RetrievePartyResponse:
       type: object
       properties:
-        partyReference:
-              type: string
-              description: "\n"
-              format: string
-        status:
-              type: string
-              description: "\n"
-              format: string
-        party:
-          $ref: '#/components/schemas/party'
+        parties:
+          $ref: '#/components/schemas/Parties'
         nextPageToken:
               type: string
               description: "\n"
