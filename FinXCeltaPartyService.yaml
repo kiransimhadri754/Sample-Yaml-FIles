@@ -34,9 +34,9 @@ paths:
     post:
       tags:
           - Party Facility
-      summary: Check a party exists
-      description: Check a party exists
-      operationId: CheckParty
+      summary: Search for a party
+      description: Search for a party
+      operationId: SearchParty
       requestBody:
         $ref: '#/components/requestBodies/InitiateSearchRequest'
       responses:
@@ -247,7 +247,7 @@ components:
             schema:
                 $ref: '#/components/schemas/InitiatePartyRequest'
     InitiateSearchRequest:
-        description: Initiate New Party
+        description: Search for a party
         content:
           application/json:
             schema:
