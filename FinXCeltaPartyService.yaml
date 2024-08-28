@@ -31,16 +31,14 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
    /Party/Search:
-    get:
+    post:
       tags:
           - Party Facility
       summary: Check a party exists
       description: Check a party exists
       operationId: CheckParty
-      parameters:
-        - $ref: '#/components/parameters/statuses'
-        - $ref: '#/components/parameters/emailAddressDescription'
-        - $ref: '#/components/parameters/mobilePhoneNumber'
+      requestBody:
+        $ref: '#/components/requestBodies/InitiateSearchRequest'
       responses:
         '200':
           $ref: '#/components/responses/RetrievePartyResponse'
@@ -168,6 +166,33 @@ components:
                 format: string
           party:
             $ref: '#/components/schemas/party'
+    IntiateSearchRequest:  
+      type: object
+      properties:
+        partyStatuses:
+          type: array
+          items:
+            type: string
+        partyName:
+          type: array
+          items:
+            type: string
+        mobilePhoneNumbers:
+          type: array
+          items:
+            type: string
+        emailAddressDescription:
+          type: array
+          items:
+            type: string
+        page_size:
+                type: string
+                description: "\n"
+                format: string
+        page_token:
+                type: string
+                description: "\n"
+                format: string
     InitiatePartyRequest:
       type: object
       properties:
@@ -214,25 +239,6 @@ components:
           type: string
           description: "\n"
           format: string
-  parameters:
-    emailAddressDescription:
-      name: emailAddressDescription
-      in: query
-      required: false
-      schema:
-        type: string
-    mobilePhoneNumber:
-      name: mobilePhoneNumber
-      in: query
-      required: false
-      schema:
-        type: string
-    statuses:
-      name: statuses
-      in: query
-      required: false
-      schema:
-        type: string
   requestBodies:
     InitiatePartyRequest:
         description: Initiate New Party
@@ -240,6 +246,12 @@ components:
           application/json:
             schema:
                 $ref: '#/components/schemas/InitiatePartyRequest'
+    InitiateSearchRequest:
+        description: Initiate New Party
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/IntiateSearchRequest'
   responses:
     InitiatePartyResponse:
         description: PartyFacility 
