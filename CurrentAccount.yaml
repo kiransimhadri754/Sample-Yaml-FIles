@@ -4,7 +4,7 @@ info:
   description: BIAN Service Domain Packaged Business Capability (PCB) | DDD Bounded Context Current Account (expanded with ISO200022)
   version: 11.0.0
 servers:
-- url: 'https://app.swaggerhub.com/apis/BIAN-3/CurrentAccount/11.0.0#/servers'
+- url: 'https://core-api.shine.staging.saas.tmachine.io'
 paths:
    /CurrentAccount/Initiate:
     post:
