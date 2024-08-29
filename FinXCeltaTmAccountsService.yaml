@@ -225,48 +225,49 @@ components:
               accountBalanceDate:
                 $ref: '#/components/schemas/accountBalanceDate'
     Balances:
-      type: object
-      properties:
-        id:
-          type: string
-          description: "\n"
-          format: string
-        account_id:
-          type: string
-          description: "\n"
-          format: string
-        account_address:
-          type: string
-          description: "\n"
-          format: string
-        phase:
-          type: string
-          description: "\n"
-          format: string
-        asset:
-          type: string
-          description: "\n"
-          format: string
-        denomination:
-          type: string
-          description: "\n"
-          format: string
-        posting_instruction_batch_id:
-          type: string
-          description: "\n"
-          format: string
-        value_time:
-          type: string
-          description: "\n"
-          format: string
-        total_debit:
-          type: string
-          description: "\n"
-          format: string
-        total_credit:
-          type: string
-          description: "\n"
-          format: string
+      type: array
+      items:
+        properties:
+          id:
+            type: string
+            description: "\n"
+            format: string
+          account_id:
+            type: string
+            description: "\n"
+            format: string
+          account_address:
+            type: string
+            description: "\n"
+            format: string
+          phase:
+            type: string
+            description: "\n"
+            format: string
+          asset:
+            type: string
+            description: "\n"
+            format: string
+          denomination:
+            type: string
+            description: "\n"
+            format: string
+          posting_instruction_batch_id:
+            type: string
+            description: "\n"
+            format: string
+          value_time:
+            type: string
+            description: "\n"
+            format: string
+          total_debit:
+            type: string
+            description: "\n"
+            format: string
+          total_credit:
+            type: string
+            description: "\n"
+            format: string
     InitiateCurrentAccountRequest:
       type: object
       properties:
@@ -280,7 +281,7 @@ components:
     RetrieveAccountListResponse:
       type: object
       properties:
-        customerReference: 
+        partyReference: 
           type: string
           description: "\n"
           format: string
