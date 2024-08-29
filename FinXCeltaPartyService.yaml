@@ -173,18 +173,22 @@ components:
           type: array
           items:
             type: string
+            format: string
         partyName:
           type: array
           items:
             type: string
+            format: string
         mobilePhoneNumbers:
           type: array
           items:
             type: string
+            format: string
         emailAddressDescription:
           type: array
           items:
             type: string
+            format: string
         page_size:
                 type: string
                 description: "\n"
