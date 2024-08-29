@@ -1,0 +1,383 @@
+openapi: 3.0.1
+info:
+  title: FinXCeltaTmAccountsService
+  description: BIAN Service Domain Packaged Business Capability (PCB) | DDD Bounded Context Account Listing.
+  version: 11.0.0
+servers:
+- url: 'https://core-api.shine.staging.saas.tmachine.io'
+paths:
+   /currentAccount/initiate:
+    post:
+      tags:
+          - Accounts
+      summary: InCR Initiate a current account for a customer
+      description: InCR Initiate a current account for a customer
+      operationId: InitiateCurrentAccount
+      requestBody:
+        $ref: '#/components/requestBodies/InitiateCurrentAccountRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiateCurrentAccountResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+   /currentAccount/{partyReference}/retrieve:
+    get:
+      tags:
+          - Accounts
+      summary: InCR Retrieve list of accounts of a customer
+      description: InCR Retrieve list of accounts of a customer
+      operationId: RetrieveAccounts
+      parameters:
+        - $ref: '#/components/parameters/partyReference'
+      responses:
+        '200':
+          $ref: '#/components/responses/RetrieveAccountListResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+   /currentAccount/{accountReference}/balance/retrieve:
+    get:
+      tags:
+          - Accounts
+      summary: InCR Retrieve balance of an account.
+      description: InCR Retrieve balance of an account.
+      operationId: RetrieveBalance
+      parameters:
+        - $ref: '#/components/parameters/accountReference'
+      responses:
+        '200':
+          $ref: '#/components/responses/RetrieveBalanceResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  schemas:
+    productInstanceReference:
+      type: object
+      properties:
+        currentAccountAgreement:
+          type: string
+          description: "\n"
+          format: string
+    StatusReason:
+      type: object
+      properties:
+        Text:
+          type: string
+          description: "\n"
+          format: string
+    accountStatus:
+      type: object
+      properties:
+        statusReason:
+          $ref: '#/components/schemas/StatusReason'
+    accountCurrency:
+      type: object
+      properties:
+        currencyCode:
+          type: string
+          description: "\n"
+          format: string
+    accountDetails:
+      type: object
+      properties:
+        accountReference:
+          type: string
+          description: "\n"
+          format: string  
+    accountIdentification:
+      type: object
+      properties:
+        accountIdentificationType:
+          type: string
+          description: "\n"
+          format: string
+        identifierValue:
+          $ref: '#/components/schemas/IdentifierValue'
+    IdentifierValue:
+      type: object
+      properties:
+        value:
+          type: string
+          description: "\n"
+          format: string
+    accountDescription:
+      type: object
+      properties:
+        Text:
+          type: string
+          description: "\n"
+          format: string
+    accountBalanceDate:
+      type: object
+      properties:
+        DateTimeContent:
+          type: string
+          description: "\n"
+          format: string
+    amountCurrency:
+      type: object
+      properties:
+        currencyCode:
+          type: string
+          description: "\n"
+          format: string
+    accountBalance:
+      type: object
+      properties:
+        amountValue:
+          type: string
+          description: "\n"
+          format: string
+        amountCurrency:
+          $ref: '#/components/schemas/amountCurrency'
+    productInstanceParameters:
+      type: object
+      properties:
+        inactivity_fee_application_day:
+          type: string
+          description: "\n"
+          format: string
+        maintenance_fee_application_day:
+          type: string
+          description: "\n"
+          format: string
+        daily_withdrawal_limit_by_transaction_type:
+          type: string
+          description: "\n"
+          format: string
+        minimum_balance_fee_application_day:
+          type: string
+          description: "\n"
+          format: string
+        roundup_autosave_active:
+          type: string
+          description: "\n"
+          format: string
+        unarranged_overdraft_fee_application_day:
+          type: string
+          description: "\n"
+          format: string
+        interest_application_day:
+          type: string
+          description: "\n"
+          format: string
+    currentAccountFacility:
+      type: object
+      properties:
+        customerReference:
+          type: string
+          description: "\n"
+          format: string
+        productInstanceReference:
+          $ref: '#/components/schemas/productInstanceReference'
+        accountCurrency:
+          $ref: '#/components/schemas/accountCurrency'
+        accountStatus:
+          $ref: '#/components/schemas/accountStatus'
+        accountOpenDate:
+          type: string
+          description: "\n"
+          format: string
+        productInstanceParameters:
+          $ref: '#/components/schemas/productInstanceParameters'
+    LinkedAccounts:
+        type: array
+        items:
+            type: object
+            properties: 
+              accountStatus:
+                $ref: '#/components/schemas/accountStatus'
+              accountIdentification:
+                $ref: '#/components/schemas/accountIdentification'
+              accountBalance:
+                $ref: '#/components/schemas/accountBalance'
+              accountDescription:
+                $ref: '#/components/schemas/accountDescription'
+              accountBalanceDate:
+                $ref: '#/components/schemas/accountBalanceDate'
+    Balances:
+      type: object
+      properties:
+        id:
+          type: string
+          description: "\n"
+          format: string
+        account_id:
+          type: string
+          description: "\n"
+          format: string
+        account_address:
+          type: string
+          description: "\n"
+          format: string
+        phase:
+          type: string
+          description: "\n"
+          format: string
+        asset:
+          type: string
+          description: "\n"
+          format: string
+        denomination:
+          type: string
+          description: "\n"
+          format: string
+        posting_instruction_batch_id:
+          type: string
+          description: "\n"
+          format: string
+        value_time:
+          type: string
+          description: "\n"
+          format: string
+        total_debit:
+          type: string
+          description: "\n"
+          format: string
+        total_credit:
+          type: string
+          description: "\n"
+          format: string
+    InitiateCurrentAccountRequest:
+      type: object
+      properties:
+        currentAccountFacility: 
+          $ref: '#/components/schemas/currentAccountFacility'
+    InitiateCurrentAccountResponse:
+      type: object
+      properties:
+        accountDetails: 
+          $ref: '#/components/schemas/accountDetails'
+    RetrieveAccountListResponse:
+      type: object
+      properties:
+        customerReference: 
+          type: string
+          description: "\n"
+          format: string
+        linkedAccounts:
+            $ref: '#/components/schemas/LinkedAccounts'
+    RetrieveBalanceResponse:
+      type: object
+      properties:
+          balances:
+              $ref: '#/components/schemas/Balances'
+    HTTPError:
+      type: object
+      properties:
+        status_code:
+          type: string
+          description: "\n"
+          format: string
+        status:
+          type: string
+          description: "\n"
+          format: string
+        message:
+          type: string
+          description: "\n"
+          format: string
+  parameters:
+    partyReference:
+      name: partyReference
+      in: path
+      required: true
+      schema:
+        type: string
+    accountReference:
+      name: accountReference
+      in: path
+      required: true
+      schema:
+        type: string
+  requestBodies:
+    InitiateCurrentAccountRequest:
+        description: createCurrentAccount
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiateCurrentAccountRequest'
+  responses:
+    InitiateCurrentAccountResponse:
+        description: createCurrentAccount
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiateCurrentAccountResponse'
+    RetrieveAccountListResponse:
+        description: fetchAccounts
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/RetrieveAccountListResponse'
+    RetrieveBalanceResponse:
+        description: fetchBalance
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/RetrieveBalanceResponse'
+    BadRequest:
+      description: BadRequest
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    NotFound:
+      description: NotFound
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    TooManyRequests:
+      description: TooManyRequests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    InternalServerError:
+      description: InternalServerError
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
