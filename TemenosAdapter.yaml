@@ -54,15 +54,13 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
-  '/LoanAccounts/Disbursement/{LoanNumber}/Initiate':
+  '/LoanAccounts/Disbursement/Initiate':
     post:
       tags:
           - Loan Facility
       summary: Initiate Disbursement
       description: Initiate Disbursement
       operationId: InitiateDisbursement
-      parameters:
-        - $ref: '#/components/parameters/LoanNumber'
       requestBody:
         $ref: '#/components/requestBodies/InitiateDisbursementRequest'
       responses:
