@@ -1,0 +1,751 @@
+openapi: 3.0.1
+info:
+  title: FinXCeltaTmPostingsService
+  description: BIAN Service Domain Packaged Business Capability (PCB) | DDD Bounded Context Transaction Listing.
+  version: 12.0.1
+servers:
+- url: 'https://core-api.shine.staging.saas.tmachine.io'
+paths:
+   /{accountId}/transactions/retrieve:
+    get:
+      tags:
+          - Postings
+      summary: InCR Retrieve list of transactions of an account
+      description: InCR Retrieve list of transactions of an account
+      operationId: RetrieveAccountTransactions
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+      responses:
+        '200':
+          $ref: '#/components/responses/retrieveTransactionListResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+   /transactions/retrieve:
+    get:
+      tags:
+          - Postings
+      summary: InCR Retrieve list of transactions.
+      description: InCR Retrieve list of transactions.
+      operationId: RetrieveTransactions
+      parameters:
+        - $ref: '#/components/parameters/startDate'
+        - $ref: '#/components/parameters/endDate'
+      responses:
+        '200':
+          $ref: '#/components/responses/retrieveTransactionListResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+   /{accountId}/balance/retrieve:
+    get:
+      tags:
+          - Postings
+      summary: InCR Retrieve balance of an account.
+      description: InCR Retrieve balance of an account.
+      operationId: RetrieveBalance
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+      responses:
+        '200':
+          $ref: '#/components/responses/RetrieveBalanceResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+   /{transactionId}/transactions/retrieve:
+    get:
+      tags:
+          - Postings
+      summary: InCR Retrieve transaction details
+      description: InCR Retrieve transaction details
+      operationId: RetrieveTransactionDetails
+      parameters:
+        - $ref: '#/components/parameters/transactionId'
+      responses:
+        '200':
+          $ref: '#/components/responses/retrieveTransactionDetailsResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+   /fundtransfer:
+    post:
+      tags:
+        - Postings
+      summary: Initiate transfer funds between accounts.
+      description: Initiate transfer funds between accounts.
+      operationId: InitiateTransferFunds.
+      requestBody:
+          $ref: '#/components/requestBodies/InitiatetransferRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiatetransferResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+   /transaction/deposits/initiate:
+    post:
+      tags:
+          - Postings
+      summary: InCR Initiate deposit transaction for an account
+      description: InCR Initiate deposit transaction for an account
+      operationId: InitiateDeposit
+      requestBody:
+        $ref: '#/components/requestBodies/InitiateDepositRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiateDepositResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+   /transaction/withdrawals/initiate:
+    post:
+      tags:
+          - Postings
+      summary: InCR Initiate withdrawal transaction for an account
+      description: InCR Initiate withdrawal transaction for an account
+      operationId: InitiateWithdrawal
+      requestBody:
+        $ref: '#/components/requestBodies/InitiateWithdrawalRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiateWithdrawalResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  schemas:
+    instruction_details:            
+      type: object
+      properties:
+          eventName:
+            type: string
+            description: "\n"
+            format: string
+          narration:
+            type: string
+            description: "\n"
+            format: string
+          sourceAccountId:
+            type: string
+            description: "\n"
+            format: string
+          targetAccountId:
+            type: string
+            description: "\n"
+            format: string
+    target_account:            
+      type: object
+      properties:
+          accountId:
+            type: string
+            description: "\n"
+            format: string
+    inbound_hard_settlement:            
+      type: object
+      properties:
+          amount:
+            type: string
+            description: "\n"
+            format: string
+          denomination:
+            type: string
+            description: "\n"
+            format: string
+          targetAccount:
+            $ref: '#/components/schemas/target_account'
+          internalAccountId:
+            type: string
+            description: "\n"
+            format: string
+          advice:
+            type: string
+            description: "\n"
+            format: string
+          instructionDetails:
+            $ref: '#/components/schemas/instruction_details'
+    outbound_hard_settlement:            
+      type: object
+      properties:
+          amount:
+            type: string
+            description: "\n"
+            format: string
+          denomination:
+            type: string
+            description: "\n"
+            format: string
+          targetAccount:
+            $ref: '#/components/schemas/target_account'
+          internalAccountId:
+            type: string
+            description: "\n"
+            format: string
+          advice:
+            type: string
+            description: "\n"
+            format: string
+          instructionDetails:
+            $ref: '#/components/schemas/instruction_details'
+    posting_instructions_deposit:            
+      type: array
+      items:
+        properties:
+          id:
+            type: string
+            description: "\n"
+            format: string
+          clientTransactionId:
+            type: string
+            description: "\n"
+            format: string
+          inboundHardSettlement:
+            $ref: '#/components/schemas/inbound_hard_settlement'
+    posting_instructions_withdrawal:            
+      type: array
+      items:
+        properties:
+          id:
+            type: string
+            description: "\n"
+            format: string
+          clientTransactionId:
+            type: string
+            description: "\n"
+            format: string
+          outboundHardSettlement:
+            $ref: '#/components/schemas/outbound_hard_settlement'
+    DepositTransaction:
+      type: object
+      properties:
+          id:
+            type: string
+            description: "\n"
+            format: string
+          createRequestId:
+            type: string
+            description: "\n"
+            format: string
+          clientId:
+            type: string
+            description: "\n"
+            format: string
+          clientBatchId:
+            type: string
+            description: "\n"
+            format: string
+          postingInstructions:
+            $ref: '#/components/schemas/posting_instructions_deposit'
+          batchDetails:
+            type: string
+            description: "\n"
+            format: string
+          valueTimestamp:
+            type: string
+            description: "\n"
+            format: string
+    WithdrawalTransaction:
+      type: object
+      properties:
+          id:
+            type: string
+            description: "\n"
+            format: string
+          createRequestId:
+            type: string
+            description: "\n"
+            format: string
+          clientId:
+            type: string
+            description: "\n"
+            format: string
+          clientBatchId:
+            type: string
+            description: "\n"
+            format: string
+          postingInstructions:
+            $ref: '#/components/schemas/posting_instructions_withdrawal'
+          batchDetails:
+            type: string
+            description: "\n"
+            format: string
+          valueTimestamp:
+            type: string
+            description: "\n"
+            format: string
+    Balances:
+      type: array
+      items:
+        properties:
+          id:
+            type: string
+            description: "\n"
+            format: string
+          account_id:
+            type: string
+            description: "\n"
+            format: string
+          account_address:
+            type: string
+            description: "\n"
+            format: string
+          phase:
+            type: string
+            description: "\n"
+            format: string
+          asset:
+            type: string
+            description: "\n"
+            format: string
+          denomination:
+            type: string
+            description: "\n"
+            format: string
+          posting_instruction_batch_id:
+            type: string
+            description: "\n"
+            format: string
+          value_time:
+            type: string
+            description: "\n"
+            format: string
+          total_debit:
+            type: string
+            description: "\n"
+            format: string
+          total_credit:
+            type: string
+            description: "\n"
+            format: string
+    RetrieveBalanceResponse:
+      type: object
+      properties:
+          balances:
+              $ref: '#/components/schemas/Balances'
+    InitiateDepositRequest:
+      type: object
+      properties:
+        requestId:
+            type: string
+            description: "\n"
+            format: string
+        postingInstructionBatch: 
+          $ref: '#/components/schemas/DepositTransaction'
+    InitiateDepositResponse:
+      type: object
+      properties:
+          id:
+            type: string
+            description: "\n"
+            format: string
+          metaData:
+            type: string
+            description: "\n"
+            format: string
+          createTimestamp:
+            type: string
+            description: "\n"
+            format: string
+          doneTimestamp:
+            type: string
+            description: "\n"
+            format: string
+          done:
+            type: string
+            description: "\n"
+            format: string
+    InitiateWithdrawalRequest:
+      type: object
+      properties:
+        requestId:
+            type: string
+            description: "\n"
+            format: string
+        postingInstructionBatch: 
+          $ref: '#/components/schemas/WithdrawalTransaction'
+    InitiateWithdrawalResponse:
+      type: object
+      properties:
+          id:
+            type: string
+            description: "\n"
+            format: string
+          metaData:
+            type: string
+            description: "\n"
+            format: string
+          createTimestamp:
+            type: string
+            description: "\n"
+            format: string
+          doneTimestamp:
+            type: string
+            description: "\n"
+            format: string
+          done:
+            type: string
+            description: "\n"
+            format: string
+    OccurrenceAmount:
+      type: object
+      properties:
+            value:
+              type: string
+              description: "\n"
+              format: string
+            currencyCode:
+              type: string
+              description: "\n"
+              format: string        
+    TransferOccurrence:
+      type: array
+      items:
+          type: object
+          properties:
+            occurrenceFromAccountId:
+              type: string
+              description: "\n"
+              format: string
+            occurrenceToAccountId:
+              type: string
+              description: "\n"
+              format: string
+            occurrenceFromCoreId:
+              type: string
+              description: "\n"
+              format: string
+            occurrenceToCoreId:
+              type: string
+              description: "\n"
+              format: string
+            concurrenceStatus:
+              type: string
+              description: "\n"
+              format: string
+            fundsWithdrawalType:
+              type: string
+              description: "\n"
+              format: string
+            occurrenceMemo:
+              type: string
+              description: "\n"
+              format: string
+            estimatedProcessDateTime:
+              type: string
+              description: "\n"
+              format: string
+            createdDateTime:
+              type: string
+              description: "\n"
+              format: string
+            queuedForPosting:
+              type: string
+              description: "\n"
+              format: string
+            note:
+              type: string
+              description: "\n"
+              format: string
+            batchId:
+              type: string
+              description: "\n"
+              format: string
+            occurrenceAmount:
+              $ref: '#/components/schemas/OccurrenceAmount'
+    InitiatetransferRequest:
+      type: object
+      properties:
+        transferOccurrenceMessage:
+          type: object
+          properties:
+            messageContext:
+              type: string
+              description: string
+              format: string
+            transferOccurenceList:
+              type: object
+              properties:
+                transferOccurence:
+                  $ref: '#/components/schemas/TransferOccurrence'
+    InitiatetransferResponse:
+      type: object
+      properties:
+            status:
+              type: string
+              description: string
+              format: string
+            message:
+              type: string
+              description: string
+              format: string
+    transactionAmount:
+      type: object
+      properties:
+        amountValue:
+          type: string
+          description: "\n"
+          format: string
+    amountCurrency:
+      type: object
+      properties:
+        currencyCode:
+          type: string
+          description: "\n"
+          format: string
+    transactionDate:
+      type: object
+      properties:
+        dateContent:
+          type: string
+          description: "\n"
+          format: string
+    insertionDate:
+      type: object
+      properties:
+        dateContent:
+          type: string
+          description: "\n"
+          format: string
+    transactions:
+      type: array
+      items:
+        type: object
+        properties:
+              transactionAmount:
+                  $ref: '#/components/schemas/transactionAmount'
+              amountCurrency:
+                  $ref: '#/components/schemas/amountCurrency'
+              transactionDate:
+                  $ref: '#/components/schemas/transactionDate'
+              insertionDate:
+                  $ref: '#/components/schemas/insertionDate'
+    retrieveTransactionListResponse:
+      type: object
+      properties:
+        totalDeposit:
+            type: string
+            description: "\n"
+            format: string
+        totalWithdrawal:
+            type: string
+            description: "\n"
+            format: string
+        currentAccountId:
+            type: string
+            description: "\n"
+            format: string
+        startDate:
+            type: string
+            description: "\n"
+            format: string
+        endDate:
+            type: string
+            description: "\n"
+            format: string
+        transactions:
+           $ref: '#/components/schemas/transactions'
+    retrieveTransactionDetailsResponse:
+        type: object
+        properties:
+              transactionAmount:
+                  $ref: '#/components/schemas/transactionAmount'
+              amountCurrency:
+                  $ref: '#/components/schemas/amountCurrency'
+              transactionDate:
+                  $ref: '#/components/schemas/transactionDate'
+              insertionDate:
+                  $ref: '#/components/schemas/insertionDate'
+    HTTPError:
+      type: object
+      properties:
+        status_code:
+          type: string
+          description: "\n"
+          format: string
+        status:
+          type: string
+          description: "\n"
+          format: string
+        message:
+          type: string
+          description: "\n"
+          format: string
+  parameters:
+    accountId:
+      name: accountId
+      in: path
+      required: true
+      schema:
+        type: string
+    transactionId:
+      name: transactionId
+      in: path
+      required: true
+      schema:
+        type: string
+    startDate:
+      name: startDate
+      in: query
+      required: true
+      schema:
+        type: string
+    endDate:
+      name: endDate
+      in: query
+      required: true
+      schema:
+        type: string
+  requestBodies:
+    InitiatetransferRequest:
+      description: Initiate transfer funds
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InitiatetransferRequest'
+    InitiateDepositRequest:
+        description: createCurrentAccount
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiateDepositRequest'
+    InitiateWithdrawalRequest:
+        description: createCurrentAccount
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiateWithdrawalRequest'
+  responses:
+    RetrieveBalanceResponse:
+        description: fetchBalance
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/RetrieveBalanceResponse'
+    retrieveTransactionListResponse:
+        description: fetchTransactionList
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/retrieveTransactionListResponse'
+    retrieveTransactionDetailsResponse:
+        description: fetchTransactionList
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/retrieveTransactionDetailsResponse'
+    InitiatetransferResponse:
+        description: Initiate transfer funds
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiatetransferResponse'
+    InitiateDepositResponse:
+        description: createCurrentAccount
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiateDepositResponse'
+    InitiateWithdrawalResponse:
+        description: createCurrentAccount
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiateWithdrawalResponse'
+    BadRequest:
+      description: BadRequest
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    NotFound:
+      description: NotFound
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    TooManyRequests:
+      description: TooManyRequests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    InternalServerError:
+      description: InternalServerError
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
