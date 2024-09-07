@@ -6,15 +6,17 @@ info:
 servers:
 - url: 'https://core-api.shine.staging.saas.tmachine.io'
 paths:
-   /{accountId}/transactions/retrieve:
+   /{accountId}/postings/retrieve:
     get:
       tags:
           - Postings
-      summary: InCR Retrieve list of transactions of an account
-      description: InCR Retrieve list of transactions of an account
-      operationId: RetrieveAccountTransactions
+      summary: InCR Retrieve list of postings of an account
+      description: InCR Retrieve list of postings of an account
+      operationId: RetrieveAccountpostings
       parameters:
         - $ref: '#/components/parameters/accountId'
+        - $ref: '#/components/parameters/pageSize'
+        - $ref: '#/components/parameters/pageToken'
       responses:
         '200':
           $ref: '#/components/responses/retrieveTransactionListResponse'
@@ -30,13 +32,13 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
-   /transactions/retrieve:
+   /postings/retrieve:
     get:
       tags:
           - Postings
-      summary: InCR Retrieve list of transactions.
-      description: InCR Retrieve list of transactions.
-      operationId: RetrieveTransactions
+      summary: InCR Retrieve list of postings.
+      description: InCR Retrieve list of postings.
+      operationId: Retrievepostings
       parameters:
         - $ref: '#/components/parameters/startDate'
         - $ref: '#/components/parameters/endDate'
@@ -79,7 +81,7 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
-   /{transactionId}/transactions/retrieve:
+   /{postingId}/postings/retrieve:
     get:
       tags:
           - Postings
@@ -87,7 +89,7 @@ paths:
       description: InCR Retrieve transaction details
       operationId: RetrieveTransactionDetails
       parameters:
-        - $ref: '#/components/parameters/transactionId'
+        - $ref: '#/components/parameters/postingId'
       responses:
         '200':
           $ref: '#/components/responses/retrieveTransactionDetailsResponse'
@@ -103,7 +105,7 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
-   /fundtransfer:
+   /fundtransfer/initiate:
     post:
       tags:
         - Postings
@@ -188,14 +190,6 @@ components:
             type: string
             description: "\n"
             format: string
-          sourceAccountId:
-            type: string
-            description: "\n"
-            format: string
-          targetAccountId:
-            type: string
-            description: "\n"
-            format: string
     target_account:            
       type: object
       properties:
@@ -257,7 +251,7 @@ components:
             type: string
             description: "\n"
             format: string
-          clientTransactionId:
+          clientpostingId:
             type: string
             description: "\n"
             format: string
@@ -271,7 +265,7 @@ components:
             type: string
             description: "\n"
             format: string
-          clientTransactionId:
+          clientpostingId:
             type: string
             description: "\n"
             format: string
@@ -343,11 +337,11 @@ components:
             type: string
             description: "\n"
             format: string
-          account_id:
+          accountId:
             type: string
             description: "\n"
             format: string
-          account_address:
+          accountAddress:
             type: string
             description: "\n"
             format: string
@@ -363,19 +357,19 @@ components:
             type: string
             description: "\n"
             format: string
-          posting_instruction_batch_id:
+          postingInstructionBatchId:
             type: string
             description: "\n"
             format: string
-          value_time:
+          valueTime:
             type: string
             description: "\n"
             format: string
-          total_debit:
+          totalDebit:
             type: string
             description: "\n"
             format: string
-          total_credit:
+          totalCredit:
             type: string
             description: "\n"
             format: string
@@ -460,8 +454,6 @@ components:
               description: "\n"
               format: string        
     TransferOccurrence:
-      type: array
-      items:
           type: object
           properties:
             occurrenceFromAccountId:
@@ -472,43 +464,15 @@ components:
               type: string
               description: "\n"
               format: string
-            occurrenceFromCoreId:
-              type: string
-              description: "\n"
-              format: string
-            occurrenceToCoreId:
-              type: string
-              description: "\n"
-              format: string
-            concurrenceStatus:
-              type: string
-              description: "\n"
-              format: string
-            fundsWithdrawalType:
-              type: string
-              description: "\n"
-              format: string
-            occurrenceMemo:
-              type: string
-              description: "\n"
-              format: string
-            estimatedProcessDateTime:
-              type: string
-              description: "\n"
-              format: string
             createdDateTime:
               type: string
               description: "\n"
               format: string
-            queuedForPosting:
+            eventName:
               type: string
               description: "\n"
               format: string
             note:
-              type: string
-              description: "\n"
-              format: string
-            batchId:
               type: string
               description: "\n"
               format: string
@@ -518,28 +482,30 @@ components:
       type: object
       properties:
         transferOccurrenceMessage:
-          type: object
-          properties:
-            messageContext:
-              type: string
-              description: string
-              format: string
-            transferOccurenceList:
-              type: object
-              properties:
-                transferOccurence:
-                  $ref: '#/components/schemas/TransferOccurrence'
+            $ref: '#/components/schemas/TransferOccurrence'
     InitiatetransferResponse:
       type: object
       properties:
-            status:
-              type: string
-              description: string
-              format: string
-            message:
-              type: string
-              description: string
-              format: string
+          id:
+            type: string
+            description: "\n"
+            format: string
+          metaData:
+            type: string
+            description: "\n"
+            format: string
+          createTimestamp:
+            type: string
+            description: "\n"
+            format: string
+          doneTimestamp:
+            type: string
+            description: "\n"
+            format: string
+          done:
+            type: string
+            description: "\n"
+            format: string
     transactionAmount:
       type: object
       properties:
@@ -568,7 +534,7 @@ components:
           type: string
           description: "\n"
           format: string
-    transactions:
+    postings:
       type: array
       items:
         type: object
@@ -584,15 +550,7 @@ components:
     retrieveTransactionListResponse:
       type: object
       properties:
-        totalDeposit:
-            type: string
-            description: "\n"
-            format: string
-        totalWithdrawal:
-            type: string
-            description: "\n"
-            format: string
-        currentAccountId:
+        accountId:
             type: string
             description: "\n"
             format: string
@@ -604,8 +562,8 @@ components:
             type: string
             description: "\n"
             format: string
-        transactions:
-           $ref: '#/components/schemas/transactions'
+        postings:
+           $ref: '#/components/schemas/postings'
     retrieveTransactionDetailsResponse:
         type: object
         properties:
@@ -639,8 +597,8 @@ components:
       required: true
       schema:
         type: string
-    transactionId:
-      name: transactionId
+    postingId:
+      name: postingId
       in: path
       required: true
       schema:
@@ -652,6 +610,18 @@ components:
       schema:
         type: string
     endDate:
+      name: endDate
+      in: query
+      required: true
+      schema:
+        type: string
+    pageSize:
+      name: pageSize
+      in: query
+      required: true
+      schema:
+        type: string
+    pageToken:
       name: endDate
       in: query
       required: true
