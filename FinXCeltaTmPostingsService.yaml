@@ -42,6 +42,8 @@ paths:
       parameters:
         - $ref: '#/components/parameters/startDate'
         - $ref: '#/components/parameters/endDate'
+        - $ref: '#/components/parameters/pageSize'
+        - $ref: '#/components/parameters/pageToken'
       responses:
         '200':
           $ref: '#/components/responses/retrieveTransactionListResponse'
@@ -622,7 +624,7 @@ components:
       schema:
         type: string
     pageToken:
-      name: endDate
+      name: pageToken
       in: query
       required: true
       schema:
