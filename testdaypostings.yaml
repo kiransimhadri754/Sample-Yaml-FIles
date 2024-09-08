@@ -264,10 +264,7 @@ components:
                 type: string
                 description: "\n"
                 format: string
-    retrieveTransactionListResponse:
-      type: object
-      properties:
-        postingInstructionsBatches:
+    postingInstructionsBatches:
           type: array
           items: 
             properties:
@@ -319,6 +316,11 @@ components:
                 type: string
                 description: "\n"
                 format: string
+    retrieveTransactionListResponse:
+      type: object
+      properties:
+        postingInstructionsBatches:
+            $ref: '#/components/schemas/postingInstructionsBatches'
         previousPageToken:
                 type: string
                 description: "\n"
