@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: FinXCeltaTmPostingsService
-  description: BIAN Service Domain Packaged Business Capability (PCB) | DDD Bounded Context Transaction Listing.
+  description: BIAN Service Domain Packaged Business Capability (PCB) | DDD Bounded Context posting Listing.
   version: 12.0.1
 servers:
 - url: 'https://core-api.shine.staging.saas.tmachine.io'
@@ -19,7 +19,7 @@ paths:
         - $ref: '#/components/parameters/pageToken'
       responses:
         '200':
-          $ref: '#/components/responses/retrieveTransactionListResponse'
+          $ref: '#/components/responses/retrievepostingListResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -46,7 +46,7 @@ paths:
         - $ref: '#/components/parameters/pageToken'
       responses:
         '200':
-          $ref: '#/components/responses/retrieveTransactionListResponse'
+          $ref: '#/components/responses/retrievepostingListResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -87,14 +87,14 @@ paths:
     get:
       tags:
           - Postings
-      summary: InCR Retrieve transaction details
-      description: InCR Retrieve transaction details
-      operationId: RetrieveTransactionDetails
+      summary: InCR Retrieve posting details
+      description: InCR Retrieve posting details
+      operationId: RetrievepostingDetails
       parameters:
         - $ref: '#/components/parameters/postingId'
       responses:
         '200':
-          $ref: '#/components/responses/retrieveTransactionDetailsResponse'
+          $ref: '#/components/responses/retrievepostingDetailsResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -131,12 +131,12 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
-   /transaction/deposits/initiate:
+   /posting/deposits/initiate:
     post:
       tags:
           - Postings
-      summary: InCR Initiate deposit transaction for an account
-      description: InCR Initiate deposit transaction for an account
+      summary: InCR Initiate deposit posting for an account
+      description: InCR Initiate deposit posting for an account
       operationId: InitiateDeposit
       requestBody:
         $ref: '#/components/requestBodies/InitiateDepositRequest'
@@ -155,12 +155,12 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
-   /transaction/withdrawals/initiate:
+   /posting/withdrawals/initiate:
     post:
       tags:
           - Postings
-      summary: InCR Initiate withdrawal transaction for an account
-      description: InCR Initiate withdrawal transaction for an account
+      summary: InCR Initiate withdrawal posting for an account
+      description: InCR Initiate withdrawal posting for an account
       operationId: InitiateWithdrawal
       requestBody:
         $ref: '#/components/requestBodies/InitiateWithdrawalRequest'
@@ -273,7 +273,7 @@ components:
             format: string
           outboundHardSettlement:
             $ref: '#/components/schemas/outbound_hard_settlement'
-    DepositTransaction:
+    Depositposting:
       type: object
       properties:
           id:
@@ -302,7 +302,7 @@ components:
             type: string
             description: "\n"
             format: string
-    WithdrawalTransaction:
+    Withdrawalposting:
       type: object
       properties:
           id:
@@ -388,7 +388,7 @@ components:
             description: "\n"
             format: string
         postingInstructionBatch: 
-          $ref: '#/components/schemas/DepositTransaction'
+          $ref: '#/components/schemas/Depositposting'
     InitiateDepositResponse:
       type: object
       properties:
@@ -420,7 +420,7 @@ components:
             description: "\n"
             format: string
         postingInstructionBatch: 
-          $ref: '#/components/schemas/WithdrawalTransaction'
+          $ref: '#/components/schemas/Withdrawalposting'
     InitiateWithdrawalResponse:
       type: object
       properties:
@@ -508,7 +508,7 @@ components:
             type: string
             description: "\n"
             format: string
-    transactionAmount:
+    postingAmount:
       type: object
       properties:
         amountValue:
@@ -522,7 +522,7 @@ components:
           type: string
           description: "\n"
           format: string
-    transactionDate:
+    postingDate:
       type: object
       properties:
         dateContent:
@@ -541,15 +541,15 @@ components:
       items:
         type: object
         properties:
-              transactionAmount:
-                  $ref: '#/components/schemas/transactionAmount'
+              postingAmount:
+                  $ref: '#/components/schemas/postingAmount'
               amountCurrency:
                   $ref: '#/components/schemas/amountCurrency'
-              transactionDate:
-                  $ref: '#/components/schemas/transactionDate'
+              postingDate:
+                  $ref: '#/components/schemas/postingDate'
               insertionDate:
                   $ref: '#/components/schemas/insertionDate'
-    retrieveTransactionListResponse:
+    retrievepostingListResponse:
       type: object
       properties:
         accountId:
@@ -566,15 +566,23 @@ components:
             format: string
         postings:
            $ref: '#/components/schemas/postings'
-    retrieveTransactionDetailsResponse:
+        previousPageToken:
+            type: string
+            description: "\n"
+            format: string
+        nextPageToken:
+            type: string
+            description: "\n"
+            format: string
+    retrievepostingDetailsResponse:
         type: object
         properties:
-              transactionAmount:
-                  $ref: '#/components/schemas/transactionAmount'
+              postingAmount:
+                  $ref: '#/components/schemas/postingAmount'
               amountCurrency:
                   $ref: '#/components/schemas/amountCurrency'
-              transactionDate:
-                  $ref: '#/components/schemas/transactionDate'
+              postingDate:
+                  $ref: '#/components/schemas/postingDate'
               insertionDate:
                   $ref: '#/components/schemas/insertionDate'
     HTTPError:
@@ -655,18 +663,18 @@ components:
           application/json:
             schema:
                 $ref: '#/components/schemas/RetrieveBalanceResponse'
-    retrieveTransactionListResponse:
-        description: fetchTransactionList
+    retrievepostingListResponse:
+        description: fetchpostingList
         content:
           application/json:
             schema:
-                $ref: '#/components/schemas/retrieveTransactionListResponse'
-    retrieveTransactionDetailsResponse:
-        description: fetchTransactionList
+                $ref: '#/components/schemas/retrievepostingListResponse'
+    retrievepostingDetailsResponse:
+        description: fetchpostingList
         content:
           application/json:
             schema:
-                $ref: '#/components/schemas/retrieveTransactionDetailsResponse'
+                $ref: '#/components/schemas/retrievepostingDetailsResponse'
     InitiatetransferResponse:
         description: Initiate transfer funds
         content:
