@@ -19,7 +19,7 @@ paths:
         - $ref: '#/components/parameters/pageToken'
       responses:
         '200':
-          $ref: '#/components/responses/retrievepostingListResponse'
+          $ref: '#/components/responses/retrievePostingsListResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -46,7 +46,7 @@ paths:
         - $ref: '#/components/parameters/pageToken'
       responses:
         '200':
-          $ref: '#/components/responses/retrievepostingListResponse'
+          $ref: '#/components/responses/retrievePostingsResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -536,44 +536,6 @@ components:
           type: string
           description: "\n"
           format: string
-    postings:
-      type: array
-      items:
-        type: object
-        properties:
-              postingAmount:
-                  $ref: '#/components/schemas/postingAmount'
-              amountCurrency:
-                  $ref: '#/components/schemas/amountCurrency'
-              postingDate:
-                  $ref: '#/components/schemas/postingDate'
-              insertionDate:
-                  $ref: '#/components/schemas/insertionDate'
-    retrievepostingListResponse:
-      type: object
-      properties:
-        accountId:
-            type: string
-            description: "\n"
-            format: string
-        startDate:
-            type: string
-            description: "\n"
-            format: string
-        endDate:
-            type: string
-            description: "\n"
-            format: string
-        postings:
-           $ref: '#/components/schemas/postings'
-        previousPageToken:
-            type: string
-            description: "\n"
-            format: string
-        nextPageToken:
-            type: string
-            description: "\n"
-            format: string
     retrievepostingDetailsResponse:
         type: object
         properties:
@@ -585,6 +547,394 @@ components:
                   $ref: '#/components/schemas/postingDate'
               insertionDate:
                   $ref: '#/components/schemas/insertionDate'
+    error:
+      type: object
+      properties:
+        type:
+          type: string
+          description: "\n"
+          format: string
+        message:
+          type: string
+          description: "\n"
+          format: string
+    transactionCode:
+      type: array
+      items:
+        properties:
+          domain:
+            type: string
+            description: "\n"
+            format: string
+          family:
+            type: string
+            description: "\n"
+            format: string
+          subFamily:
+            type: string
+            description: "\n"
+            format: string
+    restrictionSetIds:
+      type: array
+      items:
+        type: string
+    restrictions:
+      type: object
+      properties:
+          all:
+            type: string
+            description: "\n"
+            format: string
+          restrictionSetIds:
+            $ref: '#/components/schemas/restrictionSetIds'
+    overRide:
+      type: object
+      properties:
+          restrictions:
+            $ref: '#/components/schemas/restrictions'
+    postingViolations:
+      type: array
+      items:
+        properties:
+          type:
+            type: string
+            description: "\n"
+            format: string
+    accountViolations:
+      type: array
+      items:
+        properties:
+          accountId:
+            type: string
+            description: "\n"
+            format: string
+          paymentDeviceToken:
+            type: string
+            description: "\n"
+            format: string
+          type:
+            type: string
+            description: "\n"
+            format: string
+    restrictionViolations:
+      type: array
+      items:
+        properties:
+          restrictionSetId:
+            type: string
+            description: "\n"
+            format: string
+          accountId:
+            type: string
+            description: "\n"
+            format: string
+          paymentDeviceId:
+            type: string
+            description: "\n"
+            format: string
+          customerId:
+            type: string
+            description: "\n"
+            format: string
+          requiresReview:
+            type: string
+            description: "\n"
+            format: string
+    contractViolations:
+      type: array
+      items:
+        properties:
+          accountId:
+            type: string
+            description: "\n"
+            format: string
+          type:
+            type: string
+            description: "\n"
+            format: string
+          reason:
+            type: string
+            description: "\n"
+            format: string
+    commitedPostings:
+      type: array
+      items:
+        properties:
+          credit:
+            type: string
+            description: "\n"
+            format: string
+          amount:
+            type: string
+            description: "\n"
+            format: string
+          denomination:
+            type: string
+            description: "\n"
+            format: string
+          accountId:
+            type: string
+            description: "\n"
+            format: string
+          accountAddress:
+            type: string
+            description: "\n"
+            format: string
+          phase:
+            type: string
+            description: "\n"
+            format: string
+          asset:
+            type: string
+            description: "\n"
+            format: string
+    instructionDetails:
+      type: object
+      properties:
+        eventName:
+          type: string
+          description: "\n"
+          format: string
+        narration:
+          type: string
+          description: "\n"
+          format: string
+    debtorTargetAccount:
+      type: object
+      properties:
+        accountId:
+          type: string
+          description: "\n"
+          format: string
+    creditorTargetAccount:
+      type: object
+      properties:
+        accountId:
+          type: string
+          description: "\n"
+          format: string
+    transfer:
+        type: object
+        properties:
+              amount:
+                type: string
+                description: "\n"
+                format: string
+              denomination:
+                type: string
+                description: "\n"
+                format: string
+              debtorTargetAccount:
+                $ref: '#/components/schemas/debtorTargetAccount'
+              debtorTargetAccountId:
+                type: string
+                description: "\n"
+                format: string
+              creditorTargetAccount:
+                $ref: '#/components/schemas/creditorTargetAccount'
+              creditorTargetAccountId:
+                type: string
+                description: "\n"
+                format: string
+    pics:
+      type: array
+      items:
+        type: string
+    postingInstructions:
+      type: array
+      items:
+        type: object
+        properties:
+              id:
+                type: string
+                description: "\n"
+                format: string
+              clientTransactionId:
+                type: string
+                description: "\n"
+                format: string
+              transfer:
+                $ref: '#/components/schemas/transfer'
+              pics:
+                $ref: '#/components/schemas/pics'
+              instructionDetails:
+                $ref: '#/components/schemas/instructionDetails'
+              commitedPostings:
+                $ref: '#/components/schemas/commitedPostings'
+              postingViolations:
+                $ref: '#/components/schemas/postingViolations'
+              accountViolations:
+                $ref: '#/components/schemas/accountViolations'
+              restrictionViolations:
+                $ref: '#/components/schemas/restrictionViolations'
+              contractViolations:
+                $ref: '#/components/schemas/contractViolations'
+              overRide:
+                $ref: '#/components/schemas/overRide'
+              transactionCode:
+                $ref: '#/components/schemas/transactionCode'
+              bookingLocalisedDateTime:
+                type: string
+                description: "\n"
+                format: string
+    postingInstructionsBatches:
+          type: array
+          items: 
+            properties:
+              id:
+                type: string
+                description: "\n"
+                format: string
+              createRequestId:
+                type: string
+                description: "\n"
+                format: string
+              clientId:
+                type: string
+                description: "\n"
+                format: string
+              clientBatchId:
+                type: string
+                description: "\n"
+                format: string
+              postingInstructions:
+                $ref: '#/components/schemas/postingInstructions'
+              batchDetails:
+                type: string
+                description: "\n"
+                format: string
+              valueTimeStamp:
+                type: string
+                description: "\n"
+                format: string
+              bookingTimeStamp:
+                type: string
+                description: "\n"
+                format: string
+              status:
+                type: string
+                description: "\n"
+                format: string
+              error:
+                $ref: '#/components/schemas/error'
+              insertionTimeStamp:
+                type: string
+                description: "\n"
+                format: string
+              sourceInsertionTimeStamp:
+                type: string
+                description: "\n"
+                format: string
+              dryRun:
+                type: string
+                description: "\n"
+                format: string
+    postingInstructionsBatch:
+          type: object
+          properties:
+              "@type":
+                type: string
+                description: "\n"
+                format: string
+              id:
+                type: string
+                description: "\n"
+                format: string
+              createRequestId:
+                type: string
+                description: "\n"
+                format: string
+              clientId:
+                type: string
+                description: "\n"
+                format: string
+              clientBatchId:
+                type: string
+                description: "\n"
+                format: string
+              postingInstructions:
+                $ref: '#/components/schemas/postingInstructions'
+              batchDetails:
+                type: string
+                description: "\n"
+                format: string
+              valueTimeStamp:
+                type: string
+                description: "\n"
+                format: string
+              bookingTimeStamp:
+                type: string
+                description: "\n"
+                format: string
+              status:
+                type: string
+                description: "\n"
+                format: string
+              error:
+                $ref: '#/components/schemas/error'
+              insertionTimeStamp:
+                type: string
+                description: "\n"
+                format: string
+              sourceInsertionTimeStamp:
+                type: string
+                description: "\n"
+                format: string
+              dryRun:
+                type: string
+                description: "\n"
+                format: string
+    retrievePostingsListResponse:
+      type: object
+      properties:
+        postingInstructionsBatches:
+            $ref: '#/components/schemas/postingInstructionsBatches'
+        previousPageToken:
+            type: string
+            description: "\n"
+            format: string
+        nextPageToken:
+            type: string
+            description: "\n"
+            format: string
+    asyncOperations:
+      type: object
+      properties:
+          id:
+            type: string
+            description: "\n"
+            format: string
+          metaData:
+            type: string
+            description: "\n"
+            format: string
+          createTimestamp:
+            type: string
+            description: "\n"
+            format: string
+          doneTimestamp:
+            type: string
+            description: "\n"
+            format: string
+          done:
+            type: string
+            description: "\n"
+            format: string
+          response:
+            $ref: '#/components/schemas/postingInstructionsBatch'
+    retrievePostingsResponse:
+      type: object
+      properties:
+        asyncOperations:
+            $ref: '#/components/schemas/asyncOperations'
+        previousPageToken:
+            type: string
+            description: "\n"
+            format: string
+        nextPageToken:
+            type: string
+            description: "\n"
+            format: string
     HTTPError:
       type: object
       properties:
@@ -663,12 +1013,18 @@ components:
           application/json:
             schema:
                 $ref: '#/components/schemas/RetrieveBalanceResponse'
-    retrievepostingListResponse:
+    retrievePostingsListResponse:
         description: fetchpostingList
         content:
           application/json:
             schema:
-                $ref: '#/components/schemas/retrievepostingListResponse'
+                $ref: '#/components/schemas/retrievePostingsListResponse'
+    retrievePostingsResponse:
+        description: fetchpostingList
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/retrievePostingsResponse'
     retrievepostingDetailsResponse:
         description: fetchpostingList
         content:
