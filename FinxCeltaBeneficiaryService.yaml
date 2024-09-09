@@ -30,7 +30,7 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
-   /{customerId}/beneficiaries/retrieve:
+   /{customerReference}/beneficiaries/retrieve:
     get:
       tags:
           - Beneficiaries
@@ -38,7 +38,7 @@ paths:
       description: InCR Retrieve list of Beneficiaries for customer.
       operationId: RetrieveBeneficiaries
       parameters:
-        - $ref: '#/components/parameters/customerId'
+        - $ref: '#/components/parameters/customerReference'
       responses:
         '200':
           $ref: '#/components/responses/RetrieveBenificiaryResponse'
@@ -88,13 +88,13 @@ paths:
       description: InCR Search beneficiaries of customer.
       operationId: SearchBeneficiaries
       parameters:
-        - $ref: '#/components/parameters/email'
+        - $ref: '#/components/parameters/emailAddress'
         - $ref: '#/components/parameters/firstName'
         - $ref: '#/components/parameters/lastName'
         - $ref: '#/components/parameters/compName'
         - $ref: '#/components/parameters/beneBankName'
         - $ref: '#/components/parameters/beneBankBic'
-        - $ref: '#/components/parameters/accountNumber'
+        - $ref: '#/components/parameters/accountReference'
       responses:
         '200':
           $ref: '#/components/responses/SearchBenificiaryResponse'
@@ -123,7 +123,7 @@ components:
           type: string
           description: "\n"
           format: string
-        customerId:
+        customerReference:
           type: string
           description: "\n"
           format: string
@@ -143,7 +143,7 @@ components:
           type: string
           description: "\n"
           format: string
-        accountNumber:
+        accountReference:
           type: string
           description: "\n"
           format: string
@@ -207,7 +207,7 @@ components:
           type: string
           description: "\n"
           format: string
-        email:
+        emailAddress:
           type: string
           description: "\n"
           format: string
@@ -262,7 +262,7 @@ components:
           type: string
           description: "\n"
           format: string
-        customerId:
+        customerReference:
           type: string
           description: "\n"
           format: string
@@ -282,7 +282,7 @@ components:
           type: string
           description: "\n"
           format: string
-        accountNumber:
+        accountReference:
           type: string
           description: "\n"
           format: string
@@ -346,7 +346,7 @@ components:
           type: string
           description: "\n"
           format: string
-        email:
+        emailAddress:
           type: string
           description: "\n"
           format: string
@@ -390,7 +390,7 @@ components:
           type: string
           description: "\n"
           format: string
-    RetrieveBenificiaryResponse:
+    BenificiaryResponse:
       type: array
       items:
         properties:
@@ -402,7 +402,7 @@ components:
             type: string
             description: "\n"
             format: string
-          customerId:
+          customerReference:
             type: string
             description: "\n"
             format: string
@@ -422,7 +422,7 @@ components:
             type: string
             description: "\n"
             format: string
-          accountNumber:
+          accountReference:
             type: string
             description: "\n"
             format: string
@@ -486,7 +486,7 @@ components:
             type: string
             description: "\n"
             format: string
-          email:
+          emailAddress:
             type: string
             description: "\n"
             format: string
@@ -530,6 +530,11 @@ components:
             type: string
             description: "\n"
             format: string
+    RetrieveBenificiaryResponse:
+      type: object
+      properties:
+        benificiaries: 
+          $ref: '#/components/schemas/BenificiaryResponse'
     UpdateBenificiaryRequest:
       type: object
       properties:
@@ -541,7 +546,7 @@ components:
           type: string
           description: "\n"
           format: string
-        customerId:
+        customerReference:
           type: string
           description: "\n"
           format: string
@@ -561,7 +566,7 @@ components:
           type: string
           description: "\n"
           format: string
-        accountNumber:
+        accountReference:
           type: string
           description: "\n"
           format: string
@@ -625,7 +630,7 @@ components:
           type: string
           description: "\n"
           format: string
-        email:
+        emailAddress:
           type: string
           description: "\n"
           format: string
@@ -692,7 +697,7 @@ components:
             type: string
             description: "\n"
             format: string
-          customerId:
+          customerReference:
             type: string
             description: "\n"
             format: string
@@ -712,7 +717,7 @@ components:
             type: string
             description: "\n"
             format: string
-          accountNumber:
+          accountReference:
             type: string
             description: "\n"
             format: string
@@ -776,7 +781,7 @@ components:
             type: string
             description: "\n"
             format: string
-          email:
+          emailAddress:
             type: string
             description: "\n"
             format: string
@@ -836,8 +841,8 @@ components:
           description: "\n"
           format: string
   parameters:
-    customerId:
-      name: customerId
+    customerReference:
+      name: customerReference
       in: path
       required: true
       schema:
@@ -851,41 +856,41 @@ components:
     lastName:
       name: lastName
       in: query
-      required: true
+      required: false
       schema:
         type: string
     firstName:
       name: firstName
       in: query
-      required: true
+      required: false
       schema:
         type: string
     compName:
       name: compName
       in: query
-      required: true
+      required: false
       schema:
         type: string
-    accountNumber:
-      name: accountNumber
+    accountReference:
+      name: accountReference
       in: query
-      required: true
+      required: false
       schema:
         type: string
     beneBankName:
       name: beneBankName
       in: query
-      required: true
+      required: false
       schema:
         type: string 
     beneBankBic:
       name: beneBankBic
       in: query
-      required: true
+      required: false
       schema:
         type: string 
-    email:
-      name: customerId
+    emailAddress:
+      name: customerReference
       in: query
       required: true
       schema:
