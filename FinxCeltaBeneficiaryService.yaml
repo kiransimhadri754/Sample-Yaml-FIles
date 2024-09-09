@@ -85,9 +85,10 @@ paths:
       tags:
           - Beneficiaries
       summary: InCR Search beneficiaries of customer.
-      description: InCR Updates beneficiaries of customer.
+      description: InCR Search beneficiaries of customer.
       operationId: SearchBeneficiaries
       parameters:
+        - $ref: '#/components/parameters/email'
         - $ref: '#/components/parameters/firstName'
         - $ref: '#/components/parameters/lastName'
         - $ref: '#/components/parameters/compName'
@@ -879,6 +880,12 @@ components:
         type: string 
     beneBankBic:
       name: beneBankBic
+      in: query
+      required: true
+      schema:
+        type: string 
+    email:
+      name: customerId
       in: query
       required: true
       schema:
