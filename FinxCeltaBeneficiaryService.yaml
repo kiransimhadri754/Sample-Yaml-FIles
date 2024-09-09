@@ -1,0 +1,959 @@
+openapi: 3.0.1
+info:
+  title: FinxCeltaBeneficiaryService
+  description: BIAN Service Domain Packaged Business Capability (PCB) | DDD Bounded Context Beneficiaries.
+  version: 12.0.1
+servers:
+- url: 'https://core-api.shine.staging.saas.tmachine.io'
+paths:
+   /beneficiary/initiate:
+    post:
+      tags:
+          - Beneficiaries
+      summary: InCR Initiate benificiary for a customer.
+      description: InCR Initiate benificiary for a customer.
+      operationId: InitiateBeneficiary
+      requestBody:
+          $ref: '#/components/requestBodies/InitiateBenificiaryRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiateBenificiaryResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+   /{customerId}/beneficiaries/retrieve:
+    get:
+      tags:
+          - Beneficiaries
+      summary: InCR Retrieve list of Beneficiaries for customer.
+      description: InCR Retrieve list of Beneficiaries for customer.
+      operationId: RetrieveBeneficiaries
+      parameters:
+        - $ref: '#/components/parameters/customerId'
+      responses:
+        '200':
+          $ref: '#/components/responses/RetrieveBenificiaryResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+   /{beneficiaryId}/beneficiary/update:
+    put:
+      tags:
+          - Beneficiaries
+      summary: InCR Updates beneficiaries of customer.
+      description: InCR Updates beneficiaries of customer.
+      operationId: UpdateBeneficiary
+      parameters:
+        - $ref: '#/components/parameters/beneficiaryId'
+      requestBody:
+          $ref: '#/components/requestBodies/UpdateBenificiaryRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/UpdateBenificiaryResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+   /search/beneficiaries/retrieve:
+    get:
+      tags:
+          - Beneficiaries
+      summary: InCR Search beneficiaries of customer.
+      description: InCR Updates beneficiaries of customer.
+      operationId: SearchBeneficiaries
+      parameters:
+        - $ref: '#/components/parameters/firstName'
+        - $ref: '#/components/parameters/lastName'
+        - $ref: '#/components/parameters/compName'
+        - $ref: '#/components/parameters/beneBankName'
+        - $ref: '#/components/parameters/beneBankBic'
+        - $ref: '#/components/parameters/accountNumber'
+      responses:
+        '200':
+          $ref: '#/components/responses/SearchBenificiaryResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  schemas:
+    InitiateBenificiaryRequest:
+      type: object
+      properties:
+        beneficiaryId:
+          type: string
+          description: "\n"
+          format: string
+        beneficiaryShortName:
+          type: string
+          description: "\n"
+          format: string
+        customerId:
+          type: string
+          description: "\n"
+          format: string
+        beneficiaryType:
+          type: string
+          description: "\n"
+          format: string
+        firstName:
+          type: string
+          description: "\n"
+          format: string
+        lastName:
+          type: string
+          description: "\n"
+          format: string
+        compName:
+          type: string
+          description: "\n"
+          format: string
+        accountNumber:
+          type: string
+          description: "\n"
+          format: string
+        beneBankName:
+          type: string
+          description: "\n"
+          format: string
+        beneBankBic:
+          type: string
+          description: "\n"
+          format: string
+        corresBankBic1:
+          type: string
+          description: "\n"
+          format: string
+        corresBankName1:
+          type: string
+          description: "\n"
+          format: string
+        corresBankAccount1:
+          type: string
+          description: "\n"
+          format: string
+        corresBankBic2:
+          type: string
+          description: "\n"
+          format: string
+        corresBankName2:
+          type: string
+          description: "\n"
+          format: string
+        corresBankAccount2:
+          type: string
+          description: "\n"
+          format: string
+        isPrimary:
+          type: string
+          description: "\n"
+          format: string
+        maxLimitAmount:
+          type: string
+          description: "\n"
+          format: string
+        maxLimitNumberOfTransfers:
+          type: string
+          description: "\n"
+          format: string
+        status:
+          type: string
+          description: "\n"
+          format: string
+        approvalStatus:
+          type: string
+          description: "\n"
+          format: string
+        createdOn:
+          type: string
+          description: "\n"
+          format: string
+        updatedOn:
+          type: string
+          description: "\n"
+          format: string
+        email:
+          type: string
+          description: "\n"
+          format: string
+        phoneNumber:
+          type: string
+          description: "\n"
+          format: string
+        nationalId:
+          type: string
+          description: "\n"
+          format: string
+        dateOfBirth:
+          type: string
+          description: "\n"
+          format: string
+        date_of_incorp:
+          type: string
+          description: "\n"
+          format: string
+        addressLine1:
+          type: string
+          description: "\n"
+          format: string
+        addressLine2:
+          type: string
+          description: "\n"
+          format: string
+        city:
+          type: string
+          description: "\n"
+          format: string
+        state:
+          type: string
+          description: "\n"
+          format: string
+        country:
+          type: string
+          description: "\n"
+          format: string
+        postalCode:
+          type: string
+          description: "\n"
+          format: string
+    InitiateBenificiaryResponse:
+      type: object
+      properties:
+        beneficiaryId:
+          type: string
+          description: "\n"
+          format: string
+        beneficiaryShortName:
+          type: string
+          description: "\n"
+          format: string
+        customerId:
+          type: string
+          description: "\n"
+          format: string
+        beneficiaryType:
+          type: string
+          description: "\n"
+          format: string
+        firstName:
+          type: string
+          description: "\n"
+          format: string
+        lastName:
+          type: string
+          description: "\n"
+          format: string
+        compName:
+          type: string
+          description: "\n"
+          format: string
+        accountNumber:
+          type: string
+          description: "\n"
+          format: string
+        beneBankName:
+          type: string
+          description: "\n"
+          format: string
+        beneBankBic:
+          type: string
+          description: "\n"
+          format: string
+        corresBankBic1:
+          type: string
+          description: "\n"
+          format: string
+        corresBankName1:
+          type: string
+          description: "\n"
+          format: string
+        corresBankAccount1:
+          type: string
+          description: "\n"
+          format: string
+        corresBankBic2:
+          type: string
+          description: "\n"
+          format: string
+        corresBankName2:
+          type: string
+          description: "\n"
+          format: string
+        corresBankAccount2:
+          type: string
+          description: "\n"
+          format: string
+        isPrimary:
+          type: string
+          description: "\n"
+          format: string
+        maxLimitAmount:
+          type: string
+          description: "\n"
+          format: string
+        maxLimitNumberOfTransfers:
+          type: string
+          description: "\n"
+          format: string
+        status:
+          type: string
+          description: "\n"
+          format: string
+        approvalStatus:
+          type: string
+          description: "\n"
+          format: string
+        createdOn:
+          type: string
+          description: "\n"
+          format: string
+        updatedOn:
+          type: string
+          description: "\n"
+          format: string
+        email:
+          type: string
+          description: "\n"
+          format: string
+        phoneNumber:
+          type: string
+          description: "\n"
+          format: string
+        nationalId:
+          type: string
+          description: "\n"
+          format: string
+        dateOfBirth:
+          type: string
+          description: "\n"
+          format: string
+        date_of_incorp:
+          type: string
+          description: "\n"
+          format: string
+        addressLine1:
+          type: string
+          description: "\n"
+          format: string
+        addressLine2:
+          type: string
+          description: "\n"
+          format: string
+        city:
+          type: string
+          description: "\n"
+          format: string
+        state:
+          type: string
+          description: "\n"
+          format: string
+        country:
+          type: string
+          description: "\n"
+          format: string
+        postalCode:
+          type: string
+          description: "\n"
+          format: string
+    RetrieveBenificiaryResponse:
+      type: array
+      items:
+        properties:
+          beneficiaryId:
+            type: string
+            description: "\n"
+            format: string
+          beneficiaryShortName:
+            type: string
+            description: "\n"
+            format: string
+          customerId:
+            type: string
+            description: "\n"
+            format: string
+          beneficiaryType:
+            type: string
+            description: "\n"
+            format: string
+          firstName:
+            type: string
+            description: "\n"
+            format: string
+          lastName:
+            type: string
+            description: "\n"
+            format: string
+          compName:
+            type: string
+            description: "\n"
+            format: string
+          accountNumber:
+            type: string
+            description: "\n"
+            format: string
+          beneBankName:
+            type: string
+            description: "\n"
+            format: string
+          beneBankBic:
+            type: string
+            description: "\n"
+            format: string
+          corresBankBic1:
+            type: string
+            description: "\n"
+            format: string
+          corresBankName1:
+            type: string
+            description: "\n"
+            format: string
+          corresBankAccount1:
+            type: string
+            description: "\n"
+            format: string
+          corresBankBic2:
+            type: string
+            description: "\n"
+            format: string
+          corresBankName2:
+            type: string
+            description: "\n"
+            format: string
+          corresBankAccount2:
+            type: string
+            description: "\n"
+            format: string
+          isPrimary:
+            type: string
+            description: "\n"
+            format: string
+          maxLimitAmount:
+            type: string
+            description: "\n"
+            format: string
+          maxLimitNumberOfTransfers:
+            type: string
+            description: "\n"
+            format: string
+          status:
+            type: string
+            description: "\n"
+            format: string
+          approvalStatus:
+            type: string
+            description: "\n"
+            format: string
+          createdOn:
+            type: string
+            description: "\n"
+            format: string
+          updatedOn:
+            type: string
+            description: "\n"
+            format: string
+          email:
+            type: string
+            description: "\n"
+            format: string
+          phoneNumber:
+            type: string
+            description: "\n"
+            format: string
+          nationalId:
+            type: string
+            description: "\n"
+            format: string
+          dateOfBirth:
+            type: string
+            description: "\n"
+            format: string
+          date_of_incorp:
+            type: string
+            description: "\n"
+            format: string
+          addressLine1:
+            type: string
+            description: "\n"
+            format: string
+          addressLine2:
+            type: string
+            description: "\n"
+            format: string
+          city:
+            type: string
+            description: "\n"
+            format: string
+          state:
+            type: string
+            description: "\n"
+            format: string
+          country:
+            type: string
+            description: "\n"
+            format: string
+          postalCode:
+            type: string
+            description: "\n"
+            format: string
+    UpdateBenificiaryRequest:
+      type: object
+      properties:
+        beneficiaryId:
+          type: string
+          description: "\n"
+          format: string
+        beneficiaryShortName:
+          type: string
+          description: "\n"
+          format: string
+        customerId:
+          type: string
+          description: "\n"
+          format: string
+        beneficiaryType:
+          type: string
+          description: "\n"
+          format: string
+        firstName:
+          type: string
+          description: "\n"
+          format: string
+        lastName:
+          type: string
+          description: "\n"
+          format: string
+        compName:
+          type: string
+          description: "\n"
+          format: string
+        accountNumber:
+          type: string
+          description: "\n"
+          format: string
+        beneBankName:
+          type: string
+          description: "\n"
+          format: string
+        beneBankBic:
+          type: string
+          description: "\n"
+          format: string
+        corresBankBic1:
+          type: string
+          description: "\n"
+          format: string
+        corresBankName1:
+          type: string
+          description: "\n"
+          format: string
+        corresBankAccount1:
+          type: string
+          description: "\n"
+          format: string
+        corresBankBic2:
+          type: string
+          description: "\n"
+          format: string
+        corresBankName2:
+          type: string
+          description: "\n"
+          format: string
+        corresBankAccount2:
+          type: string
+          description: "\n"
+          format: string
+        isPrimary:
+          type: string
+          description: "\n"
+          format: string
+        maxLimitAmount:
+          type: string
+          description: "\n"
+          format: string
+        maxLimitNumberOfTransfers:
+          type: string
+          description: "\n"
+          format: string
+        status:
+          type: string
+          description: "\n"
+          format: string
+        approvalStatus:
+          type: string
+          description: "\n"
+          format: string
+        createdOn:
+          type: string
+          description: "\n"
+          format: string
+        updatedOn:
+          type: string
+          description: "\n"
+          format: string
+        email:
+          type: string
+          description: "\n"
+          format: string
+        phoneNumber:
+          type: string
+          description: "\n"
+          format: string
+        nationalId:
+          type: string
+          description: "\n"
+          format: string
+        dateOfBirth:
+          type: string
+          description: "\n"
+          format: string
+        date_of_incorp:
+          type: string
+          description: "\n"
+          format: string
+        addressLine1:
+          type: string
+          description: "\n"
+          format: string
+        addressLine2:
+          type: string
+          description: "\n"
+          format: string
+        city:
+          type: string
+          description: "\n"
+          format: string
+        state:
+          type: string
+          description: "\n"
+          format: string
+        country:
+          type: string
+          description: "\n"
+          format: string
+        postalCode:
+          type: string
+          description: "\n"
+          format: string
+    UpdateBenificiaryResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          description: "\n"
+          format: string
+        message:
+          type: string
+          description: "\n"
+          format: string
+    SearchBenificiaryResponse:
+      type: array
+      items:
+        properties:
+          beneficiaryId:
+            type: string
+            description: "\n"
+            format: string
+          beneficiaryShortName:
+            type: string
+            description: "\n"
+            format: string
+          customerId:
+            type: string
+            description: "\n"
+            format: string
+          beneficiaryType:
+            type: string
+            description: "\n"
+            format: string
+          firstName:
+            type: string
+            description: "\n"
+            format: string
+          lastName:
+            type: string
+            description: "\n"
+            format: string
+          compName:
+            type: string
+            description: "\n"
+            format: string
+          accountNumber:
+            type: string
+            description: "\n"
+            format: string
+          beneBankName:
+            type: string
+            description: "\n"
+            format: string
+          beneBankBic:
+            type: string
+            description: "\n"
+            format: string
+          corresBankBic1:
+            type: string
+            description: "\n"
+            format: string
+          corresBankName1:
+            type: string
+            description: "\n"
+            format: string
+          corresBankAccount1:
+            type: string
+            description: "\n"
+            format: string
+          corresBankBic2:
+            type: string
+            description: "\n"
+            format: string
+          corresBankName2:
+            type: string
+            description: "\n"
+            format: string
+          corresBankAccount2:
+            type: string
+            description: "\n"
+            format: string
+          isPrimary:
+            type: string
+            description: "\n"
+            format: string
+          maxLimitAmount:
+            type: string
+            description: "\n"
+            format: string
+          maxLimitNumberOfTransfers:
+            type: string
+            description: "\n"
+            format: string
+          status:
+            type: string
+            description: "\n"
+            format: string
+          approvalStatus:
+            type: string
+            description: "\n"
+            format: string
+          createdOn:
+            type: string
+            description: "\n"
+            format: string
+          updatedOn:
+            type: string
+            description: "\n"
+            format: string
+          email:
+            type: string
+            description: "\n"
+            format: string
+          phoneNumber:
+            type: string
+            description: "\n"
+            format: string
+          nationalId:
+            type: string
+            description: "\n"
+            format: string
+          dateOfBirth:
+            type: string
+            description: "\n"
+            format: string
+          date_of_incorp:
+            type: string
+            description: "\n"
+            format: string
+          addressLine1:
+            type: string
+            description: "\n"
+            format: string
+          addressLine2:
+            type: string
+            description: "\n"
+            format: string
+          city:
+            type: string
+            description: "\n"
+            format: string
+          state:
+            type: string
+            description: "\n"
+            format: string
+          country:
+            type: string
+            description: "\n"
+            format: string
+          postalCode:
+            type: string
+            description: "\n"
+            format: string
+    HTTPError:
+      type: object
+      properties:
+        status_code:
+          type: string
+          description: "\n"
+          format: string
+        status:
+          type: string
+          description: "\n"
+          format: string
+        message:
+          type: string
+          description: "\n"
+          format: string
+  parameters:
+    customerId:
+      name: customerId
+      in: path
+      required: true
+      schema:
+        type: string
+    beneficiaryId:
+      name: beneficiaryId
+      in: path
+      required: true
+      schema:
+        type: string
+    lastName:
+      name: lastName
+      in: query
+      required: true
+      schema:
+        type: string
+    firstName:
+      name: firstName
+      in: query
+      required: true
+      schema:
+        type: string
+    compName:
+      name: compName
+      in: query
+      required: true
+      schema:
+        type: string
+    accountNumber:
+      name: accountNumber
+      in: query
+      required: true
+      schema:
+        type: string
+    beneBankName:
+      name: beneBankName
+      in: query
+      required: true
+      schema:
+        type: string 
+    beneBankBic:
+      name: beneBankBic
+      in: query
+      required: true
+      schema:
+        type: string 
+  requestBodies:
+    InitiateBenificiaryRequest:
+      description: Initiate transfer funds
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InitiateBenificiaryRequest'
+    UpdateBenificiaryRequest:
+      description: Initiate transfer funds
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UpdateBenificiaryRequest'
+  responses:
+    InitiateBenificiaryResponse:
+        description: fetchTransactionList
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiateBenificiaryResponse'
+    RetrieveBenificiaryResponse:
+        description: fetchTransactionList
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/RetrieveBenificiaryResponse'
+    UpdateBenificiaryResponse:
+        description: fetchTransactionList
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/UpdateBenificiaryResponse'
+    SearchBenificiaryResponse:
+        description: fetchTransactionList
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/SearchBenificiaryResponse'
+    BadRequest:
+      description: BadRequest
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    NotFound:
+      description: NotFound
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    TooManyRequests:
+      description: TooManyRequests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    InternalServerError:
+      description: InternalServerError
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
