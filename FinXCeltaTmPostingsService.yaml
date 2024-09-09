@@ -107,11 +107,35 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
+   /postings/initiate:
+    post:
+      tags:
+        - Postings
+      summary: Initiate posting for an account(from UI).
+      description: Initiate posting for an account.
+      operationId: InitiatePostings.
+      requestBody:
+          $ref: '#/components/requestBodies/InitiatetransferRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiatePostingsResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
    /fundtransfer/initiate:
     post:
       tags:
         - Postings
-      summary: Initiate transfer funds between accounts.
+      summary: API will call internally from Microservice.
       description: Initiate transfer funds between accounts.
       operationId: InitiateTransferFunds.
       requestBody:
@@ -935,6 +959,29 @@ components:
             type: string
             description: "\n"
             format: string
+    InitiatePostingsResponse:
+      type: object
+      properties:
+        postingId:
+            type: string
+            description: Id created by TM which can be used know the status of posting.
+            format: string
+        clientTransactionId:
+            type: string
+            description: Id created by TM which can be used to settle the posting.
+            format: string
+        status:
+            type: string
+            description: Status of the posting.
+            format: string
+        postingViolations:
+                $ref: '#/components/schemas/postingViolations'
+        accountViolations:
+                $ref: '#/components/schemas/accountViolations'
+        restrictionViolations:
+                $ref: '#/components/schemas/restrictionViolations'
+        contractViolations:
+                $ref: '#/components/schemas/contractViolations'
     HTTPError:
       type: object
       properties:
@@ -1019,6 +1066,12 @@ components:
           application/json:
             schema:
                 $ref: '#/components/schemas/retrievePostingsListResponse'
+    InitiatePostingsResponse:
+        description: fetchpostingList
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiatePostingsResponse'
     retrievePostingsResponse:
         description: fetchpostingList
         content:
