@@ -46,7 +46,7 @@ paths:
         - $ref: '#/components/parameters/pageToken'
       responses:
         '200':
-          $ref: '#/components/responses/retrievePostingsResponse'
+          $ref: '#/components/responses/retrievepostingDetailsResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -94,7 +94,7 @@ paths:
         - $ref: '#/components/parameters/postingId'
       responses:
         '200':
-          $ref: '#/components/responses/retrievepostingDetailsResponse'
+          $ref: '#/components/responses/InitiatePostingsResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -118,7 +118,7 @@ paths:
           $ref: '#/components/requestBodies/InitiatetransferRequest'
       responses:
         '200':
-          $ref: '#/components/responses/InitiatePostingsResponse'
+          $ref: '#/components/responses/InitiatetransferResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
