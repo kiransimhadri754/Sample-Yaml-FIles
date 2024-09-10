@@ -30,7 +30,7 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
-   /{customerReference}/beneficiaries/retrieve:
+   /beneficiary/{customerReference}/retrieve:
     get:
       tags:
           - Beneficiaries
@@ -54,7 +54,7 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
-   /{beneficiaryId}/beneficiary/update:
+   /beneficiary/{beneficiaryId}/update:
     put:
       tags:
           - Beneficiaries
@@ -80,7 +80,7 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
-   /search/beneficiaries/retrieve:
+   /beneficiary/search:
     get:
       tags:
           - Beneficiaries
@@ -115,11 +115,7 @@ components:
     InitiateBenificiaryRequest:
       type: object
       properties:
-        beneficiaryId:
-          type: string
-          description: "\n"
-          format: string
-        beneficiaryShortName:
+        beneficiaryNickName:
           type: string
           description: "\n"
           format: string
@@ -258,7 +254,7 @@ components:
           type: string
           description: "\n"
           format: string
-        beneficiaryShortName:
+        beneficiaryNickName:
           type: string
           description: "\n"
           format: string
@@ -398,11 +394,7 @@ components:
             type: string
             description: "\n"
             format: string
-          beneficiaryShortName:
-            type: string
-            description: "\n"
-            format: string
-          customerReference:
+          beneficiaryNickName:
             type: string
             description: "\n"
             format: string
@@ -533,6 +525,10 @@ components:
     RetrieveBenificiaryResponse:
       type: object
       properties:
+        customerReference:
+            type: string
+            description: "\n"
+            format: string
         benificiaries: 
           $ref: '#/components/schemas/BenificiaryResponse'
     UpdateBenificiaryRequest:
@@ -542,7 +538,7 @@ components:
           type: string
           description: "\n"
           format: string
-        beneficiaryShortName:
+        beneficiaryNickName:
           type: string
           description: "\n"
           format: string
@@ -693,7 +689,7 @@ components:
             type: string
             description: "\n"
             format: string
-          beneficiaryShortName:
+          beneficiaryNickName:
             type: string
             description: "\n"
             format: string
