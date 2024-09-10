@@ -10,14 +10,14 @@ paths:
     post:
       tags:
           - Beneficiaries
-      summary: InCR Initiate benificiary for a customer.
-      description: InCR Initiate benificiary for a customer.
+      summary: InCR Initiate beneficiary for a customer.
+      description: InCR Initiate beneficiary for a customer.
       operationId: InitiateBeneficiary
       requestBody:
-          $ref: '#/components/requestBodies/InitiateBenificiaryRequest'
+          $ref: '#/components/requestBodies/InitiatebeneficiaryRequest'
       responses:
         '200':
-          $ref: '#/components/responses/InitiateBenificiaryResponse'
+          $ref: '#/components/responses/InitiatebeneficiaryResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -41,7 +41,7 @@ paths:
         - $ref: '#/components/parameters/customerReference'
       responses:
         '200':
-          $ref: '#/components/responses/RetrieveBenificiaryResponse'
+          $ref: '#/components/responses/RetrievebeneficiaryResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -64,10 +64,10 @@ paths:
       parameters:
         - $ref: '#/components/parameters/beneficiaryId'
       requestBody:
-          $ref: '#/components/requestBodies/UpdateBenificiaryRequest'
+          $ref: '#/components/requestBodies/UpdatebeneficiaryRequest'
       responses:
         '200':
-          $ref: '#/components/responses/UpdateBenificiaryResponse'
+          $ref: '#/components/responses/UpdatebeneficiaryResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -97,7 +97,7 @@ paths:
         - $ref: '#/components/parameters/beneficiaryBankAccountReference'
       responses:
         '200':
-          $ref: '#/components/responses/SearchBenificiaryResponse'
+          $ref: '#/components/responses/SearchbeneficiaryResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -112,7 +112,7 @@ paths:
           $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
-    InitiateBenificiaryRequest:
+    InitiatebeneficiaryRequest:
       type: object
       properties:
         beneficiaryNickName:
@@ -247,7 +247,7 @@ components:
           type: string
           description: "\n"
           format: string
-    InitiateBenificiaryResponse:
+    InitiatebeneficiaryResponse:
       type: object
       properties:
         beneficiaryId:
@@ -386,7 +386,7 @@ components:
           type: string
           description: "\n"
           format: string
-    BenificiaryResponse:
+    beneficiaryResponse:
       type: array
       items:
         properties:
@@ -522,16 +522,16 @@ components:
             type: string
             description: "\n"
             format: string
-    RetrieveBenificiaryResponse:
+    RetrievebeneficiaryResponse:
       type: object
       properties:
         customerReference:
             type: string
             description: "\n"
             format: string
-        benificiaries: 
-          $ref: '#/components/schemas/BenificiaryResponse'
-    UpdateBenificiaryRequest:
+        beneficiaries: 
+          $ref: '#/components/schemas/beneficiaryResponse'
+    UpdatebeneficiaryRequest:
       type: object
       properties:
         beneficiaryId:
@@ -670,7 +670,7 @@ components:
           type: string
           description: "\n"
           format: string
-    UpdateBenificiaryResponse:
+    UpdatebeneficiaryResponse:
       type: object
       properties:
         status:
@@ -681,7 +681,7 @@ components:
           type: string
           description: "\n"
           format: string
-    SearchBenificiaryResponse:
+    Searchbeneficiary:
       type: array
       items:
         properties:
@@ -693,11 +693,11 @@ components:
             type: string
             description: "\n"
             format: string
-          customerReference:
+          beneficiaryType:
             type: string
             description: "\n"
             format: string
-          beneficiaryType:
+          customerReference:
             type: string
             description: "\n"
             format: string
@@ -821,6 +821,11 @@ components:
             type: string
             description: "\n"
             format: string
+    SearchbeneficiaryResponse:
+        type: object
+        properties:
+          beneficiaries: 
+            $ref: '#/components/schemas/Searchbeneficiary'
     HTTPError:
       type: object
       properties:
@@ -888,47 +893,47 @@ components:
     emailAddress:
       name: customerReference
       in: query
-      required: true
+      required: false
       schema:
         type: string 
   requestBodies:
-    InitiateBenificiaryRequest:
+    InitiatebeneficiaryRequest:
       description: Initiate transfer funds
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/InitiateBenificiaryRequest'
-    UpdateBenificiaryRequest:
+            $ref: '#/components/schemas/InitiatebeneficiaryRequest'
+    UpdatebeneficiaryRequest:
       description: Initiate transfer funds
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/UpdateBenificiaryRequest'
+            $ref: '#/components/schemas/UpdatebeneficiaryRequest'
   responses:
-    InitiateBenificiaryResponse:
+    InitiatebeneficiaryResponse:
         description: fetchTransactionList
         content:
           application/json:
             schema:
-                $ref: '#/components/schemas/InitiateBenificiaryResponse'
-    RetrieveBenificiaryResponse:
+                $ref: '#/components/schemas/InitiatebeneficiaryResponse'
+    RetrievebeneficiaryResponse:
         description: fetchTransactionList
         content:
           application/json:
             schema:
-                $ref: '#/components/schemas/RetrieveBenificiaryResponse'
-    UpdateBenificiaryResponse:
+                $ref: '#/components/schemas/RetrievebeneficiaryResponse'
+    UpdatebeneficiaryResponse:
         description: fetchTransactionList
         content:
           application/json:
             schema:
-                $ref: '#/components/schemas/UpdateBenificiaryResponse'
-    SearchBenificiaryResponse:
+                $ref: '#/components/schemas/UpdatebeneficiaryResponse'
+    SearchbeneficiaryResponse:
         description: fetchTransactionList
         content:
           application/json:
             schema:
-                $ref: '#/components/schemas/SearchBenificiaryResponse'
+                $ref: '#/components/schemas/SearchbeneficiaryResponse'
     BadRequest:
       description: BadRequest
       content:
