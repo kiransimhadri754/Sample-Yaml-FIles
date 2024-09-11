@@ -30,7 +30,7 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
-   /beneficiary/{customerReference}/retrieve:
+   /beneficiary/retrieve:
     get:
       tags:
           - Beneficiaries
@@ -54,7 +54,7 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
-   /beneficiary/{beneficiaryId}/update:
+   /beneficiary/update:
     put:
       tags:
           - Beneficiaries
@@ -88,7 +88,7 @@ paths:
       description: InCR Search beneficiaries of customer.
       operationId: SearchBeneficiaries
       parameters:
-        - $ref: '#/components/parameters/emailAddress'
+        - $ref: '#/components/parameters/customerReference'
         - $ref: '#/components/parameters/firstName'
         - $ref: '#/components/parameters/lastName'
         - $ref: '#/components/parameters/companyName'
@@ -844,13 +844,13 @@ components:
   parameters:
     customerReference:
       name: customerReference
-      in: path
+      in: query
       required: true
       schema:
         type: string
     beneficiaryId:
       name: beneficiaryId
-      in: path
+      in: query
       required: true
       schema:
         type: string
@@ -886,12 +886,6 @@ components:
         type: string 
     beneficiaryBankBicReference:
       name: beneficiaryBankBicReference
-      in: query
-      required: false
-      schema:
-        type: string 
-    emailAddress:
-      name: customerReference
       in: query
       required: false
       schema:
