@@ -1,12 +1,12 @@
 openapi: 3.0.1
 info:
-  title: Deposit Account
+  title: Account Summary
   description: 'This service domain orchestrates a deposit account. The typical range of services and fees covers payments from and scheduled and ad-hoc loans to the account.'
   version: 11.0.0
 servers:
   - url: https://virtserver.swaggerhub.com/BIAN-3/BIAN/SavingsAccount/11.0.0
 paths:
-  'AccountSummary/{accountHolderId}/DepositAccounts/Retrieve':
+  '/AccountSummary/{accountHolderId}/DepositAccounts/Retrieve':
     get:
       tags:
         - Account Summary
