@@ -6,7 +6,7 @@ info:
 servers:
   - url: https://virtserver.swaggerhub.com/BIAN-3/BIAN/SavingsAccount/11.0.0
 paths:
-  '/{accountHolderId}/DepositAccounts/Retrieve':
+  'AccountSummary/{accountHolderId}/DepositAccounts/Retrieve':
     get:
       tags:
         - Account Summary
