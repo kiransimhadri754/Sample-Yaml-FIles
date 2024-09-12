@@ -1,7 +1,8 @@
 CREATE DATABASE IF NOT exists finx_beneficiary_db WITH owner=root;
+USE finx_beneficiary_db
 
 CREATE TABLE if not exists beneficiary_details(
-beneficiary_id uuid NOT NULL PRIMARY KEY,
+beneficiary_id uuid NOT NULL,
 beneficiary_short_name varchar(50) NOT NULL,
 customer_id varchar(32) NOT NULL,
 beneficiary_type varchar(20) NOT NULL,
@@ -35,5 +36,6 @@ address_line2 varchar(128),
 city varchar(16),
 state varchar(16),
 country_code varchar(16),
-postal_code varchar(15)
+postal_code varchar(15),
+PRIMARY KEY(beneficiary_id)
 );
