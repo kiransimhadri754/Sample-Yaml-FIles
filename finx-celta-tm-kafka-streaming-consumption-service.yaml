@@ -1,0 +1,570 @@
+openapi: 3.0.1
+info:
+  title: finx-celta-tm-kafka-streaming-consumption-service
+  description: BIAN Service Domain Packaged Business Capability (PCB) | DDD Bounded Context Payment Execution-SAPI.
+  version: 12.0.1
+servers:
+- url: 'https://core-api.partner-integrations-sandbox.thirsty-fish-dephub.tmachine.io'
+paths:
+  /vault-api-v1-postings-posting-instruction-batch-created/insertTransactionRecord/initiate:
+    post:
+      tags:
+        - Payment Execution SAPI
+      summary:  InCR Initiate Payment Execution-SAPI
+      description: InCR Initiate Payment Execution-SAPI
+      operationId: Initiate
+      requestBody:
+          $ref: '#/components/requestBodies/InitiatePaymentExecutionRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiatePaymentExecutionResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  schemas:
+    error:
+      type: object
+      properties:
+        type:
+          type: string
+          description: "\n"
+          format: string
+        message:
+          type: string
+          description: "\n"
+          format: string
+    transactionCode:
+      type: array
+      items:
+        properties:
+          domain:
+            type: string
+            description: "\n"
+            format: string
+          family:
+            type: string
+            description: "\n"
+            format: string
+          subfamily:
+            type: string
+            description: "\n"
+            format: string
+    restrictionSetIds:
+      type: object
+      items:
+        type: string
+    restrictions:
+      type: object
+      properties:
+          all:
+            type: string
+            description: "\n"
+            format: string
+          restriction_set_Ids:
+            $ref: '#/components/schemas/restrictionSetIds'
+    overRide:
+      type: object
+      properties:
+          restrictions:
+            $ref: '#/components/schemas/restrictions'
+    postingViolations:
+      type: array
+      items:
+        properties:
+          type:
+            type: string
+            description: "\n"
+            format: string
+    accountViolations:
+      type: array
+      items:
+        properties:
+          account_id:
+            type: string
+            description: "\n"
+            format: string
+          payment_device_token:
+            type: string
+            description: "\n"
+            format: string
+          type:
+            type: string
+            description: "\n"
+            format: string
+    restrictionViolations:
+      type: array
+      items:
+        properties:
+          restriction_set_id:
+            type: string
+            description: "\n"
+            format: string
+          account_id:
+            type: string
+            description: "\n"
+            format: string
+          payment_device_id:
+            type: string
+            description: "\n"
+            format: string
+          customer_id:
+            type: string
+            description: "\n"
+            format: string
+          requires_review:
+            type: string
+            description: "\n"
+            format: string
+    contractViolations:
+      type: array
+      items:
+        properties:
+          account_id:
+            type: string
+            description: "\n"
+            format: string
+          type:
+            type: string
+            description: "\n"
+            format: string
+          reason:
+            type: string
+            description: "\n"
+            format: string
+    commitedPostings:
+      type: array
+      items:
+        properties:
+          credit:
+            type: string
+            description: "\n"
+            format: string
+          amount:
+            type: string
+            description: "\n"
+            format: string
+          denomination:
+            type: string
+            description: "\n"
+            format: string
+          accountId:
+            type: string
+            description: "\n"
+            format: string
+          accountAddress:
+            type: string
+            description: "\n"
+            format: string
+          phase:
+            type: string
+            description: "\n"
+            format: string
+          asset:
+            type: string
+            description: "\n"
+            format: string
+    instructionDetails:
+      type: object
+      properties:
+        eventName:
+          type: string
+          description: "\n"
+          format: string
+        narration:
+          type: string
+          description: "\n"
+          format: string
+    debtorTargetAccount:
+      type: object
+      properties:
+        accountId:
+          type: string
+          description: "\n"
+          format: string
+    creditorTargetAccount:
+      type: object
+      properties:
+        account_id:
+          type: string
+          description: "\n"
+          format: string
+    transfer:
+        type: object
+        properties:
+              amount:
+                type: string
+                description: "\n"
+                format: string
+              denomination:
+                type: string
+                description: "\n"
+                format: string
+              debtor_target_account:
+                $ref: '#/components/schemas/debtorTargetAccount'
+              debtor_target_account_id:
+                type: string
+                description: "\n"
+                format: string
+              creditor_target_account:
+                $ref: '#/components/schemas/creditorTargetAccount'
+              creditor_target_account_id:
+                type: string
+                description: "\n"
+                format: string
+    pics:
+      type: array
+      items:
+        type: string
+    postingInstructions:
+      type: array
+      items:
+        type: object
+        properties:
+              id:
+                type: string
+                description: "\n"
+                format: string
+              client_transaction_id:
+                type: string
+                description: "\n"
+                format: string
+              transfer:
+                $ref: '#/components/schemas/transfer'
+              pics:
+                $ref: '#/components/schemas/pics'
+              instruction_details:
+                $ref: '#/components/schemas/instructionDetails'
+              commited_postings:
+                $ref: '#/components/schemas/commitedPostings'
+              posting_violations:
+                $ref: '#/components/schemas/postingViolations'
+              account_violations:
+                $ref: '#/components/schemas/accountViolations'
+              restriction_violations:
+                $ref: '#/components/schemas/restrictionViolations'
+              contract_violations:
+                $ref: '#/components/schemas/contractViolations'
+              override:
+                $ref: '#/components/schemas/overRide'
+              transaction_code:
+                $ref: '#/components/schemas/transactionCode'
+              booking_localised_date_time:
+                type: string
+                description: "\n"
+                format: string
+    postingInstructionsBatches:
+          type: object
+          properties:
+              id:
+                type: string
+                description: "\n"
+                format: string
+              create_request_id:
+                type: string
+                description: "\n"
+                format: string
+              client_id:
+                type: string
+                description: "\n"
+                format: string
+              client_batch_id:
+                type: string
+                description: "\n"
+                format: string
+              posting_instructions:
+                $ref: '#/components/schemas/postingInstructions'
+              batch_details:
+                type: string
+                description: "\n"
+                format: string
+              value_timeStamp:
+                type: string
+                description: "\n"
+                format: string
+              booking_timeStamp:
+                type: string
+                description: "\n"
+                format: string
+              status:
+                type: string
+                description: "\n"
+                format: string
+              error:
+                $ref: '#/components/schemas/error'
+              insertion_timeStamp:
+                type: string
+                description: "\n"
+                format: string
+              source_insertion_timeStamp:
+                type: string
+                description: "\n"
+                format: string
+              dry_run:
+                type: string
+                description: "\n"
+                format: string
+    vaultversion:
+          type: object
+          properties:
+              major:
+                type: string
+                description: "\n"
+                format: string
+              minor:
+                type: string
+                description: "\n"
+                format: string
+              patch:
+                type: string
+                description: "\n"
+                format: string
+              label:
+                type: string
+                description: "\n"
+                format: string
+    technical_metadata:
+      type: object
+      properties:
+              event_id:
+                type: string
+                description: "\n"
+                format: string
+              capture_timestamp:
+                type: string
+                description: "\n"
+                format: string
+              vault_version:
+                  $ref: '#/components/schemas/vaultversion'
+              context:
+                type: string
+                description: "\n"
+                format: string
+    paths:
+      type: array
+      items:
+        type: string
+        example: technical_metadata,posting_instruction_batch
+    update_mask:
+      type: object
+      properties:
+        paths:
+          $ref: '#/components/schemas/paths'
+    Balances:
+      type: array
+      items:
+        properties:
+          id:
+            type: string
+            description: "\n"
+            format: string
+          account_id:
+            type: string
+            description: "\n"
+            format: string
+          account_address:
+            type: string
+            description: "\n"
+            format: string
+          phase:
+            type: string
+            description: "\n"
+            format: string
+          asset:
+            type: string
+            description: "\n"
+            format: string
+          denomination:
+            type: string
+            description: "\n"
+            format: string
+          posting_instruction_batch_id:
+            type: string
+            description: "\n"
+            format: string
+          value_time:
+            type: string
+            description: "\n"
+            format: string
+          amount:
+            type: string
+            description: "\n"
+            format: string
+          total_debit:
+            type: string
+            description: "\n"
+            format: string
+          total_credit:
+            type: string
+            description: "\n"
+            format: string
+    InitiatePaymentExecutionRequest:
+      type: object
+      properties:
+        postingInstructionsBatches:
+            $ref: '#/components/schemas/postingInstructionsBatches'
+        technical_metadata:
+            $ref: '#/components/schemas/technical_metadata'
+        update_mask:
+            $ref: '#/components/schemas/update_mask'
+        event_id:
+              type: string
+              description: "\n"
+              format: string
+        vault_version:
+            $ref: '#/components/schemas/vaultversion'
+        timestamp:
+              type: string
+              description: "\n"
+              format: string
+        change_id:
+              type: string
+              description: "\n"
+              format: string
+        migrated:
+              type: string
+              description: "\n"
+              format: string
+        balances:
+            $ref: '#/components/schemas/Balances'
+    InitiatePaymentExecutionResponse:
+      type: object
+      properties:
+            transaction_date:
+              type: string
+              description: "\n"
+              format: string
+            transaction_reference:
+              type: string
+              description: "\n"
+              format: string
+            account_number:
+              type: string
+              description: "\n"
+              format: string
+            debit:
+              type: string
+              description: "\n"
+              format: string
+            credit:
+              type: string
+              description: "\n"
+              format: string
+            base_currency:
+              type: string
+              description: "\n"
+              format: string
+            convertion_rate:
+              type: string
+              description: "\n"
+              format: string
+            quote_currency:
+              type: string
+              description: "\n"
+              format: string
+            particulars:
+              type: string
+              description: "\n"
+              format: string
+            transaction_type:
+              type: string
+              description: "\n"
+              format: string
+            product_reference:
+              type: string
+              description: "\n"
+              format: string
+            product_type:
+              type: string
+              description: "\n"
+              format: string
+            account_ledger_id:
+              type: string
+              description: "\n"
+              format: string
+            status_by:
+              type: string
+              description: "\n"
+              format: string
+            inserted_timestamp:
+              type: string
+              description: "\n"
+              format: string
+            authorize_status:
+              type: string
+              description: "\n"
+              format: string
+    HTTPError:
+      type: object
+      properties:
+        status_code:
+          type: string
+          description: "\n"
+          format: string
+        status:
+          type: string
+          description: "\n"
+          format: string
+        message:
+          type: string
+          description: "\n"
+          format: string
+  requestBodies:
+    InitiatePaymentExecutionRequest:
+        description: InitiateCardFinancialSettlement
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiatePaymentExecutionRequest'
+  responses:
+    InitiatePaymentExecutionResponse:
+        description: InitiateCardFinancialSettlement
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiatePaymentExecutionResponse'
+    BadRequest:
+      description: BadRequest
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    NotFound:
+      description: NotFound
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    TooManyRequests:
+      description: TooManyRequests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    InternalServerError:
+      description: InternalServerError
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
