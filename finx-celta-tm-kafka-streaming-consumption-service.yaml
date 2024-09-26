@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: finx-celta-tm-kafka-streaming-consumption-service
-  description: BIAN Service Domain Packaged Business Capability (PCB) | DDD Bounded Context Payment Execution-SAPI.
+  description: BIAN Service Domain Packaged Business Capability (PCB) | DDD Bounded Context streaming apis.
   version: 12.0.1
 servers:
 - url: 'https://core-api.partner-integrations-sandbox.thirsty-fish-dephub.tmachine.io'
@@ -9,9 +9,9 @@ paths:
   /vault-api-v1-postings-posting-instruction-batch-created/insertTransactionRecord/initiate:
     post:
       tags:
-        - Payment Execution SAPI
-      summary:  InCR Initiate Payment Execution-SAPI
-      description: InCR Initiate Payment Execution-SAPI
+        - Streaming APIs
+      summary:  InCR Initiate streaming api
+      description: InCR Initiate streaming api
       operationId: Initiate
       requestBody:
           $ref: '#/components/requestBodies/InitiatePaymentExecutionRequest'
@@ -157,11 +157,11 @@ components:
             type: string
             description: "\n"
             format: string
-          accountId:
+          account_id:
             type: string
             description: "\n"
             format: string
-          accountAddress:
+          account_address:
             type: string
             description: "\n"
             format: string
@@ -170,6 +170,10 @@ components:
             description: "\n"
             format: string
           asset:
+            type: string
+            description: "\n"
+            format: string
+          internal_account_processing_label:
             type: string
             description: "\n"
             format: string
@@ -187,7 +191,7 @@ components:
     debtorTargetAccount:
       type: object
       properties:
-        accountId:
+        account_id:
           type: string
           description: "\n"
           format: string
@@ -410,7 +414,7 @@ components:
     InitiatePaymentExecutionRequest:
       type: object
       properties:
-        postingInstructionsBatches:
+        posting_instruction_batches:
             $ref: '#/components/schemas/postingInstructionsBatches'
         technical_metadata:
             $ref: '#/components/schemas/technical_metadata'
@@ -520,14 +524,14 @@ components:
           format: string
   requestBodies:
     InitiatePaymentExecutionRequest:
-        description: InitiateCardFinancialSettlement
+        description: Initiate streaming api request
         content:
           application/json:
             schema:
                 $ref: '#/components/schemas/InitiatePaymentExecutionRequest'
   responses:
     InitiatePaymentExecutionResponse:
-        description: InitiateCardFinancialSettlement
+        description: Initiate streaming api response
         content:
           application/json:
             schema:
