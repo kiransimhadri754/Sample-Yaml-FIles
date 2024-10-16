@@ -266,7 +266,7 @@ components:
                 type: string
                 description: "\n"
                 format: string
-    postingInstructionsBatches:
+    posting_instruction_batches:
           type: object
           properties:
               id:
@@ -317,7 +317,7 @@ components:
                 type: string
                 description: "\n"
                 format: string
-    vaultversion:
+    vault_version:
           type: object
           properties:
               major:
@@ -348,7 +348,7 @@ components:
                 description: "\n"
                 format: string
               vault_version:
-                  $ref: '#/components/schemas/vaultversion'
+                  $ref: '#/components/schemas/vault_version'
               context:
                 type: string
                 description: "\n"
@@ -357,7 +357,6 @@ components:
       type: array
       items:
         type: string
-        example: technical_metadata,posting_instruction_batch
     update_mask:
       type: object
       properties:
@@ -415,7 +414,7 @@ components:
       type: object
       properties:
         posting_instruction_batches:
-            $ref: '#/components/schemas/postingInstructionsBatches'
+            $ref: '#/components/schemas/posting_instruction_batches'
         technical_metadata:
             $ref: '#/components/schemas/technical_metadata'
         update_mask:
@@ -425,7 +424,7 @@ components:
               description: "\n"
               format: string
         vault_version:
-            $ref: '#/components/schemas/vaultversion'
+            $ref: '#/components/schemas/vault_version'
         timestamp:
               type: string
               description: "\n"
