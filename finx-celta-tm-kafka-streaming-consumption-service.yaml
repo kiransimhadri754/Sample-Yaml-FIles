@@ -60,7 +60,7 @@ components:
             description: "\n"
             format: string
     restrictionSetIds:
-      type: object
+      type: array
       items:
         type: string
     restrictions:
