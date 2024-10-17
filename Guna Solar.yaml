@@ -1,0 +1,489 @@
+openapi: 3.0.1
+info:
+  title: Solar
+  description: ISO-20022 service debtor bank sends message to creditor bank to transfer funds from one account to another.
+  version: pacs.008.001.11
+servers:
+- url: 'https://www.iso20022.org/iso-20022-message-definitions?search=pacs.008'
+paths:
+  /Solar/AdminOverView/Retrive:
+    get:
+      tags:
+        - Solar
+      summary:  Retrieve the Admin overview
+      description: Retrieve the Admin overview
+      operationId: RetrieveOverView
+      responses:
+        '200':
+          $ref: '#/components/responses/RetrieveAdminOverView'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /Solar/Plants/Retrive:
+    get:
+      tags:
+        - Solar
+      summary:  Retrieve the plants
+      description: Retrieve the plants
+      operationId: RetrievePlants
+      responses:
+        '200':
+          $ref: '#/components/responses/RetrievePlants'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /Solar/Plants/{plantId}/Retrive:
+    get:
+      tags:
+        - Solar
+      summary:  Retrieve the plant details
+      description: Retrieve the plants details
+      operationId: RetrievePlantdetails
+      parameters:
+        - $ref: '#/components/parameters/plantId'
+      responses:
+        '200':
+          $ref: '#/components/responses/RetrievePlantDetails'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /Solar/Plants/Initiate:
+    post:
+      tags:
+        - Solar
+      summary:  Initiate a new plant
+      description: Initiate a new plant
+      operationId: InitiatePlant
+      requestBody:
+          $ref: '#/components/requestBodies/InitiatePlantRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiatePlantResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  schemas:
+    RetrieveAdminOverView:
+      type: object
+      properties:
+        noofPlants:
+          type: string
+          description: "\n"
+          format: string
+        yieldToday:
+          type: string
+          description: "\n"
+          format: string
+        currentPower:
+          type: string
+          description: "\n"
+          format: string
+        totalYield:
+          type: string
+          description: "\n"
+          format: string
+        alerts:
+          type: string
+          description: "\n"
+          format: string
+        standardCoalSaved:
+          type: string
+          description: "\n"
+          format: string
+        co2Avoided:
+          type: string
+          description: "\n"
+          format: string
+        equivalentTreesPlanted:
+          type: string
+          description: "\n"
+          format: string
+    RetrievePlants:
+      type: object
+      properties:
+        plantStatus:
+          type: string
+          description: "\n"
+          format: string
+        plantName:
+          type: string
+          description: "\n"
+          format: string
+        country:
+          type: string
+          description: "\n"
+          format: string
+        address:
+          type: string
+          description: "\n"
+          format: string
+        gridConnection:
+          type: string
+          description: "\n"
+          format: string
+        totalStringCapacity:
+          type: string
+          description: "\n"
+          format: string
+        currentPower:
+          type: string
+          description: "\n"
+          format: string
+        specificEnergy:
+          type: string
+          description: "\n"
+          format: string
+        yieldToday:
+          type: string
+          description: "\n"
+          format: string
+        performanceRatio:
+          type: string
+          description: "\n"
+          format: string
+        globalIrradiation:
+          type: string
+          description: "\n"
+          format: string
+        PlantType:
+          type: string
+          description: "\n"
+          format: string
+        InstalledPower:
+          type: string
+          description: "\n"
+          format: string
+        Real-timePower:
+          type: string
+          description: "\n"
+          format: string
+        MonthlyYield:
+          type: string
+          description: "\n"
+          format: string
+        AnnualYield:
+          type: string
+          description: "\n"
+          format: string
+    RetrievePlantDetails:
+      type: object
+      properties:
+        plantName:
+          type: string
+          description: "\n"
+          format: string
+        noofDevices:
+          type: string
+          description: "\n"
+          format: string
+        location:
+          type: string
+          description: "\n"
+          format: string
+        revenue:
+          type: string
+          description: "\n"
+          format: string
+        images:
+          type: string
+          description: "\n"
+          format: string
+        videos:
+          type: string
+          description: "\n"
+          format: string
+        deviceName:
+          type: string
+          description: "\n"
+          format: string
+        totalStringCapacity:
+          type: string
+          description: "\n"
+          format: string
+        yield:
+          type: string
+          description: "\n"
+          format: string
+        totalYield:
+          type: string
+          description: "\n"
+          format: string
+        specificEnergy:
+          type: string
+          description: "\n"
+          format: string
+        peakACPower:
+          type: string
+          description: "\n"
+          format: string
+        gridConnectionDuration:
+          type: string
+          description: "\n"
+          format: string
+    InitiatePlantRequest:
+      type: object
+      properties:
+        plantStatus:
+          type: string
+          description: "\n"
+          format: string
+        plantName:
+          type: string
+          description: "\n"
+          format: string
+        country:
+          type: string
+          description: "\n"
+          format: string
+        address:
+          type: string
+          description: "\n"
+          format: string
+        gridConnection:
+          type: string
+          description: "\n"
+          format: string
+        totalStringCapacity:
+          type: string
+          description: "\n"
+          format: string
+        currentPower:
+          type: string
+          description: "\n"
+          format: string
+        specificEnergy:
+          type: string
+          description: "\n"
+          format: string
+        yieldToday:
+          type: string
+          description: "\n"
+          format: string
+        performanceRatio:
+          type: string
+          description: "\n"
+          format: string
+        globalIrradiation:
+          type: string
+          description: "\n"
+          format: string
+        PlantType:
+          type: string
+          description: "\n"
+          format: string
+        InstalledPower:
+          type: string
+          description: "\n"
+          format: string
+        Real-timePower:
+          type: string
+          description: "\n"
+          format: string
+        MonthlyYield:
+          type: string
+          description: "\n"
+          format: string
+        AnnualYield:
+          type: string
+          description: "\n"
+          format: string
+    InitiatePlantResponse:
+      type: object
+      properties:
+        plantStatus:
+          type: string
+          description: "\n"
+          format: string
+        plantName:
+          type: string
+          description: "\n"
+          format: string
+        country:
+          type: string
+          description: "\n"
+          format: string
+        address:
+          type: string
+          description: "\n"
+          format: string
+        gridConnection:
+          type: string
+          description: "\n"
+          format: string
+        totalStringCapacity:
+          type: string
+          description: "\n"
+          format: string
+        currentPower:
+          type: string
+          description: "\n"
+          format: string
+        specificEnergy:
+          type: string
+          description: "\n"
+          format: string
+        yieldToday:
+          type: string
+          description: "\n"
+          format: string
+        performanceRatio:
+          type: string
+          description: "\n"
+          format: string
+        globalIrradiation:
+          type: string
+          description: "\n"
+          format: string
+        PlantType:
+          type: string
+          description: "\n"
+          format: string
+        InstalledPower:
+          type: string
+          description: "\n"
+          format: string
+        Real-timePower:
+          type: string
+          description: "\n"
+          format: string
+        MonthlyYield:
+          type: string
+          description: "\n"
+          format: string
+        AnnualYield:
+          type: string
+          description: "\n"
+          format: string
+    HTTPError:
+      type: object
+      properties:
+        status_code:
+          type: string
+          description: "\n"
+          format: string
+        status:
+          type: string
+          description: "\n"
+          format: string
+        message:
+          type: string
+          description: "\n"
+          format: string
+  parameters:
+    plantId:
+      name: plantId
+      in: path
+      required: true
+      schema:
+        type: string
+  requestBodies:
+    InitiatePlantRequest:
+        description: InitiatePlantRequest
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiatePlantRequest' 
+    InitiatePlantResponse:
+        description: InitiateCardFinancialSettlement
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/UpdateCreditTransferRequest'
+  responses:
+    RetrieveAdminOverView:
+        description: RetrieveAdminOverView
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/RetrieveAdminOverView'
+    RetrievePlants:
+        description: RetrievePlants
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/RetrievePlants'
+    RetrievePlantDetails:
+        description: RetrievePlantDetails
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/RetrievePlantDetails'
+    InitiatePlantResponse:
+        description: InitiatePlantResponse
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiatePlantResponse'
+    BadRequest:
+      description: BadRequest
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    NotFound:
+      description: NotFound
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    TooManyRequests:
+      description: TooManyRequests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    InternalServerError:
+      description: InternalServerError
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
