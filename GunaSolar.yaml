@@ -288,6 +288,32 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
+  /Solar/Plants/{plantId}/Alerts/Initiate:
+    post:
+      tags:
+        - Solar
+      summary:  Initiate an alert
+      description: Initiate an alert
+      operationId: InitiateAlert
+      parameters:
+        - $ref: '#/components/parameters/plantId'
+      requestBody:
+          $ref: '#/components/requestBodies/InitiateAlertRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiateAlertResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
     RetrieveAdminOverView:
@@ -922,6 +948,68 @@ components:
           type: string
           description: "\n"
           format: string
+    InitiateAlertRequest:
+      type: object
+      properties:
+        plantId:
+          type: string
+          description: "\n"
+          format: string
+        statisticalPeriod:
+          type: string
+          description: "\n"
+          format: string
+        pvYield:
+          type: string
+          description: "\n"
+          format: string
+        inverterYield:
+          type: string
+          description: "\n"
+          format: string
+        export:
+          type: string
+          description: "\n"
+          format: string
+        import:
+          type: string
+          description: "\n"
+          format: string
+        revenue:
+          type: string
+          description: "\n"
+          format: string
+    InitiateAlertResponse:
+      type: object
+      properties:
+        plantId:
+          type: string
+          description: "\n"
+          format: string
+        statisticalPeriod:
+          type: string
+          description: "\n"
+          format: string
+        pvYield:
+          type: string
+          description: "\n"
+          format: string
+        inverterYield:
+          type: string
+          description: "\n"
+          format: string
+        export:
+          type: string
+          description: "\n"
+          format: string
+        import:
+          type: string
+          description: "\n"
+          format: string
+        revenue:
+          type: string
+          description: "\n"
+          format: string
     HTTPError:
       type: object
       properties:
@@ -987,6 +1075,12 @@ components:
           application/json:
             schema:
                 $ref: '#/components/schemas/InitiateDeviceRequest'
+    InitiateAlertRequest:
+        description: InitiateAlertRequest
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiateAlertRequest'
   responses:
     RetrieveAdminOverView:
         description: RetrieveAdminOverView
@@ -1060,6 +1154,12 @@ components:
           application/json:
             schema:
                 $ref: '#/components/schemas/InitiateDeviceResponse'
+    InitiateAlertResponse:
+        description: InitiateAlertResponse
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiateAlertResponse'
     BadRequest:
       description: BadRequest
       content:
