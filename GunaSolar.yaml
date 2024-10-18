@@ -264,6 +264,30 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
+  /Solar/Device/Initiate:
+    post:
+      tags:
+        - Solar
+      summary:  Initiate a new device
+      description: Initiate a new device
+      operationId: InitiateDevice
+      requestBody:
+          $ref: '#/components/requestBodies/InitiateDeviceRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiateDeviceResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
     RetrieveAdminOverView:
@@ -820,6 +844,84 @@ components:
               type: string
               description: "\n"
               format: string
+    InitiateDeviceRequest:
+      type: object
+      properties:
+        status:
+          type: string
+          description: "\n"
+          format: string
+        plantName:
+          type: string
+          description: "\n"
+          format: string
+        deviceName:
+          type: string
+          description: "\n"
+          format: string
+        deviceModel:
+          type: string
+          description: "\n"
+          format: string
+        deviceS/N:
+          type: string
+          description: "\n"
+          format: string
+        nominalPower:
+          type: string
+          description: "\n"
+          format: string
+        realTimePower:
+          type: string
+          description: "\n"
+          format: string
+        dailyYield:
+          type: string
+          description: "\n"
+          format: string
+        associatedPlant:
+          type: string
+          description: "\n"
+          format: string
+    InitiateDeviceResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          description: "\n"
+          format: string
+        plantName:
+          type: string
+          description: "\n"
+          format: string
+        deviceName:
+          type: string
+          description: "\n"
+          format: string
+        deviceModel:
+          type: string
+          description: "\n"
+          format: string
+        deviceS/N:
+          type: string
+          description: "\n"
+          format: string
+        nominalPower:
+          type: string
+          description: "\n"
+          format: string
+        realTimePower:
+          type: string
+          description: "\n"
+          format: string
+        dailyYield:
+          type: string
+          description: "\n"
+          format: string
+        associatedPlant:
+          type: string
+          description: "\n"
+          format: string
     HTTPError:
       type: object
       properties:
@@ -878,7 +980,13 @@ components:
         content:
           application/json:
             schema:
-                $ref: '#/components/schemas/InitiateDeviceReportsRequest'
+                $ref: '#/components/schemas/InitiateDeviceReportsRequest'    
+    InitiateDeviceRequest:
+        description: InitiateDeviceRequest
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiateDeviceRequest'
   responses:
     RetrieveAdminOverView:
         description: RetrieveAdminOverView
@@ -946,6 +1054,12 @@ components:
           application/json:
             schema:
                 $ref: '#/components/schemas/RetrieveAllDeviceResponse'
+    InitiateDeviceResponse:
+        description: InitiateDeviceResponse
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiateDeviceResponse'
     BadRequest:
       description: BadRequest
       content:
