@@ -146,6 +146,30 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
+  /Solar/Reports/OverView/Initiate:
+    post:
+      tags:
+        - Solar
+      summary:  Initiate a reports overview
+      description: Initiate a reports overview
+      operationId: InitiateReportsOverview
+      requestBody:
+          $ref: '#/components/requestBodies/InitiateReportOverviewRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiateReportOverviewResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
     RetrieveAdminOverView:
@@ -508,6 +532,44 @@ components:
           type: string
           description: "\n"
           format: string
+    InitiateReportOverviewRequest:
+      type: object
+      properties:
+        from:
+          type: string
+          description: "\n"
+          format: string
+        to:
+          type: string
+          description: "\n"
+          format: string
+        plantId:
+          type: string
+          description: "\n"
+          format: string
+    InitiateReportOverviewResponse:
+      type: object
+      properties:
+        statisticalPeriod:
+          type: string
+          description: "\n"
+          format: string
+        pvYield:
+          type: string
+          description: "\n"
+          format: string
+        inverterYield:
+          type: string
+          description: "\n"
+          format: string
+        export:
+          type: string
+          description: "\n"
+          format: string
+        importRevenue:
+          type: string
+          description: "\n"
+          format: string
     HTTPError:
       type: object
       properties:
@@ -543,6 +605,12 @@ components:
           application/json:
             schema:
                 $ref: '#/components/schemas/InitiatePlantReportRequest'
+    InitiateReportOverviewRequest:
+        description: InitiatePlantReportRequest
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiateReportOverviewRequest'
   responses:
     RetrieveAdminOverView:
         description: RetrieveAdminOverView
@@ -580,6 +648,12 @@ components:
           application/json:
             schema:
                 $ref: '#/components/schemas/InitiatePlantReportResponse'
+    InitiateReportOverviewResponse:
+        description: RetrieveMigrationDetails
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiateReportOverviewResponse'
     BadRequest:
       description: BadRequest
       content:
