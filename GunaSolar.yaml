@@ -218,6 +218,30 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
+  /Solar/Device/{deviceId}/Retrive:
+    get:
+      tags:
+        - Solar
+      summary:  Retrieve the device details
+      description: Retrieve the device details
+      operationId: RetrieveDevice
+      parameters:
+        - $ref: '#/components/parameters/deviceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/RetrieveDeviceResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
     RetrieveAdminOverView:
@@ -694,6 +718,41 @@ components:
           type: string
           description: "\n"
           format: string
+    RetrieveDeviceResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          description: "\n"
+          format: string
+        deviceName:
+          type: string
+          description: "\n"
+          format: string
+        deviceModel:
+          type: string
+          description: "\n"
+          format: string
+        deviceS/N:
+          type: string
+          description: "\n"
+          format: string
+        nominalPower:
+          type: string
+          description: "\n"
+          format: string
+        realTimePower:
+          type: string
+          description: "\n"
+          format: string
+        dailyYield:
+          type: string
+          description: "\n"
+          format: string
+        associatedPlant:
+          type: string
+          description: "\n"
+          format: string
     HTTPError:
       type: object
       properties:
@@ -712,6 +771,12 @@ components:
   parameters:
     plantId:
       name: plantId
+      in: path
+      required: true
+      schema:
+        type: string
+    deviceId:
+      name: deviceId
       in: path
       required: true
       schema:
@@ -802,6 +867,12 @@ components:
           application/json:
             schema:
                 $ref: '#/components/schemas/InitiateDeviceReportsResponse'
+    RetrieveDeviceResponse:
+        description: RetrieveDeviceResponse
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/RetrieveDeviceResponse'
     BadRequest:
       description: BadRequest
       content:
