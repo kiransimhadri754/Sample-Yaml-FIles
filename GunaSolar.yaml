@@ -342,8 +342,8 @@ paths:
     get:
       tags:
         - Solar
-      summary:  Retrieve alerts of a plant
-      description: Retrieve alerts of a plant
+      summary:  Retrieve all alerts
+      description: Retrieve all alerts 
       operationId: RetrieveAllPlantAlert
       responses:
         '200':
