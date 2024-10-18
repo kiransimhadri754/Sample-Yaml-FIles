@@ -1,10 +1,10 @@
 openapi: 3.0.1
 info:
   title: Solar
-  description: ISO-20022 service debtor bank sends message to creditor bank to transfer funds from one account to another.
-  version: pacs.008.001.11
+  description: Solar involves overseeing the operation, maintenance, and efficiency optimization of solar energy facilities to ensure maximum power generation and system longevity. It includes monitoring system performance, managing energy output, and coordinating repairs to prevent downtime.
+  version: 1.0.1
 servers:
-- url: 'https://www.iso20022.org/iso-20022-message-definitions?search=pacs.008'
+- url: 'https://solar.com'
 paths:
   /Solar/AdminOverView/Retrive:
     get:
