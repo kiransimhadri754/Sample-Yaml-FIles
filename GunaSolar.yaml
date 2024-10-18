@@ -338,6 +338,28 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
+  /Solar/Plants/Alerts/Retrive:
+    get:
+      tags:
+        - Solar
+      summary:  Retrieve alerts of a plant
+      description: Retrieve alerts of a plant
+      operationId: RetrieveAllPlantAlert
+      responses:
+        '200':
+          $ref: '#/components/responses/RetrieveAllPlantAlert'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
     RetrieveAdminOverView:
@@ -1065,6 +1087,39 @@ components:
           type: string
           description: "\n"
           format: string
+    RetrieveAllPlantAlert:
+        type: array
+        items:
+          type: object
+          properties:
+            plantId:
+              type: string
+              description: "\n"
+              format: string
+            statisticalPeriod:
+              type: string
+              description: "\n"
+              format: string
+            pvYield:
+              type: string
+              description: "\n"
+              format: string
+            inverterYield:
+              type: string
+              description: "\n"
+              format: string
+            export:
+              type: string
+              description: "\n"
+              format: string
+            import:
+              type: string
+              description: "\n"
+              format: string
+            revenue:
+              type: string
+              description: "\n"
+              format: string
     HTTPError:
       type: object
       properties:
@@ -1221,6 +1276,12 @@ components:
           application/json:
             schema:
                 $ref: '#/components/schemas/RetrievePlantAlert'
+    RetrieveAllPlantAlert:
+        description: RetrieveAllPlantAlert
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/RetrieveAllPlantAlert'
     BadRequest:
       description: BadRequest
       content:
