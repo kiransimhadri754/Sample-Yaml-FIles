@@ -194,6 +194,30 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
+  /Solar/Reports/Device/Initiate:
+    post:
+      tags:
+        - Solar
+      summary:  Initiate a device reports
+      description: Initiate a device reports
+      operationId: InitiateDeviceReports
+      requestBody:
+          $ref: '#/components/requestBodies/InitiateDeviceReportsRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiateDeviceReportsResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
     RetrieveAdminOverView:
@@ -632,6 +656,44 @@ components:
           type: string
           description: "\n"
           format: string
+    InitiateDeviceReportsRequest:
+      type: object
+      properties:
+        from:
+          type: string
+          description: "\n"
+          format: string
+        to:
+          type: string
+          description: "\n"
+          format: string
+        plantId:
+          type: string
+          description: "\n"
+          format: string
+    InitiateDeviceReportsResponse:
+      type: object
+      properties:
+        statisticalPeriod:
+          type: string
+          description: "\n"
+          format: string
+        pvYield:
+          type: string
+          description: "\n"
+          format: string
+        inverterYield:
+          type: string
+          description: "\n"
+          format: string
+        export:
+          type: string
+          description: "\n"
+          format: string
+        importRevenue:
+          type: string
+          description: "\n"
+          format: string
     HTTPError:
       type: object
       properties:
@@ -679,6 +741,12 @@ components:
           application/json:
             schema:
                 $ref: '#/components/schemas/InitiateReportsStatisticsRequest'
+    InitiateDeviceReportsRequest:
+        description: InitiateDeviceReportsRequest
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiateDeviceReportsRequest'
   responses:
     RetrieveAdminOverView:
         description: RetrieveAdminOverView
@@ -727,7 +795,13 @@ components:
         content:
           application/json:
             schema:
-                $ref: '#/components/schemas/InitiateReportsStatisticsResponse'
+                $ref: '#/components/schemas/InitiateReportsStatisticsResponse'    
+    InitiateDeviceReportsResponse:
+        description: InitiateDeviceReportsResponse
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiateDeviceReportsResponse'
     BadRequest:
       description: BadRequest
       content:
