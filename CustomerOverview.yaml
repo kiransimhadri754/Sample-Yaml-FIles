@@ -6,7 +6,7 @@ info:
 servers:
 - url: 'https://solar.com'
 paths:
-  /customers/adminOverView/Retrieve:
+  /Customers/AdminOverView/Retrieve:
     get:
       tags:
         - Customers
