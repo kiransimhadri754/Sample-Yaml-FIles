@@ -6,28 +6,6 @@ info:
 servers:
 - url: 'https://solar.com'
 paths:
-  /Solar/AdminOverView/Retrive:
-    get:
-      tags:
-        - Solar
-      summary:  Retrieve the Admin overview
-      description: Retrieve the Admin overview
-      operationId: RetrieveOverView
-      responses:
-        '200':
-          $ref: '#/components/responses/RetrieveAdminOverView'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '429':
-          $ref: '#/components/responses/TooManyRequests'
-        '500':
-          $ref: '#/components/responses/InternalServerError'
   /Solar/Plants/Retrive:
     get:
       tags:
@@ -362,41 +340,6 @@ paths:
           $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
-    RetrieveAdminOverView:
-      type: object
-      properties:
-        noofPlants:
-          type: string
-          description: "\n"
-          format: string
-        yieldToday:
-          type: string
-          description: "\n"
-          format: string
-        currentPower:
-          type: string
-          description: "\n"
-          format: string
-        totalYield:
-          type: string
-          description: "\n"
-          format: string
-        alerts:
-          type: string
-          description: "\n"
-          format: string
-        standardCoalSaved:
-          type: string
-          description: "\n"
-          format: string
-        co2Avoided:
-          type: string
-          description: "\n"
-          format: string
-        equivalentTreesPlanted:
-          type: string
-          description: "\n"
-          format: string
     RetrievePlants:
       type: array
       items:
@@ -1202,12 +1145,6 @@ components:
             schema:
                 $ref: '#/components/schemas/InitiateAlertRequest'
   responses:
-    RetrieveAdminOverView:
-        description: RetrieveAdminOverView
-        content:
-          application/json:
-            schema:
-                $ref: '#/components/schemas/RetrieveAdminOverView'
     RetrievePlants:
         description: RetrievePlants
         content:
