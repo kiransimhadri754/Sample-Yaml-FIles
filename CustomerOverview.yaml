@@ -1,0 +1,138 @@
+openapi: 3.0.1
+info:
+  title: Customers
+  description: Solar customers overview
+  version: 1.0.1
+servers:
+- url: 'https://solar.com'
+paths:
+  /customers/adminOverView/Retrive:
+    get:
+      tags:
+        - Customers
+      summary:  Retrieve the Admin overview
+      description: Retrieve the Admin overview
+      operationId: RetrieveOverView
+      responses:
+        '200':
+          $ref: '#/components/responses/RetrieveAdminOverView'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  schemas:
+    RetrieveAdminOverView:
+      type: object
+      properties:
+        noofPlants:
+          type: string
+          description: "\n"
+          format: string
+        yieldToday:
+          type: string
+          description: "\n"
+          format: string
+        currentPower:
+          type: string
+          description: "\n"
+          format: string
+        totalYield:
+          type: string
+          description: "\n"
+          format: string
+        alerts:
+          type: string
+          description: "\n"
+          format: string
+        standardCoalSaved:
+          type: string
+          description: "\n"
+          format: string
+        co2Avoided:
+          type: string
+          description: "\n"
+          format: string
+        equivalentTreesPlanted:
+          type: string
+          description: "\n"
+          format: string
+    HTTPError:
+      type: object
+      properties:
+        status_code:
+          type: string
+          description: "\n"
+          format: string
+        status:
+          type: string
+          description: "\n"
+          format: string
+        message:
+          type: string
+          description: "\n"
+          format: string
+  parameters:
+    plantId:
+      name: plantId
+      in: path
+      required: true
+      schema:
+        type: string
+    deviceId:
+      name: deviceId
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    RetrieveAdminOverView:
+        description: RetrieveAdminOverView
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/RetrieveAdminOverView'
+    BadRequest:
+      description: BadRequest
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    NotFound:
+      description: NotFound
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    TooManyRequests:
+      description: TooManyRequests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    InternalServerError:
+      description: InternalServerError
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
