@@ -398,72 +398,74 @@ components:
           description: "\n"
           format: string
     RetrievePlants:
-      type: object
-      properties:
-        plantStatus:
-          type: string
-          description: "\n"
-          format: string
-        plantName:
-          type: string
-          description: "\n"
-          format: string
-        country:
-          type: string
-          description: "\n"
-          format: string
-        address:
-          type: string
-          description: "\n"
-          format: string
-        gridConnection:
-          type: string
-          description: "\n"
-          format: string
-        totalStringCapacity:
-          type: string
-          description: "\n"
-          format: string
-        currentPower:
-          type: string
-          description: "\n"
-          format: string
-        specificEnergy:
-          type: string
-          description: "\n"
-          format: string
-        yieldToday:
-          type: string
-          description: "\n"
-          format: string
-        performanceRatio:
-          type: string
-          description: "\n"
-          format: string
-        globalIrradiation:
-          type: string
-          description: "\n"
-          format: string
-        PlantType:
-          type: string
-          description: "\n"
-          format: string
-        InstalledPower:
-          type: string
-          description: "\n"
-          format: string
-        Real-timePower:
-          type: string
-          description: "\n"
-          format: string
-        MonthlyYield:
-          type: string
-          description: "\n"
-          format: string
-        AnnualYield:
-          type: string
-          description: "\n"
-          format: string
+      type: array
+      items:
+          type: object
+          properties:
+            plantStatus:
+              type: string
+              description: "\n"
+              format: string
+            plantName:
+              type: string
+              description: "\n"
+              format: string
+            country:
+              type: string
+              description: "\n"
+              format: string
+            address:
+              type: string
+              description: "\n"
+              format: string
+            gridConnection:
+              type: string
+              description: "\n"
+              format: string
+            totalStringCapacity:
+              type: string
+              description: "\n"
+              format: string
+            currentPower:
+              type: string
+              description: "\n"
+              format: string
+            specificEnergy:
+              type: string
+              description: "\n"
+              format: string
+            yieldToday:
+              type: string
+              description: "\n"
+              format: string
+            performanceRatio:
+              type: string
+              description: "\n"
+              format: string
+            globalIrradiation:
+              type: string
+              description: "\n"
+              format: string
+            PlantType:
+              type: string
+              description: "\n"
+              format: string
+            InstalledPower:
+              type: string
+              description: "\n"
+              format: string
+            Real-timePower:
+              type: string
+              description: "\n"
+              format: string
+            MonthlyYield:
+              type: string
+              description: "\n"
+              format: string
+            AnnualYield:
+              type: string
+              description: "\n"
+              format: string
     RetrievePlantDetails:
       type: object
       properties:
@@ -700,28 +702,30 @@ components:
           description: "\n"
           format: string
     InitiatePlantReportResponse:
-      type: object
-      properties:
-        statisticalPeriod:
-          type: string
-          description: "\n"
-          format: string
-        pvYield:
-          type: string
-          description: "\n"
-          format: string
-        inverterYield:
-          type: string
-          description: "\n"
-          format: string
-        export:
-          type: string
-          description: "\n"
-          format: string
-        importRevenue:
-          type: string
-          description: "\n"
-          format: string
+        type: array
+        items:
+            type: object
+            properties:
+              statisticalPeriod:
+                type: string
+                description: "\n"
+                format: string
+              pvYield:
+                type: string
+                description: "\n"
+                format: string
+              inverterYield:
+                type: string
+                description: "\n"
+                format: string
+              export:
+                type: string
+                description: "\n"
+                format: string
+              importRevenue:
+                type: string
+                description: "\n"
+                format: string
     InitiateReportOverviewRequest:
       type: object
       properties:
@@ -738,28 +742,30 @@ components:
           description: "\n"
           format: string
     InitiateReportOverviewResponse:
-      type: object
-      properties:
-        statisticalPeriod:
-          type: string
-          description: "\n"
-          format: string
-        pvYield:
-          type: string
-          description: "\n"
-          format: string
-        inverterYield:
-          type: string
-          description: "\n"
-          format: string
-        export:
-          type: string
-          description: "\n"
-          format: string
-        importRevenue:
-          type: string
-          description: "\n"
-          format: string
+      type: array
+      items:
+          type: object
+          properties:
+            statisticalPeriod:
+              type: string
+              description: "\n"
+              format: string
+            pvYield:
+              type: string
+              description: "\n"
+              format: string
+            inverterYield:
+              type: string
+              description: "\n"
+              format: string
+            export:
+              type: string
+              description: "\n"
+              format: string
+            importRevenue:
+              type: string
+              description: "\n"
+              format: string
     InitiateReportsStatisticsRequest:
       type: object
       properties:
@@ -776,28 +782,30 @@ components:
           description: "\n"
           format: string
     InitiateReportsStatisticsResponse:
-      type: object
-      properties:
-        statisticalPeriod:
-          type: string
-          description: "\n"
-          format: string
-        pvYield:
-          type: string
-          description: "\n"
-          format: string
-        inverterYield:
-          type: string
-          description: "\n"
-          format: string
-        export:
-          type: string
-          description: "\n"
-          format: string
-        importRevenue:
-          type: string
-          description: "\n"
-          format: string
+      type: array
+      items:
+          type: object
+          properties:
+            statisticalPeriod:
+              type: string
+              description: "\n"
+              format: string
+            pvYield:
+              type: string
+              description: "\n"
+              format: string
+            inverterYield:
+              type: string
+              description: "\n"
+              format: string
+            export:
+              type: string
+              description: "\n"
+              format: string
+            importRevenue:
+              type: string
+              description: "\n"
+              format: string
     InitiateDeviceReportsRequest:
       type: object
       properties:
@@ -814,28 +822,30 @@ components:
           description: "\n"
           format: string
     InitiateDeviceReportsResponse:
-      type: object
-      properties:
-        statisticalPeriod:
-          type: string
-          description: "\n"
-          format: string
-        pvYield:
-          type: string
-          description: "\n"
-          format: string
-        inverterYield:
-          type: string
-          description: "\n"
-          format: string
-        export:
-          type: string
-          description: "\n"
-          format: string
-        importRevenue:
-          type: string
-          description: "\n"
-          format: string
+        type: array
+        items:
+          type: object
+          properties:
+            statisticalPeriod:
+              type: string
+              description: "\n"
+              format: string
+            pvYield:
+              type: string
+              description: "\n"
+              format: string
+            inverterYield:
+              type: string
+              description: "\n"
+              format: string
+            export:
+              type: string
+              description: "\n"
+              format: string
+            importRevenue:
+              type: string
+              description: "\n"
+              format: string
     RetrieveDeviceResponse:
       type: object
       properties:
