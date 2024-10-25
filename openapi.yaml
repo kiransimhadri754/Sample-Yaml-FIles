@@ -85,7 +85,7 @@ paths:
 components:
   schemas:
     CheckingAccountFacility:
-          type:
+          type: object
           properties:
             ProductInstanceReference:
               type: string
