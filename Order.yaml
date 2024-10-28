@@ -1,0 +1,349 @@
+openapi: 3.0.1
+info:
+  title: Order Initiate
+  description: 'ISO-20022 service debtor bank sends message to creditor bank to transfer funds from one account to another.'
+  version: 11.0.0
+servers:
+  - url: https://www.iso20022.org/iso-20022-message-definitions?search=pacs.008
+paths:
+  '/Order/Initiate':
+    post:
+      tags:
+        - BQ - Order initiate 
+      summary: Order initiate  
+      description: Order initiate  
+      operationId: InitiateOrder  
+      requestBody:
+        $ref: '#/components/requestBodies/InitiateOrderRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiateOrderResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  schemas:
+    Orderresponse:
+      type: object
+      properties:
+       orderId:
+        type: string
+        description: "\n"
+        format: string
+       lastUpdated:
+        type: string
+        description: "\n"
+        format: string
+       customerName:
+        type: string
+        description: "\n"
+        format: string
+       totalAmount:
+        type: string
+        description: "\n"
+        format: string
+       currency:
+        type: string
+        description: "\n"
+        format: string
+       shippingMethod:
+        type: string
+        description: "\n"
+        format: string
+       trackingNumber:
+        type: string
+        description: "\n"
+        format: string
+       estimatedDelivery:
+        type: string
+        description: "\n"
+        format: string
+    InitiateOrderRequest:
+     type: object
+     properties:
+      Order:
+        $ref: '#/components/schemas/Order'
+    timestamps:
+      type: object
+      properties:
+        created:
+          type: string
+          description: "\n"
+          format: string
+        lastUpdated:
+          type: string
+          description: "\n"
+          format: string
+    metadata:
+      type: object
+      properties:
+        notes:
+          type: string
+          description: "\n"
+          format: string
+        specialInstructions:
+          type: string
+          description: "\n"
+          format: string
+        createdBy:
+          type: string
+          description: "\n"
+          format: string        
+        timestamps:
+          $ref: '#/components/schemas/timestamps'
+    payment:
+      type: object
+      properties:
+        method:
+          type: string
+          description: "\n"
+          format: string
+        transactionId:
+          type: string
+          description: "\n"
+          format: string
+        amount:
+          type: string
+          description: "\n"
+          format: string        
+        currency:
+          type: string
+          description: "\n"
+          format: string    
+    tracking:
+      type: object
+      properties:
+        carrier:
+          type: string
+          description: "\n"
+          format: string
+        trackingNumber:
+          type: string
+          description: "\n"
+          format: string
+        estimatedDelivery:
+          type: string
+          description: "\n"
+          format: string          
+    shipping:
+      type: object
+      properties:
+        method:
+          type: string
+          description: "\n"
+          format: string
+        cost:
+          type: string
+          description: "\n"
+          format: string
+        tracking:
+          $ref: '#/components/schemas/tracking'
+    name:
+      type: object 
+      properties:
+        first:
+          type: string
+          description: "\n"
+          format: string
+        last:
+          type: string
+          description: "\n"
+          format: string
+    customer:
+      type: object
+      properties:
+        id:
+          type: string
+          description: "\n"
+          format: string
+        name:
+          $ref: '#/components/schemas/name'
+        email:
+          type: string
+          description: "\n"
+          format: string
+        phone:
+          type: string
+          description: "\n"
+          format: string
+        address:
+         $ref: '#/components/schemas/address'
+    address:
+      type: object 
+      properties:
+        line1:
+          type: string
+          description: "\n"
+          format: string
+        line2:
+          type: string
+          description: "\n"
+          format: string
+        city:
+          type: string
+          description: "\n"
+          format: string
+        state:
+          type: string
+          description: "\n"
+          format: string
+        zip:
+          type: string
+          description: "\n"
+          format: string
+        country:
+          type: string
+          description: "\n"
+          format: string
+    accessories:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+           type: string
+           description: "\n"
+           format: string
+          name:
+           type: string
+           description: "\n"
+           format: string
+          price:
+           type: string
+           description: "\n"
+           format: string
+    options:
+      type: object
+      properties:
+        color:
+          type: string
+          description: "\n"
+          format: string
+        warranty:
+          type: string
+          description: "\n"
+          format: string    
+        accessories:
+          $ref: '#/components/schemas/accessories'
+    Items:
+      type: array
+      items:
+        type: object
+        properties:
+          productId:
+            type: string
+            description: "\n"
+            format: string
+          name:
+            type: string
+            description: "\n"
+            format: string
+          quantity:
+            type: string
+            description: "\n"
+            format: string       
+          price:
+            type: string
+            description: "\n"
+            format: string   
+          options:
+            $ref: '#/components/schemas/options'
+    Order:
+      type: object
+      properties:
+        id:
+          type: string
+          description: "\n"
+          format: string
+        date:
+          type: string
+          description: "\n"
+          format: string
+        status:
+          type: string
+          description: "\n"
+          format: string
+        customer:
+         $ref: '#/components/schemas/customer'
+        Items:
+          $ref: '#/components/schemas/Items'
+        shipping:
+          $ref: '#/components/schemas/shipping'
+        payment:
+          $ref: '#/components/schemas/payment'
+        metadata:
+          $ref: '#/components/schemas/metadata'
+    HTTPError:
+      type: object
+      properties:
+        status_code:
+          type: string
+          description: "\n"
+          format: string
+        status:
+          type: string
+          description: "\n"
+          format: string
+        message:
+          type: string
+          description: "\n"
+          format: string
+  requestBodies:
+    InitiateOrderRequest:
+        description: Initiate credit request
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiateOrderRequest'
+  responses:
+    InitiateOrderResponse:
+      description: Initiate credit response 
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Orderresponse'
+    BadRequest:
+      description: BadRequest
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    NotFound:
+      description: NotFound
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    TooManyRequests:
+      description: TooManyRequests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    InternalServerError:
+      description: InternalServerError
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
