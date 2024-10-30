@@ -1,0 +1,834 @@
+openapi: 3.0.1
+info:
+  title: document-management-service
+  version: 11.0.1
+servers:
+  - url: 'https://finx-celta-api-dev.fincuro.in'
+    description: Document Management
+tags:
+  - name: Documents
+    description: Document APIs
+  - name: Docusign
+    description: Docusign APIs
+  - name: DocusignTemplate
+    description: Docusign Template APIs
+paths:
+  /documents:
+    post:
+      tags:
+        - Documents
+      summary: Create new document
+      operationId: createDocument
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DocumentRequest'
+        required: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '405':
+          description: Method Not Allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - bearerAuth: []
+    get:
+      tags:
+        - Documents
+      summary: Search document
+      operationId: searchDocument
+      parameters:
+        - name: documentId
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: corporateId
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - bearerAuth: []
+  /documents/{documentId}:
+    patch:
+      tags:
+        - Documents
+      summary: Update Document
+      operationId: updateDocument
+      parameters:
+        - name: documentId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DocumentRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DocumentResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '405':
+          description: Method Not Allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Too Many Requesta
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - bearerAuth: []
+    delete:
+      tags:
+        - Documents
+      summary: Delete Document By ID
+      operationId: deleteDocumentById
+      parameters:
+        - name: documentId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - bearerAuth: []
+  /documents/files/upload:
+     post:
+      tags:
+        - Documents
+      summary: Upload new file to s3
+      operationId: uploadFileToS3
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties: 
+                file:
+                  type: string
+                  format: binary
+        required: true
+      parameters:
+        - name: userId
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/S3FileUploadResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '405':
+          description: Method Not Allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - bearerAuth: []
+  /documents/files/s3/uploads/url:
+     get:
+      tags:
+        - Documents
+      summary: Generate S3 upload url
+      operationId: generateS3FileUploadUrl
+      parameters:
+        - name: fileName
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreSignedUrlResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '405':
+          description: Method Not Allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - bearerAuth: []
+  /docusign/send:
+     post:
+      tags:
+        - Docusign
+      summary: Send document to docusign
+      operationId: sendDocumentForSign
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DocusignRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocusignResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '405':
+          description: Method Not Allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - bearerAuth: []
+  /docusign/retrieve:
+    get:
+      tags:
+        - Docusign
+      summary: Retrieve signed document 
+      operationId: retrieveSignedDocument
+      parameters:
+        - name: documentId
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: envelopId
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: userId
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocusignRetrieveResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - bearerAuth: []
+  /docusign/status:
+     get:
+      tags:
+        - Docusign
+      summary: Check document status
+      operationId: getDocumentStatus
+      parameters:
+        - name: documentId
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: envelopId
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocusignRetrieveResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - bearerAuth: []
+  /docusign/template/send:
+    post:
+      tags:
+        - DocusignTemplate
+      summary: Send document template to docusign
+      operationId: sendDocumentTemplateForSign
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DocusignDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocusignRespDTO'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '405':
+          description: Method Not Allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - bearerAuth: []
+  /docusign/template/send-dynamic-template:
+    post:
+      tags:
+        - DocusignTemplate
+      summary: Send document with dynamic template to docusign
+      operationId: sendDocumentWithDynamicTemplate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DocusignDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocusignRespDTO'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '405':
+          description: Method Not Allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - bearerAuth: []
+  /docusign/template/status:
+     get:
+      tags:
+        - DocusignTemplate
+      summary: Check document template status
+      operationId: getDocumentTemplateStatus
+      parameters:
+        - name: caseId
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocusignTrackingDTO'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - bearerAuth: []
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        timestamp:
+          type: string
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+    DocumentRequest:
+      type: object
+      properties:
+        entityStatus:
+          type: integer
+        category:
+          type: integer
+        documentName:
+          type: integer
+        provider:
+          type: integer
+        expiryDate:
+          type: string
+        lastCheckDate:
+          type: string
+        nextCheckDate:
+          type: string
+        corporateId:
+          type: string
+        individualId:
+          type: string
+        documentUrl:
+          type: string
+    DocumentResponse:
+      type: object
+      properties:
+        documentId:
+          type: string
+        entityStatus:
+          type: integer
+        category:
+          type: integer
+        documentName:
+          type: integer
+        provider:
+          type: integer
+        expiryDate:
+          type: string
+        lastCheckDate:
+          type: string
+        nextCheckDate:
+          type: string
+        corporateId:
+          type: string
+        individualId:
+          type: string
+        documentUrl:
+          type: string
+    S3FileUploadResponse:
+      type: object
+      properties:
+        fileUrl:
+          type: string
+        status:
+          type: string
+    PreSignedUrlResponse:
+      type: object
+      properties:
+        s3Link:
+          type: string
+        s3Path:
+          type: string
+        fileName:
+          type: string
+    DocusignUser:
+      type: object
+      properties:
+        userId:
+          type: string
+        email:
+          type: string
+        name:
+          type: string
+        userType:
+          type: string
+        role:
+          type: string
+    DocusignDocument:
+      type: object
+      properties:
+        documentId:
+          type: string
+        docUrl:
+          type: string
+        pageNumber:
+          type: string
+        xPosition:
+          type: string
+        yPosition:
+          type: string
+    DocusignRequest:
+      type: object
+      properties:
+        ftwUserId:
+          type: string
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocusignUser'
+        documents:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocusignDocument'
+    DocusignResponse:
+      type: object
+      properties:
+        envolopId:
+          type: string
+        status:
+          type: string
+    DocusignRetrieveResponse:
+      type: object
+      properties:
+        fileUrl:
+          type: string
+        status:
+          type: string     
+    PlaceHolderData:
+      type: object
+      properties:
+        placeHolderLabel:
+          type: string
+        placeHolderValue:
+          type: object
+    DocusignDTO:
+      type: object
+      properties:
+        caseId:
+          type: string
+        applicationId:
+          type: string
+        templateId: 
+          type: string
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocusignUser'
+        placeHolderDataList:
+          type: array
+          items:
+            $ref: '#/components/schemas/PlaceHolderData'
+    DocusignRespDTO:
+      type: object
+      properties:
+        envelopId: 
+          type: string
+        status:
+          type: string
+        message:
+          type: string
+        errMessage:
+          type: string
+    DocusignTrackingDTO:
+      type: object
+      properties:
+        docId:
+          type: integer
+        caseId:
+          type: string
+        applicationId:
+          type: string
+        documentUrl:
+          type: string
+        signedDocUrl:
+          type: string
+        status:
+          type: string
+        msdStatus:
+          type: string
+        reason:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        signerTrackingDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocusignTrackingDtlDTO'
+    DocusignTrackingDtlDTO:
+      type: object
+      properties:
+        userId:
+          type: string
+        name:
+          type: string
+        status:
+          type: string
+        emailId:
+          type: string
+        role:
+          type: string
+        reason:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
