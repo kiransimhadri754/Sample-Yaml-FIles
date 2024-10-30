@@ -696,43 +696,43 @@ components:
         fileName:
           type: string
     DocusignUser:
-      type: object
-      properties:
-        userId:
-          type: string
-        email:
-          type: string
-        name:
-          type: string
-        userType:
-          type: string
-        role:
-          type: string
+      type: array
+      items:
+        type: object
+        properties:
+          userId:
+            type: string
+          email:
+            type: string
+          name:
+            type: string
+          userType:
+            type: string
+          role:
+            type: string
     DocusignDocument:
-      type: object
-      properties:
-        documentId:
-          type: string
-        docUrl:
-          type: string
-        pageNumber:
-          type: string
-        xPosition:
-          type: string
-        yPosition:
-          type: string
+      type: array
+      items:
+       type: object
+       properties:
+          documentId:
+            type: string
+          docUrl:
+            type: string
+          pageNumber:
+            type: string
+          xPosition:
+            type: string
+          yPosition:
+            type: string
     DocusignRequest:
       type: object
       properties:
         ftwUserId:
           type: string
         users:
-          type: array
-          items:
             $ref: '#/components/schemas/DocusignUser'
         documents:
-          type: array
-          items:
             $ref: '#/components/schemas/DocusignDocument'
     DocusignResponse:
       type: object
@@ -749,12 +749,14 @@ components:
         status:
           type: string     
     PlaceHolderData:
-      type: object
-      properties:
-        placeHolderLabel:
-          type: string
-        placeHolderValue:
-          type: object
+      type: array
+      items:
+        type: object
+        properties:
+          placeHolderLabel:
+            type: string
+          placeHolderValue:
+            type: object
     DocusignDTO:
       type: object
       properties:
@@ -765,12 +767,8 @@ components:
         templateId: 
           type: string
         users:
-          type: array
-          items:
             $ref: '#/components/schemas/DocusignUser'
         placeHolderDataList:
-          type: array
-          items:
             $ref: '#/components/schemas/PlaceHolderData'
     DocusignRespDTO:
       type: object
@@ -809,24 +807,24 @@ components:
           type: string
           format: date-time
         signerTrackingDetails:
-          type: array
-          items:
             $ref: '#/components/schemas/DocusignTrackingDtlDTO'
     DocusignTrackingDtlDTO:
-      type: object
-      properties:
-        userId:
-          type: string
-        name:
-          type: string
-        status:
-          type: string
-        emailId:
-          type: string
-        role:
-          type: string
-        reason:
-          type: string
+      type: array
+      items:
+        type: object
+        properties:
+          userId:
+            type: string
+          name:
+            type: string
+          status:
+            type: string
+          emailId:
+            type: string
+          role:
+            type: string
+          reason:
+            type: string
   securitySchemes:
     bearerAuth:
       type: http
