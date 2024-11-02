@@ -1,10 +1,10 @@
 openapi: 3.0.1
 info:
   title: BIANCurrentService
-  description: BIAN Service Domain Packaged Business Capability (PCB) | DDD Bounded Context Account Listing.
+  description: BIAN Service Domain Packaged Business Capability (PCB) | DDD Bounded Context Account creation.
   version: 11.0.0
 servers:
-- url: 'https://core-api.shine.staging.saas.tmachine.io'
+- url: 'https://core-api.partner-integrations-sandbox.thirsty-fish-dephub.tmachine.io'
 paths:
    /currentAccount/initiate:
     post:
