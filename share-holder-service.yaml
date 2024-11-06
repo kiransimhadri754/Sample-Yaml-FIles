@@ -1,0 +1,798 @@
+openapi: 3.0.1
+info:
+  title: share-holder-service
+  version: '1.0'
+servers:
+  - url: 'https://finx-celta-api-dev.fincuro.in'
+    description: Shareholder Service
+paths:
+  /shareholders:
+    post:
+      tags:
+        - Shareholder
+      summary: Create a new Shareholder
+      operationId: createShareholder
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShareholderRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateShareholderResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - bearerAuth: []
+  /executiveManagement:
+    post:
+      tags:
+        - Executive Management
+      summary: Create a New Executive Management
+      operationId: createExecutiveManagement
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateExecuetiveManagementRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateExecuetiveManagementResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - bearerAuth: []
+  /authorizedSignatory:
+    post:
+      tags:
+        - Authorized signatory
+      summary: Create a new Authorized signatory
+      operationId: createAuthorizedSignatory
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthorizedSignatoryRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateAuthorizedSignatoryResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - bearerAuth: []
+  /accountUser:
+    post:
+      tags:
+        - Account User
+      summary: Create a New Account User
+      operationId: createAccountUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAccountUserRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateAccountUserResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - bearerAuth: []
+  /shareholders/update:
+    patch:
+      tags:
+        - Shareholder
+      summary: Update an Shareholder
+      operationId: updateShareholder
+      parameters:
+        - name: shareholderId
+          in: query
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShareholderRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CreateShareholderResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - bearerAuth: []
+  /executiveManagement/update:
+    patch:
+      tags:
+        - Executive Management
+      summary: Update an Executive Management
+      operationId: updateExecutiveManagement
+      parameters:
+        - name: executiveManagementId
+          in: query
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateExecuetiveManagementRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CreateExecuetiveManagementResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - bearerAuth: []
+  /accountUser/update:
+    patch:
+      tags:
+        - Account User
+      summary: Update an Account User
+      operationId: updateAccountUser
+      parameters:
+        - name: accountId
+          in: query
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAccountUserRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CreateAccountUserResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - bearerAuth: []
+  /shareholders/search:
+    get:
+      tags:
+        - Shareholder
+      summary: Fetch Shareholder by corporate
+      operationId: searchShareHolderByCorporateId
+      parameters:
+        - name: corporateId
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetShareholderResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - bearerAuth: []
+  /executiveManagement/get:
+    get:
+      tags:
+        - Executive Management
+      summary: Fetch an Executive Management
+      operationId: fetchExecutiveManagement
+      parameters:
+        - name: corporateId
+          in: query
+          description: corporateId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FetchExecutiveManagementResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - bearerAuth: []
+  /authorizedSignatory/get:
+    get:
+      tags:
+        - Authorized signatory
+      summary: Fetch an Authorized signatory
+      operationId: fetchAuthorizedSignatoryByCorporateId
+      parameters:
+        - name: corporateId
+          in: query
+          description: corporateId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FetchAuthorizedSignatoryResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - bearerAuth: []
+  /accountUser/get:
+    get:
+      tags:
+        - Account User
+      summary: Fetch an Account User
+      operationId: fetchAccountUserByCorporateId
+      parameters:
+        - name: corporateId
+          in: query
+          description: corporateId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FetchAccountUserResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - bearerAuth: []
+  /shareholders/delete:
+    delete:
+      tags:
+        - Shareholder
+      summary: Delete Shareholder
+      operationId: deleteShareholder
+      parameters:
+        - name: shareholderId
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - bearerAuth: []
+  /executiveManagement/delete:
+    delete:
+      tags:
+        - Executive Management
+      summary: Delete an Executive Management
+      operationId: deleteExecutiveManagement
+      parameters:
+        - name: executiveManagementId
+          in: query
+          description: executiveManagementId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - bearerAuth: []
+  /authorizedSignatory/delete:
+    delete:
+      tags:
+        - Authorized signatory
+      summary: Delete an Authorized signatory
+      operationId: deleteAuthorizedSignatoryById
+      parameters:
+        - name: authorizedSignatoryId
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - bearerAuth: []
+  /accountUser/delete:
+    delete:
+      tags:
+        - Account User
+      summary: Delete an Account User
+      operationId: deleteAccountUserByAccountId
+      parameters:
+        - name: accountId
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - bearerAuth: []
+components:
+  schemas:
+    ShareholderRequest:
+      type: object
+      properties:
+        corporate:
+          type: string
+        shareHolderNameContact:
+          type: string
+        shareHolderNameAccount:
+          type: string
+        shareHoldingPercent:
+          type: string
+        entityStatus:
+          type: string
+        shareHolderEntity:
+          type: string
+    CreateShareholderResponse:
+      type: object
+      properties:
+        shareholderId:
+          type: string
+    CreateExecuetiveManagementRequest:
+      type: object
+      properties:
+        individualId:
+          type: string
+        corporateId:
+          type: string
+        entityStatus:
+          type: object
+        jobTitle:
+          type: string
+    CreateExecuetiveManagementResponse:
+      type: object
+      properties:
+        executiveManagementId:
+          type: string
+    AuthorizedSignatoryRequest:
+      type: object
+      properties:
+        individualId:
+          type: string
+        corporateId:
+          type: string
+        entityStatus:
+          type: integer
+          format: int32
+        companyName:
+          type: string
+    CreateAuthorizedSignatoryResponse:
+      type: object
+      properties:
+        authorizedSignatoryId:
+          type: string
+    CreateAccountUserRequest:
+      type: object
+      properties:
+        individual:
+          type: string
+        corporateName:
+          type: string
+        entityStatus:
+          type: string
+        jobTitle:
+          type: string
+        companyName:
+          type: string
+    CreateAccountUserResponse:
+      type: object
+      properties:
+        accountUserId:
+          type: string
+    Corporate:
+      type: object
+      properties:
+        name:
+          type: string
+        accountId:
+          type: string
+    GetShareholderResponse:
+      type: array
+      items:
+        type: object
+        properties:
+          shareHolderId:
+            type: string
+          shareHolderEntity:
+            type: string
+          shareHolderNameValue:
+            type: string
+          name:
+            type: string
+          shareHoldingPercent:
+            type: string
+          entityStatus:
+            type: string
+          corporate:
+              $ref: '#/components/schemas/Corporate'
+    FetchExecutiveManagementResponse:
+      type: array
+      items: 
+        type: object
+        properties:
+          individualId:
+            type: string
+          corporateId:
+            type: string
+          entityStatus:
+            type: string
+          name:
+            type: string
+          jobTitle:
+            type: string
+          executiveManagementId:
+            type: string
+          companyName:
+            type: string
+          corporate:
+            $ref: '#/components/schemas/Corporate'
+    FetchAuthorizedSignatoryResponse:
+      type: array
+      items:
+        type: object
+        properties:
+          authorizedSignatoryId:
+            type: string
+          individualValue:
+            type: string
+          corporateValue:
+            type: string
+          entityStatus:
+            type: integer
+            format: int32
+          name:
+            type: string
+          companyName:
+            type: string
+          corporate:
+            $ref: '#/components/schemas/Corporate'
+    CorporateName:
+      type: object
+      properties:
+        name:
+          type: string
+        accountId:
+          type: string
+    FetchAccountUserResponse:
+      type: array
+      items:
+        type: object
+        properties:
+          accountUserId:
+            type: string
+          individualId:
+            type: string
+          jobTitle:
+            type: string
+          corporateNameId:
+            type: string
+          entityStatus:
+            type: string
+          companyName:
+            type: string
+          name:
+            type: string
+          corporateName:
+            $ref: '#/components/schemas/CorporateName'
+    ErrorResponse:
+      type: object
+      properties:
+        timestamp:
+          type: string
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
