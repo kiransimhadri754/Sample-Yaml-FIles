@@ -100,7 +100,7 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
-  /Solar/Reports/Plants/Initiate:
+  /Solar/PlantsReport/Initiate:
     post:
       tags:
         - Solar
@@ -124,7 +124,7 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
-  /Solar/Reports/OverView/Initiate:
+  /Solar/OverViewReports/Initiate:
     post:
       tags:
         - Solar
@@ -148,7 +148,7 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
-  /Solar/Reports/Statistics/Initiate:
+  /Solar/StatisticsReports/Initiate:
     post:
       tags:
         - Solar
@@ -172,7 +172,7 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
-  /Solar/Reports/Device/Initiate:
+  /Solar/DeviceReports/Initiate:
     post:
       tags:
         - Solar
@@ -266,7 +266,7 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
-  /Solar/Plants/{plantId}/Alerts/Initiate:
+  /Solar/PlantsAlerts/{plantId}/Initiate:
     post:
       tags:
         - Solar
@@ -292,7 +292,7 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
-  /Solar/Plants/{plantId}/Alerts/Retrieve:
+  /Solar/PlantsAlerts/{plantId}/Retrieve:
     get:
       tags:
         - Solar
@@ -316,7 +316,7 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
-  /Solar/Plants/Alerts/Retrieve:
+  /Solar/PlantsAlerts/Retrieve:
     get:
       tags:
         - Solar
