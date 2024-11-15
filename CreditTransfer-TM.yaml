@@ -1,0 +1,288 @@
+openapi: 3.0.1
+info:
+  title: TM-Vault Payments
+  description: APIs for financial institution to financial institution credit transfer
+  version: 1.0.1
+servers:
+- url: 'https://sandbox.payments.tmachine.io/api'
+paths:
+   '/v1/instructions:initiate':
+    post:
+      tags:
+        - Credit Transfer
+      summary: InBQ Initialize fi to fi customer credit transafer transaction
+      description: InBQ Initialize fi to fi customer credit transafer transaction
+      operationId: InitiateFitoFiCreditTransfer
+      requestBody:
+        $ref: '#/components/requestBodies/InitiateCreditTransferRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiateCreditTransferResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  schemas:
+    group_header:
+      type: object
+      properties:
+        message_identification:
+          type: string
+          description: "\n"
+          format: string
+    payment_identification:
+      type: object
+      properties:
+        end_to_end_identification:
+          type: string
+          description: "\n"
+          format: string
+    interbank_settlement_amount:
+      type: object
+      properties:
+        amount:
+          type: string
+          description: "\n"
+          format: string
+        currency:
+          type: string
+          description: "\n"
+          format: string
+    instructed_amount:
+      type: object
+      properties:
+        amount:
+          type: string
+          description: "\n"
+          format: string
+        currency:
+          type: string
+          description: "\n"
+          format: string
+    debtor:
+      type: object
+      properties:
+        name:
+          type: string
+          description: "\n"
+          format: string
+    creditor:
+      type: object
+      properties:
+        name:
+          type: string
+          description: "\n"
+          format: string
+    other:
+      type: object
+      properties:
+        identification:
+          type: string
+          description: "\n"
+          format: string
+        issuer:
+          type: string
+          description: "\n"
+          format: string
+    identification:
+      type: object
+      properties:
+        iban:
+          type: string
+          description: "\n"
+          format: string
+        other:
+          $ref: '#/components/schemas/other'
+    debtor_account:
+      type: object
+      properties:
+        identification:
+          $ref: '#/components/schemas/identification'
+    creditor_account:
+      type: object
+      properties:
+        identification:
+          $ref: '#/components/schemas/identification'
+    financial_institution_identification:
+      type: object
+      properties:
+        bicfi:
+          type: string
+          description: "\n"
+          format: string
+    creditor_agent:
+      type: object
+      properties:
+        financial_institution_identification:
+          $ref: '#/components/schemas/financial_institution_identification'
+    purpose:
+      type: object
+      properties:
+        code:
+          type: string
+          description: "\n"
+          format: string
+    credit_transfer_transaction_information:
+      type: object
+      properties:
+        payment_identification:
+          $ref: '#/components/schemas/payment_identification'
+        interbank_settlement_amount:
+          $ref: '#/components/schemas/interbank_settlement_amount'
+        instructed_amount:
+          $ref: '#/components/schemas/instructed_amount' 
+        debtor:
+          $ref: '#/components/schemas/debtor' 
+        creditor:
+          $ref: '#/components/schemas/creditor'
+        debtor_account:
+          $ref: '#/components/schemas/debtor_account'
+        creditor_agent:
+          $ref: '#/components/schemas/creditor_agent'
+        creditor_account:
+          $ref: '#/components/schemas/creditor_account'  
+        purpose:
+          $ref: '#/components/schemas/purpose'  
+    message_V08:
+      type: object
+      properties:
+        group_header:
+          $ref: '#/components/schemas/group_header'
+        credit_transfer_transaction_information:
+          $ref: '#/components/schemas/credit_transfer_transaction_information'
+    fi_to_fi_customer_credit_transfer:
+      type: object
+      properties:
+        message_V08:
+          $ref: '#/components/schemas/message_V08'
+    instruction:
+      type: object
+      properties:
+        correlation_id:
+          type: string
+          description: "\n"
+          format: string
+        instruction_flow_id:
+          type: string
+          description: "\n"
+          format: string
+        scheme:
+          type: string
+          description: "\n"
+          format: string
+        direction:
+          type: string
+          description: "\n"
+          format: string
+        type:
+          type: string
+          description: "\n"
+          format: string
+        fi_to_fi_customer_credit_transfer:
+          $ref: '#/components/schemas/fi_to_fi_customer_credit_transfer'
+        context:
+          type: object
+          description: "\n"
+          format: string
+    InitiateCreditTransferRequest:
+      type: object
+      properties:
+        request_id:
+          type: string
+          description: "\n"
+          format: string
+        instruction:
+          $ref: '#/components/schemas/instruction'
+    InitiateCreditTransferResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: "\n"
+          format: string
+        payment_id:
+          type: string
+          description: "\n"
+          format: string
+        instruction_flow_id:
+          type: string
+          description: "\n"
+          format: string
+        create_timestamp:
+          type: string
+          description: "\n"
+          format: string
+    HTTPError:
+      type: object
+      properties:
+        status_code:
+          type: string
+          description: "\n"
+          format: string
+        status:
+          type: string
+          description: "\n"
+          format: string
+        message:
+          type: string
+          description: "\n"
+          format: string
+  requestBodies:
+    InitiateCreditTransferRequest:
+        description: InitiateCreditTransferRequest
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiateCreditTransferRequest' 
+  responses:
+    InitiateCreditTransferResponse:
+        description: InitiateCreditTransferResponse
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiateCreditTransferResponse'
+    BadRequest:
+      description: BadRequest
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    NotFound:
+      description: NotFound
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    TooManyRequests:
+      description: TooManyRequests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    InternalServerError:
+      description: InternalServerError
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
