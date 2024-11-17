@@ -32,21 +32,21 @@ paths:
           $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
-    group_header:
+    groupHeader:
       type: object
       properties:
-        message_identification:
+        messageIdentification:
           type: string
           description: "\n"
           format: string
-    payment_identification:
+    paymentIdentification:
       type: object
       properties:
-        end_to_end_identification:
+        endToEndIdentification:
           type: string
           description: "\n"
           format: string
-    interbank_settlement_amount:
+    interbankSettlementAmount:
       type: object
       properties:
         amount:
@@ -57,7 +57,7 @@ components:
           type: string
           description: "\n"
           format: string
-    instructed_amount:
+    instructedAmount:
       type: object
       properties:
         amount:
@@ -102,28 +102,28 @@ components:
           format: string
         other:
           $ref: '#/components/schemas/other'
-    debtor_account:
+    debtorAccount:
       type: object
       properties:
         identification:
           $ref: '#/components/schemas/identification'
-    creditor_account:
+    creditorAccount:
       type: object
       properties:
         identification:
           $ref: '#/components/schemas/identification'
-    financial_institution_identification:
+    financialInstitutionIdentification:
       type: object
       properties:
         bicfi:
           type: string
           description: "\n"
           format: string
-    creditor_agent:
+    creditorAgent:
       type: object
       properties:
-        financial_institution_identification:
-          $ref: '#/components/schemas/financial_institution_identification'
+        financialInstitutionIdentification:
+          $ref: '#/components/schemas/financialInstitutionIdentification'
     purpose:
       type: object
       properties:
@@ -131,47 +131,47 @@ components:
           type: string
           description: "\n"
           format: string
-    credit_transfer_transaction_information:
+    creditTransferTransactionInformation:
       type: object
       properties:
-        payment_identification:
-          $ref: '#/components/schemas/payment_identification'
-        interbank_settlement_amount:
-          $ref: '#/components/schemas/interbank_settlement_amount'
-        instructed_amount:
-          $ref: '#/components/schemas/instructed_amount' 
+        paymentIdentification:
+          $ref: '#/components/schemas/paymentIdentification'
+        interbankSettlementAmount:
+          $ref: '#/components/schemas/interbankSettlementAmount'
+        instructedAmount:
+          $ref: '#/components/schemas/instructedAmount' 
         debtor:
           $ref: '#/components/schemas/debtor' 
         creditor:
           $ref: '#/components/schemas/creditor'
-        debtor_account:
-          $ref: '#/components/schemas/debtor_account'
-        creditor_agent:
-          $ref: '#/components/schemas/creditor_agent'
-        creditor_account:
-          $ref: '#/components/schemas/creditor_account'  
+        debtorAccount:
+          $ref: '#/components/schemas/debtorAccount'
+        creditorAgent:
+          $ref: '#/components/schemas/creditorAgent'
+        creditorAccount:
+          $ref: '#/components/schemas/creditorAccount'  
         purpose:
           $ref: '#/components/schemas/purpose'  
-    message_V08:
+    messageV08:
       type: object
       properties:
-        group_header:
-          $ref: '#/components/schemas/group_header'
-        credit_transfer_transaction_information:
-          $ref: '#/components/schemas/credit_transfer_transaction_information'
-    fi_to_fi_customer_credit_transfer:
+        groupHeader:
+          $ref: '#/components/schemas/groupHeader'
+        creditTransferTransactionInformation:
+          $ref: '#/components/schemas/creditTransferTransactionInformation'
+    fiToFiCustomerCreditTransfer:
       type: object
       properties:
-        message_V08:
-          $ref: '#/components/schemas/message_V08'
+        messageV08:
+          $ref: '#/components/schemas/messageV08'
     instruction:
       type: object
       properties:
-        correlation_id:
+        correlationId:
           type: string
           description: "\n"
           format: string
-        instruction_flow_id:
+        instructionFlowId:
           type: string
           description: "\n"
           format: string
@@ -187,8 +187,8 @@ components:
           type: string
           description: "\n"
           format: string
-        fi_to_fi_customer_credit_transfer:
-          $ref: '#/components/schemas/fi_to_fi_customer_credit_transfer'
+        fiToFiCustomerCreditTransfer:
+          $ref: '#/components/schemas/fiToFiCustomerCreditTransfer'
         context:
           type: object
           description: "\n"
@@ -209,22 +209,22 @@ components:
           type: string
           description: "\n"
           format: string
-        payment_id:
+        paymentId:
           type: string
           description: "\n"
           format: string
-        instruction_flow_id:
+        instructionFlowId:
           type: string
           description: "\n"
           format: string
-        create_timestamp:
+        createTimestamp:
           type: string
           description: "\n"
           format: string
     HTTPError:
       type: object
       properties:
-        status_code:
+        statusCode:
           type: string
           description: "\n"
           format: string
