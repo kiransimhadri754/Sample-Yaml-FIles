@@ -30,6 +30,30 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
+   '/v1/instructions/{id}':
+    get:
+      tags:
+          - Credit Transfer
+      summary: InCR Retrieve fi to fi customer credit transafer transaction details
+      description: InCR Retrieve fi to fi customer credit transafer transaction details
+      operationId: RetrieveFitoFiCreditTransfer
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          $ref: '#/components/responses/RetrieveFitoFiCreditTransfer'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
     groupHeader:
@@ -221,6 +245,105 @@ components:
           type: string
           description: "\n"
           format: string
+    batchDetails:
+      type: object
+      properties:
+        vpCorrelationId:
+          type: string
+          description: "\n"
+          format: string
+        vpInstructionId:
+          type: string
+          description: "\n"
+          format: string
+    history:
+      type: object
+      properties:
+        batchDetails:
+          $ref: '#/components/schemas/batchDetails'
+        status:
+          type: string
+          description: "\n"
+          format: string
+        insertionTimestamp:
+          type: string
+          description: "\n"
+          format: string
+    RetrieveFitoFiCreditTransferResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: "\n"
+          format: string
+        createRequestId:
+          type: string
+          description: "\n"
+          format: string
+        correlationId:
+          type: string
+          description: "\n"
+          format: string
+        paymentId:
+          type: string
+          description: "\n"
+          format: string
+        instructionBatchId:
+          type: string
+          description: "\n"
+          format: string
+        instructionFlowId:
+          type: string
+          description: "\n"
+          format: string
+        instructionFlowVersionId:
+          type: string
+          description: "\n"
+          format: string
+        createTimestamp:
+          type: string
+          description: "\n"
+          format: string
+        updateTimestamp:
+          type: string
+          description: "\n"
+          format: string
+        scheme:
+          type: string
+          description: "\n"
+          format: string
+        direction:
+          type: string
+          description: "\n"
+          format: string
+        processingStatus:
+          type: string
+          description: "\n"
+          format: string
+        processingError:
+          type: string
+          description: "\n"
+          format: string
+        issues:
+          type: array
+          items:
+            type: string
+        outcome:
+          type: string
+          description: "\n"
+          format: string
+        outcomeReason:
+          type: string
+          description: "\n"
+          format: string
+        type:
+          type: string
+          description: "\n"
+          format: string
+        fiToFiCustomerCreditTransfer:
+          $ref: '#/components/schemas/fiToFiCustomerCreditTransfer'
+        history:
+          $ref: '#/components/schemas/history'
     HTTPError:
       type: object
       properties:
@@ -236,6 +359,13 @@ components:
           type: string
           description: "\n"
           format: string
+  parameters:
+    id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
   requestBodies:
     InitiateCreditTransferRequest:
         description: InitiateCreditTransferRequest
@@ -250,6 +380,12 @@ components:
           application/json:
             schema:
                 $ref: '#/components/schemas/InitiateCreditTransferResponse'
+    RetrieveFitoFiCreditTransfer:
+        description: InitiateCreditTransferResponse
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/RetrieveFitoFiCreditTransferResponse'
     BadRequest:
       description: BadRequest
       content:
