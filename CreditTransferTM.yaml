@@ -30,7 +30,7 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
-   '/v1/instructions/id/retrieve':
+   '/v1/instructions/retrieve/id':
     get:
       tags:
           - Credit Transfer
