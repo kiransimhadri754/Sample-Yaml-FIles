@@ -1,0 +1,197 @@
+openapi: 3.0.1
+info:
+  title: finx-celta-tm-vp-paymentinstrument-service
+  description: API to create payment instrument
+  version: 1.0.1
+servers:
+- url: 'https://sandbox.payments.tmachine.io/api'
+paths:
+   '/paymentInstruments/initiate':
+    post:
+      tags:
+        - Payment Instrument
+      summary: InBQ Initialize payment instrument
+      description: InBQ Initialize payment instrument
+      operationId: InitiatePaymentInstrument
+      requestBody:
+        $ref: '#/components/requestBodies/InitiatePaymentInstrumentRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiatePaymentInstrumentResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  schemas:
+    accountLinkSelectionRules:
+      type: array
+      items:
+        type: object
+        properties:
+          ruleId:
+            type: string
+            description: "\n"
+            format: string
+          accountLinkId:
+            type: string
+            description: "\n"
+            format: string 
+    ruleIds:
+      type: array
+      items:
+        type: string
+    routingInformation:
+      type: object
+      properties:
+        instrumentIdentifier:
+          type: string
+          description: "\n"
+          format: string
+        bankIdentifier:
+          type: string
+          description: "\n"
+          format: string        
+    paymentInstrument:
+      type: object
+      properties:
+        id:
+          type: string
+          description: "\n"
+          format: string
+        routingInformation:
+          $ref: '#/components/schemas/routingInformation'
+        defaultAccountLinkId:
+          type: string
+          description: "\n"
+          format: string
+        accountLinkSelectionRules:
+          $ref: '#/components/schemas/accountLinkSelectionRules'
+        ruleSetId:
+          type: string
+          description: "\n"
+          format: string
+        ruleIds:
+          $ref: '#/components/schemas/ruleIds'
+    InitiatePaymentInstrumentRequest:
+      type: object
+      properties:
+        requestId:
+          type: string
+          description: "\n"
+          format: string
+        paymentInstrument:
+          $ref: '#/components/schemas/paymentInstrument'
+    InitiatePaymentInstrumentResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: "\n"
+          format: string
+        status:
+          type: string
+          description: "\n"
+          format: string
+        routingInformation:
+          $ref: '#/components/schemas/routingInformation'
+        defaultAccountLinkId:
+          type: string
+          description: "\n"
+          format: string
+        accountLinkSelectionRules:
+          $ref: '#/components/schemas/accountLinkSelectionRules'
+        ruleSetId:
+          type: string
+          description: "\n"
+          format: string
+        ruleIds:
+          $ref: '#/components/schemas/ruleIds'
+        createTimestamp:
+          type: string
+          description: "\n"
+          format: string
+        updateTimestamp:
+          type: string
+          description: "\n"
+          format: string
+    HTTPError:
+      type: object
+      properties:
+        statusCode:
+          type: string
+          description: "\n"
+          format: string
+        status:
+          type: string
+          description: "\n"
+          format: string
+        message:
+          type: string
+          description: "\n"
+          format: string
+  parameters:
+    id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+  requestBodies:
+    InitiatePaymentInstrumentRequest:
+        description: InitiateCreditTransferRequest
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiatePaymentInstrumentRequest'
+  responses:
+    InitiatePaymentInstrumentResponse:
+        description: InitiatePaymentInstrumentResponse
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiatePaymentInstrumentResponse'
+    BadRequest:
+      description: BadRequest
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    NotFound:
+      description: NotFound
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    TooManyRequests:
+      description: TooManyRequests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    InternalServerError:
+      description: InternalServerError
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
