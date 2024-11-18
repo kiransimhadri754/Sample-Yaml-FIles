@@ -1,0 +1,157 @@
+openapi: 3.0.1
+info:
+  title: finx-celta-tm-vp-accountlink-service
+  description: API to create account links
+  version: 1.0.1
+servers:
+- url: 'https://sandbox.payments.tmachine.io/api'
+paths:
+   '/accountLinks/initiate':
+    post:
+      tags:
+        - Account Link
+      summary: InBQ Initialize account link
+      description: InBQ Initialize account link
+      operationId: InitiateAccountLink
+      requestBody:
+        $ref: '#/components/requestBodies/InitiateAccountLinkRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiateAccountLinkResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  schemas:
+    accountLink:
+      type: object
+      properties:
+        id:
+          type: string
+          description: "\n"
+          format: string
+        coreId:
+          type: string
+          description: "\n"
+          format: string
+        coreAccountId:
+          type: string
+          description: "\n"
+          format: string
+    InitiateAccountLinkRequest:
+      type: object
+      properties:
+        requestId:
+          type: string
+          description: "\n"
+          format: string
+        accountLink:
+          $ref: '#/components/schemas/accountLink'
+    InitiateAccountLinkResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: "\n"
+          format: string
+        status:
+          type: string
+          description: "\n"
+          format: string
+        coreId:
+          type: string
+          description: "\n"
+          format: string
+        coreAccountId:
+          type: string
+          description: "\n"
+          format: string
+        createTimestamp:
+          type: string
+          description: "\n"
+          format: string
+        updateTimestamp:
+          type: string
+          description: "\n"
+          format: string
+    HTTPError:
+      type: object
+      properties:
+        statusCode:
+          type: string
+          description: "\n"
+          format: string
+        status:
+          type: string
+          description: "\n"
+          format: string
+        message:
+          type: string
+          description: "\n"
+          format: string
+  parameters:
+    id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+  requestBodies:
+    InitiateAccountLinkRequest:
+        description: InitiateAccountLinkRequest
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiateAccountLinkRequest'
+  responses:
+    InitiateAccountLinkResponse:
+        description: InitiateAccountLinkResponse
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiateAccountLinkResponse'
+    BadRequest:
+      description: BadRequest
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    NotFound:
+      description: NotFound
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    TooManyRequests:
+      description: TooManyRequests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    InternalServerError:
+      description: InternalServerError
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
