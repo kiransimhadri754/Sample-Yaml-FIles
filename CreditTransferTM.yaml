@@ -256,9 +256,18 @@ components:
           type: string
           description: "\n"
           format: string
+    postingInstructionBatch:
+      type: object
+      properties:
+        clientBatchId:
+          type: string
+          description: "\n"
+          format: string
     history:
       type: object
       properties:
+        postingInstructionBatch:
+          $ref: '#/components/schemas/postingInstructionBatch'
         batchDetails:
           $ref: '#/components/schemas/batchDetails'
         status:
