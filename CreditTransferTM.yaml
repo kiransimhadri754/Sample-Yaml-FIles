@@ -220,7 +220,7 @@ components:
     InitiateCreditTransferRequest:
       type: object
       properties:
-        request_id:
+        requestId:
           type: string
           description: "\n"
           format: string
