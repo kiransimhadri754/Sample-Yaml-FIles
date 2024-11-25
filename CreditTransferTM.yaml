@@ -156,26 +156,28 @@ components:
           description: "\n"
           format: string
     creditTransferTransactionInformation:
-      type: object
-      properties:
-        paymentIdentification:
-          $ref: '#/components/schemas/paymentIdentification'
-        interbankSettlementAmount:
-          $ref: '#/components/schemas/interbankSettlementAmount'
-        instructedAmount:
-          $ref: '#/components/schemas/instructedAmount' 
-        debtor:
-          $ref: '#/components/schemas/debtor' 
-        creditor:
-          $ref: '#/components/schemas/creditor'
-        debtorAccount:
-          $ref: '#/components/schemas/debtorAccount'
-        creditorAgent:
-          $ref: '#/components/schemas/creditorAgent'
-        creditorAccount:
-          $ref: '#/components/schemas/creditorAccount'  
-        purpose:
-          $ref: '#/components/schemas/purpose'  
+      type: array
+      items:
+        type: object
+        properties:
+          paymentIdentification:
+            $ref: '#/components/schemas/paymentIdentification'
+          interbankSettlementAmount:
+            $ref: '#/components/schemas/interbankSettlementAmount'
+          instructedAmount:
+            $ref: '#/components/schemas/instructedAmount' 
+          debtor:
+            $ref: '#/components/schemas/debtor' 
+          creditor:
+            $ref: '#/components/schemas/creditor'
+          debtorAccount:
+            $ref: '#/components/schemas/debtorAccount'
+          creditorAgent:
+            $ref: '#/components/schemas/creditorAgent'
+          creditorAccount:
+            $ref: '#/components/schemas/creditorAccount'  
+          purpose:
+            $ref: '#/components/schemas/purpose'  
     messageV08:
       type: object
       properties:
