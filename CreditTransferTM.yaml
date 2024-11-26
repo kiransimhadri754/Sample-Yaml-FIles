@@ -158,7 +158,6 @@ components:
     creditTransferTransactionInformation:
       type: array
       items:
-        type: object
         properties:
           paymentIdentification:
             $ref: '#/components/schemas/paymentIdentification'
