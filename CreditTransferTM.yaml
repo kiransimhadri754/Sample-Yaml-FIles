@@ -1,23 +1,23 @@
 openapi: 3.0.1
 info:
-  title: TM-Vault Payments
-  description: APIs for financial institution to financial institution credit transfer
+  title: Customers
+  description: Solar customers overview
   version: 1.0.1
 servers:
-- url: 'https://sandbox.payments.tmachine.io/api'
+- url: 'https://solar.com'
 paths:
-   '/v1/instructions:initiate':
+  '/Customers/Onboarding/Initiate':
     post:
       tags:
-        - Credit Transfer
-      summary: InBQ Initialize fi to fi customer credit transafer transaction
-      description: InBQ Initialize fi to fi customer credit transafer transaction
-      operationId: InitiateFitoFiCreditTransfer
+        - Customers
+      summary: InBQ Initialize customer account.
+      description: InBQ Initialize customer account.
+      operationId: InitiateOnboarding
       requestBody:
-        $ref: '#/components/requestBodies/InitiateCreditTransferRequest'
+        $ref: '#/components/requestBodies/InitiateOnboardingRequest'
       responses:
         '200':
-          $ref: '#/components/responses/InitiateCreditTransferResponse'
+          $ref: '#/components/responses/InitiateOnboardingResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -30,18 +30,16 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
-   '/v1/instructions/retrieve/id':
+  '/Customers/AdminOverView/Retrieve':
     get:
       tags:
-          - Credit Transfer
-      summary: InCR Retrieve fi to fi customer credit transafer transaction details
-      description: InCR Retrieve fi to fi customer credit transafer transaction details
-      operationId: RetrieveFitoFiCreditTransfer
-      parameters:
-        - $ref: '#/components/parameters/id'
+        - Customers
+      summary:  Retrieve the Admin overview
+      description: Retrieve the Admin overview
+      operationId: RetrieveOverView
       responses:
         '200':
-          $ref: '#/components/responses/RetrieveFitoFiCreditTransfer'
+          $ref: '#/components/responses/RetrieveAdminOverView'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -56,305 +54,139 @@ paths:
           $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
-    groupHeader:
+    RetrieveAdminOverView:
       type: object
       properties:
-        messageIdentification:
+        noofPlants:
           type: string
           description: "\n"
           format: string
-    paymentIdentification:
+        yieldToday:
+          type: string
+          description: "\n"
+          format: string
+        currentPower:
+          type: string
+          description: "\n"
+          format: string
+        totalYield:
+          type: string
+          description: "\n"
+          format: string
+        alerts:
+          type: string
+          description: "\n"
+          format: string
+        standardCoalSaved:
+          type: string
+          description: "\n"
+          format: string
+        co2Avoided:
+          type: string
+          description: "\n"
+          format: string
+        equivalentTreesPlanted:
+          type: string
+          description: "\n"
+          format: string
+    InitiateOnboardingRequest:
       type: object
       properties:
-        endToEndIdentification:
+        plantName:
           type: string
           description: "\n"
           format: string
-    interbankSettlementAmount:
+        emailId:
+          type: string
+          description: "\n"
+          format: string
+        location:
+          type: string
+          description: "\n"
+          format: string
+        uploadImages:
+          type: string
+          description: "\n"
+          format: string
+        uploadVideos:
+          type: string
+          description: "\n"
+          format: string
+        customerName:
+          type: string
+          description: "\n"
+          format: string
+        deviceName:
+          type: string
+          description: "\n"
+          format: string
+        deviceModel:
+          type: string
+          description: "\n"
+          format: string
+        deviceS/N:
+          type: string
+          description: "\n"
+          format: string
+        nominalPower:
+          type: string
+          description: "\n"
+          format: string
+    InitiateOnboardingResponse:
       type: object
       properties:
-        amount:
+        deviceId:
           type: string
           description: "\n"
           format: string
-        currency:
+        customerId:
           type: string
           description: "\n"
           format: string
-    instructedAmount:
-      type: object
-      properties:
-        amount:
+        plantId:
           type: string
           description: "\n"
           format: string
-        currency:
+        plantName:
           type: string
           description: "\n"
           format: string
-    debtor:
-      type: object
-      properties:
-        name:
+        emailId:
           type: string
           description: "\n"
           format: string
-    creditor:
-      type: object
-      properties:
-        name:
+        location:
           type: string
           description: "\n"
           format: string
-    other:
-      type: object
-      properties:
-        identification:
+        uploadImages:
           type: string
           description: "\n"
           format: string
-        issuer:
+        uploadVideos:
           type: string
           description: "\n"
           format: string
-    identification:
-      type: object
-      properties:
-        iban:
+        customerName:
           type: string
           description: "\n"
           format: string
-        other:
-          $ref: '#/components/schemas/other'
-    debtorAccount:
-      type: object
-      properties:
-        identification:
-          $ref: '#/components/schemas/identification'
-    creditorAccount:
-      type: object
-      properties:
-        identification:
-          $ref: '#/components/schemas/identification'
-    financialInstitutionIdentification:
-      type: object
-      properties:
-        bicfi:
+        deviceName:
           type: string
           description: "\n"
           format: string
-    creditorAgent:
-      type: object
-      properties:
-        financialInstitutionIdentification:
-          $ref: '#/components/schemas/financialInstitutionIdentification'
-    purpose:
-      type: object
-      properties:
-        code:
+        deviceModel:
           type: string
           description: "\n"
           format: string
-    creditTransferTransactionInformation:
-      type: array
-      items:
-        type: object
-        properties:
-          paymentIdentification:
-            $ref: '#/components/schemas/paymentIdentification'
-          interbankSettlementAmount:
-            $ref: '#/components/schemas/interbankSettlementAmount'
-          instructedAmount:
-            $ref: '#/components/schemas/instructedAmount' 
-          debtor:
-            $ref: '#/components/schemas/debtor' 
-          creditor:
-            $ref: '#/components/schemas/creditor'
-          debtorAccount:
-            $ref: '#/components/schemas/debtorAccount'
-          creditorAgent:
-            $ref: '#/components/schemas/creditorAgent'
-          creditorAccount:
-            $ref: '#/components/schemas/creditorAccount'  
-          purpose:
-            $ref: '#/components/schemas/purpose'  
-    messageV08:
-      type: object
-      properties:
-        groupHeader:
-          $ref: '#/components/schemas/groupHeader'
-        creditTransferTransactionInformation:
-          $ref: '#/components/schemas/creditTransferTransactionInformation'
-    fiToFiCustomerCreditTransfer:
-      type: object
-      properties:
-        messageV08:
-          $ref: '#/components/schemas/messageV08'
-    instruction:
-      type: object
-      properties:
-        correlationId:
+        deviceS/N:
           type: string
           description: "\n"
           format: string
-        instructionFlowId:
+        nominalPower:
           type: string
           description: "\n"
           format: string
-        scheme:
-          type: string
-          description: "\n"
-          format: string
-        direction:
-          type: string
-          description: "\n"
-          format: string
-        type:
-          type: string
-          description: "\n"
-          format: string
-        fiToFiCustomerCreditTransfer:
-          $ref: '#/components/schemas/fiToFiCustomerCreditTransfer'
-        context:
-          type: object
-          description: "\n"
-          format: string
-    InitiateCreditTransferRequest:
-      type: object
-      properties:
-        requestId:
-          type: string
-          description: "\n"
-          format: string
-        instruction:
-          $ref: '#/components/schemas/instruction'
-    InitiateCreditTransferResponse:
-      type: object
-      properties:
-        id:
-          type: string
-          description: "\n"
-          format: string
-        paymentId:
-          type: string
-          description: "\n"
-          format: string
-        instructionFlowId:
-          type: string
-          description: "\n"
-          format: string
-        createTimestamp:
-          type: string
-          description: "\n"
-          format: string
-    batchDetails:
-      type: object
-      properties:
-        vpCorrelationId:
-          type: string
-          description: "\n"
-          format: string
-        vpInstructionId:
-          type: string
-          description: "\n"
-          format: string
-    postingInstructionBatch:
-      type: object
-      properties:
-        clientBatchId:
-          type: string
-          description: "\n"
-          format: string
-    history:
-      type: object
-      properties:
-        postingInstructionBatch:
-          $ref: '#/components/schemas/postingInstructionBatch'
-        batchDetails:
-          $ref: '#/components/schemas/batchDetails'
-        status:
-          type: string
-          description: "\n"
-          format: string
-        insertionTimestamp:
-          type: string
-          description: "\n"
-          format: string
-    RetrieveFitoFiCreditTransferResponse:
-      type: object
-      properties:
-        id:
-          type: string
-          description: "\n"
-          format: string
-        createRequestId:
-          type: string
-          description: "\n"
-          format: string
-        correlationId:
-          type: string
-          description: "\n"
-          format: string
-        paymentId:
-          type: string
-          description: "\n"
-          format: string
-        instructionBatchId:
-          type: string
-          description: "\n"
-          format: string
-        instructionFlowId:
-          type: string
-          description: "\n"
-          format: string
-        instructionFlowVersionId:
-          type: string
-          description: "\n"
-          format: string
-        createTimestamp:
-          type: string
-          description: "\n"
-          format: string
-        updateTimestamp:
-          type: string
-          description: "\n"
-          format: string
-        scheme:
-          type: string
-          description: "\n"
-          format: string
-        direction:
-          type: string
-          description: "\n"
-          format: string
-        processingStatus:
-          type: string
-          description: "\n"
-          format: string
-        processingError:
-          type: string
-          description: "\n"
-          format: string
-        issues:
-          type: array
-          items:
-            type: string
-        outcome:
-          type: string
-          description: "\n"
-          format: string
-        outcomeReason:
-          type: string
-          description: "\n"
-          format: string
-        type:
-          type: string
-          description: "\n"
-          format: string
-        fiToFiCustomerCreditTransfer:
-          $ref: '#/components/schemas/fiToFiCustomerCreditTransfer'
-        history:
-          $ref: '#/components/schemas/history'
     HTTPError:
       type: object
       properties:
@@ -371,32 +203,38 @@ components:
           description: "\n"
           format: string
   parameters:
-    id:
-      name: id
-      in: query
+    plantId:
+      name: plantId
+      in: path
+      required: true
+      schema:
+        type: string
+    deviceId:
+      name: deviceId
+      in: path
       required: true
       schema:
         type: string
   requestBodies:
-    InitiateCreditTransferRequest:
-        description: InitiateCreditTransferRequest
+    InitiateOnboardingRequest:
+        description: InitiateOnboardingRequest
         content:
           application/json:
             schema:
-                $ref: '#/components/schemas/InitiateCreditTransferRequest' 
+                $ref: '#/components/schemas/InitiateOnboardingRequest'
   responses:
-    InitiateCreditTransferResponse:
-        description: InitiateCreditTransferResponse
+    RetrieveAdminOverView:
+        description: RetrieveAdminOverView
         content:
           application/json:
             schema:
-                $ref: '#/components/schemas/InitiateCreditTransferResponse'
-    RetrieveFitoFiCreditTransfer:
-        description: InitiateCreditTransferResponse
+                $ref: '#/components/schemas/RetrieveAdminOverView'
+    InitiateOnboardingResponse:
+        description: InitiateOnboardingResponse
         content:
           application/json:
             schema:
-                $ref: '#/components/schemas/RetrieveFitoFiCreditTransferResponse'
+                $ref: '#/components/schemas/InitiateOnboardingResponse'
     BadRequest:
       description: BadRequest
       content:
