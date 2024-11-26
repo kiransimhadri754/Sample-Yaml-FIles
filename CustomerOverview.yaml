@@ -6,7 +6,31 @@ info:
 servers:
 - url: 'https://solar.com'
 paths:
-  /Customers/AdminOverView/Retrieve:
+  '/Customers/Onboarding/Initiate':
+    post:
+      tags:
+        - Customers
+      summary: InBQ Initialize customer account.
+      description: InBQ Initialize customer account.
+      operationId: InitiateOnboarding
+      requestBody:
+        $ref: '#/components/requestBodies/InitiateOnboardingRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiateOnboardingResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  '/Customers/AdminOverView/Retrieve':
     get:
       tags:
         - Customers
@@ -65,10 +89,108 @@ components:
           type: string
           description: "\n"
           format: string
+    InitiateOnboardingRequest:
+      type: object
+      properties:
+        plantName:
+          type: string
+          description: "\n"
+          format: string
+        emailId:
+          type: string
+          description: "\n"
+          format: string
+        location:
+          type: string
+          description: "\n"
+          format: string
+        uploadImages:
+          type: string
+          description: "\n"
+          format: string
+        uploadVideos:
+          type: string
+          description: "\n"
+          format: string
+        customerName:
+          type: string
+          description: "\n"
+          format: string
+        deviceName:
+          type: string
+          description: "\n"
+          format: string
+        deviceModel:
+          type: string
+          description: "\n"
+          format: string
+        deviceS/N:
+          type: string
+          description: "\n"
+          format: string
+        nominalPower:
+          type: string
+          description: "\n"
+          format: string
+    InitiateOnboardingResponse:
+      type: object
+      properties:
+        deviceId:
+          type: string
+          description: "\n"
+          format: string
+        customerId:
+          type: string
+          description: "\n"
+          format: string
+        plantId:
+          type: string
+          description: "\n"
+          format: string
+        plantName:
+          type: string
+          description: "\n"
+          format: string
+        emailId:
+          type: string
+          description: "\n"
+          format: string
+        location:
+          type: string
+          description: "\n"
+          format: string
+        uploadImages:
+          type: string
+          description: "\n"
+          format: string
+        uploadVideos:
+          type: string
+          description: "\n"
+          format: string
+        customerName:
+          type: string
+          description: "\n"
+          format: string
+        deviceName:
+          type: string
+          description: "\n"
+          format: string
+        deviceModel:
+          type: string
+          description: "\n"
+          format: string
+        deviceS/N:
+          type: string
+          description: "\n"
+          format: string
+        nominalPower:
+          type: string
+          description: "\n"
+          format: string
     HTTPError:
       type: object
       properties:
-        status_code:
+        statusCode:
           type: string
           description: "\n"
           format: string
@@ -93,6 +215,13 @@ components:
       required: true
       schema:
         type: string
+  requestBodies:
+    InitiateOnboardingRequest:
+        description: InitiateOnboardingRequest
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiateOnboardingRequest'
   responses:
     RetrieveAdminOverView:
         description: RetrieveAdminOverView
@@ -100,6 +229,12 @@ components:
           application/json:
             schema:
                 $ref: '#/components/schemas/RetrieveAdminOverView'
+    InitiateOnboardingResponse:
+        description: InitiateOnboardingResponse
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiateOnboardingResponse'
     BadRequest:
       description: BadRequest
       content:
