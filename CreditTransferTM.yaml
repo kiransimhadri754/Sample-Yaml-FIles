@@ -216,8 +216,9 @@ components:
         fiToFiCustomerCreditTransfer:
           $ref: '#/components/schemas/fiToFiCustomerCreditTransfer'
         context:
-          type: object
-          properties: {}
+          type: string
+          description: "\n"
+          format: string
     InitiateCreditTransferRequest:
       type: object
       properties:
