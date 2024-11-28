@@ -1,0 +1,374 @@
+openapi: 3.0.1
+info:
+  title: CreateServiceRequest
+  description: API to create a service category and store associated details in MSD.
+  version: 1.0.0
+servers:
+  - url: 'https://finx-celta-api-dev.fincuro.in'
+paths:
+  /v1/serviceRequest:
+    post:
+      tags:
+        - Service Request
+      summary: Create a service category and upload a file to S3 bucket.
+      description: Create a service category and upload a file to S3 bucket.
+      operationId: InitiateServiceRequest
+      requestBody:
+        $ref: '#/components/requestBodies/InitiateCategoryServiceRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiateCategoryServiceResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    get:
+      tags:
+        - Service Request 
+      summary: Retrieve service Request details
+      description: Retrieve service Request details
+      operationId: FetchServiceRequestDetails
+      parameters:
+        - $ref: '#/components/parameters/toDate'
+        - $ref: '#/components/parameters/fromDate'
+        - $ref: '#/components/parameters/status'
+        - $ref: '#/components/parameters/corporateId'
+        - $ref: '#/components/parameters/pageSize'
+      responses:
+        '200':
+          $ref: '#/components/responses/FetchServiceRequestDetailsResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    patch:
+      tags:
+        - Service Request
+      summary: Update a service category and upload a file to S3 bucket.
+      description: Update a service category and upload a file to S3 bucket.
+      operationId: UpdateCategoryService
+      requestBody:
+        $ref: '#/components/requestBodies/UpdateCategoryServiceRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/UpdateCategoryServiceResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError' 
+  '/v1/serviceRequest/fetchCategoryDetails':
+    get:
+      tags:
+        - Service Request 
+      summary: Retrieve service category details
+      description: Retrieve service category details
+      operationId: FetchServiceCategoryDetails
+      responses:
+        '200':
+          $ref: '#/components/responses/FetchServiceCategoryDetails'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  '/v1/serviceRequest/fetchSignedDocumentUrl/{filePath}':
+    get:
+      tags:
+        - Service Request 
+      summary: Retrieve service request document url
+      description: Retrieve service request document url
+      operationId: GetServiceRequestDocumentUrl
+      parameters:
+        - $ref: '#/components/parameters/filePath'
+      responses:
+        '200':
+          $ref: '#/components/responses/GetServiceRequestDocumentUrlResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'      
+components:
+  schemas:
+    InitiateCategoryServiceRequest: 
+      type: object
+      properties: 
+        category:
+          type: string
+          format: string
+          description: The category of the service.
+        subcategory:
+          type: string
+          format: string
+          description: The subcategory of the service.
+        requesttype:
+          type: string
+          format: string
+          description: The type of request being made.
+        message:
+          type: string
+          format: string
+          description: The message or description for the service category.
+        file:
+          type: string
+          format: binary
+          description: The file to be uploaded (in file format), to be stored in S3 bucket.
+        corporateId:
+          type: string
+          format: string
+          description: "/n"
+        individualId:
+          type: string
+          format: string
+          description: "/n"
+    UpdateCategoryServiceRequest:
+      type: object
+      properties: 
+        file:
+          type: string
+          format: binary
+          description: The file to be uploaded (in file format), to be stored in S3 bucket.
+        message:
+          type: string
+          format: string
+          description: The message or description for the service category.
+        serviceRequestId:
+          type: string
+          format: string
+          description: The Id of the service request.
+    InitiateCategoryServiceResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          format: string
+          description: Data stored successfully.
+    UpdateCategoryServiceResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          format: string
+          description: Data updated successfully.
+    FetchServiceRequestDetailsResponse:
+      type: array
+      items:
+        type: object
+        properties: 
+          date:
+            type: string
+            format: string
+            description: "/n"
+          senderName:
+            type: string
+            format: string
+            description: "/n"
+          serviceRequestId:
+            type: string
+            format: string
+            description: "/n"
+          status:
+            type: string
+            format: string
+            description: "/n"
+          message:
+            type: string
+            format: string
+            description: "/n"
+          category:
+            type: string
+            format: string
+            description: "/n"
+          subCategory:
+            type: string
+            format: string
+            description: "/n"
+          requestType:
+            type: string
+            format: string
+            description: "/n"  
+    GetServiceRequestDocumentUrlResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          format: string
+          description: Fetch Signed url successfully.
+    HTTPError:
+      type: object
+      properties:
+        status_code:
+          type: string
+          description: "\n"
+          format: string
+        status:
+          type: string
+          description: "\n"
+          format: string
+        message:
+          type: string
+          description: "\n"
+          format: string   
+    FetchServiceCategoryDetails:
+      type: object
+      properties:
+        status:
+          type: string
+          description: "\n"
+          format: string  
+  requestBodies:
+    InitiateCategoryServiceRequest:
+      description: InitiateCategory
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InitiateCategoryServiceRequest'
+    UpdateCategoryServiceRequest:
+      description: UpdateCategoryService
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UpdateCategoryServiceRequest'
+  responses:
+    FetchServiceCategoryDetails:
+      description: Fetch Service request category details.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GetServiceRequestDocumentUrlResponse'
+    InitiateCategoryServiceResponse:
+      description: InitiateCategoryServiceResponse
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InitiateCategoryServiceResponse' 
+    UpdateCategoryServiceResponse:
+      description: UpdateCategoryServiceResponse
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UpdateCategoryServiceResponse' 
+    FetchServiceRequestDetailsResponse:
+      description: FetchServiceRequestDetailsResponse
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/FetchServiceRequestDetailsResponse'
+    GetServiceRequestDocumentUrlResponse:
+      description: GetServiceRequestDocumentUrlResponse
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GetServiceRequestDocumentUrlResponse'
+    BadRequest:
+      description: BadRequest
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    NotFound:
+      description: NotFound
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    TooManyRequests:
+      description: TooManyRequests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    InternalServerError:
+      description: InternalServerError
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'  
+  parameters:
+    filePath:
+      name: filePath
+      in: path
+      required: true
+      style: simple
+      schema:
+        type: string 
+    fromDate:    
+      name: fromDate
+      in: query
+      required: true
+      schema:
+        type: string
+    toDate:  
+      name: toDate
+      in: query
+      required: true
+      schema:
+        type: string
+    status:
+      name: status
+      in: query
+      required: true
+      schema:
+        type: string 
+    corporateId:
+      name: corporateId
+      in: query
+      required: true
+      schema:
+        type: string
+    pageSize:
+      name: pageSize
+      in: query
+      required: true
+      schema:
+        type: string  
