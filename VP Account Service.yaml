@@ -1,0 +1,750 @@
+openapi: 3.0.1
+info:
+  title: VP Account Service 
+  description: APIs for financial institution to financial institution credit transfer
+  version: 1.0.1
+servers:
+- url: 'https://sandbox.payments.tmachine.io/api'
+paths:
+   '/v1/account/vp/initiate':
+    post:
+      tags:
+          - Accounts
+      summary: InCR Initiate a current account for a customer
+      description: InCR Initiate a current account for a customer
+      operationId: InitiateCurrentAccount
+      requestBody:
+        $ref: '#/components/requestBodies/InitiateCurrentAccountRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiateCurrentAccountResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+   '/v1/account/status-update':
+    put:
+      tags:
+        - Accounts
+      summary: Update a current account status for a customer
+      description: Update a current account status for a customer
+      operationId: UpdateAccountStatus
+      requestBody:
+        $ref: '#/components/requestBodies/InitiateUpdateAccountStatusRequest'
+      parameters:
+        - $ref: '#/components/parameters/accountReference'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiateUpdateAccountStatusResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+   '/v1/account/details-update':
+    put:
+      tags:
+        - Accounts
+      summary: Update a current account status for a customer
+      description: Update a current account status for a customer
+      operationId: UpdateAccountDetails
+      requestBody:
+        $ref: '#/components/requestBodies/InitiateUpdateAccountDetailsRequest'
+      parameters:
+        - $ref: '#/components/parameters/accountReference'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiateUpdateAccountDetailsResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+   '/accountLinks/initiate':
+    post:
+      tags:
+        - Accounts
+      summary: InBQ Initialize account link
+      description: InBQ Initialize account link
+      operationId: InitiateAccountLink
+      requestBody:
+        $ref: '#/components/requestBodies/InitiateAccountLinkRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiateAccountLinkResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+   '/paymentInstruments/initiate':
+    post:
+      tags:
+        - Accounts
+      summary: InBQ Initialize payment instrument
+      description: InBQ Initialize payment instrument
+      operationId: InitiatePaymentInstrument
+      requestBody:
+        $ref: '#/components/requestBodies/InitiatePaymentInstrumentRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiatePaymentInstrumentResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+   '/paymentInstruments/search/initiate':
+    post:
+      tags:
+          - Accounts
+      summary: InCR Initiate search payment instrument
+      description: InCR Initiate search payment instrument
+      operationId: SearchPaymentInstrument
+      requestBody:
+        $ref: '#/components/requestBodies/InitiateSearchPaymentInstrumentRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiateSearchPaymentInstrumentResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+   '/paymentInstruments/update/initiate':
+    post:
+      tags:
+          - Accounts
+      summary: InCR Initiate search payment instrument
+      description: InCR Initiate search payment instrument
+      operationId: UpdatePaymentInstrument
+      parameters:
+        - $ref: '#/components/parameters/paymentInstrumentId'
+      requestBody:
+        $ref: '#/components/requestBodies/InitiateUpdatePaymentInstrumentRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiateUpdatePaymentInstrumentResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  schemas:
+    InitiateUpdatePaymentInstrumentRequest:
+      type: object
+      properties:
+        requestId:
+          type: string
+          description: "\n"
+          format: string
+        accountLinkId:
+          type: string
+          description: "\n"
+          format: string
+        status:
+          type: string
+          description: "\n"
+          format: string
+        accountLinkSelectionRules:
+          $ref: '#/components/schemas/accountLinkSelectionRules'
+        ruleSetId:
+          type: string
+          description: "\n"
+          format: string
+        ruleIds:
+          $ref: '#/components/schemas/ruleIds'
+        updateMask:
+          $ref: '#/components/schemas/updateMask'
+    InitiateUpdatePaymentInstrumentResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: "\n"
+          format: string
+        accountLinkId:
+          type: string
+          description: "\n"
+          format: string
+        status:
+          type: string
+          description: "\n"
+          format: string
+    accountLinkSelectionRules:
+      type: array
+      items:
+        type: object
+        properties:
+          ruleId:
+            type: string
+            description: "\n"
+            format: string
+          accountLinkId:
+            type: string
+            description: "\n"
+            format: string 
+    ruleIds:
+      type: array
+      items:
+        type: string
+    routingInformation:
+      type: object
+      properties:
+        instrumentIdentifier:
+          type: string
+          description: "\n"
+          format: string
+        bankIdentifier:
+          type: string
+          description: "\n"
+          format: string        
+    paymentInstrument:
+      type: object
+      properties:
+        id:
+          type: string
+          description: "\n"
+          format: string
+        routingInformation:
+          $ref: '#/components/schemas/routingInformation'
+        defaultAccountLinkId:
+          type: string
+          description: "\n"
+          format: string
+        accountLinkSelectionRules:
+          $ref: '#/components/schemas/accountLinkSelectionRules'
+        ruleSetId:
+          type: string
+          description: "\n"
+          format: string
+        ruleIds:
+          $ref: '#/components/schemas/ruleIds'
+    InitiatePaymentInstrumentRequest:
+      type: object
+      properties:
+        requestId:
+          type: string
+          description: "\n"
+          format: string
+        paymentInstrument:
+          $ref: '#/components/schemas/paymentInstrument'
+    InitiatePaymentInstrumentResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: "\n"
+          format: string
+        status:
+          type: string
+          description: "\n"
+          format: string
+        routingInformation:
+          $ref: '#/components/schemas/routingInformation'
+        defaultAccountLinkId:
+          type: string
+          description: "\n"
+          format: string
+        accountLinkSelectionRules:
+          $ref: '#/components/schemas/accountLinkSelectionRules'
+        ruleSetId:
+          type: string
+          description: "\n"
+          format: string
+        ruleIds:
+          $ref: '#/components/schemas/ruleIds'
+        createTimestamp:
+          type: string
+          description: "\n"
+          format: string
+        updateTimestamp:
+          type: string
+          description: "\n"
+          format: string
+    InitiateSearchPaymentInstrumentRequest:
+      type: object
+      properties:
+        routingInformation:
+          $ref: '#/components/schemas/routingInformation'
+        paymentInstrumentId:
+          type: string
+          description: "\n"
+          format: string
+        pageSize:
+          type: string
+          description: "\n"
+          format: string
+    InitiateSearchPaymentInstrumentResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: "\n"
+          format: string
+        status:
+          type: string
+          description: "\n"
+          format: string
+        routingInformation:
+          $ref: '#/components/schemas/routingInformation'
+        defaultAccountLinkId:
+          type: string
+          description: "\n"
+          format: string
+        accountLinkSelectionRules:
+          $ref: '#/components/schemas/accountLinkSelectionRules'
+        ruleSetId:
+          type: string
+          description: "\n"
+          format: string
+        ruleIds:
+          $ref: '#/components/schemas/ruleIds'
+        createTimestamp:
+          type: string
+          description: "\n"
+          format: string
+        updateTimestamp:
+          type: string
+          description: "\n"
+          format: string
+    accountLink:
+      type: object
+      properties:
+        id:
+          type: string
+          description: "\n"
+          format: string
+        coreId:
+          type: string
+          description: "\n"
+          format: string
+        coreAccountId:
+          type: string
+          description: "\n"
+          format: string
+    InitiateAccountLinkRequest:
+      type: object
+      properties:
+        requestId:
+          type: string
+          description: "\n"
+          format: string
+        accountLink:
+          $ref: '#/components/schemas/accountLink'
+    InitiateAccountLinkResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: "\n"
+          format: string
+        status:
+          type: string
+          description: "\n"
+          format: string
+        coreId:
+          type: string
+          description: "\n"
+          format: string
+        coreAccountId:
+          type: string
+          description: "\n"
+          format: string
+        createTimestamp:
+          type: string
+          description: "\n"
+          format: string
+        updateTimestamp:
+          type: string
+          description: "\n"
+          format: string
+    productInstanceReference:
+      type: object
+      properties:
+        currentAccountAgreement:
+          type: string
+          description: "\n"
+          format: string
+    StatusReason:
+      type: object
+      properties:
+        Text:
+          type: string
+          description: "\n"
+          format: string
+    accountStatus:
+      type: object
+      properties:
+        statusReason:
+          $ref: '#/components/schemas/StatusReason'
+    productInstanceParameters:
+      type: object
+      properties:
+        inactivity_fee_application_day:
+          type: string
+          description: "\n"
+          format: string
+        maintenance_fee_application_day:
+          type: string
+          description: "\n"
+          format: string
+        daily_withdrawal_limit_by_transaction_type:
+          type: string
+          description: "\n"
+          format: string
+        minimum_balance_fee_application_day:
+          type: string
+          description: "\n"
+          format: string
+        roundup_autosave_active:
+          type: string
+          description: "\n"
+          format: string
+        unarranged_overdraft_fee_application_day:
+          type: string
+          description: "\n"
+          format: string
+        interest_application_day:
+          type: string
+          description: "\n"
+          format: string
+    accountCurrency:
+      type: object
+      properties:
+        currencyCode:
+          type: string
+          description: "\n"
+          format: string
+    currentAccountFacility:
+      type: object
+      properties:
+        customerReference:
+          type: string
+          description: "\n"
+          format: string
+        productInstanceReference:
+          $ref: '#/components/schemas/productInstanceReference'
+        accountCurrency:
+          $ref: '#/components/schemas/accountCurrency'
+        accountStatus:
+          $ref: '#/components/schemas/accountStatus'
+        accountOpenDate:
+          type: string
+          description: "\n"
+          format: string
+        businessType:
+          type: string
+          description: "\n"
+          format: string
+        productInstanceParameters:
+          $ref: '#/components/schemas/productInstanceParameters'
+    accountDetails:
+      type: object
+      properties:
+        accountReference:
+          type: string
+          description: "\n"
+          format: string
+        externalIdentifier:
+          type: string
+          description: "\n"
+          format: string
+    InitiateCurrentAccountRequest:
+      type: object
+      properties:
+        currentAccountFacility: 
+          $ref: '#/components/schemas/currentAccountFacility'
+    InitiateCurrentAccountResponse:
+      type: object
+      properties:
+        accountDetails: 
+          $ref: '#/components/schemas/accountDetails'
+    paths:
+      type: array
+      items:
+        type: string
+    updateMask:
+      type: object
+      properties:
+        paths:
+          $ref: '#/components/schemas/paths'
+    currentAccount:
+      type: object
+      properties:
+        customerReference:
+          type: string
+          description: "\n"
+          format: string
+        accountStatus:
+          type: string
+          description: "\n"
+          format: string
+        accountClosingDate:
+          type: string
+          description: "\n"
+          format: string
+        updateMask:
+          $ref: '#/components/schemas/updateMask'
+    InitiateUpdateAccountStatusRequest:
+      type: object
+      properties:
+        currentAccount:
+          $ref: '#/components/schemas/currentAccount'
+    InitiateUpdateAccountStatusResponse:
+      type: object
+      properties:
+        accountReference:
+          type: string
+          description: "\n"
+          format: string  
+        customerReference:
+          type: string
+          description: "\n"
+          format: string
+        accountStatus:
+          type: string
+          description: "\n"
+          format: string
+        accountClosingDate:
+          type: string
+          description: "\n"
+          format: string
+    itemsToAdd:
+      type: object
+      properties:
+        externalIdentifier:
+          type: string
+          description: "\n"
+          format: string  
+    itemsToRemove:
+      type: array
+      items:
+        type: string
+    InitiateUpdateAccountDetailsRequest:
+      type: object
+      properties:
+        requestId:
+          type: string
+          description: "\n"
+          format: string
+        itemsToAdd:
+          $ref: '#/components/schemas/itemsToAdd'
+        itemsToRemove:
+          $ref: '#/components/schemas/itemsToRemove'
+    InitiateUpdateAccountDetailsResponse:
+      type: object
+      properties:
+        accountReference:
+          type: string
+          description: "\n"
+          format: string  
+        customerReference:
+          type: string
+          description: "\n"
+          format: string
+        accountStatus:
+          type: string
+          description: "\n"
+          format: string
+    HTTPError:
+      type: object
+      properties:
+        statusCode:
+          type: string
+          description: "\n"
+          format: string
+        status:
+          type: string
+          description: "\n"
+          format: string
+        message:
+          type: string
+          description: "\n"
+          format: string
+  parameters:
+    accountReference:
+      name: accountReference
+      in: query
+      required: true
+      schema:
+        type: string
+    paymentInstrumentId:
+      name: paymentInstrumentId
+      in: query
+      required: true
+      schema:
+        type: string
+  requestBodies:
+    InitiateUpdateAccountStatusRequest:
+        description: InitiateCreditTransferRequest
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiateUpdateAccountStatusRequest'
+    InitiateCurrentAccountRequest:
+        description: createCurrentAccount
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiateCurrentAccountRequest'
+    InitiateUpdateAccountDetailsRequest:
+        description: InitiateUpdateAccountDetailsRequest
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiateUpdateAccountDetailsRequest'
+    InitiateAccountLinkRequest:
+        description: InitiateAccountLinkRequest
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiateAccountLinkRequest'
+    InitiatePaymentInstrumentRequest:
+        description: InitiatePaymentInstrumentRequest
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiatePaymentInstrumentRequest'
+    InitiateSearchPaymentInstrumentRequest:
+        description: InitiateSearchPaymentInstrumentRequest
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiateSearchPaymentInstrumentRequest'
+    InitiateUpdatePaymentInstrumentRequest:
+        description: InitiateUpdatePaymentInstrumentRequest
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiateUpdatePaymentInstrumentRequest'
+  responses:
+    InitiateUpdateAccountStatusResponse:
+        description: InitiateCreditTransferResponse
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiateUpdateAccountStatusResponse'
+    InitiateCurrentAccountResponse:
+        description: createCurrentAccount
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiateCurrentAccountResponse'
+    InitiateUpdateAccountDetailsResponse:
+        description: InitiateUpdateAccountDetailsResponse
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiateUpdateAccountDetailsResponse'
+    InitiateAccountLinkResponse:
+        description: InitiateAccountLinkResponse
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiateAccountLinkResponse'
+    InitiatePaymentInstrumentResponse:
+        description: InitiatePaymentInstrumentResponse
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiatePaymentInstrumentResponse'
+    InitiateSearchPaymentInstrumentResponse:
+        description: InitiateSearchPaymentInstrumentResponse
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiateSearchPaymentInstrumentResponse'
+    InitiateUpdatePaymentInstrumentResponse:
+        description: InitiateUpdatePaymentInstrumentResponse
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiateUpdatePaymentInstrumentResponse'
+    BadRequest:
+      description: BadRequest
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    NotFound:
+      description: NotFound
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    TooManyRequests:
+      description: TooManyRequests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    InternalServerError:
+      description: InternalServerError
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
