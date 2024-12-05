@@ -155,7 +155,7 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
    '/paymentInstruments/update/initiate':
-    post:
+    put:
       tags:
           - Accounts
       summary: InCR Initiate search payment instrument
