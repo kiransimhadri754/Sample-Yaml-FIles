@@ -1,0 +1,237 @@
+openapi: 3.0.1
+info:
+  title: CreateVaultPayment
+  description: API to create a Vault Payment to store a Thought Machine.
+  version: 1.0.0
+servers:
+  - url: 'https://finx-celta-api-dev.fincuro.in'
+paths:
+  /v1/payment/initiate:
+    post:
+      tags:
+        - Vault Payment
+      summary: Create a Vault Payment.
+      description: Create a Vault Payment.
+      operationId: InitiateVaultPayment
+      requestBody:
+        $ref: '#/components/requestBodies/InitiateVaultPaymentRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiateVaultPaymentResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  schemas:
+    InitiateVaultPaymentRequest: 
+      type: object
+      properties: 
+        requestId:
+          type: string
+          format: string
+          description: "/n"
+        correlationId:
+          type: string
+          format: string
+          description: "/n"
+        scheme:
+          type: string
+          format: string
+          description: "/n"
+        type:
+          type: string
+          format: string
+          description: "/n"
+        messageIdentification:
+          type: string
+          format: string
+          description: "/n"
+        numberOfTransactions:
+          type: string
+          format: string
+          description: "/n"
+        paymentInformationIdentification:
+          type: string
+          format: string
+          description: "/n"
+        paymentMethod:
+          type: string
+          format: string
+          description: "/n"
+        date:
+          type: string
+          format: string
+          description: "/n" 
+        debtorName:
+          type: string
+          format: string
+          description: "/n" 
+        debtorStreetName:
+          type: string
+          format: string
+          description: "/n" 
+        debtorBuildingNumber:
+          type: string
+          format: string
+          description: "/n"
+        debtorTownName:
+          type: string
+          format: string
+          description: "/n"
+        debtorIban:
+          type: string
+          format: string
+          description: "/n"
+        debtorBicfi:
+          type: string
+          format: string
+          description: "/n"
+        instructionIdentification:
+          type: string
+          format: string
+          description: "/n"
+        endToEndIdentification:
+          type: string
+          format: string
+          description: "/n"
+        uetr:
+          type: string
+          format: string
+          description: "/n"
+        amount:
+          type: string
+          format: string
+          description: "/n"
+        currency:
+          type: string
+          format: string
+          description: "/n"
+        chargeBearer:
+          type: string
+          format: string
+          description: "/n"
+        creditorBicfi:
+          type: string
+          format: string
+          description: "/n"
+        creditorName:
+          type: string
+          format: string
+          description: "/n"
+        creditorStreetName:
+          type: string
+          format: string
+          description: "/n"
+        creditorBuildingNumber:
+          type: string
+          format: string
+          description: "/n"
+        creditorTownName:
+          type: string
+          format: string
+          description: "/n"
+        creditorIban:
+          type: string
+          format: string
+          description: "/n"
+        wireFee:
+          type: string
+          format: string
+          description: "/n"
+        customerApprovalRequired:
+          type: string
+          format: string
+          description: "/n"  
+    InitiateVaultPaymentResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: string
+          description: "/n"
+        payment_id:
+          type: string
+          format: string
+          description: "/n" 
+        instruction_flow_id:
+          type: string
+          format: string
+          description: "/n" 
+        create_timestamp:
+          type: string
+          format: string
+          description: "/n"   
+    HTTPError:
+      type: object
+      properties:
+        status_code:
+          type: string
+          description: "\n"
+          format: string
+        status:
+          type: string
+          description: "\n"
+          format: string
+        message:
+          type: string
+          description: "\n"
+          format: string   
+  requestBodies:
+    InitiateVaultPaymentRequest:
+      description: InitiateCategory
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InitiateVaultPaymentRequest'
+  responses:
+    InitiateVaultPaymentResponse:
+      description: InitiateVaultPaymentResponse
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InitiateVaultPaymentResponse' 
+    BadRequest:
+      description: BadRequest
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    NotFound:
+      description: NotFound
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    TooManyRequests:
+      description: TooManyRequests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    InternalServerError:
+      description: InternalServerError
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'  
