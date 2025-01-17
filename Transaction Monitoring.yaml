@@ -1,0 +1,316 @@
+openapi: 3.0.1
+info:
+  title: Monitoring Transactions
+  description: 'This service domain orchestrates the transfer funds between an accounts.'
+  version: 11.0.0
+servers:
+  - url: https://finx-celta-api-dev.fincuro.in/payment/v1/amlTransactionMonitoringCheck
+  - url: https://finx-celta-api-dev.fincuro.in/payment/v1/amlScreeningCheck
+paths:
+  '/Payment/v1/amlTransactionMonitoringCheck':
+    post:
+      tags:
+        - Monitor Transactions
+      summary: To monitor transactions for an account.
+      description: To monitor End to End transactions.
+      operationId: MonitorTransactions.
+      requestBody:
+          $ref: '#/components/requestBodies/TransactionMonitoringRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/TransactionMonitoringresponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  '/Payment/v1/amlScreeningCheck':
+    post:
+      tags:
+        - Transactions Details
+      summary: Details of a transactions.
+      description: Details of a transactions.
+      operationId: TransactionsDetails.
+      requestBody:
+          $ref: '#/components/requestBodies/AMLScreeningcheckrequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/AMLScreeningcheckresponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  schemas:
+    TransactionMonitoringResponse:
+      type: object
+      properties:
+            monitoringRequestId:
+              type: string
+              description: "\n"
+              format: string              
+            endToEndTransactionId:
+              type: string
+              description: "\n"
+              format: string
+            CreditorName:
+              type: string
+              description: "\n"
+              format: string  
+            creditorBankAccountNumber:
+              type: string
+              description: "\n"
+              format: string  
+            paymentDateTime:
+              type: string
+              description: "\n"
+              format: string
+            debtorCorporateIdentification:
+              type: string
+              description: "\n"
+              format: string
+            debtorName:
+              type: string
+              description: "\n"
+              format: string
+            creditorReference:
+              type: string
+              description: "\n"
+              format: string
+            paymentDirection:
+              type: string
+              description: "\n"
+              format: string  
+            paymentCurrency:
+              type: string
+              description: "\n"
+              format: string  
+            paymentAmount:
+              type: string
+              description: "\n"
+              format: string 
+            vaultPaymentToken:
+              type: string
+              description: "\n"
+              format: string
+            vaultPaymentId:
+              type: string
+              description: "\n"
+              format: string
+            monitoringStatus:
+              type: string
+              description: "\n"
+              format: string
+    TransactionMonitoringRequest:
+      type: object
+      properties:
+            endToEndTransactionId:
+              type: string
+              description: "\n"
+              format: string
+            CreditorName:
+              type: string
+              description: "\n"
+              format: string  
+            creditorBankAccountNumber:
+              type: string
+              description: "\n"
+              format: string  
+            paymentDateTime:
+              type: string
+              description: "\n"
+              format: string
+            debtorCorporateIdentification:
+              type: string
+              description: "\n"
+              format: string  
+            debtorName:
+              type: string
+              description: "\n"
+              format: string  
+            creditorReference:
+              type: string
+              description: "\n"
+              format: string
+            paymentDirection:
+              type: string
+              description: "\n"
+              format: string  
+            paymentCurrency:
+              type: string
+              description: "\n"
+              format: string  
+            paymentAmount:
+              type: string
+              description: "\n"
+              format: string 
+            vaultPaymentToken:
+              type: string
+              description: "\n"
+              format: string
+            vaultPaymentId:
+              type: string
+              description: "\n"
+              format: string
+    AMLScreeningcheckrequest:
+      type: object
+      properties:
+            transactionId:
+              type: string
+              description: "\n"
+              format: string              
+            vaultPaymentToken:
+              type: string
+              description: "\n"
+              format: string
+            vaultPaymentId:
+              type: string
+              description: "\n"
+              format: string  
+            debtorName:
+              type: string
+              description: "\n"
+              format: string  
+            debtorCorporateIdentification:
+              type: string
+              description: "\n"
+              format: string
+            creditorName:
+              type: string
+              description: "\n"
+              format: string
+            creditorReference:
+              type: string
+              description: "\n"
+              format: string
+    AMLScreeningcheckresponse:
+      type: object
+      properties:
+            screeningRequestId:
+              type: string
+              description: "\n"
+              format: string
+            transactionId:
+              type: string
+              description: "\n"
+              format: string  
+            vaultPaymentToken:
+              type: string
+              description: "\n"
+              format: string  
+            vaultPaymentId:
+              type: string
+              description: "\n"
+              format: string
+            debtorName:
+              type: string
+              description: "\n"
+              format: string  
+            debtorCorporateIdentification:
+              type: string
+              description: "\n"
+              format: string  
+            creditorName:
+              type: string
+              description: "\n"
+              format: string
+            creditorReference:
+              type: string
+              description: "\n"
+              format: string  
+            screeningStatus:
+              type: string
+              description: "\n"
+              format: string  
+    HTTPError:
+      type: object
+      properties:
+        status_code:
+          type: string
+          description: "\n"
+          format: string
+        status:
+          type: string
+          description: "\n"
+          format: string
+        message:
+          type: string
+          description: "\n"
+          format: string
+  requestBodies:
+    TransactionMonitoringRequest:
+      description: Transaction Monitoring
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TransactionMonitoringRequest'
+    AMLScreeningcheckrequest:
+      description: Transaction Details
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AMLScreeningcheckrequest'
+  responses:
+    TransactionMonitoringresponse:
+        description: Transaction Monitoring
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/TransactionMonitoringResponse'
+    AMLScreeningcheckresponse:
+        description: Transaction Details
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/AMLScreeningcheckresponse'
+    BadRequest:
+      description: BadRequest
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    NotFound:
+      description: NotFound
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    TooManyRequests:
+      description: TooManyRequests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    InternalServerError:
+      description: InternalServerError
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
