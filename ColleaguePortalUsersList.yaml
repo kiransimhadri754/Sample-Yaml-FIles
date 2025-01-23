@@ -14,10 +14,10 @@ paths:
       description: FinxColleagePortalService
       operationId: FinxColleagePortalService
       requestBody:
-        $ref: '#/components/requestBodies/RetrieveUserRequest'
+        $ref: '#/components/requestBodies/retrieveUserRequest'
       responses:
         '200':
-          $ref: '#/components/responses/RetrieveUserResponseResponse'
+          $ref: '#/components/responses/retrieveUserResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -38,10 +38,10 @@ paths:
       description: FetchUserListBasedOnName
       operationId: FetchUserListBasedOnName
       requestBody:
-         $ref: '#/components/requestBodies/RetrieveCustomerNameRequest'
+         $ref: '#/components/requestBodies/retrieveCustomerNameRequest'
       responses:
         '200':
-          $ref: '#/components/responses/RetrieveCustomerNameResponse'
+          $ref: '#/components/responses/retrieveCustomerNameResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -56,7 +56,7 @@ paths:
           $ref: '#/components/responses/InternalServerError'      
 components:
   schemas:
-    retrieveUserResponseResponse:
+    retrieveUserResponse:
       type: object
       properties:
         status:
@@ -69,18 +69,18 @@ components:
         status:
           type: string
           format: string
-           description: "\n"
+          description: "\n"
     paging:
           type: object
           properties:
             pageRowCount:
               type: string
               format: string
-               description: "\n"
+              description: "\n"
             pageNumber:
               type: string
               format: string
-               description: "\n"
+              description: "\n"
     retrieveCustomerNameRequest:      
       type: object
       properties:
@@ -118,26 +118,26 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/RetrieveCustomerNameRequest'
+            $ref: '#/components/schemas/retrieveCustomerNameRequest'
     retrieveUserRequest:
       description: RetrieveUserRequest
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/RetrieveUserRequest'
+            $ref: '#/components/schemas/retrieveUserRequest'
   responses:
-    retrieveUserResponseResponse:
+    retrieveUserResponse:
       description: RetriveUserResponse
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/RetrieveUserResponseResponse'
+            $ref: '#/components/schemas/retrieveUserResponse'
     retrieveCustomerNameResponse:
       description: RetriveCustomerNameResponse
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/RetrieveCustomerNameResponse'        
+            $ref: '#/components/schemas/retrieveCustomerNameResponse'        
     BadRequest:
       description: BadRequest
       content:
