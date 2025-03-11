@@ -1,0 +1,654 @@
+openapi: 3.0.1
+info:
+  title: Compliance Officer/SM Freeze Relationship Request API
+  description: API for handling customer relationship freeze requests and approvals.
+  version: 1.0.0
+servers:
+  - url: 'https://finx-celta-api-dev.fincuro.in'
+paths:
+  '/v1/restriction-set-definitions':
+    post:
+      tags:
+        - Vault Core
+      summary: Fetch restriction set definitions.
+      description: Create a request to fetch the list of restriction set definitions for applying restrictions at account or customer level.
+      operationId: CreateRestrictionSetDefinitions
+      requestBody:
+        $ref: '#/components/requestBodies/CreateRestrictionSetDefinitionsRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/CreateRestrictionSetDefinitionsResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  '/v1/restriction-sets':
+    post:
+      tags:
+        - Vault Core
+      summary: Apply restrictions to customers/accounts.
+      description: Apply selected restrictions (e.g., prevent credit, debit, update, closing) to a customer or account.
+      operationId: ApplyRestrictionSets
+      requestBody:
+        $ref: '#/components/requestBodies/ApplyRestrictionSetsRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/ApplyRestrictionSetsResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /v1/restriction-sets/update:
+    put:
+      tags:
+        - Vault Core
+      summary: Remove restrictions from customers/accounts.
+      description: Update the applied restrictions by removing them from a customer or account using the restriction set IDs.
+      operationId: UpdateRestrictionSets
+      requestBody:
+        $ref: '#/components/requestBodies/UpdateRestrictionSetsRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/UpdateRestrictionSetsResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /v1/restriction-set-definitions/list:
+    get:
+      tags:
+        - Vault Core
+      summary: List all restriction definitions.
+      description: Fetch all restriction definitions available in VC (Vault Core).
+      operationId: ListRestrictionDefinitions
+      parameters:
+        - $ref: '#/components/parameters/pagesize'
+      responses:
+        '200':
+          $ref: '#/components/responses/RetrieveRestrictionSetDefinitionsResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /v1/restriction-set-definitions/versions:
+    get:
+      tags:
+        - Vault Core
+      summary: List all restriction definition versions.
+      description: Fetch all versions of restriction definitions available in VC (Vault Core).
+      operationId: ListRestrictionDefinitionVersions
+      parameters:
+        - $ref: '#/components/parameters/restrictionsetdefinitionid'
+        - $ref: '#/components/parameters/excludepreviousversions'
+      responses:
+        '200':
+          $ref: '#/components/responses/RetrieveRestrictionSetDefinitionVersionsResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /v1/restrictions:
+    get:
+      tags:
+        - Vault Core
+      summary: Get applied restrictions for a customer or account.
+      description: Fetch applied restrictions for a customer or account based on the provided ID.
+      operationId: GetRestrictions
+      parameters:
+        - $ref: '#/components/parameters/accountids'
+        - $ref: '#/components/parameters/customerid'
+      responses:
+        '200':
+          $ref: '#/components/responses/RetrieveRestrictionsResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  schemas:
+    HTTPError:
+       type: object
+       properties:
+        status_code:
+          type: string
+          description: Status code for the error.
+        status:
+          type: string
+          description: Status of the error.
+        message:
+          type: string
+          description: Detailed error message.
+    restrictionSetDefinitions:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+                type: string
+                description: "\n"
+                format: string
+          name:
+                type: string
+                description: "\n"
+                format: string
+          isActive:
+                type: string
+                description: "\n"
+                format: string
+    restrictionSetDefinitionVersions:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+                type: string
+                description: "\n"
+                format: string
+          restrictionDefinitions:
+            type: array
+            items:
+              type: object
+              properties:
+                restrictionType:
+                      type: string
+                      description: "\n"
+                      format: string
+                requiredRestrictionLevels:
+                   type: array
+                   items:
+                     type: object
+          restrictionSetDefinitionId:
+                type: string
+                description: "\n"
+                format: string
+          description:
+                type: string
+                description: "\n"
+                format: string
+          createTimestamp:
+                type: string
+                description: "\n"
+                format: string
+          isCurrent:
+                type: string
+                description: "\n"
+                format: string
+    restrictions:
+      type: array
+      items:
+        type: object
+        properties:
+          restrictionType:
+                type: string
+                description: "\n"
+                format: string
+          parameters:
+            items:
+              type: object
+              properties:
+               preventDebitsExemptionConditions:
+                type: string
+                description: "\n"
+                format: string
+          customerId:
+                type: string
+                description: "\n"
+                format: string
+          accountId:
+                type: string
+                description: "\n"
+                format: string
+          paymentDeviceId:
+                type: string
+                description: "\n"
+                format: string
+          effectiveTimestamp:
+                type: string
+                description: "\n"
+                format: string
+          expiryTimestamp:
+                type: string
+                description: "\n"
+                format: string
+          id:
+                type: string
+                description: "\n"
+                format: string
+    CreateRestrictionSetDefinitionsRequest:
+      type: object
+      properties: 
+        restrictionSetDefinitionVersion:
+          type: object
+          properties: 
+            restrictionDefinitions:
+              type: array
+              items:
+                 type: object
+                 properties:
+                  restrictionType:
+                      type: string
+                      description: "\n"
+                      format: string
+                  requiredRestrictionLevels:
+                    type: array
+                    items:
+                      type: object
+            restrictionSetDefinitionId:
+               type: string
+               format: string
+               description: "/n" 
+            description:
+             type: string
+             format: string
+             description: "/n" 
+            requestId:
+             type: string
+             format: string
+             description: "/n"
+    ApplyRestrictionSetsRequest:
+      type: object
+      properties: 
+        restrictionSet:
+          type: object
+          properties: 
+            restrictionSetDefinitionVersionId:
+              type: string
+              description: "\n"
+              format: string
+            name:
+              type: string
+              description: "\n"
+              format: string
+            description:
+              type: string
+              description: "\n"
+              format: string
+            restrictionSetParameters:
+             items:
+              type: object
+              properties:
+               preventDebitsExemptionConditions:
+                type: string
+                description: "\n"
+                format: string
+            customerId:
+                type: string
+                description: "\n"
+                format: string
+            accountId:
+                type: string
+                description: "\n"
+                format: string
+            expiryTimestamp:
+                type: string
+                description: "\n"
+                format: string
+        requestId:
+                type: string
+                description: "\n"
+                format: string
+    UpdateRestrictionSetsRequest:
+      type: object
+      properties: 
+        restrictionSet:
+          type: object
+          properties: 
+            isActive:
+              type: string
+              description: "\n"
+              format: string
+        requestId:
+              type: string
+              description: "\n"
+              format: string
+        updateMask:
+              type: object
+              properties: 
+                paths:
+                 items:
+                  type: array
+                  description: "\n"
+                  format: string
+    UpdateRestrictionSetsResponse:
+      type: object
+      properties:
+          message:
+            type: string
+            description: "\n"
+            format: string
+          code:
+            type: string
+            description: "\n"
+            format: string
+          details:
+           items:
+            type: array
+            description: "\n"
+            format: string
+          vaultErrorCode:
+            type: string
+            description: "\n"
+            format: string
+          tracingId:
+            type: string
+            description: "\n"
+            format: string
+    ApplyRestrictionSetsResponse:
+      type: object
+      properties:
+          id:
+            type: string
+            description: "\n"
+            format: string
+          restrictionSetDefinitionId:
+            type: string
+            description: "\n"
+            format: string
+          restrictionSetDefinitionVersionId:
+            type: string
+            description: "\n"
+            format: string
+          name:
+            type: string
+            description: "\n"
+            format: string
+          restrictions:
+            type: array
+            items:
+             type: object
+             properties:
+              restrictionType:
+                type: string
+                description: "\n"
+                format: string
+              parameters:
+               items:
+                 type: object
+                 properties:
+                  preventDebitsExemptionConditions:
+                   type: string
+                   description: "\n"
+                   format: string
+              customerId:
+                   type: string
+                   description: "\n"
+                   format: string
+              accountId:
+                type: string
+                description: "\n"
+                format: string
+              paymentDeviceId:
+                type: string
+                description: "\n"
+                format: string
+              effectiveTimestamp:
+                type: string
+                description: "\n"
+                format: string
+              expiryTimestamp:
+                type: string
+                description: "\n"
+                format: string
+              id:
+                type: string
+                description: "\n"
+                format: string
+          description:
+            type: string
+            description: "\n"
+            format: string
+          restrictionSetParameters:
+             items:
+              type: object
+              properties:
+               preventDebitsExemptionConditions:
+                type: string
+                description: "\n"
+                format: string
+          customerId:
+            type: string
+            description: "\n"
+            format: string
+          accountId:
+            type: string
+            description: "\n"
+            format: string
+          paymentDeviceId:
+            type: string
+            description: "\n"
+            format: string
+          effectiveTimestamp:
+                type: string
+                description: "\n"
+                format: string
+          expiryTimestamp:
+                type: string
+                description: "\n"
+                format: string
+          isActive:
+                type: string
+                description: "\n"
+                format: string
+    CreateRestrictionSetDefinitionsResponse:
+      type: object
+      properties:
+          id:
+            type: string
+            description: "\n"
+            format: string
+          restrictionDefinitions:
+            type: array
+            items:
+              type: object
+              properties:
+                restrictionType:
+                      type: string
+                      description: "\n"
+                      format: string
+                requiredRestrictionLevels:
+                   type: array
+                   items:
+                     type: object
+          restrictionSetDefinitionId:
+                type: string
+                description: "\n"
+                format: string
+          description:
+                type: string
+                description: "\n"
+                format: string
+          createTimestamp:
+                type: string
+                description: "\n"
+                format: string
+          isCurrent:
+                type: string
+                description: "\n"
+                format: string
+    RetrieveRestrictionSetDefinitionsResponse:
+      type: object
+      properties:
+        restrictionSetDefinitions:
+          $ref: '#/components/schemas/restrictionSetDefinitions'
+    RetrieveRestrictionSetDefinitionVersionsResponse:
+      type: object
+      properties:
+        restrictionSetDefinitionVersions:
+          $ref: '#/components/schemas/restrictionSetDefinitionVersions'  
+    RetrieveRestrictionsResponse:
+      type: object
+      properties:
+        restrictions:
+          $ref: '#/components/schemas/restrictions'
+  requestBodies:
+    CreateRestrictionSetDefinitionsRequest:
+        description: restrictionSetDefinitions
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/CreateRestrictionSetDefinitionsRequest'
+    ApplyRestrictionSetsRequest:
+        description: applyrestrictionSetDefinitions
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/ApplyRestrictionSetsRequest'
+    UpdateRestrictionSetsRequest:
+        description: updaterestrictions
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/UpdateRestrictionSetsRequest'
+  responses:
+    ApplyRestrictionSetsResponse:
+        description: aaplyrestrictionSetDefinitions
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/ApplyRestrictionSetsResponse'
+    CreateRestrictionSetDefinitionsResponse:
+        description: restrictionSetDefinitions
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/CreateRestrictionSetDefinitionsResponse'
+    UpdateRestrictionSetsResponse:
+        description: updaterestrictions
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/UpdateRestrictionSetsResponse'
+    RetrieveRestrictionSetDefinitionsResponse:
+      description: allTransactions
+      content:
+       application/json:
+        schema:
+          $ref: '#/components/schemas/RetrieveRestrictionSetDefinitionsResponse'
+    RetrieveRestrictionSetDefinitionVersionsResponse:
+      description: allTransactions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RetrieveRestrictionSetDefinitionVersionsResponse'
+    RetrieveRestrictionsResponse:
+      description: allTransactions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RetrieveRestrictionsResponse'
+    BadRequest:
+      description: BadRequest
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    NotFound:
+      description: NotFound
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    TooManyRequests:
+      description: TooManyRequests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    InternalServerError:
+      description: InternalServerError
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+  parameters:
+     pagesize:
+       name: pagesize
+       in: query
+       required: true
+       schema:
+         type: string
+     restrictionsetdefinitionid:
+       name: restrictionsetdefinitionid
+       in: query
+       required: false
+       schema:
+         type: string
+     excludepreviousversions:    
+       name: excludepreviousversions
+       in: query
+       required: false
+       schema:
+         type: string
+     accountids:
+       name: accountids
+       in: query
+       required: true
+       schema:
+         type: string
+     customerid:
+        name: customerid
+        in: query
+        required: true
+        style: form
+        schema:
+          type: string
