@@ -298,7 +298,7 @@ components:
         restrictionType:
           type: string
           format: string
-        restrictionDefinion:  
+        restrictionDefinionRequest:  
           $ref: '#/components/schemas/restrictionDefinionRequest'  
         restrictionDefinitionID:
           type: string
@@ -340,7 +340,7 @@ components:
         name:
           type: string
           format: string
-        restrictions:
+        restrictionsUpdate:
           $ref: '#/components/schemas/restrictionsUpdate'
         description:
           type: string
@@ -374,7 +374,7 @@ components:
             type: string
             description: "\n"
             format: string
-          parameters:
+          restrictParameters:
             $ref: '#/components/schemas/restrictParameters'  
           customerId:
             type: string
@@ -439,7 +439,7 @@ components:
     RetrieveListRestrictionsBasedOnIdResponse:
       type: object
       properties:
-        restrictions:
+        restrictionsDetails:
           $ref: '#/components/schemas/restrictionsDetails' 
     restrictionsDetails:
       type: array
@@ -615,4 +615,4 @@ components:
       in: query
       required: false
       schema:
-        type: string    
+        type: string
