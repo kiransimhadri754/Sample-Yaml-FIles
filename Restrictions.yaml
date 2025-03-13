@@ -180,12 +180,12 @@ components:
         properties: 
           restrictionType:
             type: string
+            format: string
+            description: "/n" 
           requiredRestrictionLevels:
-            $ref: '#/components/schemas/requiredRestrictionLevels'
-    requiredRestrictionLevels:
-      type: array
-      items:
-        type: string
+            type: string
+            format: string
+            description: "/n"
     InitiateApplyRestrictionResponse:
       type: object
       properties:
@@ -272,99 +272,120 @@ components:
       type: object
       properties:
         restrictionType:
-          type: string
-          format: string 
+            type: string
+            format: string
+            description: "/n"
         name:
-          type: string
-          format: string 
+            type: string
+            format: string
+            description: "/n"
         restrictionDefinitionID:
-          $ref: '#/components/schemas/restrictionDefinitionID'  
+            type: string
+            format: string
+            description: "/n"
         description:
-          type: string
-          format: string 
+            type: string
+            format: string
+            description: "/n"
         requestId:
-          type: string
-          format: string 
+            type: string
+            format: string
+            description: "/n"
         corporateId:
-          type: string
-          format: string   
-    restrictionDefinitionID:
-      type: array
-      items:
-        type: string
+            type: string
+            format: string
+            description: "/n"
     InitiateRestrictionDefinitionRequest:
       type: object
       properties:
         restrictionType:
-          type: string
-          format: string
+            type: string
+            format: string
+            description: "/n"
         restrictionDefinionRequest:  
-          $ref: '#/components/schemas/restrictionDefinionRequest'  
+            type: string
+            format: string
+            description: "/n"
         restrictionDefinitionID:
-          type: string
-          format: string
+            type: string
+            format: string
+            description: "/n"
         description:
-          type: string
-          format: string
+            type: string
+            format: string
+            description: "/n"
         requestId:
-          type: string
-          format: string
-    restrictionDefinionRequest:
-      type: array
-      items:
-        type: string
+            type: string
+            format: string
+            description: "/n"
     InitiateUpdateRestrictionRequest:
       type: object
       properties:
         applyRestrictionID:
-          type: string
-          format: string
+            type: string
+            format: string
+            description: "/n"
         isActive :
-          type: string
-          format: string
+            type: string
+            format: string
+            description: "/n"
         requestId:
-          type: string
-          format: string 
+            type: string
+            format: string
+            description: "/n"
     InitiateUpdateRestrictionResponse:
       type: object
       properties:
         id:
-          type: string
-          format: string
+            type: string
+            format: string
+            description: "/n"
         restrictionSetDefinitionId:
-          type: string
-          format: string
+            type: string
+            format: string
+            description: "/n"
         restrictionSetDefinitionVersionId:
-          type: string
-          format: string
+            type: string
+            format: string
+            description: "/n"
         name:
-          type: string
-          format: string
+            type: string
+            format: string
+            description: "/n"
         restriction:
           $ref: '#/components/schemas/restriction'
         description:
-          type: string
-          format: string
+            type: string
+            format: string
+            description: "/n"
         restrictionSetParameters:
-          $ref: '#/components/schemas/restrictionSetParameters'  
+            type: string
+            format: string
+            description: "/n"
         customerId:
-          type: string
-          format: string
+            type: string
+            format: string
+            description: "/n"
         accountId:
-          type: string
-          format: string
+            type: string
+            format: string
+            description: "/n"
         paymentDeviceId:
-          type: string
-          format: string
+            type: string
+            format: string
+            description: "/n"
         effectiveTimestamp:
-          type: string
-          format: string
+            type: string
+            format: string
+            description: "/n"
         expiryTimestamp:
-          type: string
-          format: string 
+            type: string
+            format: string
+            description: "/n"
         isActive:
-          type: string
-          format: string
+            type: string
+            format: string
+            description: "/n"
     restriction:
       type: array
       items:
@@ -375,7 +396,9 @@ components:
             description: "\n"
             format: string
           restrictParameters:
-            $ref: '#/components/schemas/restrictParameters'  
+            type: string
+            format: string
+            description: "/n" 
           customerId:
             type: string
             description: "\n"
@@ -400,12 +423,6 @@ components:
             type: string
             description: "\n"
             format: string 
-    restrictionSetParameters:
-      type: object
-      additionalProperties: false
-    restrictParameters:
-      type: object
-      additionalProperties: false  
     restrictionSetDefinitions:
           type: array
           items:
@@ -475,15 +492,19 @@ components:
           id: 
             type: string
             description: "\n"
-            format: string   
-    parametersDetails:
-      type: object
-      properties:
-        preventDebitsExemptionConditions:
+            format: string 
+    preventDebitsExemptionConditions:
           type: object
           properties:
             eventName:
               type: string
+              format: string
+              description: "/n"
+    parametersDetails:
+      type: object
+      properties:
+        preventDebitsExemptionConditions:
+            $ref: '#/components/schemas/preventDebitsExemptionConditions'
     HTTPError:
       type: object
       properties:
