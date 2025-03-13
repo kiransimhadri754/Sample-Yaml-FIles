@@ -340,8 +340,8 @@ components:
         name:
           type: string
           format: string
-        restrictionsUpdate:
-          $ref: '#/components/schemas/restrictionsUpdate'
+        restriction:
+          $ref: '#/components/schemas/restriction'
         description:
           type: string
           format: string
@@ -365,7 +365,7 @@ components:
         isActive:
           type: string
           format: string
-    restrictionsUpdate:
+    restriction:
       type: array
       items:
         type: object
