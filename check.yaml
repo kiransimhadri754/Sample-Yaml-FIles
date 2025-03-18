@@ -6,7 +6,7 @@ info:
 servers:
   - url: 'https://finx-celta-api-dev.fincuro.in'
 paths:
-  '/v1/fetchUserList':
+  '/restrictions/definitionsVersions':
     post:
       tags:
         - FinxFreezeRelationShipService
@@ -30,55 +30,6 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
-  '/v1/fetchUserListBasedOnName':
-    post:
-      tags:
-        - FinxFreezeRelationShipService
-      summary: FinxFreezeRelationShipService
-      description: FinxFreezeRelationShipService
-      operationId: ApplyRestriction
-      requestBody:
-         $ref: '#/components/requestBodies/InitiateApplyRestrictionRequest'
-      responses:
-        '200':
-          $ref: '#/components/responses/InitiateApplyRestrictionResponse'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '429':
-          $ref: '#/components/responses/TooManyRequests'
-        '500':
-          $ref: '#/components/responses/InternalServerError'
-  '/v1/updateFreeze':
-    post:
-      tags:
-        - FinxFreezeRelationShipService
-      summary: FinxFreezeRelationShipService
-      description: FinxFreezeRelationShipService
-      operationId: UpdateRestriction
-      requestBody:
-         $ref: '#/components/requestBodies/InitiateUpdateRestrictionRequest'
-      responses:
-        '200':
-          $ref: '#/components/responses/InitiateUpdateRestrictionResponse'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '429':
-          $ref: '#/components/responses/TooManyRequests'
-        '500':
-          $ref: '#/components/responses/InternalServerError'
-  '/v1/listOfRestrictionDefinition':
     get:
       tags:
         - FinxFreezeRelationShipService
@@ -102,19 +53,18 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
-  '/v1/listOfRestrictionDefinitionVersion':
-    get:
+  '/restrictions':
+    post:
       tags:
         - FinxFreezeRelationShipService
       summary: FinxFreezeRelationShipService
       description: FinxFreezeRelationShipService
-      operationId: listOfRestrictionDefinitionVersion
-      parameters:
-        - $ref: '#/components/parameters/excludePreviousVersions'
-        - $ref: '#/components/parameters/restrictionSetDefinitionId'
+      operationId: ApplyRestriction
+      requestBody:
+         $ref: '#/components/requestBodies/InitiateApplyRestrictionRequest'
       responses:
         '200':
-          $ref: '#/components/responses/RetrieveListofRestrictionDefinitionResponse'
+          $ref: '#/components/responses/InitiateApplyRestrictionResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -127,7 +77,29 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
-  '/v1/listRestrictionsBasedOnId':
+    put:
+      tags:
+        - FinxFreezeRelationShipService
+      summary: FinxFreezeRelationShipService
+      description: FinxFreezeRelationShipService
+      operationId: UpdateRestriction
+      requestBody:
+         $ref: '#/components/requestBodies/InitiateUpdateRestrictionRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiateUpdateRestrictionResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
     get:
       tags:
         - FinxFreezeRelationShipService
@@ -151,7 +123,32 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequests'
         '500':
-          $ref: '#/components/responses/InternalServerError'        
+          $ref: '#/components/responses/InternalServerError'
+  '/restrictions/definitions':
+    get:
+      tags:
+        - FinxFreezeRelationShipService
+      summary: FinxFreezeRelationShipService
+      description: FinxFreezeRelationShipService
+      operationId: listOfRestrictionDefinitionVersion
+      parameters:
+        - $ref: '#/components/parameters/excludePreviousVersions'
+        - $ref: '#/components/parameters/restrictionSetDefinitionId'
+      responses:
+        '200':
+          $ref: '#/components/responses/RetrieveListofRestrictionDefinitionVersionResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
     InitiateRestrictionDefinitionResponse:
@@ -159,7 +156,7 @@ components:
       properties:
         id:
           type: string
-        restrictionDefinion:
+        restrictionDefinition:
           $ref: '#/components/schemas/restrictionDefinion'
         restrictionSetDefinitionId:
           type: string
@@ -169,10 +166,14 @@ components:
           type: string
           format: string
           description: "/n" 
-        requestId:
+        createTimestamp:
           type: string
           format: string
-          description: "/n"  
+          description: "/n"
+        isCurrent:
+          type: string
+          format: string
+          description: "/n"
     restrictionDefinion:
       type: array
       items:
@@ -180,12 +181,10 @@ components:
         properties: 
           restrictionType:
             type: string
+            format: string
+            description: "/n" 
           requiredRestrictionLevels:
-            $ref: '#/components/schemas/requiredRestrictionLevels'
-    requiredRestrictionLevels:
-      type: array
-      items:
-        type: string
+            $ref: '#/components/schemas/requiredRestrictionLevels'  
     InitiateApplyRestrictionResponse:
       type: object
       properties:
@@ -252,6 +251,10 @@ components:
                 type: string
                 format: string
                 description: "\n"
+              customerId:
+                type: string
+                format: string
+                description: "\n"
               paymentDeviceId:
                 type: string
                 format: string
@@ -272,23 +275,32 @@ components:
       type: object
       properties:
         restrictionType:
-          type: string
-          format: string 
-        name:
-          type: string
-          format: string 
-        restrictionDefinitionID:
-          $ref: '#/components/schemas/restrictionDefinitionID'  
-        description:
-          type: string
-          format: string 
-        requestId:
-          type: string
-          format: string 
+          $ref: '#/components/schemas/restrictionType'    
+        freezeType:
+            type: string
+            format: string
+            description: "/n"
+        freezeComment:
+            type: string
+            format: string
+            description: "/n"
+        freezeReason:
+            type: string
+            format: string
+            description: "/n"
+        freezeDocumentUrl:
+            type: string
+            format: string
+            description: "/n"    
         corporateId:
-          type: string
-          format: string   
-    restrictionDefinitionID:
+            type: string
+            format: string
+            description: "/n"
+        accountId:
+            type: string
+            format: string
+            description: "/n"    
+    restrictionType:
       type: array
       items:
         type: string
@@ -296,76 +308,106 @@ components:
       type: object
       properties:
         restrictionType:
-          type: string
-          format: string
-        restrictionDefinion:  
-          $ref: '#/components/schemas/restrictionDefinionRequest'  
-        restrictionDefinitionID:
-          type: string
-          format: string
-        description:
-          type: string
-          format: string
-        requestId:
-          type: string
-          format: string
-    restrictionDefinionRequest:
-      type: array
-      items:
-        type: string
+            type: string
+            format: string
+            description: "/n"
+        requiredRestrictionLevels:  
+          $ref: '#/components/schemas/requiredRestrictionLevels'
+        restrictionSetDefinitionID:
+            type: string
+            format: string
+            description: "/n"
+        restrictionDescription:
+            type: string
+            format: string
+            description: "/n"
     InitiateUpdateRestrictionRequest:
       type: object
       properties:
-        applyRestrictionID:
-          type: string
-          format: string
-        isActive :
-          type: string
-          format: string
-        requestId:
-          type: string
-          format: string 
+        restrictionType:
+          $ref: '#/components/schemas/restrictionType'
+        unFreezeType:
+            type: string
+            format: string
+            description: "/n"
+        unFreezeReason:
+            type: string
+            format: string
+            description: "/n"    
+        unFreezeDocumentUrl:
+            type: string
+            format: string
+            description: "/n"
+        isDocumentVerified :
+            type: string
+            format: string
+            description: "/n"
+        unFreezeComment:
+            type: string
+            format: string
+            description: "/n"
+        corporateId:
+            type: string
+            format: string
+            description: "/n"
+        accountId:
+            type: string
+            format: string
+            description: "/n"    
     InitiateUpdateRestrictionResponse:
       type: object
       properties:
         id:
-          type: string
-          format: string
+            type: string
+            format: string
+            description: "/n"
         restrictionSetDefinitionId:
-          type: string
-          format: string
+            type: string
+            format: string
+            description: "/n"
         restrictionSetDefinitionVersionId:
-          type: string
-          format: string
+            type: string
+            format: string
+            description: "/n"
         name:
-          type: string
-          format: string
-        restrictions:
-          $ref: '#/components/schemas/restrictionsUpdate'  
+            type: string
+            format: string
+            description: "/n"
+        restriction:
+          $ref: '#/components/schemas/restriction'
         description:
-          type: string
-          format: string
+            type: string
+            format: string
+            description: "/n"
         restrictionSetParameters:
-          $ref: '#/components/schemas/restrictionSetParameters'  
+            type: string
+            format: string
+            description: "/n"
         customerId:
-          type: string
-          format: string
+            type: string
+            format: string
+            description: "/n"
         accountId:
-          type: string
-          format: string
+            type: string
+            format: string
+            description: "/n"
         paymentDeviceId:
-          type: string
-          format: string
+            type: string
+            format: string
+            description: "/n"
         effectiveTimestamp:
-          type: string
-          format: string
+            type: string
+            format: string
+            description: "/n"
         expiryTimestamp:
-          type: string
-          format: string 
+            type: string
+            format: string
+            description: "/n"
         isActive:
-          type: string
-          format: string
-    restrictionsUpdate:
+            type: string
+            format: string
+            description: "/n"
+    restriction:
       type: array
       items:
         type: object
@@ -374,8 +416,10 @@ components:
             type: string
             description: "\n"
             format: string
-          parameters:
-            $ref: '#/components/schemas/restrictParameters'  
+          restrictParameters:
+            type: string
+            format: string
+            description: "/n" 
           customerId:
             type: string
             description: "\n"
@@ -400,16 +444,7 @@ components:
             type: string
             description: "\n"
             format: string 
-    restrictionSetParameters:
-      type: object
-      additionalProperties: false
-    restrictParameters:
-      type: object
-      additionalProperties: false  
-    RetrieveListofRestrictionDefinitionResponse:
-      type: object
-      properties:
-        restrictionSetDefinitions:
+    restrictionSetDefinitions:
           type: array
           items:
             type: object
@@ -426,6 +461,11 @@ components:
                 type: string
                 description: "\n"
                 format: string 
+    RetrieveListofRestrictionDefinitionResponse:
+      type: object
+      properties:
+        restrictionSetDefinitions:
+          $ref: '#/components/schemas/restrictionSetDefinitions'
         previousPageToken: 
           type: string
           description: "\n"
@@ -437,7 +477,7 @@ components:
     RetrieveListRestrictionsBasedOnIdResponse:
       type: object
       properties:
-        restrictions:
+        restrictionsDetails:
           $ref: '#/components/schemas/restrictionsDetails' 
     restrictionsDetails:
       type: array
@@ -473,15 +513,50 @@ components:
           id: 
             type: string
             description: "\n"
-            format: string   
-    parametersDetails:
-      type: object
-      properties:
-        preventDebitsExemptionConditions:
+            format: string 
+    preventDebitsExemptionConditions:
           type: object
           properties:
             eventName:
               type: string
+              format: string
+              description: "/n"
+    parametersDetails:
+      type: object
+      properties:
+        preventDebitsExemptionConditions:
+            $ref: '#/components/schemas/preventDebitsExemptionConditions'
+    RetrieveListofRestrictionDefinitionVersionResponse:
+      type: object
+      properties:
+        restrictionSetDefinitionVersions:
+          $ref: '#/components/schemas/restrictionSetDefinitionVersions'
+    restrictionSetDefinitionVersions:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                format: string
+                description: "/n"
+              restrictionDefinitions:  
+                $ref: '#/components/schemas/restrictionDefinitions'  
+    restrictionDefinitions:
+      type: array
+      items:
+        type: object
+        properties:
+          restrictionType:
+            type: string
+            format: string
+            description: "/n"
+          requiredRestrictionLevels:
+            $ref: '#/components/schemas/requiredRestrictionLevels'  
+    requiredRestrictionLevels:
+      type: array
+      items:
+        type: string
     HTTPError:
       type: object
       properties:
@@ -547,6 +622,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/RetrieveListRestrictionsBasedOnIdResponse'
+    RetrieveListofRestrictionDefinitionVersionResponse: 
+      description: RetrieveListRestrictionsBasedOnIdResponse
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RetrieveListofRestrictionDefinitionVersionResponse'        
     BadRequest:
       description: BadRequest
       content:
@@ -613,4 +694,4 @@ components:
       in: query
       required: false
       schema:
-        type: string    
+        type: string
