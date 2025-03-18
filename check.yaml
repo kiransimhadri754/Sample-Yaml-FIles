@@ -12,7 +12,7 @@ paths:
         - FinxFreezeRelationShipService
       summary: FinxFreezeRelationShipService
       description: FinxFreezeRelationShipService
-      operationId: FinxFreezeRelationShipService
+      operationId: RestrictionDefinition
       requestBody:
         $ref: '#/components/requestBodies/InitiateRestrictionDefinitionRequest'
       responses:
@@ -35,7 +35,7 @@ paths:
         - FinxFreezeRelationShipService
       summary: FinxFreezeRelationShipService
       description: FinxFreezeRelationShipService
-      operationId: listOfRestrictionDefinition
+      operationId: ListOfRestrictionDefinitions
       parameters:
         - $ref: '#/components/parameters/pageSize'
       responses:
@@ -156,6 +156,8 @@ components:
       properties:
         id:
           type: string
+          format: string
+          description: "/n"
         restrictionDefinition:
           $ref: '#/components/schemas/restrictionDefinion'
         restrictionSetDefinitionId:
