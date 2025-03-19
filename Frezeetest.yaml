@@ -30,6 +30,7 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
+  '/restrictions/definitionsVersion':
     get:
       tags:
         - FinxFreezeRelationShipService
@@ -77,6 +78,7 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
+  '/restriction':
     put:
       tags:
         - FinxFreezeRelationShipService
@@ -100,6 +102,7 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
+  '/restrictins':
     get:
       tags:
         - FinxFreezeRelationShipService
@@ -151,6 +154,19 @@ paths:
           $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
+    restrictionDefinition:
+      type: array
+      items:
+        type: object
+        properties: 
+          restrictionType:
+            type: string
+            format: string
+            description: "/n" 
+          requiredRestrictionLevels:
+            type: string
+            format: string
+            description: "/n"
     InitiateRestrictionDefinitionResponse:
       type: object
       properties:
@@ -159,7 +175,7 @@ components:
           format: string
           description: "/n"
         restrictionDefinition:
-          $ref: '#/components/schemas/restrictionDefinion'
+          $ref: '#/components/schemas/restrictionDefinition'
         restrictionSetDefinitionId:
           type: string
           format: string
@@ -176,19 +192,6 @@ components:
           type: string
           format: string
           description: "/n"
-    restrictionDefinion:
-      type: array
-      items:
-        type: object
-        properties: 
-          restrictionType:
-            type: string
-            format: string
-            description: "/n" 
-          requiredRestrictionLevels:
-            type: string
-            format: string
-            description: "/n"
     InitiateApplyRestrictionResponse:
       type: object
       properties:
@@ -627,7 +630,7 @@ components:
           schema:
             $ref: '#/components/schemas/RetrieveListRestrictionsBasedOnIdResponse'
     RetrieveListofRestrictionDefinitionVersionResponse: 
-      description: RetrieveListRestrictionsBasedOnIdResponse
+      description: RetrieveListofRestrictionDefinitionVersionResponse
       content:
         application/json:
           schema:
