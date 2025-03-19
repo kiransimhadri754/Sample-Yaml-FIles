@@ -157,7 +157,6 @@ components:
     restrictionDefinition:
       type: array
       items:
-        type: object
         properties: 
           restrictionType:
             type: string
@@ -248,7 +247,6 @@ components:
     restrictions:
           type: array
           items:
-            type: object
             properties:
               restrictionType:
                 type: string
@@ -419,7 +417,6 @@ components:
     restriction:
       type: array
       items:
-        type: object
         properties:
           restrictionType:
             type: string
@@ -456,7 +453,6 @@ components:
     restrictionSetDefinitions:
           type: array
           items:
-            type: object
             properties:
               id:
                 type: string
@@ -491,7 +487,6 @@ components:
     restrictionsDetails:
       type: array
       items:
-        type: object
         properties:
           restrictionType:
             type: string
@@ -543,7 +538,6 @@ components:
     restrictionSetDefinitionVersions:
           type: array
           items:
-            type: object
             properties:
               id:
                 type: string
@@ -554,7 +548,6 @@ components:
     restrictionDefinitions:
       type: array
       items:
-        type: object
         properties:
           restrictionType:
             type: string
