@@ -14,10 +14,10 @@ paths:
       description: To create Dormancy case for the accounts that are in-operative for 6 months
       operationId: FinxCeltaTMDormancyService
       requestBody:
-        $ref: "#/components/requestBodies/createDormantCaseRequest"
+        $ref: "#/components/requestBodies/CreateDormantCaseRequest"
       responses:
         "200":
-          $ref: "#/components/responses/createDormantCaseResponse"
+          $ref: "#/components/responses/CreateDormantCaseResponse"
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
@@ -41,7 +41,7 @@ paths:
         - $ref: '#/components/parameters/accountNumber'
       responses:
         "200":
-          $ref: "#/components/responses/updateAccountAsDormantResponse"
+          $ref: "#/components/responses/UpdateAccountAsDormantResponse"
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
@@ -64,10 +64,10 @@ paths:
       parameters:
         - $ref: '#/components/parameters/accountNumber'
       requestBody:
-        $ref: "#/components/requestBodies/updateDormantCaseCategoryAndStatusRequest"
+        $ref: "#/components/requestBodies/UpdateDormantCaseCategoryAndStatusRequest"
       responses:
         "200":
-          $ref: "#/components/responses/updateDormantCaseCategoryAndStatusResponse"
+          $ref: "#/components/responses/UpdateDormantCaseCategoryAndStatusResponse"
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
@@ -88,10 +88,10 @@ paths:
       description: To get list of Dormancy cases or single Dormancy case based on Case GUID
       operationId: FetchDormantCases
       requestBody:
-        $ref: "#/components/requestBodies/getDormantCasesRequest"
+        $ref: "#/components/requestBodies/GetDormantCasesRequest"
       responses:
         "200":
-          $ref: "#/components/responses/getDormantCasesResponse"
+          $ref: "#/components/responses/GetDormantCasesResponse"
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
@@ -114,10 +114,10 @@ paths:
       parameters:
         - $ref: '#/components/parameters/customerId'
       requestBody:
-        $ref: "#/components/requestBodies/updateCorporateDocumentDoingReKYCRequest"
+        $ref: "#/components/requestBodies/UpdateCorporateDocumentDoingReKYCRequest"
       responses:
         "200":
-          $ref: "#/components/responses/updateCorporateDocumentDoingReKYCResponse"
+          $ref: "#/components/responses/UpdateCorporateDocumentDoingReKYCResponse"
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
@@ -141,7 +141,7 @@ paths:
         - $ref: '#/components/parameters/accountNumber'
       responses:
         "200":
-          $ref: "#/components/responses/updateDormantCaseCategoryResponse"
+          $ref: "#/components/responses/UpdateDormantCaseCategoryResponse"
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
@@ -156,14 +156,14 @@ paths:
           $ref: "#/components/responses/InternalServerError"        
 components:
   schemas:
-    updateAccountAsDormantResponse:
+    UpdateAccountAsDormantResponse:
       type: object
       properties:
         accountGuid:
           type: string
           format: string
           description: "\n"
-    createDormantCaseResponse:
+    CreateDormantCaseResponse:
       type: object
       properties:
         dormantCaseGuid:
@@ -188,21 +188,21 @@ components:
           type: string
           format: string
           description: "\n"
-    updateDormantCaseCategoryResponse:
+    UpdateDormantCaseCategoryResponse:
       type: object
       properties:
         accountGuid:
           type: string
           format: string
           description: "\n"
-    updateCorporateDocumentDoingReKYCResponse:
+    UpdateCorporateDocumentDoingReKYCResponse:
       type: object
       properties:
         results:
           type: string
           format: string
           description: "\n"
-    updateDormantCaseCategoryAndStatusResponse:
+    UpdateDormantCaseCategoryAndStatusResponse:
       type: object
       properties:
         dormantCaseGuid:
@@ -259,7 +259,7 @@ components:
                 description: "\n"
               prospectiveCorporate:
                 $ref: "#/components/schemas/prospectiveCorporate"
-    getDormantCasesResponse:
+    GetDormantCasesResponse:
       type: object
       properties:
         cases:
@@ -279,7 +279,7 @@ components:
           type: string
           format: string
           description: "\n"
-    updateDormantCaseCategoryAndStatusRequest:
+    UpdateDormantCaseCategoryAndStatusRequest:
       type: object
       properties:
         caseCategory:
@@ -321,7 +321,7 @@ components:
           type: string
           format: string
           description: "\n"
-    updateCorporateDocumentDoingReKYCRequest:
+    UpdateCorporateDocumentDoingReKYCRequest:
       type: object
       properties:
         CorporateDocumentList:
@@ -343,7 +343,7 @@ components:
             type: string
             format: string
             description: "\n" 
-    getDormantCasesRequest:
+    GetDormantCasesRequest:
       type: object
       properties:
         dormantCaseGuid:
@@ -352,7 +352,7 @@ components:
           description: "\n"
         paging:
           $ref: "#/components/schemas/paging"
-    createDormantCaseRequest:
+    CreateDormantCaseRequest:
       type: object
       properties:
         caseCategory:
@@ -412,36 +412,36 @@ components:
       schema:
         type: string
   requestBodies:
-    updateCorporateDocumentDoingReKYCRequest:
+    UpdateCorporateDocumentDoingReKYCRequest:
       description: UpdateCorporateDocumentDoingReKYCRequest
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/updateCorporateDocumentDoingReKYCRequest"
-    getDormantCasesRequest:
+            $ref: "#/components/schemas/UpdateCorporateDocumentDoingReKYCRequest"
+    GetDormantCasesRequest:
       description: GetDormantCasesRequest
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/getDormantCasesRequest"
-    updateDormantCaseCategoryAndStatusRequest:
+            $ref: "#/components/schemas/GetDormantCasesRequest"
+    UpdateDormantCaseCategoryAndStatusRequest:
       description: UpdateDormantCaseCategoryAndStatusRequest
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/updateDormantCaseCategoryAndStatusRequest"
+            $ref: "#/components/schemas/UpdateDormantCaseCategoryAndStatusRequest"
     updateDormantCaseStatusRequest:
       description: UpdateDormantCaseStatusRequest
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/updateDormantCaseStatusRequest"
-    createDormantCaseRequest:
+    CreateDormantCaseRequest:
       description: CreateDormantCaseRequest
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/createDormantCaseRequest"
+            $ref: "#/components/schemas/CreateDormantCaseRequest"
     updateDormantCaseRequest:
       description: UpdateDormantCaseRequest
       content:
@@ -449,48 +449,48 @@ components:
           schema:
             $ref: "#/components/schemas/updateDormantCaseRequest"
   responses:
-    createDormantCaseResponse:
-      description: createDormantCaseResponse
+    CreateDormantCaseResponse:
+      description: CreateDormantCaseResponse
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/createDormantCaseResponse"
-    updateAccountAsDormantResponse:
-      description: updateAccountAsDormantResponse
+            $ref: "#/components/schemas/CreateDormantCaseResponse"
+    UpdateAccountAsDormantResponse:
+      description: UpdateAccountAsDormantResponse
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/updateAccountAsDormantResponse"
+            $ref: "#/components/schemas/UpdateAccountAsDormantResponse"
     updateDormantCaseResponse:
       description: UpdateDormantCaseResponse
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/updateDormantCaseResponse"
-    updateDormantCaseCategoryResponse:
+    UpdateDormantCaseCategoryResponse:
       description: UpdateDormantCaseCategoryResponse
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/updateDormantCaseCategoryResponse"
-    updateCorporateDocumentDoingReKYCResponse:
+            $ref: "#/components/schemas/UpdateDormantCaseCategoryResponse"
+    UpdateCorporateDocumentDoingReKYCResponse:
       description: UpdateCorporateDocumentDoingReKYCResponse
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/updateCorporateDocumentDoingReKYCResponse"
-    updateDormantCaseCategoryAndStatusResponse:
+            $ref: "#/components/schemas/UpdateCorporateDocumentDoingReKYCResponse"
+    UpdateDormantCaseCategoryAndStatusResponse:
       description: UpdateDormantCaseCategoryAndStatusResponse
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/updateDormantCaseCategoryAndStatusResponse"
-    getDormantCasesResponse:
+            $ref: "#/components/schemas/UpdateDormantCaseCategoryAndStatusResponse"
+    GetDormantCasesResponse:
       description: GetDormantCasesResponse
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/getDormantCasesResponse"
+            $ref: "#/components/schemas/GetDormantCasesResponse"
     BadRequest:
       description: BadRequest
       content:
