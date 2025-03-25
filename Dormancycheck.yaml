@@ -1,18 +1,18 @@
 openapi: 3.0.1
 info:
-  title: Finx Dormancy Check Service
-  description: Finx Dormancy Check Service.
+  title: FinX Celta TM Dormancy Service
+  description: Service to conduct periodic check on accounts that are in-operative for 6/9/10/11/12 months and create/update cases in MSD for compliance team to follow up with customer and mark account as Dormant on 12th month to stop inbound/outbound payments to the account.
   version: 11.0.0
 servers:
   - url: https://finx-celta-api-dev.fincuro.in
 paths:
-  /v1/dormantCase/createDormantCase:
+  /v1/dormancy/cases/initiate:
     post:
       tags:
-        - FinxDormancyCheckService
-      summary: FinxDormancyCheckService
-      description: FinxDormancyCheckService
-      operationId: FinxDormancyCheckService
+        - FinxCeltaTMDormancyService
+      summary: CreateCaseForDormancy
+      description: To create Dormancy case for the accounts that are in-operative for 6 months
+      operationId: FinxCeltaTMDormancyService
       requestBody:
         $ref: "#/components/requestBodies/createDormantCaseRequest"
       responses:
@@ -30,12 +30,12 @@ paths:
           $ref: "#/components/responses/TooManyRequests"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /v1/account/{accountNumber}/setAsDormant:
+  /v1/dormancy/account/{accountNumber}/setDormancy:
     put:
       tags:
-        - FinxDormancyCheckService
+        - FinxCeltaTMDormancyService
       summary: UpdateSetAccountAsDormant
-      description: UpdateSetAccountAsDormant
+      description: To mark Dormancy status for an account for 12th month
       operationId: UpdateSetAccountAsDormant
       parameters:
         - $ref: '#/components/parameters/accountNumber'
@@ -54,12 +54,12 @@ paths:
           $ref: "#/components/responses/TooManyRequests"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /v1/dormantCase/updateDormantCaseCategoryAndStatus/{accountNumber}:
+  /v1/dormancy/cases/{accountNumber}/update:
     put:
       tags:
-        - FinxDormancyCheckService
+        - FinxCeltaTMDormancyService
       summary: UpdateDormantCaseCategoryAndStatus
-      description: UpdateDormantCaseCategoryAndStatus
+      description: To update the Dormancy Case Category and Case status during every in-operative check at 9/10/11/12
       operationId: UpdateDormantCaseCategoryAndStatus
       parameters:
         - $ref: '#/components/parameters/accountNumber'
@@ -80,12 +80,12 @@ paths:
           $ref: "#/components/responses/TooManyRequests"
         "500":
           $ref: "#/components/responses/InternalServerError"        
-  /v1/dormantCase/getDormantCases:
+  /v1/dormancy/cases/retrieve:
     post:
       tags:
-        - FinxDormancyCheckService
+        - FinxCeltaTMDormancyService
       summary: FetchDormantCases
-      description: FetchDormantCases
+      description: To get list of Dormancy cases or single Dormancy case based on Case GUID
       operationId: FetchDormantCases
       requestBody:
         $ref: "#/components/requestBodies/getDormantCasesRequest"
@@ -104,12 +104,12 @@ paths:
           $ref: "#/components/responses/TooManyRequests"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /v1/corporate/updateDocument/{customerId}:
+  /v1/dormancy/corporate/document/{customerId}/update:
     put:
       tags:
-        - FinxDormancyCheckService
-      summary: UpdateCorporateDocumentDoingReKYC
-      description: UpdateCorporateDocumentDoingReKYC
+        - FinxCeltaTMDormancyService
+      summary: UpdateCorporateDocumentDuringReKYC
+      description: To update Corporate Customer KYC documents at MSD during re-kyc process
       operationId: UpdateCorporateDocumentDoingReKYC
       parameters:
         - $ref: '#/components/parameters/customerId'
@@ -130,12 +130,12 @@ paths:
           $ref: "#/components/responses/TooManyRequests"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /v1/account/{accountNumber}/setAsActive:
+  /v1/dormancy/account/{accountNumber}/removeDormancy:
     put:
       tags:
-        - FinxDormancyCheckService
-      summary: UpdateDormantCaseCategory
-      description: UpdateDormantCaseCategory
+        - FinxCeltaTMDormancyService
+      summary: UpdateAccountStatusAsActive
+      description: To remove dormancy
       operationId: UpdateDormantCaseCategory
       parameters:
         - $ref: '#/components/parameters/accountNumber'
@@ -191,7 +191,7 @@ components:
     updateDormantCaseCategoryResponse:
       type: object
       properties:
-        dormantCaseGuid:
+        accountGuid:
           type: string
           format: string
           description: "\n"
@@ -327,8 +327,8 @@ components:
         CorporateDocumentList:
           type: array
           items:
-            $ref: "#/components/schemas/CorporateDocumentList"
-    CorporateDocumentList:
+            $ref: "#/components/schemas/corporateDocument"
+    corporateDocument:
         type: object
         properties:
           DocumentLink:
