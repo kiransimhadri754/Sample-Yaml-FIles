@@ -1,0 +1,279 @@
+openapi: 3.0.1
+info:
+  title: Finx-celta-vc-parameter-service
+  description: 'Service for managing VC parameters in FinX Celta.'
+  version: 11.0.0
+servers:
+  - url: https://finx-celta-api-dev.fincuro.in
+paths:
+  '/v1/vcParameter/values':
+    post:
+      tags:
+        - FinxCeltaVCParameterservice
+      summary: FinxCeltaVCParameterservice
+      description: FinxCeltaVCParameterservice
+      operationId: InitiateParameterValue
+      requestBody:
+        $ref: '#/components/requestBodies/InitiateParameterValueRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiateParameterValueResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    get:
+      tags:
+        - FinxCeltaVCParameterservice
+      summary: FinxCeltaVCParameterservice
+      description: FinxCeltaVCParameterservice
+      operationId: RetrieveParameterValue
+      parameters:
+        - $ref: '#/components/parameters/pageSize'
+        - $ref: '#/components/parameters/accountId'
+        - $ref: '#/components/parameters/parameterId'
+      responses:
+        '200':
+          $ref: '#/components/responses/RetrieveParameterValue'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  schemas:
+    InitiateParameterValueRequest:
+      type: object
+      properties:
+            parameterId:
+              type: string
+              description: "\n"
+              format: string
+            effectiveFromTimestamp:
+              type: string
+              description: "\n"
+              format: string
+            status:
+              type: string
+              description: "\n"
+              format: string
+            accountId:
+              type: string
+              description: "\n"
+              format: string
+    value:
+      type: object
+      properties:
+            status:
+              type: string
+              description: "\n"
+              format: string
+    InitiateParameterValueResponse:
+      type: object
+      properties:
+            id:
+              type: string
+              description: "\n"
+              format: string
+            parameterId:
+              type: string
+              description: "\n"
+              format: string
+            createTimestamp:
+              type: string
+              description: "\n"
+              format: string
+            updateTimestamp:
+              type: string
+              description: "\n"
+              format: string   
+            effectiveFromTimestamp:
+              type: string
+              description: "\n"
+              format: string
+            effectiveToTimestamp:
+              type: string
+              description: "\n"
+              format: string
+            isCancelled:
+              type: string
+              description: "\n"
+              format: string
+            isBackDated:
+              type: string
+              description: "\n"
+              format: string   
+            value:
+               $ref: '#/components/schemas/value'
+    parameterValues:
+      type: array
+      items:
+        properties:
+              id:
+                type: string
+                description: "\n"
+                format: string
+              parameterId:
+                type: string
+                description: "\n"
+                format: string
+              createTimestamp:
+                type: string
+                description: "\n"
+                format: string
+              updateTimestamp:
+                type: string
+                description: "\n"
+                format: string   
+              effectiveFromTimestamp:
+                type: string
+                description: "\n"
+                format: string
+              effectiveToTimestamp:
+                type: string
+                description: "\n"
+                format: string
+              isCancelled:
+                type: string
+                description: "\n"
+                format: string
+              isBackDated:
+                type: string
+                description: "\n"
+                format: string   
+              value:
+                 $ref: '#/components/schemas/value' 
+              accountConfigGroupId:
+                type: string
+                description: "\n"
+                format: string   
+              accountId:
+                type: string
+                description: "\n"
+                format: string
+              cancelTimeStamp:
+                type: string
+                description: "\n"
+                format: string
+              effectiveToTimeStampIsExplicit:
+                type: string
+                description: "\n"
+                format: string
+    RetrieveParameterValue:
+      type: object
+      properties:
+        parameterValues:
+          $ref: '#/components/schemas/parameterValues'
+        nextPageToken:
+                type: string
+                description: "\n"
+                format: string
+        previousPageToken:
+                type: string
+                description: "\n"
+                format: string
+    HTTPError:
+      type: object
+      properties:
+        status_code:
+          type: string
+          description: "\n"
+          format: string
+        status:
+          type: string
+          description: "\n"
+          format: string
+        message:
+          type: string
+          description: "\n"
+          format: string
+  requestBodies:
+    InitiateParameterValueRequest:
+      description: InitiateParameterValueRequest
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InitiateParameterValueRequest'
+  responses:
+    RetrieveParameterValue:
+      description: RetrieveParameterValue
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RetrieveParameterValue'
+    InitiateParameterValueResponse:
+      description: InitiateParameterValueResponse
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InitiateParameterValueResponse'
+    BadRequest:
+      description: BadRequest
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    NotFound:
+      description: NotFound
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    TooManyRequests:
+      description: TooManyRequests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    InternalServerError:
+      description: InternalServerError
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+  parameters:
+    pageSize:
+      name: pageSize
+      in: query
+      required: true
+      schema:
+        type: string
+    parameterId:
+      name: parameterId
+      in: query
+      required: true
+      schema:
+        type: string
+    accountId:
+      name: accountId
+      in: query
+      required: true
+      schema:
+        type: string
