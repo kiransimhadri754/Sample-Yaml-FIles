@@ -1,0 +1,683 @@
+openapi: 3.0.1
+info:
+  title: FinX Celta VP Parameter Service
+  description: Service for managing VP parameters in Celta.
+  version: 11.0.0
+servers:
+  - url: https://finx-celta-api-dev.fincuro.in
+paths:
+  /v1/vpParameter/initiate:
+    post:
+      tags:
+        - FinXCeltaVPParameterService
+      summary: Create VP Parameter  
+      description: Create VP Parameter  
+      operationId: InitiateVPParameter 
+      requestBody:
+        $ref: "#/components/requestBodies/InitiateVPParameterRequest"
+      responses:
+        "200":
+          $ref: "#/components/responses/InitiateVPParameterResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "429":
+          $ref: "#/components/responses/TooManyRequests"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /v1/vpParameter/retrieve:
+    get:
+      tags:
+        - FinXCeltaVPParameterService
+      summary: Get All Parameters
+      description: Get All Parameters
+      operationId: RetrieveAllVPParameters
+      parameters:
+        - $ref: '#/components/parameters/pageSize'
+        - $ref: '#/components/parameters/pageToken'
+      responses:
+        "200":
+          $ref: "#/components/responses/RetrieveAllVPParametersResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "429":
+          $ref: "#/components/responses/TooManyRequests"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /v1/vpParameter/values/initiate:
+    post:
+      tags:
+        - FinXCeltaVPParameterService
+      summary: Set Parameter Value
+      description: Set Parameter Value
+      operationId: SetVPParametervalue
+      requestBody:
+        $ref: "#/components/requestBodies/SetVPParametervalueRequest"
+      responses:
+        "200":
+          $ref: "#/components/responses/SetVPParametervalueResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "429":
+          $ref: "#/components/responses/TooManyRequests"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /v1/vpParameter/values/retrieve:
+    get:
+      tags:
+        - FinXCeltaVPParameterService
+      summary: Get All Parameter Values
+      description: Get All Parameter Values
+      operationId: RetrieveAllVPParametervalues
+      parameters:
+        - $ref: '#/components/parameters/pageSize'
+        - $ref: '#/components/parameters/pageToken'
+        - $ref: '#/components/parameters/parameterReference'
+        - $ref: '#/components/parameters/paymentInstrumentId'
+        - $ref: '#/components/parameters/effectiveTimeStampRangeFrom'
+        - $ref: '#/components/parameters/effectiveTimeStampRangeTo'
+      responses:
+        "200":
+          $ref: "#/components/responses/RetrieveAllVPParametervaluesResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "429":
+          $ref: "#/components/responses/TooManyRequests"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /v1/vpParameter/values/update:
+    put:
+      tags:
+        - FinXCeltaVPParameterService
+      summary: Update Parameter Value
+      description: Update Parameter Value
+      operationId: UpdateVPParametervalue
+      requestBody:
+        $ref: "#/components/requestBodies/UpdateVPParametervalueRequest"
+      responses:
+        "200":
+          $ref: "#/components/responses/UpdateVPParametervalueResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "429":
+          $ref: "#/components/responses/TooManyRequests"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /v1/vpAccounts/accountLinks/retrieve:
+    get:
+      tags:
+        - FinXCeltaVPParameterService
+      summary: Get Account Links
+      description: Get Account Links
+      operationId: RetrieveAccountLinks
+      parameters:
+        - $ref: '#/components/parameters/coreAccountIds'
+        - $ref: '#/components/parameters/pageSize'
+        - $ref: '#/components/parameters/pageToken'
+      responses:
+        "200":
+          $ref: "#/components/responses/RetrieveAccountLinksResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "429":
+          $ref: "#/components/responses/TooManyRequests"
+        "500":
+          $ref: "#/components/responses/InternalServerError"  
+  /v1/vpAccounts/paymentInstrument/retrieve:
+    get:
+      tags:
+        - FinXCeltaVPParameterService
+      summary: Get Payment Instrument
+      description: Get Payment Instrument
+      operationId: RetrievepaymentInstrument
+      parameters:
+        - $ref: '#/components/parameters/paymentInstrumentId'
+      responses:
+        "200":
+          $ref: "#/components/responses/RetrievepaymentInstrumentResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "429":
+          $ref: "#/components/responses/TooManyRequests"
+        "500":
+          $ref: "#/components/responses/InternalServerError"  
+components:
+  schemas:
+    parameterType:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Specifies the data type of the parameter. Possible values could be boolean,string,stringlist,decimal,dateTime
+          format: string
+        minimumValue:
+          type: string
+          description: Defines the minimum allowed value for the parameter.
+          format: string
+        maximumValue:
+          type: string
+          description: Defines the maximum allowed value for the parameter.
+          format: string
+        condition:
+          type: string
+          description: Specifies the criteria that must be met for the rule or configuration to apply.
+          format: string
+    InitiateVPParameterRequest:
+      type: object
+      properties:
+        parameterReference:
+          type: string
+          description: A unique identifier or reference for the parameter
+          format: string
+        parameterName:
+          type: string
+          description: The name assigned to the parameter.
+          format: string
+        parameterDescription:
+          type: string
+          description: A brief description of the parameter's purpose or usage.
+          format: string
+        parameterType:
+          $ref: "#/components/schemas/parameterType"
+    constraint:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Specifies the data type of the parameter.Possible values could be boolean,string,stringlist ... etc
+          format: string
+        minimumValue:
+          type: string
+          description: Defines the minimum allowed value for the parameter.
+          format: string
+        maximumValue:
+          type: string
+          description: Defines the minimum allowed value for the parameter.
+          format: string
+        condition:
+          type: string
+          description: Specifies the criteria that must be met for the rule or configuration to apply.
+          format: string
+    InitiateVPParameterResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: A unique identifier for the parameter.
+          format: string
+        displayName:
+          type: string
+          description: A user-friendly name for the parameter.
+          format: string
+        description:
+          type: string
+          description: A brief explanation of the parameter's purpose.
+          format: string
+        constraint:
+          $ref: "#/components/schemas/constraint"
+        createTimeStamp:
+          type: string
+          description: The TimeStamp indicating when the parameter was created.
+          format: string
+        updateTimeStamp:
+          type: string
+          description: The TimeStamp indicating when the parameter was updated.
+          format: string
+    parameters:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: string
+            description: A unique identifier for the parameter.
+            format: string
+          displayName:
+            type: string
+            description: A user-friendly name for the parameter.
+            format: string
+          description:
+            type: string
+            description: A brief explanation of the parameter's purpose.
+            format: string
+          constraint:
+            $ref: "#/components/schemas/constraint"
+          createTimeStamp:
+            type: string
+            description: The TimeStamp indicating when the parameter was created.
+            format: string
+          updateTimeStamp:
+            type: string
+            description: The TimeStamp indicating when the parameter was updated.
+            format: string        
+    RetrieveAllVPParametersResponse:
+      type: object
+      properties:
+        parameters:
+            $ref: "#/components/schemas/parameters"
+        nextPageToken:
+          type: string
+          description: A token used for pagination to fetch the next set of results.
+          format: string  
+        previousPageToken:
+          type: string
+          description: A token used for pagination to fetch the previous set of results.
+          format: string  
+    parameterValues:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: string
+            description: A unique identifier for the parameter.
+            format: string
+          parameterReference:
+            type: string
+            description: A unique identifier or reference for the parameter
+            format: string
+          paymentInstrumentId:
+            type: string
+            description: Unique identifier for the associated payment instrument.
+            format: string
+          parameterValue:
+            type: string
+            description: The value assigned to the specified parameter.
+            format: string
+          effectiveFromTimeStamp:
+            type: string
+            description: Timestamp indicating when the parameter becomes effective.
+            format: string
+          effectiveToTimeStamp:
+            type: string
+            description: Timestamp indicating when the parameter ceases to be effective.
+            format: string   
+          createTimeStamp:
+            type: string
+            description: The TimeStamp indicating when the parameter was created.
+            format: string
+          updateTimeStamp:
+            type: string
+            description: The TimeStamp indicating when the parameter was updated.
+            format: string   
+    RetrieveAllVPParametervaluesResponse:
+        type: object
+        properties:
+          parameterValues:
+            $ref: "#/components/schemas/parameterValues"
+    accountLinks:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: string
+            description: A unique identifier for the account link.
+            format: string
+          status:
+            type: string
+            description: The current status of the account link.
+            format: string
+          coreId:
+            type: string
+            description: A unique identifier associated with the core banking system.
+            format: string
+          coreAccountId:
+            type: string
+            description: The account id in the core banking system.
+            format: string
+          createTimeStamp:
+            type: string
+            description: The TimeStamp when the account link was created.
+            format: string
+          updateTimeStamp:
+            type: string
+            description: The TimeStamp when the account link was updated.
+            format: string  
+    RetrieveAccountLinksResponse:
+      type: object
+      properties:
+        accountLinks:
+          $ref: "#/components/schemas/accountLinks"
+        nextPageToken:
+          type: string
+          description: A token used for pagination to fetch the next set of results.
+          format: string  
+        previousPageToken:
+          type: string
+          description: A token used for pagination to fetch the previous set of results.
+          format: string  
+    RetrievepaymentInstrumentResponse:
+      type: object
+      properties:
+          id:
+            type: string
+            description: A unique identifier for the account link.
+            format: string
+          status:
+            type: string
+            description: The current status of the account link.
+            format: string
+          coreId:
+            type: string
+            description: A unique identifier associated with the core banking system.
+            format: string
+          coreAccountId:
+            type: string
+            description: The account id in the core banking system.
+            format: string
+          createTimeStamp:
+            type: string
+            description: The TimeStamp when the account link was created.
+            format: string
+          updateTimeStamp:
+            type: string
+            description: The TimeStamp when the account link was updated.
+            format: string  
+    UpdateVPParametervalueRequest:
+      type: object
+      properties:
+        parameterReference:
+          type: string
+          description: A unique identifier or reference for the parameter
+          format: string
+        effectiveToTimeStamp:
+          type: string
+          description: Timestamp indicating when the parameter ceases to be effective.
+          format: string
+    UpdateVPParametervalueResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the record.
+          format: string
+        parameterId:
+          type: string
+          description: Identifier linking to the associated parameter.
+          format: string
+        parameterValue:
+          type: string
+          description: TimeStamp indicating when the value becomes effective.
+          format: string
+        effectiveFromTimeStamp:
+          type: string
+          description: TimeStamp indicating when the value becomes effective.
+          format: string
+        effectiveToTimeStamp:
+          type: string
+          description: TimeStamp indicating when the value is no longer effective.
+          format: string
+        createTimeStamp:
+          type: string
+          description: TimeStamp when the record was created.
+          format: string
+        updateTimeStamp:
+          type: string
+          description: TimeStamp when the record was last updated.
+          format: string
+        global:
+          type: string
+          description: Indicates if the parameter is globally applicable.
+          format: string
+    SetVPParametervalueRequest:
+      type: object
+      properties:
+        parameterId:
+          type: string
+          description: Identifier linking to the associated parameter.
+          format: string
+        parameterValue:
+          type: string
+          description: The assigned value for the parameter.
+          format: string
+        global:
+          type: string
+          description: Indicates if the parameter is globally applicable.
+          format: string
+        paymentInstrumentId:
+          type: string
+          description: Unique identifier for the payment instrument.
+          format: string
+    SetVPParametervalueResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the record.
+          format: string
+        parameterId:
+          type: string
+          description: Identifier linking to the associated parameter.
+          format: string
+        parameterValue:
+          type: string
+          description: TimeStamp indicating when the value becomes effective.
+          format: string
+        effectiveFromTimeStamp:
+          type: string
+          description: TimeStamp indicating when the value becomes effective.
+          format: string
+        effectiveToTimeStamp:
+          type: string
+          description: TimeStamp indicating when the value is no longer effective.
+          format: string
+        createTimeStamp:
+          type: string
+          description: TimeStamp when the record was created.
+          format: string
+        updateTimeStamp:
+          type: string
+          description: TimeStamp when the record was last updated.
+          format: string
+        paymentInstrumentId:
+          type: string
+          description: Unique identifier for the associated payment instrument.
+          format: string
+        global:
+          type: string
+          description: Indicates if the parameter is globally applicable.
+          format: string
+    HTTPError:
+      type: object
+      properties:
+        statusCode:
+          type: string
+          description: "\n"
+          format: string
+        status:
+          type: string
+          description: "\n"
+          format: string
+        message:
+          type: string
+          description: "\n"
+          format: string
+  parameters:    
+    pageSize:
+      name: pageSize
+      in: query
+      required: true
+      schema:
+        type: string 
+    pageToken:
+      name: pageToken
+      in: query
+      required: false
+      schema:
+        type: string
+    coreAccountIds:
+      name: coreAccountIds
+      in: query
+      required: true
+      schema:
+        type: string
+    accountLinkId:
+      name: accountLinkId
+      in: query
+      required: true
+      schema:
+        type: string
+    parameterReference:
+      name: parameterReference
+      in: query
+      required: false
+      schema:
+        type: string 
+    paymentInstrumentId:
+      name: paymentInstrumentId
+      in: query
+      required: true
+      schema:
+        type: string
+    effectiveTimeStampRangeFrom:
+      name: effectiveTimeStampRangeFrom
+      in: query
+      required: false
+      schema:
+        type: string
+    effectiveTimeStampRangeTo:
+      name: effectiveTimeStampRangeTo
+      in: query
+      required: false
+      schema:
+        type: string
+  requestBodies:
+    InitiateVPParameterRequest:
+      description: InitiateVPParameterRequest
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/InitiateVPParameterRequest"
+    UpdateVPParametervalueRequest:
+      description: UpdateVPParametervalueRequest
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UpdateVPParametervalueRequest"
+    SetVPParametervalueRequest:
+      description: SetVPParametervalueRequest
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/SetVPParametervalueRequest"
+  responses:
+    InitiateVPParameterResponse:
+      description: InitiateVPParameterResponse
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/InitiateVPParameterResponse"
+    RetrieveAllVPParametervaluesResponse:
+      description: RetrieveAllVPParametervaluesResponse
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/RetrieveAllVPParametervaluesResponse"
+    RetrieveAllVPParametersResponse:
+      description: RetrieveAllVPParametersResponse
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/RetrieveAllVPParametersResponse"
+    RetrieveAccountLinksResponse:
+      description: RetrieveAccountLinksResponse
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/RetrieveAccountLinksResponse"
+    RetrievepaymentInstrumentResponse:
+      description: RetrievepaymentInstrumentResponse
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/RetrievepaymentInstrumentResponse"
+    UpdateVPParametervalueResponse:
+      description: UpdateVPParametervalueResponse
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UpdateVPParametervalueResponse"
+    SetVPParametervalueResponse:
+      description: SetVPParametervalueResponse
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/SetVPParametervalueResponse"
+    BadRequest:
+      description: BadRequest
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/HTTPError"
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/HTTPError"
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/HTTPError"
+    NotFound:
+      description: NotFound
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/HTTPError"
+    TooManyRequests:
+      description: TooManyRequests
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/HTTPError"
+    InternalServerError:
+      description: InternalServerError
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/HTTPError"
