@@ -30,6 +30,56 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
+   /currentAccount/{accountReference}/Retrieve:
+      get:
+        tags:
+            - Accounts
+        summary: InCR Initiate a current account for a customer
+        description: InCR Initiate a current account for a customer
+        operationId: RetrieveCurrentAccountDetails
+        parameters:
+          - $ref: '#/components/parameters/accountReference'
+        responses:
+          '200':
+            $ref: '#/components/responses/RetrieveCurrentAccountResponse'
+          '400':
+            $ref: '#/components/responses/BadRequest'
+          '401':
+            $ref: '#/components/responses/Unauthorized'
+          '403':
+            $ref: '#/components/responses/Forbidden'
+          '404':
+            $ref: '#/components/responses/NotFound'
+          '429':
+            $ref: '#/components/responses/TooManyRequests'
+          '500':
+            $ref: '#/components/responses/InternalServerError'
+   /currentAccount/{accountReference}/Update:
+      put:
+        tags:
+            - Accounts
+        summary: InCR Initiate a current account for a customer
+        description: InCR Initiate a current account for a customer
+        operationId: UpdateCurrentAccount
+        parameters:
+          - $ref: '#/components/parameters/accountReference'
+        requestBody:
+          $ref: '#/components/requestBodies/UpdateCurrentAccountRequest'
+        responses:
+          '200':
+            $ref: '#/components/responses/UpdateCurrentAccountResponse'
+          '400':
+            $ref: '#/components/responses/BadRequest'
+          '401':
+            $ref: '#/components/responses/Unauthorized'
+          '403':
+            $ref: '#/components/responses/Forbidden'
+          '404':
+            $ref: '#/components/responses/NotFound'
+          '429':
+            $ref: '#/components/responses/TooManyRequests'
+          '500':
+            $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
     productInstanceReference:
@@ -61,7 +111,19 @@ components:
     accountDetails:
       type: object
       properties:
+        customerReference:
+          type: string
+          description: "\n"
+          format: string
         accountReference:
+          type: string
+          description: "\n"
+          format: string
+        accountCurrency:
+          type: string
+          description: "\n"
+          format: string
+        productInstanceReference:
           type: string
           description: "\n"
           format: string
@@ -119,12 +181,60 @@ components:
           format: string
         productInstanceParameters:
           $ref: '#/components/schemas/productInstanceParameters'
+    account:
+      type: object
+      properties:
+        customerReference:
+          type: string
+          description: "\n"
+          format: string
+        accountStatus:
+          type: string
+          description: "\n"
+          format: string
+        accountCloseDate:
+          type: string
+          description: "\n"
+          format: string
     InitiateCurrentAccountRequest:
       type: object
       properties:
         currentAccountFacility: 
           $ref: '#/components/schemas/currentAccountFacility'
     InitiateCurrentAccountResponse:
+      type: object
+      properties:
+        accountDetails: 
+          $ref: '#/components/schemas/accountDetails'
+    UpdateCurrentAccountRequest:
+      type: object
+      properties:
+        account: 
+          $ref: '#/components/schemas/account'
+    UpdateCurrentAccountResponse:
+      type: object
+      properties:
+        customerReference:
+          type: string
+          description: "\n"
+          format: string
+        accountReference:
+          type: string
+          description: "\n"
+          format: string
+        accountStatus:
+          type: string
+          description: "\n"
+          format: string
+        accountOpenDate:
+          type: string
+          description: "\n"
+          format: string
+        accountCloseDate:
+          type: string
+          description: "\n"
+          format: string
+    RetrieveCurrentAccountResponse:
       type: object
       properties:
         accountDetails: 
@@ -164,6 +274,12 @@ components:
           application/json:
             schema:
                 $ref: '#/components/schemas/InitiateCurrentAccountRequest'
+    UpdateCurrentAccountRequest:
+        description: createCurrentAccount
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/UpdateCurrentAccountRequest'
   responses:
     InitiateCurrentAccountResponse:
         description: createCurrentAccount
@@ -171,6 +287,18 @@ components:
           application/json:
             schema:
                 $ref: '#/components/schemas/InitiateCurrentAccountResponse'
+    RetrieveCurrentAccountResponse:
+        description: createCurrentAccount
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/RetrieveCurrentAccountResponse'
+    UpdateCurrentAccountResponse:
+        description: createCurrentAccount
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/UpdateCurrentAccountResponse'
     BadRequest:
       description: BadRequest
       content:
