@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: BIAN-TM-CurrentAccount-Service
-  description: BIAN Service Domain Packaged Business Capability (PCB) | DDD Bounded Context Account creation.
+  description: Handles all operations related to current accounts, including account creation, status updates. This service maps BIAN’s “Current Account” service domain to relevant Thought Machine core banking endpoints for seamless account lifecycle management.
   version: 11.0.0
 servers:
 - url: 'https://core-api.partner-integrations-sandbox.thirsty-fish-dephub.tmachine.io'
