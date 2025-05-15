@@ -1,6 +1,6 @@
 openapi: 3.0.1
 info:
-  title: BIANCurrentAccountService
+  title: BIAN-TM-CurrentAccount-Service
   description: BIAN Service Domain Packaged Business Capability (PCB) | DDD Bounded Context Account creation.
   version: 11.0.0
 servers:
