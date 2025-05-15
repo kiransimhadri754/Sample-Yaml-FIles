@@ -1,23 +1,23 @@
 openapi: 3.0.1
 info:
-  title: Current Account
-  description: BIAN Service Domain Packaged Business Capability (PCB) | DDD Bounded Context Current Account (expanded with ISO200022)
+  title: BIAN-TM-CurrentAccount-Service
+  description: Handles all operations related to current accounts, including account creation, status updates. This service maps BIAN’s “Current Account” service domain to relevant Thought Machine core banking endpoints for seamless account lifecycle management.
   version: 11.0.0
 servers:
-- url: 'https://core-api.shine.staging.saas.tmachine.io'
+- url: 'https://core-api.partner-integrations-sandbox.thirsty-fish-dephub.tmachine.io'
 paths:
-   /CurrentAccount/Initiate:
+   /currentAccount/initiate:
     post:
       tags:
-          - CurrentAccountFacility
-      summary: InCR Initiate A new current account
-      description: InCR Initiate A new current account
-      operationId: Initiate
+          - Accounts
+      summary: InCR Initiate a current account for a customer
+      description: InCR Initiate a current account for a customer
+      operationId: InitiateCurrentAccount
       requestBody:
-        $ref: '#/components/requestBodies/InitiateCurrentAccountFacilityRequest'
+        $ref: '#/components/requestBodies/InitiateCurrentAccountRequest'
       responses:
         '200':
-          $ref: '#/components/responses/InitiateCurrentAccountFacilityResponse'
+          $ref: '#/components/responses/InitiateCurrentAccountResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -32,86 +32,130 @@ paths:
           $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
-    AccountType:
+    productInstanceReference:
       type: object
       properties:
-        AccountType:
+        currentAccountAgreement:
           type: string
           description: "\n"
           format: string
-        AccountTypeName:
-          $ref: '#/components/schemas/AccountTypeName'
-    AccountTypeName:
+    StatusReason:
       type: object
       properties:
-        Name:
+        Text:
           type: string
           description: "\n"
           format: string
-    AccountCurrency:
+    accountStatus:
       type: object
       properties:
-        AccountCurrencyType:
+        statusReason:
+          $ref: '#/components/schemas/StatusReason'
+    accountCurrency:
+      type: object
+      properties:
+        currencyCode:
           type: string
           description: "\n"
           format: string
-        CurrencyCode:
+    accountDetails:
+      type: object
+      properties:
+        customerReference:
           type: string
           description: "\n"
           format: string
-    CurrentAccountFaciity:
-          type: object
-          properties:
-            CustomerReference:
-              type: string
-              description: "\n"
-              format: string
-            BankBranchLocationReference:
-              type: string
-              description: "\n"
-              format: string
-            AccountType:
-              $ref: '#/components/schemas/AccountType'
-            AccountCurrency:
-              $ref: '#/components/schemas/AccountCurrency'
-            Associations:
-              type: string
-              description: "\n"
-              format: string
-            AssociationType:
-              type: string
-              description: "\n"
-              format: string
-            AssociationReference:
-              type: string
-              description: "\n"
-              format: string
-            AccountDetails:
-              type: string
-              description: "\n"
-              format: string
-            PositionLimits:
-              type: string
-              description: "\n"
-              format: string
-            PositionLimitSettings:
-              type: string
-              description: "\n"
-              format: string
-            DateType:
-              type: string
-              description: "\n"
-              format: string
-    InitiateCurrentAccountFacilityRequest:
+        accountReference:
+          type: string
+          description: "\n"
+          format: string
+        accountCurrency:
+          type: string
+          description: "\n"
+          format: string
+        productInstanceReference:
+          type: string
+          description: "\n"
+          format: string
+        accountOpenDate:
+          type: string
+          description: "\n"
+          format: string
+        accountStatus:
+          type: string
+          description: "\n"
+          format: string
+    productInstanceParameters:
       type: object
       properties:
-        CurrentAccountFaciity:
-          $ref: '#/components/schemas/CurrentAccountFaciity'
-    InitiateCurrentAccountFacilityResponse:
+        inactivity_fee_application_day:
+          type: string
+          description: "\n"
+          format: string
+        maintenance_fee_application_day:
+          type: string
+          description: "\n"
+          format: string
+        minimum_balance_fee_application_day:
+          type: string
+          description: "\n"
+          format: string
+        roundup_autosave_active:
+          type: string
+          description: "\n"
+          format: string
+        unarranged_overdraft_fee_application_day:
+          type: string
+          description: "\n"
+          format: string
+        interest_application_day:
+          type: string
+          description: "\n"
+          format: string
+    currentAccountFacility:
       type: object
       properties:
-        CurrentAccountFaciity:
-          $ref: '#/components/schemas/CurrentAccountFaciity'
+        customerReference:
+          type: string
+          description: "\n"
+          format: string
+        productInstanceReference:
+          $ref: '#/components/schemas/productInstanceReference'
+        accountCurrency:
+          $ref: '#/components/schemas/accountCurrency'
+        accountStatus:
+          $ref: '#/components/schemas/accountStatus'
+        accountOpenDate:
+          type: string
+          description: "\n"
+          format: string
+        productInstanceParameters:
+          $ref: '#/components/schemas/productInstanceParameters'
+    account:
+      type: object
+      properties:
+        customerReference:
+          type: string
+          description: "\n"
+          format: string
+        accountStatus:
+          type: string
+          description: "\n"
+          format: string
+        accountCloseDate:
+          type: string
+          description: "\n"
+          format: string
+    InitiateCurrentAccountRequest:
+      type: object
+      properties:
+        currentAccountFacility: 
+          $ref: '#/components/schemas/currentAccountFacility'
+    InitiateCurrentAccountResponse:
+      type: object
+      properties:
+        accountDetails: 
+          $ref: '#/components/schemas/accountDetails'
     HTTPError:
       type: object
       properties:
@@ -128,19 +172,19 @@ components:
           description: "\n"
           format: string
   requestBodies:
-    InitiateCurrentAccountFacilityRequest:
-      description: CurrentAccountFacilityInitiate
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/InitiateCurrentAccountFacilityRequest'
-  responses:
-    InitiateCurrentAccountFacilityResponse:
-        description: fetchAccountUser
+    InitiateCurrentAccountRequest:
+        description: createCurrentAccount
         content:
           application/json:
             schema:
-                $ref: '#/components/schemas/InitiateCurrentAccountFacilityResponse'
+                $ref: '#/components/schemas/InitiateCurrentAccountRequest'
+  responses:
+    InitiateCurrentAccountResponse:
+        description: createCurrentAccount
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiateCurrentAccountResponse'
     BadRequest:
       description: BadRequest
       content:
