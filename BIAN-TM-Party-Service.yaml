@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: BIAN-TM-Party-Service
-  description: This API provides endpoints for managing customer information, including creating, retrieving, updating customer records.
+  description: Manages customer (party) information such as personal details, identification, relationships, and stakeholder roles. This service corresponds to BIAN’s “Party” service domain and ensures consistent customer data across TM core and FinX APIs.
   version: 11.0.1
 servers:
 - url: 'https://core-api.shine.staging.saas.tmachine.io'
