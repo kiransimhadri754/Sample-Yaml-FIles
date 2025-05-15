@@ -131,21 +131,6 @@ components:
           format: string
         productInstanceParameters:
           $ref: '#/components/schemas/productInstanceParameters'
-    account:
-      type: object
-      properties:
-        customerReference:
-          type: string
-          description: "\n"
-          format: string
-        accountStatus:
-          type: string
-          description: "\n"
-          format: string
-        accountCloseDate:
-          type: string
-          description: "\n"
-          format: string
     InitiateCurrentAccountRequest:
       type: object
       properties:
