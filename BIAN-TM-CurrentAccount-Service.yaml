@@ -138,27 +138,27 @@ components:
     productInstanceParameters:
       type: object
       properties:
-        inactivity_fee_application_day:
+        inactivityFeeApplicationDay:
           type: string
           description: "\n"
           format: string
-        maintenance_fee_application_day:
+        maintenanceFeeApplicationDay:
           type: string
           description: "\n"
           format: string
-        minimum_balance_fee_application_day:
+        minimumBalanceFeeApplicationDay:
           type: string
           description: "\n"
           format: string
-        roundup_autosave_active:
+        roundupAutosaveActive:
           type: string
           description: "\n"
           format: string
-        unarranged_overdraft_fee_application_day:
+        unarrangedOverdraftFeeApplicationDay:
           type: string
           description: "\n"
           format: string
-        interest_application_day:
+        interestApplicationDay:
           type: string
           description: "\n"
           format: string
