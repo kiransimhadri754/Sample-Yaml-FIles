@@ -160,7 +160,7 @@ components:
               type: string
               description: "\n"
               format: string
-            transactionDateType:
+            transactionDateTime:
               type: string
               description: "\n"
               format: string
@@ -185,7 +185,7 @@ components:
               type: string
               description: "\n"
               format: string
-            transactionDateType:
+            transactionDateTime:
               type: string
               description: "\n"
               format: string
@@ -260,7 +260,7 @@ components:
               type: string
               description: "\n"
               format: string
-            transactionDateType:
+            transactionDateTime:
               type: string
               description: "\n"
               format: string
