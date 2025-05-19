@@ -78,7 +78,7 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
-  '/{transactionReference}/transactionsDetails/Retrieve':
+  '/transactionsDetails/Retrieve':
     get:
       tags:
         - Transactions
@@ -102,7 +102,7 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
-  '/{currentAccountid}/transactions/Retrieve':
+  '/transactions/Retrieve':
     get:
       tags:
         - Transactions
@@ -370,15 +370,13 @@ components:
   parameters:
     currentAccountid:
       name: currentAccountid
-      in: path
+      in: query
       required: true
-      style: simple
       schema:
         type: string
     transactionReference:
       name: transactionReference
-      in: path
+      in: query
       required: true
-      style: simple
       schema:
         type: string
