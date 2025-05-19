@@ -111,6 +111,7 @@ paths:
       operationId: RetrieveAllTransactions
       parameters:
         - $ref: '#/components/parameters/currentAccountid'
+        - $ref: '#/components/parameters/pageSize'
       responses:
         '200':
           $ref: '#/components/responses/RetrieveTransactionsResponse'
@@ -370,6 +371,12 @@ components:
   parameters:
     currentAccountid:
       name: currentAccountid
+      in: query
+      required: true
+      schema:
+        type: string
+    pageSize:
+      name: page_size
       in: query
       required: true
       schema:
