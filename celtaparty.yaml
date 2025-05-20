@@ -166,7 +166,7 @@ components:
                 format: string
           party:
             $ref: '#/components/schemas/party'
-    `SearchRequest:  
+    InitiateSearchRequest:  
       type: object
       properties:
         partyStatuses:
