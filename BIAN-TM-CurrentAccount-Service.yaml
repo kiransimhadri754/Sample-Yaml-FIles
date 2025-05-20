@@ -222,6 +222,10 @@ components:
           type: string
           description: "\n"
           format: string
+        accountType:
+          type: string
+          description: "\n"
+          format: string
         accountStatus:
           type: string
           description: "\n"
