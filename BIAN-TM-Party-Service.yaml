@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
-  title: BIAN-TM-Party-Service
-  description: Manages customer (party) information such as personal details, identification, relationships, and stakeholder roles. This service corresponds to BIAN’s “Party” service domain and ensures consistent customer data across TM core and FinX APIs.
+  title: FinXCeltaTmPartyService
+  description: This API provides endpoints for managing customer information, including creating, retrieving, updating customer records.
   version: 11.0.1
 servers:
 - url: 'https://core-api.shine.staging.saas.tmachine.io'
@@ -18,6 +18,30 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/InitiatePartyResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+   /Party/Search:
+    post:
+      tags:
+          - Party Facility
+      summary: Search for a party
+      description: Search for a party
+      operationId: SearchParty
+      requestBody:
+        $ref: '#/components/requestBodies/InitiateSearchRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/IntiateSearchResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -128,6 +152,51 @@ components:
               type: string
               description: "\n"
               format: string
+    Parties:  
+      type: array
+      items:
+        properties:
+          partyReference:
+                type: string
+                description: "\n"
+                format: string
+          status:
+                type: string
+                description: "\n"
+                format: string
+          party:
+            $ref: '#/components/schemas/party'
+    IntiateSearchRequest:  
+      type: object
+      properties:
+        partyStatuses:
+          type: array
+          items:
+            type: string
+            format: string
+        partyName:
+          type: array
+          items:
+            type: string
+            format: string
+        mobilePhoneNumbers:
+          type: array
+          items:
+            type: string
+            format: string
+        emailAddressDescription:
+          type: array
+          items:
+            type: string
+            format: string
+        page_size:
+                type: string
+                description: "\n"
+                format: string
+        page_token:
+                type: string
+                description: "\n"
+                format: string
     InitiatePartyRequest:
       type: object
       properties:
@@ -146,6 +215,19 @@ components:
               format: string
         party:
           $ref: '#/components/schemas/party'
+    IntiateSearchResponse:
+      type: object
+      properties:
+        parties:
+          $ref: '#/components/schemas/Parties'
+        nextPageToken:
+              type: string
+              description: "\n"
+              format: string
+        previousPageToken:
+              type: string
+              description: "\n"
+              format: string
     HTTPError:
       type: object
       properties:
@@ -168,6 +250,12 @@ components:
           application/json:
             schema:
                 $ref: '#/components/schemas/InitiatePartyRequest'
+    InitiateSearchRequest:
+        description: Search for a party
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/IntiateSearchRequest'
   responses:
     InitiatePartyResponse:
         description: PartyFacility 
@@ -175,6 +263,12 @@ components:
           application/json:
             schema:
                 $ref: '#/components/schemas/InitiatePartyResponse'
+    IntiateSearchResponse:
+        description: PartyFacility 
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/IntiateSearchResponse'  
     BadRequest:
       description: BadRequest
       content:
