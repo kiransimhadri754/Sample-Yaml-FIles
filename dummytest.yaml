@@ -128,8 +128,178 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
+   /fundTransfer/Initiate:
+    post:
+      tags:
+        - Transactions
+      summary: InBQ Initiate transfer transaction
+      description: InBQ Initiate transfer transaction
+      operationId: InitiateFundTransfer
+      requestBody:
+        $ref: '#/components/requestBodies/InitiateTransferRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiateDepositsandWithdrawalsResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+   /transactionsDetails/Retrieve:
+    get:
+      tags:
+        - Transactions
+      summary: ReBQ Retrieve details about all transactions
+      description: ReBQ Retrieve details about all transactions
+      operationId: RetrieveTransactionDetails
+      parameters:
+        - $ref: '#/components/parameters/transactionReference'
+      responses:
+        '200':
+          $ref: '#/components/responses/RetrieveTransactionDetailsResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+   /transactions/Retrieve:
+    get:
+      tags:
+        - Transactions
+      summary: ReBQ Retrieve details about all transactions
+      description: ReBQ Retrieve details about all transactions
+      operationId: RetrieveAllTransactions
+      parameters:
+        - $ref: '#/components/parameters/currentAccountid'
+        - $ref: '#/components/parameters/pageSize'
+      responses:
+        '200':
+          $ref: '#/components/responses/RetrieveTransactionsResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
+    transactionDetails:
+          type: object
+          properties:
+            transactionReference:
+              description: "\n"
+              format: string
+              type: string
+            transactionAmount:
+              $ref: '#/components/schemas/transactionAmount'
+            transactionType:
+              type: string
+              description: "\n"
+              format: string
+            transactionDescription:
+              type: string
+              description: "\n"
+              format: string
+            transactionDateTime:
+              type: string
+              description: "\n"
+              format: string
+            transactionStatus:
+              type: string
+              description: "\n"
+              format: string
+    RetrieveTransactionDetailsResponse:
+      type: object
+      properties:
+        transactionDetails:
+          $ref: '#/components/schemas/transactionDetails'
+    InitiateTransferRequest:
+      type: object
+      properties:
+            occurrenceFromAccountId:
+              type: string
+              description: "\n"
+              format: string
+            occurrenceToAccountId:
+              type: string
+              description: "\n"
+              format: string
+            transactionAmount:
+              $ref: '#/components/schemas/transactionAmount'
+            transactionType:
+              type: string
+              description: "\n"
+              format: string
+            transactionDescription:
+              type: string
+              description: "\n"
+              format: string
+            transactionDateTime:
+              type: string
+              description: "\n"
+              format: string
+            accountLimitBreachResponse:
+              type: string
+              description: "\n"
+              format: string
+    transactions:
+      type: array
+      items:
+        type: object
+        properties:
+          transactionReference:
+                type: string
+                description: "\n"
+                format: string
+          transactionType:
+                type: string
+                description: "\n"
+                format: string
+          accountLimitBreachResponse:
+                type: string
+                description: "\n"
+                format: string
+          transactionDescription:
+                type: string
+                description: "\n"
+                format: string
+          transactionAmount:
+                type: string
+                description: "\n"
+                format: string
+          transactionDate:
+                type: string
+                description: "\n"
+                format: string
+          transactionStatus:
+                type: string
+                description: "\n"
+                format: string
+    RetrieveTransactionsResponse:
+      type: object
+      properties:
+        transactions:
+          $ref: '#/components/schemas/transactions'
     InitiateWithdrawalRequest:
       type: object
       properties:
@@ -376,6 +546,24 @@ components:
       required: true
       schema:
         type: string
+    currentAccountid:
+      name: currentAccountid
+      in: query
+      required: true
+      schema:
+        type: string
+    pageSize:
+      name: page_size
+      in: query
+      required: true
+      schema:
+        type: string
+    transactionReference:
+      name: transactionReference
+      in: query
+      required: true
+      schema:
+        type: string
   requestBodies:
     InitiateCurrentAccountRequest:
         description: createCurrentAccount
@@ -401,7 +589,25 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/InitiateWithdrawalRequest'
+    InitiateTransferRequest:
+      description: InitiateDeposit
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InitiateTransferRequest'
   responses:
+    RetrieveTransactionDetailsResponse:
+      description: allTransactions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RetrieveTransactionDetailsResponse'
+    RetrieveTransactionsResponse:
+      description: allTransactions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RetrieveTransactionsResponse'
     InitiateDepositsandWithdrawalsResponse:
       description: allTransactions
       content:
