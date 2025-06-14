@@ -1,0 +1,737 @@
+openapi: 3.0.1
+info:
+  title: BIAN-TM-CurrentAccount-Service
+  description: Handles all operations related to current accounts, including account creation, status updates. This service maps BIAN’s “Current Account” service domain to relevant Thought Machine core banking endpoints for seamless account lifecycle management.
+  version: 11.0.0
+servers:
+- url: 'https://core-api.partner-integrations-sandbox.thirsty-fish-dephub.tmachine.io'
+paths:
+   /currentAccount/initiate:
+    post:
+      tags:
+          - Accounts
+      summary: InCR Initiate a current account for a customer
+      description: InCR Initiate a current account for a customer
+      operationId: InitiateCurrentAccount
+      requestBody:
+        $ref: '#/components/requestBodies/InitiateCurrentAccountRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiateCurrentAccountResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+   /currentAccount/{accountReference}/Retrieve:
+      get:
+        tags:
+            - Accounts
+        summary: InCR Initiate a current account for a customer
+        description: InCR Initiate a current account for a customer
+        operationId: RetrieveCurrentAccountDetails
+        parameters:
+          - $ref: '#/components/parameters/accountReference'
+        responses:
+          '200':
+            $ref: '#/components/responses/RetrieveCurrentAccountResponse'
+          '400':
+            $ref: '#/components/responses/BadRequest'
+          '401':
+            $ref: '#/components/responses/Unauthorized'
+          '403':
+            $ref: '#/components/responses/Forbidden'
+          '404':
+            $ref: '#/components/responses/NotFound'
+          '429':
+            $ref: '#/components/responses/TooManyRequests'
+          '500':
+            $ref: '#/components/responses/InternalServerError'
+   /currentAccount/{accountReference}/Update:
+      put:
+        tags:
+            - Accounts
+        summary: InCR Initiate a current account for a customer
+        description: InCR Initiate a current account for a customer
+        operationId: UpdateCurrentAccount
+        parameters:
+          - $ref: '#/components/parameters/accountReference'
+        requestBody:
+          $ref: '#/components/requestBodies/UpdateCurrentAccountRequest'
+        responses:
+          '200':
+            $ref: '#/components/responses/UpdateCurrentAccountResponse'
+          '400':
+            $ref: '#/components/responses/BadRequest'
+          '401':
+            $ref: '#/components/responses/Unauthorized'
+          '403':
+            $ref: '#/components/responses/Forbidden'
+          '404':
+            $ref: '#/components/responses/NotFound'
+          '429':
+            $ref: '#/components/responses/TooManyRequests'
+          '500':
+            $ref: '#/components/responses/InternalServerError'
+   /deposits/Initiate:
+    post:
+      tags:
+        - Transactions
+      summary: InBQ Initiate deposit transaction
+      description: InBQ Initiate deposit transaction
+      operationId: InitiateDeposits
+      requestBody:
+        $ref: '#/components/requestBodies/InitiateDepositRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiateDepositsandWithdrawalsResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+   /withdrawal/Initiate:
+    post:
+      tags:
+        - Transactions
+      summary: InBQ Initiate withdrawal transaction
+      description: InBQ Initiate withdrawal transaction
+      operationId: InitiateWithdrawals
+      requestBody:
+        $ref: '#/components/requestBodies/InitiateWithdrawalRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiateDepositsandWithdrawalsResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+   /fundTransfer/Initiate:
+    post:
+      tags:
+        - Transactions
+      summary: InBQ Initiate transfer transaction
+      description: InBQ Initiate transfer transaction
+      operationId: InitiateFundTransfer
+      requestBody:
+        $ref: '#/components/requestBodies/InitiateTransferRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiateDepositsandWithdrawalsResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+   /accountBalance/Retrieve:
+    get:
+      tags:
+        - Transactions
+      summary: ReBQ Retrieve details about all transactions
+      description: ReBQ Retrieve details about all transactions
+      operationId: RetrieveAccountBalance
+      parameters:
+        - $ref: '#/components/parameters/currentaccountReference'
+      responses:
+        '200':
+          $ref: '#/components/responses/RetrieveAccountBalanceResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+   /transactionsDetails/Retrieve:
+    get:
+      tags:
+        - Transactions
+      summary: ReBQ Retrieve details about all transactions
+      description: ReBQ Retrieve details about all transactions
+      operationId: RetrieveTransactionDetails
+      parameters:
+        - $ref: '#/components/parameters/transactionReference'
+      responses:
+        '200':
+          $ref: '#/components/responses/RetrieveTransactionDetailsResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+   /transactions/Retrieve:
+    get:
+      tags:
+        - Transactions
+      summary: ReBQ Retrieve details about all transactions
+      description: ReBQ Retrieve details about all transactions
+      operationId: RetrieveAllTransactions
+      parameters:
+        - $ref: '#/components/parameters/currentaccountReference'
+        - $ref: '#/components/parameters/pageSize'
+      responses:
+        '200':
+          $ref: '#/components/responses/RetrieveTransactionsResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  schemas:
+    transactionDetails:
+          type: object
+          properties:
+            transactionReference:
+              description: "\n"
+              format: string
+              type: string
+            transactionAmount:
+              $ref: '#/components/schemas/transactionAmount'
+            transactionType:
+              type: string
+              description: "\n"
+              format: string
+            transactionDescription:
+              type: string
+              description: "\n"
+              format: string
+            transactionDateTime:
+              type: string
+              description: "\n"
+              format: string
+            transactionStatus:
+              type: string
+              description: "\n"
+              format: string
+    RetrieveTransactionDetailsResponse:
+      type: object
+      properties:
+        transactionDetails:
+          $ref: '#/components/schemas/transactionDetails'
+    balanceAmount:
+      type: object
+      properties:
+            amount:
+              type: string
+              description: "\n"
+              format: string
+            currency:
+              type: string
+              description: "\n"
+              format: string
+    balanceDetails:
+      type: object
+      properties:
+            balanceType:
+              type: string
+              description: "\n"
+              format: string
+            balanceAmount:
+              $ref: '#/components/schemas/balanceAmount'
+    RetrieveAccountBalanceResponse:
+      type: object
+      properties:
+            accountReference:
+              description: "\n"
+              format: string
+              type: string
+            accountType:
+              type: string
+              description: "\n"
+              format: string
+            accountCurrency:
+              type: string
+              description: "\n"
+              format: string
+            balanceDetails:
+              $ref: '#/components/schemas/balanceDetails'
+    InitiateTransferRequest:
+      type: object
+      properties:
+            occurrenceFromaccountReference:
+              type: string
+              description: "\n"
+              format: string
+            occurrenceToaccountReference:
+              type: string
+              description: "\n"
+              format: string
+            transactionAmount:
+              $ref: '#/components/schemas/transactionAmount'
+            transactionType:
+              type: string
+              description: "\n"
+              format: string
+            transactionDescription:
+              type: string
+              description: "\n"
+              format: string
+            transactionDateTime:
+              type: string
+              description: "\n"
+              format: string
+            accountLimitBreachResponse:
+              type: string
+              description: "\n"
+              format: string
+    transactions:
+      type: array
+      items:
+        type: object
+        properties:
+          transactionReference:
+                type: string
+                description: "\n"
+                format: string
+          transactionType:
+                type: string
+                description: "\n"
+                format: string
+          accountLimitBreachResponse:
+                type: string
+                description: "\n"
+                format: string
+          transactionDescription:
+                type: string
+                description: "\n"
+                format: string
+          transactionAmount:
+                type: string
+                description: "\n"
+                format: string
+          transactionDate:
+                type: string
+                description: "\n"
+                format: string
+          transactionStatus:
+                type: string
+                description: "\n"
+                format: string
+    RetrieveTransactionsResponse:
+      type: object
+      properties:
+        transactions:
+          $ref: '#/components/schemas/transactions'
+    InitiateWithdrawalRequest:
+      type: object
+      properties:
+        DepositsandWithdrawals:
+          $ref: '#/components/schemas/DepositsandWithdrawals'
+    transactionAmount:
+      type: object
+      properties:
+            value:
+              type: string
+              description: "\n"
+              format: string
+            currencyCode:
+              type: string
+              description: "\n"
+              format: string
+    DepositsandWithdrawals:
+          type: object
+          properties:
+            accountReference:
+              description: "\n"
+              format: string
+              type: integer
+            accountType:
+              type: string
+              description: "\n"
+              format: string
+            transactionAmount:
+              $ref: '#/components/schemas/transactionAmount'
+            transactionType:
+              type: string
+              description: "\n"
+              format: string
+            transactionDescription:
+              type: string
+              description: "\n"
+              format: string
+            transactionDateTime:
+              type: string
+              description: "\n"
+              format: string
+            accountLimitBreachResponse:
+              type: string
+              description: "\n"
+              format: string
+    InitiateDepositRequest:
+      type: object
+      properties:
+        DepositsandWithdrawals:
+          $ref: '#/components/schemas/DepositsandWithdrawals'
+    InitiateDepositsandWithdrawalsResponse:
+      type: object
+      properties:
+            transactionReference:
+              type: string
+              description: "\n"
+              format: string
+    productInstanceReference:
+      type: object
+      properties:
+        currentAccountAgreement:
+          type: string
+          description: "\n"
+          format: string
+    StatusReason:
+      type: object
+      properties:
+        Text:
+          type: string
+          description: "\n"
+          format: string
+    accountStatus:
+      type: object
+      properties:
+        statusReason:
+          $ref: '#/components/schemas/StatusReason'
+    accountCurrency:
+      type: object
+      properties:
+        currencyCode:
+          type: string
+          description: "\n"
+          format: string
+    accountDetails:
+      type: object
+      properties:
+        customerReference:
+          type: string
+          description: "\n"
+          format: string
+        accountReference:
+          type: string
+          description: "\n"
+          format: string
+        accountCurrency:
+          type: string
+          description: "\n"
+          format: string
+        productInstanceReference:
+          type: string
+          description: "\n"
+          format: string
+        accountOpenDate:
+          type: string
+          description: "\n"
+          format: string
+        accountStatus:
+          type: string
+          description: "\n"
+          format: string
+    productInstanceParameters:
+      type: object
+      properties:
+        inactivityFeeApplicationDay:
+          type: string
+          description: "\n"
+          format: string
+        maintenanceFeeApplicationDay:
+          type: string
+          description: "\n"
+          format: string
+        minimumBalanceFeeApplicationDay:
+          type: string
+          description: "\n"
+          format: string
+        roundupAutosaveActive:
+          type: string
+          description: "\n"
+          format: string
+        unarrangedOverdraftFeeApplicationDay:
+          type: string
+          description: "\n"
+          format: string
+        interestApplicationDay:
+          type: string
+          description: "\n"
+          format: string
+    currentAccountFacility:
+      type: object
+      properties:
+        customerReference:
+          type: string
+          description: "\n"
+          format: string
+        productInstanceReference:
+          $ref: '#/components/schemas/productInstanceReference'
+        accountCurrency:
+          $ref: '#/components/schemas/accountCurrency'
+        accountStatus:
+          $ref: '#/components/schemas/accountStatus'
+        accountOpenDate:
+          type: string
+          description: "\n"
+          format: string
+        productInstanceParameters:
+          $ref: '#/components/schemas/productInstanceParameters'
+    account:
+      type: object
+      properties:
+        customerReference:
+          type: string
+          description: "\n"
+          format: string
+        accountStatus:
+          type: string
+          description: "\n"
+          format: string
+        accountCloseDate:
+          type: string
+          description: "\n"
+          format: string
+    InitiateCurrentAccountRequest:
+      type: object
+      properties:
+        currentAccountFacility: 
+          $ref: '#/components/schemas/currentAccountFacility'
+    InitiateCurrentAccountResponse:
+      type: object
+      properties:
+        accountDetails: 
+          $ref: '#/components/schemas/accountDetails'
+    UpdateCurrentAccountRequest:
+      type: object
+      properties:
+        account: 
+          $ref: '#/components/schemas/account'
+    UpdateCurrentAccountResponse:
+      type: object
+      properties:
+        customerReference:
+          type: string
+          description: "\n"
+          format: string
+        accountReference:
+          type: string
+          description: "\n"
+          format: string
+        accountType:
+          type: string
+          description: "\n"
+          format: string
+        accountStatus:
+          type: string
+          description: "\n"
+          format: string
+        accountOpenDate:
+          type: string
+          description: "\n"
+          format: string
+        accountCloseDate:
+          type: string
+          description: "\n"
+          format: string
+    RetrieveCurrentAccountResponse:
+      type: object
+      properties:
+        accountDetails: 
+          $ref: '#/components/schemas/accountDetails'
+    HTTPError:
+      type: object
+      properties:
+        status_code:
+          type: string
+          description: "\n"
+          format: string
+        status:
+          type: string
+          description: "\n"
+          format: string
+        message:
+          type: string
+          description: "\n"
+          format: string
+  parameters:
+    partyReference:
+      name: partyReference
+      in: path
+      required: true
+      schema:
+        type: string
+    accountReference:
+      name: accountReference
+      in: path
+      required: true
+      schema:
+        type: string
+    currentaccountReference:
+      name: currentaccountReference
+      in: query
+      required: true
+      schema:
+        type: string
+    pageSize:
+      name: page_size
+      in: query
+      required: true
+      schema:
+        type: string
+    transactionReference:
+      name: transactionReference
+      in: query
+      required: true
+      schema:
+        type: string
+  requestBodies:
+    InitiateCurrentAccountRequest:
+        description: createCurrentAccount
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiateCurrentAccountRequest'
+    UpdateCurrentAccountRequest:
+        description: createCurrentAccount
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/UpdateCurrentAccountRequest'
+    InitiateDepositRequest:
+      description: InitiateDeposit
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InitiateDepositRequest'
+    InitiateWithdrawalRequest:
+      description: InitiateWithdrawal
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InitiateWithdrawalRequest'
+    InitiateTransferRequest:
+      description: InitiateDeposit
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InitiateTransferRequest'
+  responses:
+    RetrieveAccountBalanceResponse:
+      description: Account Balance
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RetrieveAccountBalanceResponse'
+    RetrieveTransactionDetailsResponse:
+      description: allTransactions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RetrieveTransactionDetailsResponse'
+    RetrieveTransactionsResponse:
+      description: allTransactions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RetrieveTransactionsResponse'
+    InitiateDepositsandWithdrawalsResponse:
+      description: allTransactions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InitiateDepositsandWithdrawalsResponse'
+    InitiateCurrentAccountResponse:
+        description: createCurrentAccount
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiateCurrentAccountResponse'
+    RetrieveCurrentAccountResponse:
+        description: createCurrentAccount
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/RetrieveCurrentAccountResponse'
+    UpdateCurrentAccountResponse:
+        description: createCurrentAccount
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/UpdateCurrentAccountResponse'
+    BadRequest:
+      description: BadRequest
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    NotFound:
+      description: NotFound
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    TooManyRequests:
+      description: TooManyRequests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    InternalServerError:
+      description: InternalServerError
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
