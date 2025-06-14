@@ -152,6 +152,30 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
         '500':
           $ref: '#/components/responses/InternalServerError'
+   /accountBalance/Retrieve:
+    get:
+      tags:
+        - Transactions
+      summary: ReBQ Retrieve details about all transactions
+      description: ReBQ Retrieve details about all transactions
+      operationId: RetrieveAccountBalance
+      parameters:
+        - $ref: '#/components/parameters/currentaccountReference'
+      responses:
+        '200':
+          $ref: '#/components/responses/RetrieveAccountBalanceResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
    /transactionsDetails/Retrieve:
     get:
       tags:
@@ -184,7 +208,7 @@ paths:
       description: ReBQ Retrieve details about all transactions
       operationId: RetrieveAllTransactions
       parameters:
-        - $ref: '#/components/parameters/currentAccountid'
+        - $ref: '#/components/parameters/currentaccountReference'
         - $ref: '#/components/parameters/pageSize'
       responses:
         '200':
@@ -233,14 +257,51 @@ components:
       properties:
         transactionDetails:
           $ref: '#/components/schemas/transactionDetails'
-    InitiateTransferRequest:
+    balanceAmount:
       type: object
       properties:
-            occurrenceFromAccountId:
+            amount:
               type: string
               description: "\n"
               format: string
-            occurrenceToAccountId:
+            currency:
+              type: string
+              description: "\n"
+              format: string
+    balanceDetails:
+      type: object
+      properties:
+            balanceType:
+              type: string
+              description: "\n"
+              format: string
+            balanceAmount:
+              $ref: '#/components/schemas/balanceAmount'
+    RetrieveAccountBalanceResponse:
+      type: object
+      properties:
+            accountReference:
+              description: "\n"
+              format: string
+              type: string
+            accountType:
+              type: string
+              description: "\n"
+              format: string
+            accountCurrency:
+              type: string
+              description: "\n"
+              format: string
+            balanceDetails:
+              $ref: '#/components/schemas/balanceDetails'
+    InitiateTransferRequest:
+      type: object
+      properties:
+            occurrenceFromaccountReference:
+              type: string
+              description: "\n"
+              format: string
+            occurrenceToaccountReference:
               type: string
               description: "\n"
               format: string
@@ -319,7 +380,7 @@ components:
     DepositsandWithdrawals:
           type: object
           properties:
-            accountId:
+            accountReference:
               description: "\n"
               format: string
               type: integer
@@ -546,8 +607,8 @@ components:
       required: true
       schema:
         type: string
-    currentAccountid:
-      name: currentAccountid
+    currentaccountReference:
+      name: currentaccountReference
       in: query
       required: true
       schema:
@@ -596,6 +657,12 @@ components:
           schema:
             $ref: '#/components/schemas/InitiateTransferRequest'
   responses:
+    RetrieveAccountBalanceResponse:
+      description: Account Balance
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RetrieveAccountBalanceResponse'
     RetrieveTransactionDetailsResponse:
       description: allTransactions
       content:
