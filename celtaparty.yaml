@@ -91,18 +91,10 @@ components:
               format: string
     HomePhoneType:
           type: object
-          properties:
-            homePhoneNumber:
-              type: string
-              description: "\n"
-              format: string
+          properties: {}
     BusinessPhoneType:
           type: object
-          properties:
-            businessPhoneNumber:
-              type: string
-              description: "\n"
-              format: string
+          properties: {}
     party:
           type: object
           properties:
