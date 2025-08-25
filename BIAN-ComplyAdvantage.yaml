@@ -1,0 +1,366 @@
+openapi: 3.0.1
+info:
+  title: BIAN-Comply Advantage
+  description: APIs for managing transfer and individual compliance checks by integrating BIAN service domains core banking endpoints.
+  version: 11.0.0
+servers:
+- url: 'https://api-dev.fincuro.com'
+paths:
+   /scan/individual/initiate:
+    post:
+      tags:
+          - ComplyAdvantage - Scan Individual
+      summary: InCR Initiate scan a new individual
+      description: InCR Initiate scan a new individual
+      operationId: InitiateIndividual
+      requestBody:
+        $ref: '#/components/requestBodies/InitiateIndividualRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiateIndividualResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  schemas:
+    customer_creation_step_output:
+      type: object
+      properties:
+        customer_identifier:
+          type: string
+          description: "\n"
+          format: string
+        external_identifier:
+          type: string
+          description: "\n"
+          format: string
+    customerCreation:
+      type: object
+      properties:
+        status:
+          type: string
+          description: "\n"
+          format: string
+        identifier:
+          type: string
+          description: "\n"
+          format: string
+        step_output:
+          $ref: '#/components/schemas/customer_creation_step_output'
+    initial_risk_scoring_step_output:
+      type: object
+      properties:
+        overall_value:
+          type: string
+          description: "\n"
+          format: string
+        overall_level:
+          type: string
+          description: "\n"
+          format: string
+    initialRiskScoring:
+        type: object
+        properties:
+            status:
+              type: string
+              description: "\n"
+              format: string
+            identifier:
+              type: string
+              description: "\n"
+              format: string
+            step_output:
+              $ref: '#/components/schemas/initial_risk_scoring_step_output'
+    customer_screening_step_output:
+        type: object
+        properties:
+          screening_result:
+            type: string
+            description: "\n"
+            format: string
+    customerScreening:
+              type: object
+              properties:
+                status:
+                    type: string
+                    description: "\n"
+                    format: string
+                identifier:
+                    type: string
+                    description: "\n"
+                    format: string
+                step_output:
+                    $ref: '#/components/schemas/customer_screening_step_output'
+    alerts:
+        type: array
+        items:
+          type: object
+          properties:
+            identifier:
+              type: string
+              description: "\n"
+              format: string
+    alerting_step_output:
+        type: object
+        properties:
+          alerts:
+              $ref: '#/components/schemas/alerts'
+    alerting:
+        type: object
+        properties:
+          status:
+            type: string
+            description: "\n"
+            format: string
+          identifier:
+            type: string
+            description: "\n"
+            format: string
+          step_output:
+            $ref: '#/components/schemas/alerting_step_output'
+    case_creation_step_output:
+        type: object
+        properties:
+          case_identifier:
+            type: string
+            description: "\n"
+            format: string
+    caseCreation:
+        type: object
+        properties:
+          status:
+            type: string
+            description: "\n"
+            format: string
+          identifier:
+            type: string
+            description: "\n"
+            format: string
+          step_output:
+            $ref: '#/components/schemas/case_creation_step_output'
+    step_details:
+        type: object
+        properties:
+          customer-creation:
+             $ref: '#/components/schemas/customerCreation'
+          initial-risk-scoring:
+             $ref: '#/components/schemas/initialRiskScoring'
+          customer-screening:
+             $ref: '#/components/schemas/customerScreening'
+          alerting:
+             $ref: '#/components/schemas/alerting'
+          case-creation:
+             $ref: '#/components/schemas/caseCreation'
+    InitiateIndividualRequest:
+          type: object
+          properties:
+            individualId:
+              type: string
+              description: "\n"
+              format: string
+            firstName:
+              type: string
+              description: "\n"
+              format: string
+            middleName:
+              type: string
+              description: "\n"
+              format: string
+            lastName:
+              type: string
+              description: "\n"
+              format: string
+            gender:
+              type: string
+              description: "\n"
+              format: string
+            birthdate:
+              type: string
+              description: "\n"
+              format: string
+            nationality:
+              type: string
+              description: "\n"
+              format: string
+            emailAddress:
+              type: string
+              description: "\n"
+              format: string
+            countryCode:
+              type: string
+              description: "\n"
+              format: string
+            mobilephone:
+              type: string
+              description: "\n"
+              format: string
+            taxResidency:
+              type: string
+              description: "\n"
+              format: string
+            copyAddress:
+              type: string
+              description: "\n"
+              format: string
+            address1TypeCode:
+              type: string
+              description: "\n"
+              format: string
+            address1Line1:
+              type: string
+              description: "\n"
+              format: string
+            address1City:
+              type: string
+              description: "\n"
+              format: string
+            address1PostalCode:
+              type: string
+              description: "\n"
+              format: string
+            address1Country:
+              type: string
+              description: "\n"
+              format: string
+            address1Line2:
+              type: string
+              description: "\n"
+              format: string
+            address1StateOrProvince:
+              type: string
+              description: "\n"
+              format: string
+            address1Status:
+              type: string
+              description: "\n"
+              format: string
+            address2TypeCode:
+              type: string
+              description: "\n"
+              format: string
+            address2Line1:
+              type: string
+              description: "\n"
+              format: string
+            address2City:
+              type: string
+              description: "\n"
+              format: string
+            address2PostalCode:
+              type: string
+              description: "\n"
+              format: string
+            address2Country:
+              type: string
+              description: "\n"
+              format: string
+            address2Line2:
+              type: string
+              description: "\n"
+              format: string
+            address2StateOrProvince:
+              type: string
+              description: "\n"
+              format: string
+            address2Status:
+              type: string
+              description: "\n"
+              format: string
+    InitiateIndividualResponse:
+                type: object
+                properties:
+                  workflow_instance_identifier:
+                    type: string
+                    description: "\n"
+                    format: string
+                  workflow_type:
+                    type: string
+                    description: "\n"
+                    format: string
+                  status:
+                    type: string
+                    description: "\n"
+                    format: string
+                  step_details:
+                    $ref: '#/components/schemas/step_details'
+    HTTPError:
+      type: object
+      properties:
+        status_code:
+          type: string
+          description: "\n"
+          format: string
+        status:
+          type: string
+          description: "\n"
+          format: string
+        message:
+          type: string
+          description: "\n"
+          format: string
+  parameters:
+    partyReference:
+      name: partyReference
+      in: path
+      required: true
+      schema:
+        type: string
+  requestBodies:
+    InitiateIndividualRequest:
+        description: Initiate scan a new individual
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiateIndividualRequest'
+  responses:
+    InitiateIndividualResponse:
+        description: Initiate scan a new individual
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiateIndividualResponse'
+    BadRequest:
+      description: BadRequest
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    NotFound:
+      description: NotFound
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    TooManyRequests:
+      description: TooManyRequests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    InternalServerError:
+      description: InternalServerError
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'

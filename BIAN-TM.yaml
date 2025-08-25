@@ -1,0 +1,149 @@
+openapi: 3.0.1
+info:
+  title: BIAN-Thought Machine
+  description: APIs for managing transfer by integrating BIAN service domains core banking endpoints.
+  version: 11.0.0
+servers:
+- url: 'https://api-dev.fincuro.com'
+paths:
+   /fundTransfer/initiate:
+    post:
+      tags:
+        - Fund Transfer
+      summary: InBQ Initiate transfer transaction
+      description: InBQ Initiate transfer transaction
+      operationId: InitiateFundTransfer
+      requestBody:
+        $ref: '#/components/requestBodies/InitiateTransferRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiateDepositsandWithdrawalsResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  schemas:
+    InitiateTransferRequest:
+      type: object
+      properties:
+            occurrenceFromaccountReference:
+              type: string
+              description: "\n"
+              format: string
+            occurrenceToaccountReference:
+              type: string
+              description: "\n"
+              format: string
+            transactionAmount:
+              $ref: '#/components/schemas/transactionAmount'
+            transactionType:
+              type: string
+              description: "\n"
+              format: string
+            transactionDescription:
+              type: string
+              description: "\n"
+              format: string
+            accountLimitBreachResponse:
+              type: string
+              description: "\n"
+              format: string
+    transactionAmount:
+      type: object
+      properties:
+            value:
+              type: string
+              description: "\n"
+              format: string
+            currencyCode:
+              type: string
+              description: "\n"
+              format: string
+    InitiateDepositsandWithdrawalsResponse:
+      type: object
+      properties:
+            transactionReference:
+              type: string
+              description: "\n"
+              format: string
+    HTTPError:
+      type: object
+      properties:
+        status_code:
+          type: string
+          description: "\n"
+          format: string
+        status:
+          type: string
+          description: "\n"
+          format: string
+        message:
+          type: string
+          description: "\n"
+          format: string
+  parameters:
+    partyReference:
+      name: partyReference
+      in: path
+      required: true
+      schema:
+        type: string
+  requestBodies:
+    InitiateTransferRequest:
+      description: InitiateDeposit
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InitiateTransferRequest'
+  responses:
+    InitiateDepositsandWithdrawalsResponse:
+      description: allTransactions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InitiateDepositsandWithdrawalsResponse'
+    BadRequest:
+      description: BadRequest
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    NotFound:
+      description: NotFound
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    TooManyRequests:
+      description: TooManyRequests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    InternalServerError:
+      description: InternalServerError
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
