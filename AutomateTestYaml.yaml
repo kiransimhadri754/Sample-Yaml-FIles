@@ -1,0 +1,324 @@
+openapi: 3.0.1
+info:
+  title: BIAN-TM-CurrentAccount-Service
+  description: Handles all operations related to current accounts, including account creation, status updates. This service maps BIAN’s “Current Account” service domain to relevant Thought Machine core banking endpoints for seamless account lifecycle management.
+  version: 11.0.0
+servers:
+- url: 'https://core-api.partner-integrations-sandbox.thirsty-fish-dephub.tmachine.io'
+paths:
+   /currentAccount/initiate:
+    post:
+      tags:
+          - Accounts
+      summary: InCR Initiate a current account for a customer
+      description: InCR Initiate a current account for a customer
+      operationId: InitiateCurrentAccount
+      requestBody:
+        $ref: '#/components/requestBodies/InitiateCurrentAccountRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiateCurrentAccountResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  schemas:
+    productInstanceReference:
+      type: object
+      properties:
+        currentAccountAgreement:
+          type: string
+          description: "\n"
+          format: string
+          example: "finx_current_account"
+    StatusReason:
+      type: object
+      properties:
+        Text:
+          type: string
+          description: "\n"
+          format: string
+          example: "ACCOUNT_STATUS_OPEN"
+    accountStatus:
+      type: object
+      properties:
+        statusReason:
+          $ref: '#/components/schemas/StatusReason'
+    accountCurrency:
+      type: object
+      properties:
+        currencyCode:
+          type: string
+          description: "\n"
+          format: string
+          example: "USD"
+    accountDetails:
+      type: object
+      properties:
+        customerReference:
+          type: string
+          description: "\n"
+          format: string
+          example: "03ca1f2e-84bd-4bba-a0ce-3acb6e785e3d"
+        accountReference:
+          type: string
+          description: "\n"
+          format: string
+          example: "2eb2d558-a31d-4cbb-b74f-d70af317f8ee"
+        accountCurrency:
+          type: string
+          description: "\n"
+          format: string
+          example: "USD"
+        productInstanceReference:
+          type: string
+          description: "\n"
+          format: string
+          example: "finx_current_account"
+        accountOpenDate:
+          type: string
+          description: "\n"
+          format: string
+          example: "2025-05-31T20:14:37.808587Z"
+        accountStatus:
+          type: string
+          description: "\n"
+          format: string
+          example: "ACCOUNT_STATUS_OPEN"
+    productInstanceParameters:
+      type: object
+      properties:
+        inactivityFeeApplicationDay:
+          type: string
+          description: "\n"
+          format: string
+          example: "1"
+        maintenanceFeeApplicationDay:
+          type: string
+          description: "\n"
+          format: string
+          example: "1"
+        minimumBalanceFeeApplicationDay:
+          type: string
+          description: "\n"
+          format: string
+          example: "1"
+        roundupAutosaveActive:
+          type: string
+          description: "\n"
+          format: string
+          example: "True"
+        unarrangedOverdraftFeeApplicationDay:
+          type: string
+          description: "\n"
+          format: string
+          example: "1"
+        interestApplicationDay:
+          type: string
+          description: "\n"
+          format: string
+          example: "1"
+    currentAccountFacility:
+      type: object
+      properties:
+        customerReference:
+          type: string
+          description: "\n"
+          format: string
+          example: "03ca1f2e-84bd-4bba-a0ce-3acb6e785e3d"
+        productInstanceReference:
+          $ref: '#/components/schemas/productInstanceReference'
+        accountCurrency:
+          $ref: '#/components/schemas/accountCurrency'
+        accountStatus:
+          $ref: '#/components/schemas/accountStatus'
+        accountOpenDate:
+          type: string
+          description: "\n"
+          format: string
+          example: "2025-05-31T20:14:37.808587Z"
+        productInstanceParameters:
+          $ref: '#/components/schemas/productInstanceParameters'
+    InitiateCurrentAccountRequest:
+      type: object
+      properties:
+        currentAccountFacility: 
+          $ref: '#/components/schemas/currentAccountFacility'
+    InitiateCurrentAccountResponse:
+      type: object
+      properties:
+        accountDetails: 
+          $ref: '#/components/schemas/accountDetails'
+    BadRequest:
+      type: object
+      properties:
+        status_code:
+          type: string
+          description: "\n"
+          format: string
+          example: "400"
+        status:
+          type: string
+          description: "\n"
+          format: string
+          example: "Bad Request"
+        message:
+          type: string
+          description: "\n"
+          format: string
+          example: "Invalid Argument"
+    Unauthorized:
+      type: object
+      properties:
+        status_code:
+          type: string
+          description: HTTP status code
+          format: string
+          example: "401"
+        status:
+          type: string
+          description: Error status
+          format: string
+          example: "Unauthorized"
+        message:
+          type: string
+          description: Detailed error message
+          format: string
+          example: "Authentication credentials are missing or invalid"
+    Forbidden:
+      type: object
+      properties:
+        status_code:
+          type: string
+          description: HTTP status code
+          format: string
+          example: "403"
+        status:
+          type: string
+          description: Error status
+          format: string
+          example: "Forbidden"
+        message:
+          type: string
+          description: Detailed error message
+          format: string
+          example: "You do not have permission to perform this action"
+    NotFound:
+      type: object
+      properties:
+        status_code:
+          type: string
+          description: HTTP status code
+          example: "404"
+        status:
+          type: string
+          description: Error status
+          example: "Not Found"
+        message:
+          type: string
+          description: Detailed error message
+          example: "The requested resource was not found"
+    TooManyRequests:
+      type: object
+      properties:
+        status_code:
+          type: string
+          description: HTTP status code
+          example: "429"
+        status:
+          type: string
+          description: Error status
+          example: "Too Many Requests"
+        message:
+          type: string
+          description: Detailed error message
+          example: "Rate limit exceeded. Please try again later"
+    InternalServerError:
+      type: object
+      properties:
+        status_code:
+          type: string
+          description: HTTP status code
+          example: "500"
+        status:
+          type: string
+          description: Error status
+          example: "Internal Server Error"
+        message:
+          type: string
+          description: Detailed error message
+          example: "An unexpected error occurred on the server"
+  parameters:
+    partyReference:
+      name: partyReference
+      in: path
+      required: true
+      schema:
+        type: string
+      example: ""
+    accountReference:
+      name: accountReference
+      in: path
+      required: true
+      schema:
+        type: string
+      example: ""
+  requestBodies:
+    InitiateCurrentAccountRequest:
+        description: createCurrentAccount
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiateCurrentAccountRequest'
+  responses:
+    InitiateCurrentAccountResponse:
+        description: createCurrentAccount
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiateCurrentAccountResponse'
+    BadRequest:
+      description: BadRequest
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BadRequest'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Unauthorized'
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Forbidden'
+    NotFound:
+      description: NotFound
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/NotFound'
+    TooManyRequests:
+      description: TooManyRequests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TooManyRequests'
+    InternalServerError:
+      description: InternalServerError
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InternalServerError'
