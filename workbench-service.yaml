@@ -1,0 +1,378 @@
+
+openapi: 3.0.1
+info:
+  title: Finx API Service
+  description: 'Combined service for Finx Workbench and Product APIs'
+  version: 1.0.0
+servers:
+- url: 'https://finx-demo-api.fincuro.in'
+paths:
+  /account-types:
+    get:
+      summary: Get Account Types
+      operationId: getAccountTypes
+      tags:
+      - Workbench service
+      parameters: []
+      responses:
+        '200':
+          $ref: '#/components/responses/AccountTypesListResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /intended-use-of-account:
+    get:
+      summary: Get Intended Use of Account
+      operationId: getIntendedUseOfAccount
+      tags:
+      - Workbench service
+      parameters:
+      - name: accountType
+        in: query
+        required: false
+        schema:
+          type: string
+        description: "Optional filter to get uses for a specific account type."
+      responses:
+        '200':
+          $ref: '#/components/responses/IntendedUseResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /id-types:
+    get:
+      summary: Get ID Types
+      operationId: getIdTypes
+      tags:
+      - Workbench service
+      parameters: []
+      responses:
+        '200':
+          $ref: '#/components/responses/IdTypesListResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /products:
+    get:
+      summary: Get Products
+      operationId: getProducts
+      tags:
+      - Product service
+      parameters:
+      - name: productType
+        in: query
+        required: false
+        schema:
+          type: string
+        description: "Filter by the type of product, e.g., 'Savings Account'."
+      - name: accountType
+        in: query
+        required: false
+        schema:
+          type: string
+        description: "Filter by the specific account type, e.g., 'High-Yield Savings'."
+      responses:
+        '200':
+          $ref: '#/components/responses/ProductsListResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /products/{id}:
+    get:
+      summary: Get Product Details
+      operationId: getProductDetailsById
+      tags:
+      - Product service
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of the product.
+      responses:
+        '200':
+          $ref: '#/components/responses/ProductDetailsResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  schemas:
+    AccountTypeSummary:
+      type: object
+      properties:
+        code:
+          type: string
+          description: "The unique code for the account type."
+          example: "SAVINGS_REGULAR"
+        name:
+          type: string
+          description: "The display name of the account type."
+          example: "Regular Savings Account"
+        description:
+          type: string
+          description: "A brief description of the account type."
+          example: "A standard savings account with basic features."
+        is_enabled:
+          type: boolean
+          description: "Indicates if the account type is currently active."
+        is_selectable:
+          type: boolean
+          description: "Indicates if the account type can be selected by a user."
+    AccountTypesResponse:
+      type: object
+      properties:
+        accountTypes:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccountTypeSummary'
+    IntendedUse:
+      type: object
+      properties:
+        code:
+          type: string
+          description: "The unique code for the intended use."
+          example: "PERSONAL_SAVINGS"
+        name:
+          type: string
+          description: "The display name for the intended use."
+          example: "Personal Savings"
+        requires_details:
+          type: boolean
+          description: "Indicates if the user must provide additional details for this option."
+          example: false
+        is_enabled:
+          type: boolean
+          description: "Indicates if this option is currently active."
+        sort_order:
+          type: integer
+          description: "The order in which to display this option."
+          example: 100
+    IntendedUseListResponse:
+      type: object
+      properties:
+        intendedUses:
+          type: array
+          items:
+            $ref: '#/components/schemas/IntendedUse'
+    IdTypeSummary:
+      type: object
+      properties:
+        code:
+          type: string
+          description: "The unique code for the ID type."
+          example: "PASSPORT"
+        name:
+          type: string
+          description: "The display name of the ID type."
+          example: "Passport"
+        description:
+          type: string
+          description: "A brief description of the ID type."
+          example: "An official government-issued travel document."
+        country_code:
+          type: string
+          description: "The ISO 3166-1 alpha-3 country code."
+          example: "IND"
+        is_enabled:
+          type: boolean
+          description: "Indicates if this ID type is currently active."
+        sort_order:
+          type: integer
+          description: "The order in which to display this ID type."
+          example: 100
+    IdTypesResponse:
+      type: object
+      properties:
+        idTypes:
+          type: array
+          items:
+            $ref: '#/components/schemas/IdTypeSummary'
+    ProductSummary:
+      type: object
+      properties:
+        id:
+          type: string
+          description: "The unique identifier for the product."
+          example: "celta_demand_account"
+        productType:
+          type: string
+          description: "The category of the product."
+          example: "Savings Account"
+        displayName:
+          type: string
+          description: "The customer-facing name of the product."
+          example: "Demand Deposit Account"
+        currentVersionId:
+          type: string
+          description: "The current version identifier of the product."
+          example: "350"
+        internal:
+          type: boolean
+          description: "Indicates if the product is for internal use only."
+          example: false
+    ProductDetails:
+      type: object
+      properties:
+        id:
+          type: string
+          description: "The unique identifier for the product."
+          example: "celta_demand_account"
+        productType:
+          type: string
+          description: "The category of the product."
+          example: "Savings Account"
+        displayName:
+          type: string
+          description: "The customer-facing name of the product."
+          example: "Demand Deposit Account"
+        currentVersionId:
+          type: string
+          description: "The current version identifier of the product."
+          example: "350"
+        internal:
+          type: boolean
+          description: "Indicates if the product is for internal use only."
+          example: false
+        description:
+          type: string
+          example: "A high-interest savings account with premium benefits."
+        currency:
+          type: string
+          example: "INR"
+        features:
+          type: array
+          items:
+            type: string
+          example: ["Higher Interest Rate", "No Minimum Balance", "Dedicated Relationship Manager"]
+        termsAndConditions:
+          type: string
+          example: "URL to the terms and conditions document."
+    ProductsResponse:
+      type: object
+      properties:
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductSummary'
+    HTTPError:
+      type: object
+      properties:
+        statusCode:
+          type: string
+        status:
+          type: string
+        message:
+          type: string
+  responses:
+    AccountTypesListResponse:
+      description: A list of available account types.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AccountTypesResponse'
+    IntendedUseResponse:
+      description: A list of options for the intended use of an account.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IntendedUseListResponse'
+    IdTypesListResponse:
+      description: A list of available ID types for verification.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IdTypesResponse'
+    ProductsListResponse:
+      description: A list of available products.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProductsResponse'
+    ProductDetailsResponse:
+      description: Detailed information for a specific product.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProductDetails'
+    BadRequest:
+      description: BadRequest
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    NotFound:
+      description: NotFound
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    TooManyRequests:
+      description: TooManyRequests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
+    InternalServerError:
+      description: InternalServerError
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HTTPError'
