@@ -10,6 +10,54 @@ info:
 servers:
   - url: ' https://virtserver.swaggerhub.com/BIAN-3/PartyReferenceDataDirectory/12.0.1'
 paths:
+  '/currentAccount/initiate':
+    post:
+      tags:
+          - Accounts
+      summary: InCR Initiate a current account for a customer
+      description: InCR Initiate a current account for a customer
+      operationId: InitiateCurrentAccount
+      requestBody:
+        $ref: '#/components/requestBodies/InitiateCurrentAccountRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiateCurrentAccountResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  '/fundTransfer/initiate':
+    post:
+      tags:
+        - Fund Transfer
+      summary: InBQ Initiate transfer transaction
+      description: InBQ Initiate transfer transaction
+      operationId: InitiateFundTransfer
+      requestBody:
+        $ref: '#/components/requestBodies/InitiateTransferRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/InitiateDepositsandWithdrawalsResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
   '/PartyReferenceDataDirectory/Register':
       post:
         tags:
@@ -482,6 +530,274 @@ paths:
             $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
+    productInstanceReference:
+      type: object
+      properties:
+        currentAccountAgreement:
+          type: string
+          description: "\n"
+          format: string
+          example: "finx_current_account"
+    StatusReason:
+      type: object
+      properties:
+        Text:
+          type: string
+          description: "\n"
+          format: string
+          example: "ACCOUNT_STATUS_OPEN"
+    accountStatus:
+      type: object
+      properties:
+        statusReason:
+          $ref: '#/components/schemas/StatusReason'
+    accountCurrency:
+      type: object
+      properties:
+        currencyCode:
+          type: string
+          description: "\n"
+          format: string
+          example: "USD"
+    accountDetails:
+      type: object
+      properties:
+        customerReference:
+          type: string
+          description: "\n"
+          format: string
+          example: "03ca1f2e-84bd-4bba-a0ce-3acb6e785e3d"
+        accountReference:
+          type: string
+          description: "\n"
+          format: string
+          example: "2eb2d558-a31d-4cbb-b74f-d70af317f8ee"
+        accountCurrency:
+          type: string
+          description: "\n"
+          format: string
+          example: "USD"
+        productInstanceReference:
+          type: string
+          description: "\n"
+          format: string
+          example: "finx_current_account"
+        accountOpenDate:
+          type: string
+          description: "\n"
+          format: string
+          example: "2025-05-31T20:14:37.808587Z"
+        accountStatus:
+          type: string
+          description: "\n"
+          format: string
+          example: "ACCOUNT_STATUS_OPEN"
+    productInstanceParameters:
+      type: object
+      properties:
+        inactivityFeeApplicationDay:
+          type: string
+          description: "\n"
+          format: string
+          example: "1"
+        maintenanceFeeApplicationDay:
+          type: string
+          description: "\n"
+          format: string
+          example: "1"
+        minimumBalanceFeeApplicationDay:
+          type: string
+          description: "\n"
+          format: string
+          example: "1"
+        roundupAutosaveActive:
+          type: string
+          description: "\n"
+          format: string
+          example: "True"
+        unarrangedOverdraftFeeApplicationDay:
+          type: string
+          description: "\n"
+          format: string
+          example: "1"
+        interestApplicationDay:
+          type: string
+          description: "\n"
+          format: string
+          example: "1"
+    currentAccountFacility:
+      type: object
+      properties:
+        customerReference:
+          type: string
+          description: "\n"
+          format: string
+          example: "03ca1f2e-84bd-4bba-a0ce-3acb6e785e3d"
+        productInstanceReference:
+          $ref: '#/components/schemas/productInstanceReference'
+        accountCurrency:
+          $ref: '#/components/schemas/accountCurrency'
+        accountStatus:
+          $ref: '#/components/schemas/accountStatus'
+        accountOpenDate:
+          type: string
+          description: "\n"
+          format: string
+          example: "2025-05-31T20:14:37.808587Z"
+        productInstanceParameters:
+          $ref: '#/components/schemas/productInstanceParameters'
+    InitiateCurrentAccountRequest:
+      type: object
+      properties:
+        currentAccountFacility: 
+          $ref: '#/components/schemas/currentAccountFacility'
+    InitiateCurrentAccountResponse:
+      type: object
+      properties:
+        accountDetails: 
+          $ref: '#/components/schemas/accountDetails'
+    InitiateTransferRequest:
+      type: object
+      properties:
+        occurrenceFromAccountId:
+          type: string
+          description: Unique identifier of the source account
+          example: "2eff6fa2-44e6-46a3-b94d-831824016f58"
+        occurrenceToAccountId:
+          type: string
+          description: Unique identifier of the target account
+          example: "f6fa2-44e6-46a3-b94d-831824016f"
+        transactionAmount:
+          $ref: '#/components/schemas/transactionAmount'
+        transactionType:
+          type: string
+          description: Type of transaction
+          example: "Fund Transfer"
+        transactionDescription:
+          type: string
+          description: Description of the transaction
+          example: "string"
+        accountLimitBreachResponse:
+          type: string
+          description: Action if account limit is breached
+          example: "Override"
+    transactionAmount:
+      type: object
+      properties:
+        value:
+          type: string
+          description: Transaction value
+          example: "100"
+        currencyCode:
+          type: string
+          description: ISO Currency Code
+          example: "USD"
+    InitiateDepositsandWithdrawalsResponse:
+      type: object
+      properties:
+        transactionReference:
+          type: string
+          description: Unique transaction reference
+          example: "TRX-23923923923"
+    BadRequest:
+      type: object
+      properties:
+        status_code:
+          type: string
+          description: "\n"
+          format: string
+          example: "400"
+        status:
+          type: string
+          description: "\n"
+          format: string
+          example: "Bad Request"
+        message:
+          type: string
+          description: "\n"
+          format: string
+          example: "Invalid Argument"
+    Unauthorized:
+      type: object
+      properties:
+        status_code:
+          type: string
+          description: HTTP status code
+          format: string
+          example: "401"
+        status:
+          type: string
+          description: Error status
+          format: string
+          example: "Unauthorized"
+        message:
+          type: string
+          description: Detailed error message
+          format: string
+          example: "Authentication credentials are missing or invalid"
+    Forbidden:
+      type: object
+      properties:
+        status_code:
+          type: string
+          description: HTTP status code
+          format: string
+          example: "403"
+        status:
+          type: string
+          description: Error status
+          format: string
+          example: "Forbidden"
+        message:
+          type: string
+          description: Detailed error message
+          format: string
+          example: "You do not have permission to perform this action"
+    NotFound:
+      type: object
+      properties:
+        status_code:
+          type: string
+          description: HTTP status code
+          example: "404"
+        status:
+          type: string
+          description: Error status
+          example: "Not Found"
+        message:
+          type: string
+          description: Detailed error message
+          example: "The requested resource was not found"
+    TooManyRequests:
+      type: object
+      properties:
+        status_code:
+          type: string
+          description: HTTP status code
+          example: "429"
+        status:
+          type: string
+          description: Error status
+          example: "Too Many Requests"
+        message:
+          type: string
+          description: Detailed error message
+          example: "Rate limit exceeded. Please try again later"
+    InternalServerError:
+      type: object
+      properties:
+        status_code:
+          type: string
+          description: HTTP status code
+          example: "500"
+        status:
+          type: string
+          description: Error status
+          example: "Internal Server Error"
+        message:
+          type: string
+          description: Detailed error message
+          example: "An unexpected error occurred on the server"
     RegisterPartyReferenceDataDirectoryEntryRequest:
         type: object
         description: ''
@@ -2992,18 +3308,17 @@ components:
               format: Partytypevalues
               description: OBExternalPartyType1Code| ()|Standard|UK Open Banking ()
     HTTPError:
-        type: object
-        properties:
-          status_code:
-            type: string
-            format: string
-          status:
-            type: string
-            format: string
-          message:
-            type: string
-            format: string
-        description: Status Attributes
+      type: object
+      properties:
+        status_code:
+          type: string
+          example: "400"
+        status:
+          type: string
+          example: "Bad Request"
+        message:
+          type: string
+          example: "Invalid request parameters"
     Party:
         type: object
         description: >-
@@ -3868,6 +4183,54 @@ components:
                 (DDD Entity) - System availability for which the closure period is
                 provided. 
   responses:
+    InitiateCurrentAccountResponse:
+        description: createCurrentAccount
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiateCurrentAccountResponse'
+    InitiateDepositsandWithdrawalsResponse:
+      description: Fund Transfer successful response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InitiateDepositsandWithdrawalsResponse'
+    BadRequest:
+      description: BadRequest
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BadRequest'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Unauthorized'
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Forbidden'
+    NotFound:
+      description: NotFound
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/NotFound'
+    TooManyRequests:
+      description: TooManyRequests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TooManyRequests'
+    InternalServerError:
+      description: InternalServerError
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InternalServerError'
     RegisterPartyReferenceDataDirectoryEntryResponse:
         description: PartyReferenceDataDirectoryEntryRegister
         content:
@@ -3977,42 +4340,6 @@ components:
           'application/json:':
             schema:
               $ref: '#/components/schemas/RegisterAssociationsResponse'
-    BadRequest:
-        description: BadRequest
-        content:
-          'application/json:':
-            schema:
-              $ref: '#/components/schemas/HTTPError'
-    Unauthorized:
-        description: Unauthorized
-        content:
-          'application/json:':
-            schema:
-              $ref: '#/components/schemas/HTTPError'
-    Forbidden:
-        description: Forbidden
-        content:
-          'application/json:':
-            schema:
-              $ref: '#/components/schemas/HTTPError'
-    NotFound:
-        description: NotFound
-        content:
-          'application/json:':
-            schema:
-              $ref: '#/components/schemas/HTTPError'
-    TooManyRequests:
-        description: TooManyRequests
-        content:
-          'application/json:':
-            schema:
-              $ref: '#/components/schemas/HTTPError'
-    InternalServerError:
-        description: InternalServerError
-        content:
-          'application/json:':
-            schema:
-              $ref: '#/components/schemas/HTTPError'
   parameters:
     partyreferencedatadirectoryid:
         name: partyreferencedatadirectoryid
@@ -4050,6 +4377,19 @@ components:
         schema:
           type: string
   requestBodies:
+    InitiateCurrentAccountRequest:
+        description: createCurrentAccount
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/InitiateCurrentAccountRequest'
+    InitiateTransferRequest:
+      description: Request body to initiate a fund transfer
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InitiateTransferRequest'
     RegisterPartyReferenceDataDirectoryEntryRequest:
         content:
           'application/json:':
