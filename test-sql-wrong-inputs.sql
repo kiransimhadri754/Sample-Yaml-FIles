@@ -1,6 +1,5 @@
 -- Missing semicolon
 CREATE TABLE users (
-    id SERIAL PRIMARY KEY,
     name VARCHAR(50)
 )
 
@@ -13,7 +12,6 @@ CREATE TABLE products (
 
 -- Missing comma between columns
 CREATE TABLE orders (
-    id SERIAL PRIMARY KEY
     user_id INTEGER
     total DECIMAL(10,2)
 );
@@ -27,7 +25,6 @@ CREATE TABLE customers (
 
 -- Wrong foreign key syntax
 CREATE TABLE order_items (
-    id SERIAL PRIMARY KEY,
     order_id INTEGER REFERENCES orders,
     FOREIGN KEY order_id REFERENCES orders(id)
 );
