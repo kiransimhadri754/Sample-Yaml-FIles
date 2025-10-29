@@ -12,7 +12,6 @@ paths:
           - CurrentAccountFacility
       summary: InCR Initiate A new current account
       description: InCR Initiate A new current account
-      operationId: Initiate
       requestBody:
         $ref: '#/components/requestBodies/InitiateCurrentAccountFacilityRequest'
       responses:
@@ -34,8 +33,6 @@ components:
   schemas:
     CustomerReference:
       type: array
-      items:
-        type: string
     AccountType:
       type: array
       items:
@@ -46,8 +43,6 @@ components:
             description: "\n"
             format: string
           AccountTypeName:
-            type: object
-            properties:
               Name:
                 type: string
                 description: "\n"
@@ -343,3 +338,4 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/HTTPError'
+
