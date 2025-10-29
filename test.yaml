@@ -130,33 +130,8 @@ components:
             DateType:
               type: string
               description: "\n"
-              format: string
-    InitiateCurrentAccountFacilityRequest:
-      type: object
-      properties:
-        CurrentAccountFaciity:
-          type: object
-          properties:
-            CustomerReference:
-              type: array
-              items:
-                type: string
-                enum: 
-                  - "123455"
-            BankBranchLocationReference:
-              type: string
-              description: "\n"
-              format: string
-            AccountType:
-              type: array
-              items:
-                type: object
-                properties:
-                  AccountType:
-                    type: string
-                    description: "\n"
-                    format: string
-                  AccountTypeName:
+              format: strin
+              Name:
                     type: object
                     properties:
                       Name:
@@ -338,4 +313,5 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/HTTPError'
+
 
